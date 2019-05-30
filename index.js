@@ -67,115 +67,229 @@ client.on('message', msg => {
 });
 
 client.on('message', async msg => {
-if (msg.author.bot) return undefined;
-if (msg.content.startsWith(`${PREFIX}`)) {
-if (msg.member.roles.find(x => x.name === 'DJ')) {
-	const args = msg.content.split(' ');
-	const searchString = args.slice(1).join(' ');
-	const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
-	const serverQueue = queue.get(msg.guild.id);
-
-	let command = msg.content.toLowerCase().split(' ')[0];
-	command = command.slice(PREFIX.length)
-
-	if (command === 'play') {
-		const voiceChannel = msg.member.voiceChannel;
-		if (!voiceChannel) return msg.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
-		const permissions = voiceChannel.permissionsFor(msg.client.user);
-		if (!permissions.has('CONNECT')) {
-			return msg.channel.send(':x: I cannot connect to your voice channel, make sure I have the proper permissions!');
+	if (msg.author.bot) return undefined;
+	if (msg.content.startsWith(`${PREFIX}`)) {
+	if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
+		if (!msg.member.roles.find(x => x.name === 'DJ')) {
+			msg.channel.send('You need to have the \'DJ\' role!')
 		}
-		if (!permissions.has('SPEAK')) {
-			return msg.channel.send(':x: I cannot speak in this voice channel, make sure I have the proper permissions!');
-		}
-
-		if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
-			const playlist = await youtube.getPlaylist(url);
-			const videos = await playlist.getVideos();
-			for (const video of Object.values(videos)) {
-				const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
-				await handleVideo(video2, msg, voiceChannel, true); // eslint-disable-line no-await-in-loop
+	if (msg.member.roles.find(x => x.name === 'DJ')) {
+		const args = msg.content.split(' ');
+		const searchString = args.slice(1).join(' ');
+		const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
+		const serverQueue = queue.get(msg.guild.id);
+	
+		let command = msg.content.toLowerCase().split(' ')[0];
+		command = command.slice(PREFIX.length)
+	
+		if (command === 'play') {
+			const voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) return msg.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
+			const permissions = voiceChannel.permissionsFor(msg.client.user);
+			if (!permissions.has('CONNECT')) {
+				return msg.channel.send(':x: I cannot connect to your voice channel, make sure I have the proper permissions!');
 			}
-			return msg.channel.send(`:white_check_mark: Playlist: **${playlist.title}** has been added to the queue!`);
-		} else {
-			try {
-				var video = await youtube.getVideo(url);
-			} catch (error) {
+			if (!permissions.has('SPEAK')) {
+				return msg.channel.send(':x: I cannot speak in this voice channel, make sure I have the proper permissions!');
+			}
+	
+			if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
+				const playlist = await youtube.getPlaylist(url);
+				const videos = await playlist.getVideos();
+				for (const video of Object.values(videos)) {
+					const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
+					await handleVideo(video2, msg, voiceChannel, true); // eslint-disable-line no-await-in-loop
+				}
+				return msg.channel.send(`:white_check_mark: Playlist: **${playlist.title}** has been added to the queue!`);
+			} else {
 				try {
-					var videos = await youtube.searchVideos(searchString, 10);
-					let index = 0;
-					msg.channel.send(`
-__**Song selection:**__
-${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
-Please provide a value to select one of the search results ranging from 1-10.
-					`);
-					// eslint-disable-next-line max-depth
+					var video = await youtube.getVideo(url);
+				} catch (error) {
 					try {
-						var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
-							maxMatches: 1,
-							time: 10000,
-							errors: ['time']
-						});
+						var videos = await youtube.searchVideos(searchString, 10);
+						let index = 0;
+						msg.channel.send(`
+	__**Song selection:**__
+	${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
+	Please provide a value to select one of the search results ranging from 1-10.
+						`);
+						// eslint-disable-next-line max-depth
+						try {
+							var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
+								maxMatches: 1,
+								time: 10000,
+								errors: ['time']
+							});
+						} catch (err) {
+							console.error(err);
+							return msg.channel.send(':x: No or invalid value entered, cancelling video selection.');
+						}
+						const videoIndex = parseInt(response.first().content);
+						var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
 					} catch (err) {
 						console.error(err);
-						return msg.channel.send(':x: No or invalid value entered, cancelling video selection.');
+						return msg.channel.send(':x: I could not obtain any search results.');
 					}
-					const videoIndex = parseInt(response.first().content);
-					var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
-				} catch (err) {
-					console.error(err);
-					return msg.channel.send(':x: I could not obtain any search results.');
 				}
+				return handleVideo(video, msg, voiceChannel);
 			}
-			return handleVideo(video, msg, voiceChannel);
+		} else if (command === 'skip') {
+			if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
+			if (!serverQueue) return msg.channel.send(':x: There is nothing playing that I could skip for you.');
+			serverQueue.connection.dispatcher.end('Skipped :thumbsup:');
+			return undefined;
+		} else if (command === 'stop') {
+			if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
+			if (!serverQueue) return msg.channel.send(':x: There is nothing playing that I could stop for you.');
+			serverQueue.songs = [];
+			serverQueue.connection.dispatcher.end('Stopped!');
+			return undefined;
+		} else if (command === 'volume') {
+			if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
+			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
+			if (!args[1]) return msg.channel.send(`The current volume is: **${serverQueue.volume}** :speaker:`);
+			serverQueue.volume = args[1];
+			serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
+			return msg.channel.send(`I set the volume to: **${args[1]}** 🔊`);
+		} else if (command === 'np') {
+			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
+			return msg.channel.send(`:musical_note: Now playing: **${serverQueue.songs[0].title}**`);
+		} else if (command === 'queue') {
+			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
+			return msg.channel.send(`
+	__**Song queue:**__
+	${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
+	**Now playing:** ${serverQueue.songs[0].title} :musical_note: 
+			`);
+		} else if (command === 'pause') {
+			if (serverQueue && serverQueue.playing) {
+				serverQueue.playing = false;
+				serverQueue.connection.dispatcher.pause();
+				return msg.channel.send(':pause_button: Paused the music for you!');
+			}
+			return msg.channel.send(':x: There is nothing playing.');
+		} else if (command === 'resume') {
+			if (serverQueue && !serverQueue.playing) {
+				serverQueue.playing = true;
+				serverQueue.connection.dispatcher.resume();
+				return msg.channel.send(':play_pause: Resumed the music for you!');
+			}
+			return msg.channel.send(':x: There is nothing playing.');
 		}
-	} else if (command === 'skip') {
-		if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
-		if (!serverQueue) return msg.channel.send(':x: There is nothing playing that I could skip for you.');
-		serverQueue.connection.dispatcher.end('Skipped :thumbsup:');
+	
 		return undefined;
-	} else if (command === 'stop') {
-		if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
-		if (!serverQueue) return msg.channel.send(':x: There is nothing playing that I could stop for you.');
-		serverQueue.songs = [];
-		serverQueue.connection.dispatcher.end('Stopped!');
-		return undefined;
-	} else if (command === 'volume') {
-		if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
-		if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
-		if (!args[1]) return msg.channel.send(`The current volume is: **${serverQueue.volume}** :speaker:`);
-		serverQueue.volume = args[1];
-		serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
-		return msg.channel.send(`I set the volume to: **${args[1]}** 🔊`);
-	} else if (command === 'np') {
-		if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
-		return msg.channel.send(`:musical_note: Now playing: **${serverQueue.songs[0].title}**`);
-	} else if (command === 'queue') {
-		if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
-		return msg.channel.send(`
-__**Song queue:**__
-${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
-**Now playing:** ${serverQueue.songs[0].title} :musical_note: 
-		`);
-	} else if (command === 'pause') {
-		if (serverQueue && serverQueue.playing) {
-			serverQueue.playing = false;
-			serverQueue.connection.dispatcher.pause();
-			return msg.channel.send(':pause_button: Paused the music for you!');
-		}
-		return msg.channel.send(':x: There is nothing playing.');
-	} else if (command === 'resume') {
-		if (serverQueue && !serverQueue.playing) {
-			serverQueue.playing = true;
-			serverQueue.connection.dispatcher.resume();
-			return msg.channel.send(':play_pause: Resumed the music for you!');
-		}
-		return msg.channel.send(':x: There is nothing playing.');
 	}
-
-	return undefined;
-}
-}
+	}
+	else {
+		const args = msg.content.split(' ');
+		const searchString = args.slice(1).join(' ');
+		const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
+		const serverQueue = queue.get(msg.guild.id);
+	
+		let command = msg.content.toLowerCase().split(' ')[0];
+		command = command.slice(PREFIX.length)
+	
+		if (command === 'play') {
+			if (!args[1]) return msg.channel.send(':x: I think you forgot what you wanted to play!');
+			const voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) return msg.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
+			const permissions = voiceChannel.permissionsFor(msg.client.user);
+			if (!permissions.has('CONNECT')) {
+				return msg.channel.send(':x: I cannot connect to your voice channel, make sure I have the proper permissions!');
+			}
+			if (!permissions.has('SPEAK')) {
+				return msg.channel.send(':x: I cannot speak in this voice channel, make sure I have the proper permissions!');
+			}
+	
+			if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
+				const playlist = await youtube.getPlaylist(url);
+				const videos = await playlist.getVideos();
+				for (const video of Object.values(videos)) {
+					const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
+					await handleVideo(video2, msg, voiceChannel, true); // eslint-disable-line no-await-in-loop
+				}
+				return msg.channel.send(`:white_check_mark: Playlist: **${playlist.title}** has been added to the queue!`);
+			} else {
+				try {
+					var video = await youtube.getVideo(url);
+				} catch (error) {
+					try {
+						var videos = await youtube.searchVideos(searchString, 10);
+						let index = 0;
+						msg.channel.send(`
+	__**Song selection:**__
+	${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
+	Please provide a value to select one of the search results ranging from 1-10.
+						`);
+						// eslint-disable-next-line max-depth
+						try {
+							var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
+								maxMatches: 1,
+								time: 10000,
+								errors: ['time']
+							});
+						} catch (err) {
+							console.error(err);
+							return msg.channel.send(':x: No or invalid value entered, cancelling video selection.');
+						}
+						const videoIndex = parseInt(response.first().content);
+						var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
+					} catch (err) {
+						console.error(err);
+						return msg.channel.send(':x: I could not obtain any search results.');
+					}
+				}
+				return handleVideo(video, msg, voiceChannel);
+			}
+		} else if (command === 'skip') {
+			if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
+			if (!serverQueue) return msg.channel.send(':x: There is nothing playing that I could skip for you.');
+			msg.channel.send('Skipped :thumbsup:')
+			serverQueue.connection.dispatcher.end('Skipped');
+			return undefined;
+		} else if (command === 'stop') {
+			if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
+			if (!serverQueue) return msg.channel.send(':x: There is nothing playing that I could stop for you.');
+			msg.channel.send('Stopped the music! :stop_button:')
+			serverQueue.songs = [];
+			serverQueue.connection.dispatcher.end('Stopped!');
+			return undefined;
+		} else if (command === 'volume') {
+			if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
+			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
+			if (!args[1]) return msg.channel.send(`The current volume is: **${serverQueue.volume}** :speaker:`);
+			serverQueue.volume = args[1];
+			serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
+			return msg.channel.send(`I set the volume to: **${args[1]}** 🔊`);
+		} else if (command === 'np') {
+			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
+			return msg.channel.send(`:musical_note: Now playing: **${serverQueue.songs[0].title}**`);
+		} else if (command === 'queue') {
+			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
+			return msg.channel.send(`
+	__**Song queue:**__
+	${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
+	**Now playing:** ${serverQueue.songs[0].title} :musical_note: 
+			`);
+		} else if (command === 'pause') {
+			if (serverQueue && serverQueue.playing) {
+				serverQueue.playing = false;
+				serverQueue.connection.dispatcher.pause();
+				return msg.channel.send(':pause_button: Paused the music for you!');
+			}
+			return msg.channel.send(':x: There is nothing playing.');
+		} else if (command === 'resume') {
+			if (serverQueue && !serverQueue.playing) {
+				serverQueue.playing = true;
+				serverQueue.connection.dispatcher.resume();
+				return msg.channel.send(':play_pause: Resumed the music for you!');
+			}
+			return msg.channel.send(':x: There is nothing playing.');
+		}
+	
+		return undefined;
+	}
+	}
 });
 
 async function handleVideo(video, msg, voiceChannel, playlist = false) {
