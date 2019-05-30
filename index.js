@@ -51,11 +51,12 @@ client.on('message', msg => {
       msg.channel.send(embed);
     }
     if (msg.content === `${PREFIX}info`) {
+				var dj = guild.roles.find(x => x.name === 'DJ') ? false : true;
         var line = '**>-----------------------------------------------------------------------<**';
         const embed = new Discord.RichEmbed()
 					.setTitle('**Musix instructions and info**:')
 					.addField('On any errors you should use the !stop command end reset the queue.', line, true)
-					.addField('If your guild has a role called \'DJ\' you will need it to play music! If you don\'t, Everyone can play music.', line, true)
+					.addField('If your guild has a role called \'DJ\' you will need it to play music! If you don\'t, Everyone can play music.', 'DJ role existance:' + dj, true)
 					.addField('Musix support server: https://discord.gg/rvHuJtB', line, true)
           .addField('If you have any problems with musix please contact Matte#5254!', line, true)
           .setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
@@ -72,7 +73,7 @@ client.on('message', async msg => {
 	if (msg.content.startsWith(`${PREFIX}`)) {
 	if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
 		if (!msg.member.roles.find(x => x.name === 'DJ')) {
-			msg.channel.send('You need to have the \'DJ\' role!')
+			msg.channel.send(':x: i\'m sorry you need to have the \'DJ\' role!')
 		}
 	if (msg.member.roles.find(x => x.name === 'DJ')) {
 		const args = msg.content.split(' ');
