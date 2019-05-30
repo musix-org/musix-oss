@@ -54,7 +54,8 @@ client.on('message', msg => {
         var line = '**>-----------------------------------------------------------------------<**';
         const embed = new Discord.RichEmbed()
           .setTitle('**Musix instructions and info**:')
-          .addField('To use Musix you need a role called DJ !', line, true)
+					.addField('To use Musix you need a role called DJ !', line, true)
+					.addField('Musix support server: https://discord.gg/rvHuJtB')
           .addField('If you have any problems with musix please contact Matte#5254!', line, true)
           .setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
           .setColor('#b50002')
