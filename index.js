@@ -44,8 +44,8 @@ client.on('message', msg => {
       .addField('```!stop```', 'Stop the music, Clear the queue and leave the current voice channel.', true)
       .addField('```!skip```', 'Skip a song.', true)
       .addField('```!invitemusix```', 'Invite Musix.', true)
-      .addField('```!musixinfo```', 'Display info and instructions.', true)
-      .addField('```!musixhelp```', 'Display the help.', true)
+      .addField('```!info```', 'Display info and instructions.', true)
+      .addField('```!help```', 'Display the help.', true)
       .setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
       .setColor('#b50002')
       msg.channel.send(embed);
@@ -53,7 +53,8 @@ client.on('message', msg => {
     if (msg.content === `${PREFIX}info`) {
         var line = '**>-----------------------------------------------------------------------<**';
         const embed = new Discord.RichEmbed()
-          .setTitle('**Musix instructions and info**:')
+					.setTitle('**Musix instructions and info**:')
+					.addField('On any errors you should use the !stop command end reset the queue.', line, true)
 					.addField('If your guild has a role called \'DJ\' you will need it to play music! If you don\'t, Everyone can play music.', line, true)
 					.addField('Musix support server: https://discord.gg/rvHuJtB', line, true)
           .addField('If you have any problems with musix please contact Matte#5254!', line, true)
