@@ -51,7 +51,7 @@ client.on('message', msg => {
       msg.channel.send(embed);
     }
     if (msg.content === `${PREFIX}info`) {
-				var dj = msg.guild.roles.find(x => x.name === 'DJ') ? false : true;
+				var dj = msg.guild.roles.find(x => x.name === 'DJ') ? true : false;
         var line = '**>-----------------------------------------------------------------------<**';
         const embed = new Discord.RichEmbed()
 					.setTitle('**Musix instructions and info**:')
