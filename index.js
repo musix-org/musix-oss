@@ -54,7 +54,7 @@ client.on('message', msg => {
 				var dj = msg.guild.roles.find(x => x.name === 'DJ') ? true : false;
         const embed = new Discord.RichEmbed()
 					.setTitle('**Musix instructions and info**:')
-					.addField('On any errors you should use the !stop command end reset the queue.', 'Remember to __try again__ before contacting support!', true)
+					.addField('On any errors you should use the !stop command end the music and reset the queue.', 'Remember to __try again__ before contacting support!', true)
 					.addField('If your guild has a role called \'DJ\' you will need it to play music! If you don\'t, Everyone can play music.', 'DJ role existance: ' + dj, true)
 					.addField('Musix support server', 'https://discord.gg/rvHuJtB', true)
           .addField('If you have any problems with musix please contact Matte#5254!', '(creator and developer of Musix)', true)
