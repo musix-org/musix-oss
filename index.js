@@ -352,6 +352,7 @@ function play(guild, song) {
 		})
 		.on('error', error => console.error(error));
 	dispatcher.setVolumeLogarithmic(1 / 5);
+	serverQueue.volume = 1
 
 	serverQueue.textChannel.send(`:musical_note: Start playing: **${song.title}**`);
 }
