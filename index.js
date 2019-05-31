@@ -151,7 +151,7 @@ Please provide a value to select one of the search results ranging from __1-10__
 			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
 			if (!args[1]) return msg.channel.send(`The current volume is: **${serverQueue.volume}** :speaker:`);
 			serverQueue.volume = args[1];
-			serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 1);
+			serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
 			return msg.channel.send(`I set the volume to: **${args[1]}** 🔊`);
 		} else if (command === 'np') {
 			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
@@ -261,7 +261,7 @@ Please provide a value to select one of the search results ranging from __1-10__
 			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
 			if (!args[1]) return msg.channel.send(`The current volume is: **${serverQueue.volume}** :speaker:`);
 			serverQueue.volume = args[1];
-			serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 1);
+			serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
 			return msg.channel.send(`I set the volume to: **${args[1]}** 🔊`);
 		} else if (command === 'np') {
 			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
@@ -351,7 +351,7 @@ function play(guild, song) {
 			play(guild, serverQueue.songs[0]);
 		})
 		.on('error', error => console.error(error));
-	dispatcher.setVolumeLogarithmic(serverQueue.volume / 1);
+	dispatcher.setVolumeLogarithmic(1 / 5);
 
 	serverQueue.textChannel.send(`:musical_note: Start playing: **${song.title}**`);
 }
