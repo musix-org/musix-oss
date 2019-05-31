@@ -84,7 +84,6 @@ client.on('message', async msg => {
 		command = command.slice(PREFIX.length)
 	
 		if (command === 'play') {
-			serverQueue.connection.dispatcher.setVolumeLogarithmic(1 / 5);
 			if (!args[1]) return msg.channel.send(':x: I\'m sorry but you didn\'t specify the song');
 			const voiceChannel = msg.member.voiceChannel;
 			if (!voiceChannel) return msg.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
@@ -152,7 +151,7 @@ Please provide a value to select one of the search results ranging from __1-10__
 			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
 			if (!args[1]) return msg.channel.send(`The current volume is: **${serverQueue.volume}** :speaker:`);
 			serverQueue.volume = args[1];
-			serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
+			serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 1);
 			return msg.channel.send(`I set the volume to: **${args[1]}** 🔊`);
 		} else if (command === 'np') {
 			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
@@ -262,7 +261,7 @@ Please provide a value to select one of the search results ranging from __1-10__
 			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
 			if (!args[1]) return msg.channel.send(`The current volume is: **${serverQueue.volume}** :speaker:`);
 			serverQueue.volume = args[1];
-			serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
+			serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 1);
 			return msg.channel.send(`I set the volume to: **${args[1]}** 🔊`);
 		} else if (command === 'np') {
 			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
@@ -352,7 +351,7 @@ function play(guild, song) {
 			play(guild, serverQueue.songs[0]);
 		})
 		.on('error', error => console.error(error));
-	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
+	dispatcher.setVolumeLogarithmic(serverQueue.volume / 1);
 
 	serverQueue.textChannel.send(`:musical_note: Start playing: **${song.title}**`);
 }
