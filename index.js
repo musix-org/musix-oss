@@ -84,6 +84,7 @@ client.on('message', async msg => {
 		command = command.slice(PREFIX.length)
 	
 		if (command === 'play') {
+			serverQueue.connection.dispatcher.setVolumeLogarithmic(1 / 5);
 			if (!args[1]) return msg.channel.send(':x: I\'m sorry but you didn\'t specify the song');
 			const voiceChannel = msg.member.voiceChannel;
 			if (!voiceChannel) return msg.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
