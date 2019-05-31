@@ -43,7 +43,7 @@ client.on('message', msg => {
       .addField('```!resume```', 'Resume the music.', true)
       .addField('```!stop```', 'Stop the music, Clear the queue and leave the current voice channel.', true)
       .addField('```!skip```', 'Skip a song.', true)
-      .addField('```!invitemusix```', 'Invite Musix.', true)
+      .addField('```!invite```', 'Invite Musix.', true)
       .addField('```!info```', 'Display info and instructions.', true)
       .addField('```!help```', 'Display the help.', true)
       .setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
@@ -62,7 +62,7 @@ client.on('message', msg => {
           .setColor('#b50002')
           msg.channel.send(embed);
         }
-    if(msg.content === `${PREFIX}musixinvite`) {
+    if(msg.content === `${PREFIX}invite`) {
     msg.channel.send('https://bit.ly/2V3D0p7') 
     }
 });
