@@ -220,8 +220,8 @@ Please provide a value to select one of the search results ranging from __1-10__
 						let index = 0;
 						msg.channel.send(`
 	__**Song selection:**__
-	${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
-	Please provide a value to select one of the search results ranging from 1-10.
+${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
+Please provide a value to select one of the search results ranging from 1-10.
 						`);
 						// eslint-disable-next-line max-depth
 						try {
@@ -320,7 +320,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 			queueConstruct.connection = connection;
 			play(msg.guild, queueConstruct.songs[0]);
 		} catch (error) {
-			console.error(`:x: I could not join the voice channel: ${error}`);
+			console.error(`I could not join the voice channel: ${error}`);
 			queue.delete(msg.guild.id);
 			return msg.channel.send(`:x: I could not join the voice channel: ${error}`);
 		}
