@@ -116,6 +116,7 @@ ${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
 Please provide a value to select one of the search results ranging from __1-10__.
 						`);
 						// eslint-disable-next-line max-depth
+						console.log('trying response')
 						try {
 							var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
 								maxMatches: 1,
@@ -123,16 +124,20 @@ Please provide a value to select one of the search results ranging from __1-10__
 								errors: ['time']
 							});
 						} catch (err) {
+							console.log('Error 1')
 							console.error(err);
 							return msg.channel.send(':x: No or invalid value entered, cancelling video selection.');
 						}
+						console.log('Start playing')
 						const videoIndex = parseInt(response.first().content);
 						var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
 					} catch (err) {
+						console.log('Error 2')
 						console.error(err);
 						return msg.channel.send(':x: I could not obtain any search results.');
 					}
 				}
+				console.log('Play command done')
 				return handleVideo(video, msg, voiceChannel);
 			}
 		} else if (command === 'skip') {
