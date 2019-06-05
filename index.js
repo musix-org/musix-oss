@@ -34,7 +34,7 @@ client.on('message', msg => {
 		}
 		if (msg.content === '!restart') {
 			if (!msg.member.username === 'Matte') {
-				msg.channel.send(':x: I\'n´m sorry, You can\'t do that!')
+				msg.channel.send(':x: I\'m sorry, You can\'t do that!')
 			}
 			if (msg.author.username === 'Matte') {
 				console.log('restarting...')
