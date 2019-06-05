@@ -31,7 +31,21 @@ client.on('message', msg => {
         if (msg.author.username === 'Matte') {
         msg.channel.send('Bot is currently online hosted!')
         }
-    }
+		}
+		if (msg.content === '!restart') {
+			if (msg.member.username !== 'Matte') {
+				msg.channel.send(':x: I\'n´m sorry, You can\'t do that!')
+			}
+			if (msg.author.username === 'Matte') {
+				console.log('restarting...')
+				msg.channel.send('Restarting...')
+			}
+		}
+		if (msg.content === 'Restarting...') {
+			if (msg.author.username === 'Musix') {
+				msg.author.crash('done')
+			}
+		}
     if (msg.content === `${PREFIX}help`) {
     const embed = new Discord.RichEmbed()
       .setTitle('Commands for Musix!')
