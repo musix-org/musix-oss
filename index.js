@@ -27,6 +27,7 @@ client.on('ready', () => { //startup stuff
 });
 
 client.on('message', msg => {
+	if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
     if (msg.content === '!test') {
         if (msg.author.username === 'Matte') {
         msg.channel.send('Bot is currently online hosted!')
@@ -75,10 +76,8 @@ client.on('message', msg => {
           .setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
           .setColor('#b50002')
           msg.channel.send(embed);
-        }
-    if(msg.content === `${PREFIX}invite`) {
-    msg.channel.send('https://bit.ly/2V3D0p7') 
-    }
+				}
+			}
 });
 
 client.on('message', async msg => {
@@ -86,6 +85,9 @@ client.on('message', async msg => {
 	if (msg.content.startsWith(`${PREFIX}`)) {
 	if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
 		if (!msg.member.roles.find(x => x.name === 'DJ')) {
+			if (msg.content === `${PREFIX}invite`) {
+				msg.channel.send('https://bit.ly/2V3D0p7') 
+			}
 			msg.channel.send(':x: i\'m sorry you need to have the \'DJ\' role!')
 		}
 	if (msg.member.roles.find(x => x.name === 'DJ')) {
