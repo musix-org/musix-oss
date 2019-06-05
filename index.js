@@ -33,7 +33,7 @@ client.on('message', msg => {
         }
 		}
 		if (msg.content === '!restart') {
-			if (msg.member.username !== 'Matte') {
+			if (!msg.member.username === 'Matte') {
 				msg.channel.send(':x: I\'n´m sorry, You can\'t do that!')
 			}
 			if (msg.author.username === 'Matte') {
