@@ -78,6 +78,9 @@ client.on('message', msg => {
           msg.channel.send(embed);
 				}
 			}
+			if (msg.content === `${PREFIX}invite`) {
+				msg.channel.send('https://bit.ly/2V3D0p7') 
+			}
 });
 
 client.on('message', async msg => {
@@ -86,7 +89,7 @@ client.on('message', async msg => {
 	if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
 		if (!msg.member.roles.find(x => x.name === 'DJ')) {
 			if (msg.content === `${PREFIX}invite`) {
-				msg.channel.send('https://bit.ly/2V3D0p7') 
+				return undefined
 			}
 			msg.channel.send(':x: i\'m sorry you need to have the \'DJ\' role!')
 		}
