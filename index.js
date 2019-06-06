@@ -28,9 +28,13 @@ client.on('ready', () => { //startup stuff
 
 client.on('message', msg => {
     if (msg.content === '!test') {
+			if (!msg.member.username === 'Matte') {
+				msg.channel.send(':x: I\'m sorry, You can\'t do that!')
+			}
         if (msg.author.username === 'Matte') {
         msg.channel.send('Bot is currently online hosted!')
-        }
+				}
+				return undefined;
 		}
 		if (msg.content === '!restart') {
 			if (!msg.member.username === 'Matte') {
@@ -40,6 +44,7 @@ client.on('message', msg => {
 				console.log('restarting...')
 				msg.channel.send('Restarting...')
 			}
+			return undefined;
 		}
 		if (msg.content === 'Restarting...') {
 			if (msg.author.username === 'Musix') {
@@ -62,7 +67,8 @@ client.on('message', msg => {
       .addField('```!help```', 'Display the help.', true)
       .setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
       .setColor('#b50002')
-      msg.channel.send(embed);
+			msg.channel.send(embed);
+			return undefined;
     }
     if (msg.content === `${PREFIX}info`) {
 				var dj = msg.guild.roles.find(x => x.name === 'DJ') ? true : false;
@@ -78,14 +84,13 @@ client.on('message', msg => {
 				}
 			if (msg.content === `${PREFIX}invite`) {
 				msg.channel.send('https://bit.ly/2V3D0p7') 
+				return undefined;
 			}
 });
 
 client.on('message', async msg => {
-var textcoms = ['!test','!restart','!help','!info','!invite']
 	if (msg.author.bot) return undefined;
 	if (msg.content.startsWith(`${PREFIX}`)) {
-		if (msg.content === textcoms) return undefined;
 	if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
 		if (!msg.member.roles.find(x => x.name === 'DJ')) {
 			msg.channel.send(':x: i\'m sorry you need to have the \'DJ\' role!')
