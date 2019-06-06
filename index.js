@@ -88,9 +88,6 @@ var textcoms = ['!test','!restart','!help','!info','!invite']
 		if (msg.content === textcoms) return;
 	if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
 		if (!msg.member.roles.find(x => x.name === 'DJ')) {
-			if (msg.content === `${PREFIX}invite`) {
-				return undefined;
-			}
 			msg.channel.send(':x: i\'m sorry you need to have the \'DJ\' role!')
 		}
 	if (msg.member.roles.find(x => x.name === 'DJ')) {
