@@ -85,7 +85,7 @@ client.on('message', async msg => {
 var textcoms = ['!test','!restart','!help','!info','!invite']
 	if (msg.author.bot) return undefined;
 	if (msg.content.startsWith(`${PREFIX}`)) {
-		if (msg.content === textcoms) return;
+		if (msg.content === textcoms) return undefined;
 	if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
 		if (!msg.member.roles.find(x => x.name === 'DJ')) {
 			msg.channel.send(':x: i\'m sorry you need to have the \'DJ\' role!')
