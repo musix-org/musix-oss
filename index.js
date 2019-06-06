@@ -27,7 +27,6 @@ client.on('ready', () => { //startup stuff
 });
 
 client.on('message', msg => {
-	if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
     if (msg.content === '!test') {
         if (msg.author.username === 'Matte') {
         msg.channel.send('Bot is currently online hosted!')
@@ -77,15 +76,16 @@ client.on('message', msg => {
           .setColor('#b50002')
           msg.channel.send(embed);
 				}
-			}
 			if (msg.content === `${PREFIX}invite`) {
 				msg.channel.send('https://bit.ly/2V3D0p7') 
 			}
 });
 
 client.on('message', async msg => {
+var textcoms = ['!test','!restart','!help','!info','!invite']
 	if (msg.author.bot) return undefined;
 	if (msg.content.startsWith(`${PREFIX}`)) {
+		if (msg.content === textcoms) return;
 	if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
 		if (!msg.member.roles.find(x => x.name === 'DJ')) {
 			if (msg.content === `${PREFIX}invite`) {
