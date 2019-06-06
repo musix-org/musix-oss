@@ -89,7 +89,7 @@ client.on('message', async msg => {
 	if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
 		if (!msg.member.roles.find(x => x.name === 'DJ')) {
 			if (msg.content === `${PREFIX}invite`) {
-				return undefined
+				return undefined;
 			}
 			msg.channel.send(':x: i\'m sorry you need to have the \'DJ\' role!')
 		}
