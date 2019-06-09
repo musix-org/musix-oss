@@ -85,6 +85,9 @@ client.on('message', async msg => {
 		return undefined;
 		}
 	if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
+		if (!msg.member.roles.find(x => x.name === 'DJ')) {
+			msg.channel.send(':x: i\'m sorry but you need to have the \'DJ\' role!')
+		}
 	if (msg.member.roles.find(x => x.name === 'DJ')) {
 		const args = msg.content.split(' ');
 		const searchString = args.slice(1).join(' ');
@@ -95,7 +98,7 @@ client.on('message', async msg => {
 		command = command.slice(PREFIX.length)
 	
 		if (command === 'play') {
-			if (!args[1]) return msg.channel.send(':x: I\'m sorry but you didn\'t specify the song');
+			if (!args[1]) return msg.channel.send(':x: I\'m sorry but you didn\'t specify a song');
 			const voiceChannel = msg.member.voiceChannel;
 			if (!voiceChannel) return msg.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
 			const permissions = voiceChannel.permissionsFor(msg.client.user);
@@ -197,9 +200,6 @@ Please provide a value to select one of the search results ranging from __1-10__
 	
 		return undefined;
 	}
-	}
-	if (!msg.member.roles.find(x => x.name === 'DJ')) {
-		msg.channel.send(':x: i\'m sorry you need to have the \'DJ\' role!')
 	}
 	else {
 		const args = msg.content.split(' ');
