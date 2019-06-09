@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const YouTube = require('simple-youtube-api')
 const ytdl = require('ytdl-core');
 const GOOGLE_API_KEY = (process.env.API_KEY)
-const PREFIX = ('!')
+const PREFIX = ('-')
 
 
 const client = new Client({ disableEveryone: true });
@@ -22,7 +22,7 @@ client.on('reconnecting', () => console.log('- Reconnecting -'));
 
 client.on('ready', () => { //startup stuff
   console.log('- Connected -');
-  client.user.setActivity('!help', { type: 'LISTENING' })
+  client.user.setActivity('-help', { type: 'LISTENING' })
   client.user.setStatus('dnd');
 });
 
