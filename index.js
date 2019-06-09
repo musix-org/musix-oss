@@ -26,75 +26,65 @@ client.on('ready', () => { //startup stuff
   client.user.setStatus('dnd');
 });
 
-client.on('message', msg => {
-    if (msg.content === '!test') {
-			if (!msg.member.username === 'Matte') {
-				msg.channel.send(':x: I\'m sorry, You can\'t do that!')
-			}
-        if (msg.author.username === 'Matte') {
-        msg.channel.send('Bot is currently online hosted!')
-				}
-				return undefined;
-		}
-		if (msg.content === '!restart') {
-			if (!msg.member.username === 'Matte') {
-				msg.channel.send(':x: I\'m sorry, You can\'t do that!')
-			}
-			if (msg.author.username === 'Matte') {
-				console.log('restarting...')
-				msg.channel.send('Restarting...')
-			}
-			return undefined;
-		}
-		if (msg.content === 'Restarting...') {
-			if (msg.author.username === 'Musix') {
-				msg.author.crash('done')
-			}
-		}
-    if (msg.content === `${PREFIX}help`) {
-    const embed = new Discord.RichEmbed()
-      .setTitle('Commands for Musix!')
-      .addField('```!play```', 'Play a song.', true)
-      .addField('```!queue```', 'Display the queue.', true)
-      .addField('```!np```', 'Display whats currently playing.', true)
-      .addField('```!volume```', 'Change or check the volume.', true)
-      .addField('```!pause```', 'Pause the music.', true)
-      .addField('```!resume```', 'Resume the music.', true)
-      .addField('```!stop```', 'Stop the music, Clear the queue and leave the current voice channel.', true)
-      .addField('```!skip```', 'Skip a song.', true)
-      .addField('```!invite```', 'Invite Musix.', true)
-      .addField('```!info```', 'Display info and instructions.', true)
-      .addField('```!help```', 'Display the help.', true)
-      .setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
-      .setColor('#b50002')
-			msg.channel.send(embed);
-			return undefined;
-    }
-    if (msg.content === `${PREFIX}info`) {
-				var dj = msg.guild.roles.find(x => x.name === 'DJ') ? true : false;
-        const embed = new Discord.RichEmbed()
-					.setTitle('**Musix instructions and info**:')
-					.addField('On any errors you should use the !stop command, end the music and reset the queue.', 'Remember to __try again__ before contacting support!', true)
-					.addField('If your guild has a role called \'DJ\' you will need it to play music! If your guild doesn\'t have the DJ role everyone can play music.', 'DJ role existance: ' + dj, true)
-					.addField('Musix support server', 'https://discord.gg/rvHuJtB', true)
-          .addField('If you encounter any problems with Musix please contact Matte#5254!', '(creator and developer of Musix)', true)
-          .setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
-          .setColor('#b50002')
-          msg.channel.send(embed);
-				}
-			if (msg.content === `${PREFIX}invite`) {
-				msg.channel.send('https://bit.ly/2V3D0p7') 
-				return undefined;
-			}
-});
-
 client.on('message', async msg => {
 	if (msg.author.bot) return undefined;
 	if (msg.content.startsWith(`${PREFIX}`)) {
-	if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
-		if (!msg.member.roles.find(x => x.name === 'DJ')) {
-			msg.channel.send(':x: i\'m sorry you need to have the \'DJ\' role!')
+		if (msg.content === '-test') {
+			if (msg.author.username === 'Matte') {
+			msg.channel.send('Bot is currently online hosted!')
+			}
+			return undefined;
+			}
+			if (msg.content === '-restart') {
+				if (msg.member.username !== 'Matte') {
+					msg.channel.send(':x: I\'n´m sorry, You can\'t do that!')
+				}
+				if (msg.author.username === 'Matte') {
+					console.log('restarting...')
+					msg.channel.send('Restarting...')
+				}
+				return undefined;
+			}
+			if (msg.content === 'Restarting...') {
+				if (msg.author.username === 'Musix') {
+					msg.author.crash('done')
+				}
+			}
+		if (msg.content === `${PREFIX}help`) {
+		const embed = new Discord.RichEmbed()
+		  .setTitle('Commands for Musix!')
+		  .addField('```-play```', 'Play a song.', true)
+		  .addField('```-queue```', 'Display the queue.', true)
+		  .addField('```-np```', 'Display whats currently playing.', true)
+		  .addField('```-volume```', 'Change or check the volume.', true)
+		  .addField('```-pause```', 'Pause the music.', true)
+		  .addField('```-resume```', 'Resume the music.', true)
+		  .addField('```-stop```', 'Stop the music, Clear the queue and leave the current voice channel.', true)
+		  .addField('```-skip```', 'Skip a song.', true)
+		  .addField('```-invitemusix```', 'Invite Musix.', true)
+		  .addField('```-musixinfo```', 'Display info and instructions.', true)
+		  .addField('```-musixhelp```', 'Display the help.', true)
+		  .setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
+		  .setColor('#b50002')
+		  msg.channel.send(embed);
+		  return undefined;
 		}
+		if (msg.content === `${PREFIX}info`) {
+			var line = '**>-----------------------------------------------------------------------<**';
+			const embed = new Discord.RichEmbed()
+			  .setTitle('**Musix instructions and info**:')
+			  .addField('To use Musix you need a role called DJ !', line, true)
+			  .addField('If you have any problems with musix please contact Matte#5254!', line, true)
+			  .setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
+			  .setColor('#b50002')
+			  msg.channel.send(embed);
+			  return undefined;
+			}
+		if(msg.content === `${PREFIX}musixinvite`) {
+		msg.channel.send('https://bit.ly/2V3D0p7') 
+		return undefined;
+		}
+	if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
 	if (msg.member.roles.find(x => x.name === 'DJ')) {
 		const args = msg.content.split(' ');
 		const searchString = args.slice(1).join(' ');
@@ -207,6 +197,9 @@ Please provide a value to select one of the search results ranging from __1-10__
 	
 		return undefined;
 	}
+	}
+	if (!msg.member.roles.find(x => x.name === 'DJ')) {
+		msg.channel.send(':x: i\'m sorry you need to have the \'DJ\' role!')
 	}
 	else {
 		const args = msg.content.split(' ');
