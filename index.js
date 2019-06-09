@@ -71,16 +71,17 @@ client.on('message', async msg => {
 		}
 		if (msg.content === `${PREFIX}info`) {
 			var line = '**>-----------------------------------------------------------------------<**';
+			var coder = msg.guild.roles.find(x => x.name === 'Coder') ? true : false;
 			const embed = new Discord.RichEmbed()
-			  .setTitle('**Musix instructions and info**:')
-			  .addField('To use Musix you need a role called DJ !', line, true)
-			  .addField('If you have any problems with musix please contact Matte#5254!', line, true)
+	 		  .setTitle('**Musix instructions and info**:')
+	 		  .addField('This is a musix developement version and is not avaiable for public usage!', line, true)
+			  .addField('You will need a role called \'Coder\' to use the developement version!', 'Coder role existance: ' + coder, true)
 			  .setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
 			  .setColor('#b50002')
 			  msg.channel.send(embed);
 			  return undefined;
 			}
-		if(msg.content === `${PREFIX}musixinvite`) {
+		if(msg.content === `${PREFIX}invite`) {
 		msg.channel.send('https://bit.ly/2V3D0p7') 
 		return undefined;
 		}
@@ -310,6 +311,7 @@ Please provide a value to select one of the search results ranging from 1-10.
 	
 		return undefined;
 	}
+	msg.channel.send('Unknown command! Type -help for the list of commands!')
 	}
 });
 
