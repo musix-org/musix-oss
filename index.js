@@ -71,11 +71,12 @@ client.on('message', async msg => {
 		}
 		if (msg.content === `${PREFIX}info`) {
 			var line = '**>-----------------------------------------------------------------------<**';
-			var coder = msg.guild.roles.find(x => x.name === 'Coder') ? true : false;
+			var dj = msg.guild.roles.find(x => x.name === 'DJ') ? true : false;
 			const embed = new Discord.RichEmbed()
 	 		  .setTitle('**Musix instructions and info**:')
-	 		  .addField('This is a musix developement version and is not avaiable for public usage!', line, true)
-			  .addField('You will need a role called \'Coder\' to use the developement version!', 'Coder role existance: ' + coder, true)
+			  .addField('If your current guild has a role called \'DJ\' you will need it to use music commands! If your current guild doesn\'t have a role called \'DJ\' everyone can use music commands!', 'DJ role existance: ' + dj, true)
+			  .addField('If you encounter any errors with musix please report about them on the offical musix support server!', 'https://discord.gg/rvHuJtB', true)
+			  .addField('On errors you can do -stop to reset the queue and try again!', line, true)
 			  .setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
 			  .setColor('#b50002')
 			  msg.channel.send(embed);
@@ -87,7 +88,7 @@ client.on('message', async msg => {
 		}
 	if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
 		if (!msg.member.roles.find(x => x.name === 'DJ')) {
-			msg.channel.send(':x: i\'m sorry but you need to have the \'DJ\' role!')
+			msg.channel.send(':x: i\'m sorry but you need to have the \'DJ\' role use music commands!')
 		}
 	if (msg.member.roles.find(x => x.name === 'DJ')) {
 		const args = msg.content.split(' ');
@@ -311,7 +312,7 @@ Please provide a value to select one of the search results ranging from 1-10.
 	
 		return undefined;
 	}
-	msg.channel.send('Unknown command! Type -help for the list of commands!')
+	msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
 	}
 });
 
