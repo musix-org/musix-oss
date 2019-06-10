@@ -89,6 +89,7 @@ client.on('message', async msg => {
 	if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
 		if (!msg.member.roles.find(x => x.name === 'DJ')) {
 			msg.channel.send(':x: i\'m sorry but you need to have the \'DJ\' role use music commands!')
+			return undefined;
 		}
 	if (msg.member.roles.find(x => x.name === 'DJ')) {
 		const args = msg.content.split(' ');
