@@ -61,9 +61,9 @@ client.on('message', async msg => {
 		  .addField('```-resume```', 'Resume the music.', true)
 		  .addField('```-stop```', 'Stop the music, Clear the queue and leave the current voice channel.', true)
 		  .addField('```-skip```', 'Skip a song.', true)
-		  .addField('```-invitemusix```', 'Invite Musix.', true)
-		  .addField('```-musixinfo```', 'Display info and instructions.', true)
-		  .addField('```-musixhelp```', 'Display the help.', true)
+		  .addField('```-invite```', 'Invite Musix.', true)
+		  .addField('```-info```', 'Display info and instructions.', true)
+		  .addField('```-help```', 'Display the help.', true)
 		  .setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
 		  .setColor('#b50002')
 		  msg.channel.send(embed);
