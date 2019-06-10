@@ -37,7 +37,7 @@ client.on('message', async msg => {
 			}
 			if (msg.content === '-restart') {
 				if (msg.member.username !== 'Matte') {
-					msg.channel.send(':x: I\'n´m sorry, You can\'t do that!')
+					msg.channel.send(':x: I\'m sorry, but you can\'t do that!')
 				}
 				if (msg.author.username === 'Matte') {
 					console.log('restarting...')
@@ -309,9 +309,9 @@ Please provide a value to select one of the search results ranging from 1-10.
 			}
 			return msg.channel.send(':x: There is nothing playing.');
 		}
-		msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
 	}
 	msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
+	return undefined;
 	}
 });
 
