@@ -47,7 +47,7 @@ client.on('message', async msg => {
 			}
 			if (msg.content === 'Restarting...') {
 				if (msg.author.username === 'Musix') {
-					msg.author.crash('done')
+					msg.author.ikgoeieiqgihi('done')
 				}
 			}
 		if (msg.content === `${PREFIX}help`) {
