@@ -199,7 +199,7 @@ Please provide a value to select one of the search results ranging from __1-10__
 			}
 			return msg.channel.send(':x: There is nothing playing.');
 		}
-	
+		msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
 		return undefined;
 	}
 	msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
