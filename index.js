@@ -156,7 +156,7 @@ Please provide a value to select one of the search results ranging from __1-10__
 		} else if (command === 'skip') {
 			if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
 			if (!serverQueue) return msg.channel.send(':x: There is nothing playing that I could skip for you.');
-			serverQueue.connection.dispatcher.end('Skipped :thumbsup:');
+			serverQueue.connection.dispatcher.end('Skipped');
 			return undefined;
 		} else if (command === 'stop') {
 			if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
@@ -202,13 +202,15 @@ Please provide a value to select one of the search results ranging from __1-10__
 	}
 	if (msg.content === `${PREFIX}`) return;
 	var coms = ['-play','-queue','-np','-volume','-pause','-resume','-stop','-skip']
+	for (var i = 0; i < coms.length; i++) {
 	if (msg.content.includes(coms[i])) {
 		if (!msg.member.roles.find(x => x.name === 'DJ')) {
 			msg.channel.send(':x: i\'m sorry but you need to have the \'DJ\' role use music commands!')
 			return;
 		}
-	msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
+		}
 	}
+	msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
 	}
 	else {
 		const args = msg.content.split(' ');
