@@ -177,9 +177,9 @@ Please provide a value to select one of the search results ranging from __1-10__
 		} else if (command === 'queue') {
 			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
 			return msg.channel.send(`
-	__**Song queue:**__
-	${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
-	**Now playing:** ${serverQueue.songs[0].title} :musical_note: 
+__**Song queue:**__
+${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
+**Now playing:** ${serverQueue.songs[0].title} :musical_note: 
 			`);
 		} else if (command === 'pause') {
 			if (serverQueue && serverQueue.playing) {
