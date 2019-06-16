@@ -200,12 +200,12 @@ Please provide a value to select one of the search results ranging from __1-10__
 		msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
 		return undefined;
 	}
+	if (msg.content === `${PREFIX}`) return;
+	msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
 	if (!msg.member.roles.find(x => x.name === 'DJ')) {
 		msg.channel.send(':x: i\'m sorry but you need to have the \'DJ\' role use music commands!')
 		return;
 	}
-	if (msg.content === `${PREFIX}`) return;
-	msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
 	}
 	else {
 		const args = msg.content.split(' ');
