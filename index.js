@@ -201,13 +201,13 @@ Please provide a value to select one of the search results ranging from __1-10__
 		return undefined;
 	}
 	if (msg.content === `${PREFIX}`) return;
-	msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
-	var coms = []
+	var coms = ['-play','-queue','-np','-volume','-pause','-resume','-stop','-skip']
 	if (msg.content.includes(coms[i])) {
 		if (!msg.member.roles.find(x => x.name === 'DJ')) {
 			msg.channel.send(':x: i\'m sorry but you need to have the \'DJ\' role use music commands!')
 			return;
 		}
+	msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
 	}
 	}
 	else {
