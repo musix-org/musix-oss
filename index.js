@@ -205,7 +205,7 @@ Please provide a value to select one of the search results ranging from __1-10__
 	for (var i = 0; i < coms.length; i++) {
 	if (msg.content.includes(coms[i])) {
 		if (!msg.member.roles.find(x => x.name === 'DJ')) {
-			msg.channel.send(':x: i\'m sorry but you need to have the \'DJ\' role use music commands!')
+			msg.channel.send(':x: i\'m sorry but you need to have the \'DJ\' role to use music commands!')
 			return;
 		}
 		}
