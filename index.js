@@ -87,9 +87,6 @@ client.on('message', async msg => {
 		return undefined;
 		}
 	if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
-		if (!msg.member.roles.find(x => x.name === 'DJ')) {
-			msg.channel.send(':x: i\'m sorry but you need to have the \'DJ\' role use music commands!')
-		}
 	if (msg.member.roles.find(x => x.name === 'DJ')) {
 		const args = msg.content.split(' ');
 		const searchString = args.slice(1).join(' ');
@@ -202,6 +199,10 @@ Please provide a value to select one of the search results ranging from __1-10__
 		if (msg.content === `${PREFIX}`) return;
 		msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
 		return undefined;
+	}
+	if (!msg.member.roles.find(x => x.name === 'DJ')) {
+		msg.channel.send(':x: i\'m sorry but you need to have the \'DJ\' role use music commands!')
+		return;
 	}
 	if (msg.content === `${PREFIX}`) return;
 	msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
