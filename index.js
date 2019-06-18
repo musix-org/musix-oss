@@ -37,7 +37,7 @@ client.on('message', async msg => {
 			}
 			if (msg.content === '-restart') {
 				if (msg.member.username !== 'Matte') {
-					msg.channel.send(':x: I\'m sorry, but you can\'t do that!')
+					msg.channel.send(':x: I\'m sorry, But you can\'t do that!')
 				}
 				if (msg.author.username === 'Matte') {
 					console.log('restarting...')
@@ -295,6 +295,10 @@ Please provide a value to select one of the search results ranging from 1-10.
 			if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
 			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
 			if (!args[1]) return msg.channel.send(`The current volume is: **${serverQueue.volume}** :speaker:`);
+			if (isNaN(args[1])) {
+				console.log('NAN')
+				return msg.channel.send(':x: I\'m sorry, But you need to enter a valid __number__.')
+			}
 			serverQueue.volume = args[1];
 			serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
 			return msg.channel.send(`I set the volume to: **${args[1]}** 🔊`);
