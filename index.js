@@ -49,9 +49,12 @@ client.on('message', async msg => {
 					d.d('d')
 				}
 			}
-			if (msg.content === '!ping') {
-				msg.channel.send(`Current ping: ${client.ping}`)
+			if (msg.content === `${PREFIX}ping`) {
+				msg.channel.send(`My current ping is ${client.ping}`)
 				return;
+			  }
+			  if (msg.content.toUpperCase().startsWith(`MUSIX`)) {
+				  msg.channel.send('-help to see my commands.')
 			  }
 		if (msg.content === `${PREFIX}help`) {
 		const embed = new Discord.RichEmbed()
