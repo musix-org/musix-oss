@@ -83,6 +83,7 @@ client.on('message', async msg => {
 			  .addField('If your current guild has a role called \'DJ\' you will need it to use music commands! If your current guild doesn\'t have a role called \'DJ\' everyone can use music commands!', 'DJ role existance: ' + dj, true)
 			  .addField('If you encounter any errors with musix please report about them on the offical musix support server!', 'https://discord.gg/rvHuJtB', true)
 			  .addField('On errors you can do -stop to reset the queue and try again!', line, true)
+			  .addField('Current Ping in milliseconds', `${client.ping}`, true)
 			  .setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
 			  .setColor('#b50002')
 			  msg.channel.send(embed);
