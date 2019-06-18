@@ -5,7 +5,6 @@ const ytdl = require('ytdl-core');
 const GOOGLE_API_KEY = (process.env.API_KEY)
 const PREFIX = ('-')
 
-
 const client = new Client({ disableEveryone: true });
 
 const youtube = new YouTube(GOOGLE_API_KEY);
@@ -27,7 +26,7 @@ client.on('ready', () => { //startup stuff
 });
 
 client.on('message', async msg => {
-	if (msg.author.bot) return undefined;
+	if (!msg.guild || msg.author.bot) return undefined;
 	if (msg.content.startsWith(`${PREFIX}`)) {
 		if (msg.content === '-test') {
 			if (msg.author.username === 'Matte') {
@@ -36,7 +35,7 @@ client.on('message', async msg => {
 			return undefined;
 			}
 			if (msg.content === '-restart') {
-				if (msg.member.username !== 'Matte') {
+				if (msg.author.username !== 'Matte') {
 					msg.channel.send(':x: I\'m sorry, But you can\'t do that!')
 				}
 				if (msg.author.username === 'Matte') {
@@ -47,9 +46,13 @@ client.on('message', async msg => {
 			}
 			if (msg.content === 'Restarting...') {
 				if (msg.author.username === 'Musix') {
-					msg.author.ikgoeieiqgihi('done')
+					d.d('d')
 				}
 			}
+			if (msg.content === '!ping') {
+				msg.channel.send(`Current ping: ${client.ping}`)
+				return;
+			  }
 		if (msg.content === `${PREFIX}help`) {
 		const embed = new Discord.RichEmbed()
 		  .setTitle('Commands for Musix!')
@@ -107,7 +110,6 @@ client.on('message', async msg => {
 			if (!permissions.has('SPEAK')) {
 				return msg.channel.send(':x: I cannot speak in this voice channel, make sure I have the proper permissions!');
 			}
-	
 			if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
 				const playlist = await youtube.getPlaylist(url);
 				const videos = await playlist.getVideos();
@@ -296,7 +298,6 @@ Please provide a value to select one of the search results ranging from 1-10.
 			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
 			if (!args[1]) return msg.channel.send(`The current volume is: **${serverQueue.volume}** :speaker:`);
 			if (isNaN(args[1])) {
-				console.log('NAN')
 				return msg.channel.send(':x: I\'m sorry, But you need to enter a valid __number__.')
 			}
 			serverQueue.volume = args[1];
