@@ -27,6 +27,9 @@ client.on('ready', () => { //startup stuff
 
 client.on('message', async msg => {
 	if (!msg.guild || msg.author.bot) return undefined;
+	if (msg.content.toUpperCase().startsWith(`MUSIX`)) {
+		msg.channel.send('-help to see my commands.')
+	}
 	if (msg.content.startsWith(`${PREFIX}`)) {
 		if (msg.content === '-test') {
 			if (msg.author.username === 'Matte') {
@@ -52,9 +55,6 @@ client.on('message', async msg => {
 			if (msg.content === `${PREFIX}ping`) {
 				msg.channel.send(`My current ping is ${client.ping}`)
 				return;
-			  }
-			  if (msg.content.toUpperCase().startsWith(`MUSIX`)) {
-				  msg.channel.send('-help to see my commands.')
 			  }
 		if (msg.content === `${PREFIX}help`) {
 		const embed = new Discord.RichEmbed()
