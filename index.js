@@ -49,7 +49,7 @@ client.on('message', async msg => {
 					d.d('d')
 				}
 			}
-			if (msg.content === '!ping') {
+			if (msg.content === `${PREFIX}ping`) {
 				msg.channel.send(`Current ping: ${client.ping}`)
 				return;
 			  }
