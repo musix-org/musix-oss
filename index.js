@@ -50,11 +50,7 @@ client.on('message', async msg => {
 				}
 			}
 			if (msg.content === `${PREFIX}ping`) {
-<<<<<<< HEAD
 				msg.channel.send(`My current ping is ${client.ping}`)
-=======
-				msg.channel.send(`Current ping: ${client.ping}`)
->>>>>>> 33d39075120ae490150018d86e74e4f49378b76f
 				return;
 			  }
 			  if (msg.content.toUpperCase().startsWith(`MUSIX`)) {
