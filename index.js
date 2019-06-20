@@ -145,7 +145,7 @@ Please provide a value to select one of the search results ranging from __1-10__
 						} catch (err) {
 							console.log('Error 1')
 							console.error(err);
-							return msg.channel.send(':x: No or invalid value entered, cancelling video selection.');
+							return msg.channel.send(':x: No or invalid value entered, cancelling song selection.');
 						}
 						console.log('Start playing')
 						const videoIndex = parseInt(response.first().content);
