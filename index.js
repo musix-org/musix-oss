@@ -53,7 +53,7 @@ client.on('message', async msg => {
 				}
 			}
 			if (msg.content === `${PREFIX}ping`) {
-				msg.channel.send(`My current ping is ${client.ping}`)
+				msg.channel.send(`Current Ping: **${Math.floor(client.ping * 10) / 10} ms**.`)
 				return;
 			  }
 		if (msg.content === `${PREFIX}help`) {
