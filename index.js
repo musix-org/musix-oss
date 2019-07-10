@@ -187,7 +187,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 		return undefined;
 	}
 	if (msg.content === `${PREFIX}`) return;
-	var coms = ['-play','-queue','-np','-volume','-pause','-resume','-stop','-skip','-forcestop']
+	var coms = ['-play','-queue','-np','-volume','-pause','-resume','-stop','-skip']
 	for (var i = 0; i < coms.length; i++) {
 	if (msg.content.includes(coms[i])) {
 		if (!msg.member.roles.find(x => x.name === 'DJ')) {
