@@ -5,7 +5,7 @@ const ytdl = require('ytdl-core');
 const GOOGLE_API_KEY = (process.env.API_KEY)
 const PREFIX = ('-')
 const client = new Client({ disableEveryone: true });
-const youtube = new YouTube('AIzaSyBPFfx6Kq2Nvn9lpB_M2T2Y6V2N-8K9Uvo');
+const youtube = new YouTube(process.env.API_KEY);
 const queue = new Map();
 client.on('ready', () => {
   client.user.setActivity('-help', { type: 'LISTENING' })
@@ -376,4 +376,4 @@ function play(guild, song) {
 	serverQueue.textChannel.send(`:musical_note: Start playing: **${song.title}**`);
 }
 
-client.login('NTcyNDA1MTM1NjU4MTg4ODAw.XSW4cQ.i_Q6xGM6oIsqxs1oMnIazIcjRBY');
+client.login(process.env.BOT_TOKEN);
