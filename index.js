@@ -5,7 +5,7 @@ const ytdl = require('ytdl-core');
 const GOOGLE_API_KEY = (process.env.API_KEY)
 const PREFIX = ('-')
 const client = new Client({ disableEveryone: true });
-const youtube = new YouTube(GOOGLE_API_KEY);
+const youtube = new YouTube('AIzaSyBPFfx6Kq2Nvn9lpB_M2T2Y6V2N-8K9Uvo');
 const queue = new Map();
 client.on('ready', () => {
   client.user.setActivity('-help', { type: 'LISTENING' })
@@ -253,6 +253,7 @@ Please provide a value to select one of the search results ranging from 1-10.
 						const videoIndex = parseInt(response.first().content);
 						var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
 					} catch (err) {
+						console.error(err);
 						return msg.channel.send(':x: I could not obtain any search results.');
 					}
 				}
@@ -314,6 +315,7 @@ Please provide a value to select one of the search results ranging from 1-10.
 	return undefined;
 	}
 });
+
 async function handleVideo(video, msg, voiceChannel, playlist = false) {
 	const serverQueue = queue.get(msg.guild.id);
 	const song = {
@@ -331,12 +333,15 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 			playing: true
 		};
 		queue.set(msg.guild.id, queueConstruct);
+
 		queueConstruct.songs.push(song);
+
 		try {
 			var connection = await voiceChannel.join();
 			queueConstruct.connection = connection;
 			play(msg.guild, queueConstruct.songs[0]);
 		} catch (error) {
+			console.error(`I could not join the voice channel: ${error}`);
 			queue.delete(msg.guild.id);
 			return msg.channel.send(`:x: I could not join the voice channel: ${error}`);
 		}
@@ -347,23 +352,28 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 	}
 	return undefined;
 }
+
 function play(guild, song) {
 	const serverQueue = queue.get(guild.id);
+
 	if (!song) {
 		serverQueue.voiceChannel.leave();
 		queue.delete(guild.id);
 		return;
 	}
+
 	const dispatcher = serverQueue.connection.playStream(ytdl(song.url, { quality: `highestaudio`, filter: 'audioonly' }))
 		.on('end', reason => {
-			if (reason === 'Stream is not generating quickly enough.')
+			if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
 			else msg.channel.send(reason);
 			serverQueue.songs.shift();
 			play(guild, serverQueue.songs[0]);
 		})
-		.on('error', error => msg.channel.send(error));
+		.on('error', error => console.error(error));
 	dispatcher.setVolumeLogarithmic(1 / 5);
 	serverQueue.volume = 1
+
 	serverQueue.textChannel.send(`:musical_note: Start playing: **${song.title}**`);
 }
-client.login(process.env.BOT_TOKEN);
+
+client.login('NTcyNDA1MTM1NjU4MTg4ODAw.XSW4cQ.i_Q6xGM6oIsqxs1oMnIazIcjRBY');
