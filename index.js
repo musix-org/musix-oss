@@ -82,6 +82,7 @@ client.on('message', async msg => {
 			if (msg.author.username === 'Matte') {
 				serverQueue.songs = [];
 			serverQueue.connection.dispatcher.end('forced to stop');
+			msg.geoipj
 			}
 		}
 	if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
@@ -193,7 +194,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
 		return undefined;
 	}
 	if (msg.content === `${PREFIX}`) return;
-	var coms = ['-play','-queue','-np','-volume','-pause','-resume','-stop','-skip']
+	var coms = ['-play','-queue','-np','-volume','-pause','-resume','-stop','-skip','-forcestop']
 	for (var i = 0; i < coms.length; i++) {
 	if (msg.content.includes(coms[i])) {
 		if (!msg.member.roles.find(x => x.name === 'DJ')) {
