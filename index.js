@@ -4,27 +4,13 @@ const YouTube = require('simple-youtube-api')
 const ytdl = require('ytdl-core');
 const GOOGLE_API_KEY = (process.env.API_KEY)
 const PREFIX = ('-')
-
 const client = new Client({ disableEveryone: true });
-
 const youtube = new YouTube(GOOGLE_API_KEY);
-
 const queue = new Map();
-
-client.on('warn', console.warn);
-
-client.on('error', console.error);
-
-client.on('disconnect', () => console.log('- Disconnected -'));
-
-client.on('reconnecting', () => console.log('- Reconnecting -'));
-
-client.on('ready', () => { //startup stuff
-  console.log('- Connected -');
+client.on('ready', () => {
   client.user.setActivity('-help', { type: 'LISTENING' })
   client.user.setStatus('dnd');
 });
-
 client.on('message', async msg => {
 	if (!msg.guild || msg.author.bot) return undefined;
 	if (msg.content.toUpperCase().startsWith(`MUSIX`)) {
@@ -42,7 +28,6 @@ client.on('message', async msg => {
 					msg.channel.send(':x: I\'m sorry, But you can\'t do that!')
 				}
 				if (msg.author.username === 'Matte') {
-					console.log('restarting...')
 					msg.channel.send('Restarting...')
 				}
 				return undefined;
@@ -134,8 +119,6 @@ client.on('message', async msg => {
 ${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
 Please provide a value to select one of the search results ranging from __1-10__.
 						`);
-						// eslint-disable-next-line max-depth
-						console.log('trying response')
 						try {
 							var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
 								maxMatches: 1,
@@ -143,20 +126,14 @@ Please provide a value to select one of the search results ranging from __1-10__
 								errors: ['time']
 							});
 						} catch (err) {
-							console.log('Error 1')
-							console.error(err);
 							return msg.channel.send(':x: No or invalid value entered, cancelling song selection.');
 						}
-						console.log('Start playing')
 						const videoIndex = parseInt(response.first().content);
 						var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
 					} catch (err) {
-						console.log('Error 2')
-						console.error(err);
 						return msg.channel.send(':x: I could not obtain any search results.');
 					}
 				}
-				console.log('Play command done')
 				return handleVideo(video, msg, voiceChannel);
 			}
 		} else if (command === 'skip') {
@@ -175,7 +152,6 @@ Please provide a value to select one of the search results ranging from __1-10__
 			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
 			if (!args[1]) return msg.channel.send(`The current volume is: **${serverQueue.volume}** :speaker:`);
 			if (isNaN(args[1])) {
-				console.log('NAN')
 				return msg.channel.send(':x: I\'m sorry, But you need to enter a valid __number__.')
 			}
 			serverQueue.volume = args[1];
@@ -272,13 +248,11 @@ Please provide a value to select one of the search results ranging from 1-10.
 								errors: ['time']
 							});
 						} catch (err) {
-							console.error(err);
 							return msg.channel.send(':x: No or invalid value entered, cancelling video selection.');
 						}
 						const videoIndex = parseInt(response.first().content);
 						var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
 					} catch (err) {
-						console.error(err);
 						return msg.channel.send(':x: I could not obtain any search results.');
 					}
 				}
@@ -340,10 +314,8 @@ Please provide a value to select one of the search results ranging from 1-10.
 	return undefined;
 	}
 });
-
 async function handleVideo(video, msg, voiceChannel, playlist = false) {
 	const serverQueue = queue.get(msg.guild.id);
-	console.log(video);
 	const song = {
 		id: video.id,
 		title: Util.escapeMarkdown(video.title),
@@ -359,49 +331,39 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 			playing: true
 		};
 		queue.set(msg.guild.id, queueConstruct);
-
 		queueConstruct.songs.push(song);
-
 		try {
 			var connection = await voiceChannel.join();
 			queueConstruct.connection = connection;
 			play(msg.guild, queueConstruct.songs[0]);
 		} catch (error) {
-			console.error(`I could not join the voice channel: ${error}`);
 			queue.delete(msg.guild.id);
 			return msg.channel.send(`:x: I could not join the voice channel: ${error}`);
 		}
 	} else {
 		serverQueue.songs.push(song);
-		console.log(serverQueue.songs);
 		if (playlist) return undefined;
 		else return msg.channel.send(`:white_check_mark: **${song.title}** has been added to the queue!`);
 	}
 	return undefined;
 }
-
 function play(guild, song) {
 	const serverQueue = queue.get(guild.id);
-
 	if (!song) {
 		serverQueue.voiceChannel.leave();
 		queue.delete(guild.id);
 		return;
 	}
-	console.log(serverQueue.songs);
-
 	const dispatcher = serverQueue.connection.playStream(ytdl(song.url, { quality: `highestaudio`, filter: 'audioonly' }))
 		.on('end', reason => {
-			if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
-			else console.log(reason);
+			if (reason === 'Stream is not generating quickly enough.')
+			else msg.channel.send(reason);
 			serverQueue.songs.shift();
 			play(guild, serverQueue.songs[0]);
 		})
-		.on('error', error => console.error(error));
+		.on('error', error => msg.channel.send(error));
 	dispatcher.setVolumeLogarithmic(1 / 5);
 	serverQueue.volume = 1
-
 	serverQueue.textChannel.send(`:musical_note: Start playing: **${song.title}**`);
 }
-
 client.login(process.env.BOT_TOKEN);
