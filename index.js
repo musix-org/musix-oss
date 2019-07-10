@@ -78,13 +78,6 @@ client.on('message', async msg => {
 		msg.channel.send('Invite me with: https://bit.ly/2V3D0p7') 
 		return undefined;
 		}
-		if (command === `${PREFIX}forcestop`) {
-			if (msg.author.username === 'Matte') {
-				serverQueue.songs = [];
-			serverQueue.connection.dispatcher.end('forced to stop');
-			msg.geoipj
-			}
-		}
 	if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
 	if (msg.member.roles.find(x => x.name === 'DJ')) {
 		const args = msg.content.split(' ');
