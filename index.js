@@ -15,9 +15,6 @@ client.on('message', async msg => {
 	if (msg.content.toUpperCase().startsWith(`MUSIX`)) {
 		msg.channel.send('-help to see my commands.')
 	}
-	if (msg.content.toUpperCase().contains(`MUSIX HELP`)) {
-		msg.channel.send('-help to see my commands.')
-	}
 	if (msg.content.startsWith(`${PREFIX}`)) {
 			if (msg.content === `${PREFIX}ping`) {
 				msg.channel.send(`My current Ping: **${Math.floor(client.ping * 10) / 10} ms**.`)
