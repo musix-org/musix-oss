@@ -15,27 +15,10 @@ client.on('message', async msg => {
 	if (msg.content.toUpperCase().startsWith(`MUSIX`)) {
 		msg.channel.send('-help to see my commands.')
 	}
+	if (msg.content.toUpperCase().contains(`MUSIX HELP`)) {
+		msg.channel.send('-help to see my commands.')
+	}
 	if (msg.content.startsWith(`${PREFIX}`)) {
-		if (msg.content === '-test') {
-			if (msg.author.username === 'Matte') {
-			msg.channel.send('Bot is currently online hosted!')
-			}
-			return undefined;
-			}
-			if (msg.content === '-restart') {
-				if (msg.author.username !== 'Matte') {
-					msg.channel.send(':x: I\'m sorry, But you can\'t do that!')
-				}
-				if (msg.author.username === 'Matte') {
-					msg.channel.send('Restarting...')
-				}
-				return undefined;
-			}
-			if (msg.content === 'Restarting...') {
-				if (msg.author.username === 'Musix') {
-					d.d('d')
-				}
-			}
 			if (msg.content === `${PREFIX}ping`) {
 				msg.channel.send(`My current Ping: **${Math.floor(client.ping * 10) / 10} ms**.`)
 				return;
