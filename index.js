@@ -20,6 +20,17 @@ client.on('message', async msg => {
 			msg.channel.send(`My current Ping: **${Math.floor(client.ping * 10) / 10} ms**.`)
 			return;
 		}
+		if (msg.content === `${PREFIX} uptime`) {
+			var uptime = parseDate(client.uptime, ['h', 'm']);
+			var finalUptime
+			if (uptime.h === 0) {
+				console.log('first');
+				finalUptime = uptime.m + ' minutes';
+			} else {
+
+			}
+			msg.channel.send(`I've been up & running for ${finalUptime}.`);
+		}
 		if (msg.content === `${PREFIX}help`) {
 			const embed = new Discord.RichEmbed()
 				.setTitle('Commands for Musix!')
@@ -32,6 +43,8 @@ client.on('message', async msg => {
 				.addField('```-stop```', 'Stop the music, Clear the queue and leave the current voice channel.', true)
 				.addField('```-skip```', 'Skip a song.', true)
 				.addField('```-invite```', 'Invite Musix.', true)
+				.addField('```-ping```', 'See the current ping for Musix', true)
+				.addField('```-uptime```', 'See the current uptime for Musix', true)
 				.addField('```-info```', 'Display info and instructions.', true)
 				.addField('```-help```', 'Display the help.', true)
 				.setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
