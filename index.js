@@ -20,7 +20,7 @@ client.on('message', async msg => {
 			msg.channel.send(`My current Ping: **${Math.floor(client.ping * 10) / 10} ms**.`)
 			return;
 		}
-		if (msg.content === `${PREFIX} uptime`) {
+		if (msg.content === `${PREFIX}uptime`) {
 			var uptime = parseDate(client.uptime, ['h', 'm']);
 			var finalUptime
 			if (uptime.h === 0) {
