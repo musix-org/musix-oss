@@ -29,7 +29,7 @@ client.on('message', async msg => {
 			} else {
 
 			}
-			msg.channel.send(`I've been up & running for ${finalUptime}.`);
+			return msg.channel.send(`I've been up & running for ${finalUptime}.`);
 		}
 		if (msg.content === `${PREFIX}help`) {
 			const embed = new Discord.RichEmbed()
@@ -185,7 +185,7 @@ Please provide a value to select one of the search results ranging from __1-10__
 				return undefined;
 			}
 			if (msg.content === `${PREFIX}`) return;
-			var coms = ['-play', '-queue', '-np', '-volume', '-pause', '-resume', '-stop', '-skip']
+			var coms = ['-play', '-queue', '-np', '-volume', '-pause', '-resume', '-stop', '-skip', '-uptime', '-ping']
 			for (var i = 0; i < coms.length; i++) {
 				if (msg.content.includes(coms[i])) {
 					if (!msg.member.roles.find(x => x.name === 'DJ')) {
