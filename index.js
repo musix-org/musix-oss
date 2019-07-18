@@ -68,7 +68,7 @@ client.on('message', async msg => {
 				command = command.slice(PREFIX.length)
 
 				if (command === 'play') {
-					return msg.channel.send(':x: I\'m sorry but Musix is currently unavaiable to playing music. :cry:')
+					return msg.channel.send(':x: I\'m sorry but Musix is currently unable to play music. :cry:')
 					if (!args[1]) return msg.channel.send(':x: I\'m sorry but you didn\'t specify a song');
 					const voiceChannel = msg.member.voiceChannel;
 					if (!voiceChannel) return msg.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
@@ -193,7 +193,7 @@ Please provide a value to select one of the search results ranging from __1-10__
 			command = command.slice(PREFIX.length)
 
 			if (command === 'play') {
-				return msg.channel.send(':x: I\'m sorry but Musix is currently unavaiable to playing music. :cry:')
+				return msg.channel.send(':x: I\'m sorry but Musix is currently unable to play music. :cry:')
 				if (!args[1]) return msg.channel.send(':x: I think you forgot what you wanted to play!');
 				const voiceChannel = msg.member.voiceChannel;
 				if (!voiceChannel) return msg.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
