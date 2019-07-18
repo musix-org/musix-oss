@@ -7,8 +7,8 @@ const client = new Client({ disableEveryone: true });
 const youtube = new YouTube(process.env.API_KEY);
 const queue = new Map();
 client.on('ready', () => {
-  client.user.setActivity('-help', { type: 'LISTENING' })
-  client.user.setStatus('dnd');
+	client.user.setActivity('-help', { type: 'LISTENING' })
+	client.user.setStatus('dnd');
 });
 client.on('message', async msg => {
 	if (!msg.guild || msg.author.bot) return undefined;
@@ -16,292 +16,293 @@ client.on('message', async msg => {
 		msg.channel.send('-help to see my commands.')
 	}
 	if (msg.content.startsWith(`${PREFIX}`)) {
-			if (msg.content === `${PREFIX}ping`) {
-				msg.channel.send(`My current Ping: **${Math.floor(client.ping * 10) / 10} ms**.`)
-				return;
-			  }
+		if (msg.content === `${PREFIX}ping`) {
+			msg.channel.send(`My current Ping: **${Math.floor(client.ping * 10) / 10} ms**.`)
+			return;
+		}
 		if (msg.content === `${PREFIX}help`) {
-		const embed = new Discord.RichEmbed()
-		  .setTitle('Commands for Musix!')
-		  .addField('```-play```', 'Play a song.', true)
-		  .addField('```-queue```', 'Display the queue.', true)
-		  .addField('```-np```', 'Display whats currently playing.', true)
-		  .addField('```-volume```', 'Change or check the volume.', true)
-		  .addField('```-pause```', 'Pause the music.', true)
-		  .addField('```-resume```', 'Resume the music.', true)
-		  .addField('```-stop```', 'Stop the music, Clear the queue and leave the current voice channel.', true)
-		  .addField('```-skip```', 'Skip a song.', true)
-		  .addField('```-invite```', 'Invite Musix.', true)
-		  .addField('```-info```', 'Display info and instructions.', true)
-		  .addField('```-help```', 'Display the help.', true)
-		  .setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
-		  .setColor('#b50002')
-		  msg.channel.send(embed);
-		  return undefined;
+			const embed = new Discord.RichEmbed()
+				.setTitle('Commands for Musix!')
+				.addField('```-play```', 'Play a song.', true)
+				.addField('```-queue```', 'Display the queue.', true)
+				.addField('```-np```', 'Display whats currently playing.', true)
+				.addField('```-volume```', 'Change or check the volume.', true)
+				.addField('```-pause```', 'Pause the music.', true)
+				.addField('```-resume```', 'Resume the music.', true)
+				.addField('```-stop```', 'Stop the music, Clear the queue and leave the current voice channel.', true)
+				.addField('```-skip```', 'Skip a song.', true)
+				.addField('```-invite```', 'Invite Musix.', true)
+				.addField('```-info```', 'Display info and instructions.', true)
+				.addField('```-help```', 'Display the help.', true)
+				.setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
+				.setColor('#b50002')
+			msg.channel.send(embed);
+			return undefined;
 		}
 		if (msg.content === `${PREFIX}info`) {
 			var line = '**>-----------------------------------------------------------------------<**';
 			var dj = msg.guild.roles.find(x => x.name === 'DJ') ? true : false;
 			const embed = new Discord.RichEmbed()
-	 		  .setTitle('**Musix instructions and info**:')
-			  .addField('If your current guild has a role called \'DJ\' you will need it to use music commands! If your current guild doesn\'t have a role called \'DJ\' everyone can use music commands!', 'DJ role existance: ' + dj, true)
-			  .addField('If you encounter any errors with musix please report about them on the offical musix support server!', 'https://discord.gg/rvHuJtB', true)
-			  .addField('On errors you can do -stop to reset the queue and try again!', line, true)
-			  .addField('Current Ping in milliseconds', `${client.ping}`, true)
-			  .setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
-			  .setColor('#b50002')
-			  msg.channel.send(embed);
-			  return undefined;
-			}
-		if(msg.content === `${PREFIX}invite`) {
-		msg.channel.send('Invite me with: https://bit.ly/2V3D0p7') 
-		return undefined;
+				.setTitle('**Musix instructions and info**:')
+				.addField('If your current guild has a role called \'DJ\' you will need it to use music commands! If your current guild doesn\'t have a role called \'DJ\' everyone can use music commands!', 'DJ role existance: ' + dj, true)
+				.addField('If you encounter any errors with musix please report about them on the offical musix support server!', 'https://discord.gg/rvHuJtB', true)
+				.addField('On errors you can do -stop to reset the queue and try again!', line, true)
+				.addField('Current Ping in milliseconds', `${client.ping}`, true)
+				.setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
+				.setColor('#b50002')
+			msg.channel.send(embed);
+			return undefined;
 		}
-	if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
-	if (msg.member.roles.find(x => x.name === 'DJ')) {
-		const args = msg.content.split(' ');
-		const searchString = args.slice(1).join(' ');
-		const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
-		const serverQueue = queue.get(msg.guild.id);
-	
-		let command = msg.content.toLowerCase().split(' ')[0];
-		command = command.slice(PREFIX.length)
-	
-		if (command === 'play') {
-			if (!args[1]) return msg.channel.send(':x: I\'m sorry but you didn\'t specify a song');
-			const voiceChannel = msg.member.voiceChannel;
-			if (!voiceChannel) return msg.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
-			const permissions = voiceChannel.permissionsFor(msg.client.user);
-			if (!permissions.has('CONNECT')) {
-				return msg.channel.send(':x: I cannot connect to your voice channel, make sure I have the proper permissions!');
-			}
-			if (!permissions.has('SPEAK')) {
-				return msg.channel.send(':x: I cannot speak in this voice channel, make sure I have the proper permissions!');
-			}
-			if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
-				const playlist = await youtube.getPlaylist(url);
-				const videos = await playlist.getVideos();
-				for (const video of Object.values(videos)) {
-					const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
-					await handleVideo(video2, msg, voiceChannel, true); // eslint-disable-line no-await-in-loop
-				}
-				return msg.channel.send(`:white_check_mark: Playlist: **${playlist.title}** has been added to the queue!`);
-			} else {
-				try {
-					var video = await youtube.getVideo(url);
-				} catch (error) {
-					try {
-						var videos = await youtube.searchVideos(searchString, 10);
-						let index = 0;
-						msg.channel.send(`
+		if (msg.content === `${PREFIX}invite`) {
+			msg.channel.send('Invite me with: https://bit.ly/2V3D0p7')
+			return undefined;
+		}
+		if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
+			if (msg.member.roles.find(x => x.name === 'DJ')) {
+				const args = msg.content.split(' ');
+				const searchString = args.slice(1).join(' ');
+				const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
+				const serverQueue = queue.get(msg.guild.id);
+
+				let command = msg.content.toLowerCase().split(' ')[0];
+				command = command.slice(PREFIX.length)
+
+				if (command === 'play') {
+					return msg.channel.send(':x: I\'m sorry but Musix is currently unavaiable to playing music. :cry:')
+					if (!args[1]) return msg.channel.send(':x: I\'m sorry but you didn\'t specify a song');
+					const voiceChannel = msg.member.voiceChannel;
+					if (!voiceChannel) return msg.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
+					const permissions = voiceChannel.permissionsFor(msg.client.user);
+					if (!permissions.has('CONNECT')) {
+						return msg.channel.send(':x: I cannot connect to your voice channel, make sure I have the proper permissions!');
+					}
+					if (!permissions.has('SPEAK')) {
+						return msg.channel.send(':x: I cannot speak in this voice channel, make sure I have the proper permissions!');
+					}
+					if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
+						const playlist = await youtube.getPlaylist(url);
+						const videos = await playlist.getVideos();
+						for (const video of Object.values(videos)) {
+							const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
+							await handleVideo(video2, msg, voiceChannel, true); // eslint-disable-line no-await-in-loop
+						}
+						return msg.channel.send(`:white_check_mark: Playlist: **${playlist.title}** has been added to the queue!`);
+					} else {
+						try {
+							var video = await youtube.getVideo(url);
+						} catch (error) {
+							try {
+								var videos = await youtube.searchVideos(searchString, 10);
+								let index = 0;
+								msg.channel.send(`
 	__**Song selection:**__
 ${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
 Please provide a value to select one of the search results ranging from __1-10__.
 						`);
-						try {
-							var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
-								maxMatches: 1,
-								time: 10000,
-								errors: ['time']
-							});
-						} catch (err) {
-							return msg.channel.send(':x: No or invalid value entered, cancelling song selection.');
+								try {
+									var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
+										maxMatches: 1,
+										time: 10000,
+										errors: ['time']
+									});
+								} catch (err) {
+									return msg.channel.send(':x: No or invalid value entered, cancelling song selection.');
+								}
+								const videoIndex = parseInt(response.first().content);
+								var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
+							} catch (err) {
+								return msg.channel.send(':x: I could not obtain any search results.');
+							}
 						}
-						const videoIndex = parseInt(response.first().content);
-						var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
-					} catch (err) {
-						return msg.channel.send(':x: I could not obtain any search results.');
+						return handleVideo(video, msg, voiceChannel);
 					}
-				}
-				return handleVideo(video, msg, voiceChannel);
-			}
-		} else if (command === 'skip') {
-			if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
-			if (!serverQueue) return msg.channel.send(':x: There is nothing playing that I could skip for you.');
-			serverQueue.connection.dispatcher.end('Skipped');
-			return undefined;
-		} else if (command === 'stop') {
-			if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
-			if (!serverQueue) return msg.channel.send(':x: There is nothing playing that I could stop for you.');
-			serverQueue.songs = [];
-			serverQueue.connection.dispatcher.end('Stopped!');
-			return undefined;
-		} else if (command === 'volume') {
-			if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
-			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
-			if (!args[1]) return msg.channel.send(`The current volume is: **${serverQueue.volume}** :speaker:`);
-			if (isNaN(args[1])) {
-				return msg.channel.send(':x: I\'m sorry, But you need to enter a valid __number__.')
-			}
-			serverQueue.volume = args[1];
-			serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
-			return msg.channel.send(`I set the volume to: **${args[1]}** 🔊`);
-		} else if (command === 'np') {
-			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
-			return msg.channel.send(`:musical_note: Now playing: **${serverQueue.songs[0].title}**`);
-		} else if (command === "queue") {
-			if (!serverQueue)
-			  return msg.channel.send(":x: There is nothing in the queue.");
-			var queuemessage = `__**Song queue:**__
+				} else if (command === 'skip') {
+					if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
+					if (!serverQueue) return msg.channel.send(':x: There is nothing playing that I could skip for you.');
+					serverQueue.connection.dispatcher.end('Skipped');
+					return undefined;
+				} else if (command === 'stop') {
+					if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
+					if (!serverQueue) return msg.channel.send(':x: There is nothing playing that I could stop for you.');
+					serverQueue.songs = [];
+					serverQueue.connection.dispatcher.end('Stopped!');
+					return undefined;
+				} else if (command === 'volume') {
+					if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
+					if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
+					if (!args[1]) return msg.channel.send(`The current volume is: **${serverQueue.volume}** :speaker:`);
+					if (isNaN(args[1])) {
+						return msg.channel.send(':x: I\'m sorry, But you need to enter a valid __number__.')
+					}
+					serverQueue.volume = args[1];
+					serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
+					return msg.channel.send(`I set the volume to: **${args[1]}** 🔊`);
+				} else if (command === 'np') {
+					if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
+					return msg.channel.send(`:musical_note: Now playing: **${serverQueue.songs[0].title}**`);
+				} else if (command === "queue") {
+					if (!serverQueue)
+						return msg.channel.send(":x: There is nothing in the queue.");
+					var queuemessage = `__**Song queue:**__
 	${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
 	**Now playing:** ${serverQueue.songs[0].title} :musical_note: `;
-			if (queuemessage.length < 2000) {
-			  return msg.channel.send(
-				":x: The queue has too many songs in it to show all in this channel. Try again after a few songs"
-			  );
+					if (queuemessage.length < 2000) {
+						return msg.channel.send(
+							":x: The queue has too many songs in it to show all in this channel. Try again after a few songs"
+						);
+					}
+					return msg.channel.send(queuemessage);
+				} else if (command === 'pause') {
+					if (serverQueue && serverQueue.playing) {
+						serverQueue.playing = false;
+						serverQueue.connection.dispatcher.pause();
+						return msg.channel.send(':pause_button: Paused the music for you!');
+					}
+					return msg.channel.send(':x: There is nothing playing.');
+				} else if (command === 'resume') {
+					if (serverQueue && !serverQueue.playing) {
+						serverQueue.playing = true;
+						serverQueue.connection.dispatcher.resume();
+						return msg.channel.send(':play_pause: Resumed the music for you!');
+					}
+					return msg.channel.send(':x: There is nothing playing.');
+				}
+				if (msg.content === `${PREFIX}`) return;
+				msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
+				return undefined;
 			}
-			return msg.channel.send(queuemessage);
-		} else if (command === 'pause') {
-			if (serverQueue && serverQueue.playing) {
-				serverQueue.playing = false;
-				serverQueue.connection.dispatcher.pause();
-				return msg.channel.send(':pause_button: Paused the music for you!');
+			if (msg.content === `${PREFIX}`) return;
+			var coms = ['-play', '-queue', '-np', '-volume', '-pause', '-resume', '-stop', '-skip']
+			for (var i = 0; i < coms.length; i++) {
+				if (msg.content.includes(coms[i])) {
+					if (!msg.member.roles.find(x => x.name === 'DJ')) {
+						msg.channel.send(':x: i\'m sorry but you need to have the \'DJ\' role to use music commands!')
+						return;
+					}
+				}
 			}
-			return msg.channel.send(':x: There is nothing playing.');
-		} else if (command === 'resume') {
-			if (serverQueue && !serverQueue.playing) {
-				serverQueue.playing = true;
-				serverQueue.connection.dispatcher.resume();
-				return msg.channel.send(':play_pause: Resumed the music for you!');
-			}
-			return msg.channel.send(':x: There is nothing playing.');
-		}
-		if (msg.content === `${PREFIX}`) return;
-		msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
-		return undefined;
-	}
-	if (msg.content === `${PREFIX}`) return;
-	var coms = ['-play','-queue','-np','-volume','-pause','-resume','-stop','-skip']
-	for (var i = 0; i < coms.length; i++) {
-	if (msg.content.includes(coms[i])) {
-		if (!msg.member.roles.find(x => x.name === 'DJ')) {
-			msg.channel.send(':x: i\'m sorry but you need to have the \'DJ\' role to use music commands!')
+			msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
 			return;
 		}
-		}
-	}
-	msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
-	return;
-	}
-	else {
-		const args = msg.content.split(' ');
-		const searchString = args.slice(1).join(' ');
-		const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
-		const serverQueue = queue.get(msg.guild.id);
-	
-		let command = msg.content.toLowerCase().split(' ')[0];
-		command = command.slice(PREFIX.length)
-	
-		if (command === 'play') {
-			if (!args[1]) return msg.channel.send(':x: I think you forgot what you wanted to play!');
-			const voiceChannel = msg.member.voiceChannel;
-			if (!voiceChannel) return msg.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
-			const permissions = voiceChannel.permissionsFor(msg.client.user);
-			if (!permissions.has('CONNECT')) {
-				return msg.channel.send(':x: I cannot connect to your voice channel, make sure I have the proper permissions!');
-			}
-			if (!permissions.has('SPEAK')) {
-				return msg.channel.send(':x: I cannot speak in this voice channel, make sure I have the proper permissions!');
-			}
-	
-			if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
-				const playlist = await youtube.getPlaylist(url);
-				const videos = await playlist.getVideos();
-				for (const video of Object.values(videos)) {
-					const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
-					await handleVideo(video2, msg, voiceChannel, true); // eslint-disable-line no-await-in-loop
+		else {
+			const args = msg.content.split(' ');
+			const searchString = args.slice(1).join(' ');
+			const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
+			const serverQueue = queue.get(msg.guild.id);
+
+			let command = msg.content.toLowerCase().split(' ')[0];
+			command = command.slice(PREFIX.length)
+
+			if (command === 'play') {
+				if (!args[1]) return msg.channel.send(':x: I think you forgot what you wanted to play!');
+				const voiceChannel = msg.member.voiceChannel;
+				if (!voiceChannel) return msg.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
+				const permissions = voiceChannel.permissionsFor(msg.client.user);
+				if (!permissions.has('CONNECT')) {
+					return msg.channel.send(':x: I cannot connect to your voice channel, make sure I have the proper permissions!');
 				}
-				return msg.channel.send(`:white_check_mark: Playlist: **${playlist.title}** has been added to the queue!`);
-			} else {
-				try {
-					var video = await youtube.getVideo(url);
-				} catch (error) {
+				if (!permissions.has('SPEAK')) {
+					return msg.channel.send(':x: I cannot speak in this voice channel, make sure I have the proper permissions!');
+				}
+
+				if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
+					const playlist = await youtube.getPlaylist(url);
+					const videos = await playlist.getVideos();
+					for (const video of Object.values(videos)) {
+						const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
+						await handleVideo(video2, msg, voiceChannel, true); // eslint-disable-line no-await-in-loop
+					}
+					return msg.channel.send(`:white_check_mark: Playlist: **${playlist.title}** has been added to the queue!`);
+				} else {
 					try {
-						var videos = await youtube.searchVideos(searchString, 10);
-						let index = 0;
-						msg.channel.send(`
+						var video = await youtube.getVideo(url);
+					} catch (error) {
+						try {
+							var videos = await youtube.searchVideos(searchString, 10);
+							let index = 0;
+							msg.channel.send(`
 	__**Song selection:**__
 ${videos.map(video2 => `**${++index} -** ${video2.title}`).join('\n')}
 Please provide a value to select one of the search results ranging from 1-10.
 						`);
-						// eslint-disable-next-line max-depth
-						try {
-							var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
-								maxMatches: 1,
-								time: 10000,
-								errors: ['time']
-							});
+							// eslint-disable-next-line max-depth
+							try {
+								var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
+									maxMatches: 1,
+									time: 10000,
+									errors: ['time']
+								});
+							} catch (err) {
+								return msg.channel.send(':x: No or invalid value entered, cancelling video selection.');
+							}
+							const videoIndex = parseInt(response.first().content);
+							var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
 						} catch (err) {
-							return msg.channel.send(':x: No or invalid value entered, cancelling video selection.');
+							console.error(err);
+							return msg.channel.send(':x: I could not obtain any search results.');
 						}
-						const videoIndex = parseInt(response.first().content);
-						var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
-					} catch (err) {
-						console.error(err);
-						return msg.channel.send(':x: I could not obtain any search results.');
 					}
+					return handleVideo(video, msg, voiceChannel);
 				}
-				return handleVideo(video, msg, voiceChannel);
-			}
-		} else if (command === 'skip') {
-			if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
-			if (!serverQueue) return msg.channel.send(':x: There is nothing playing that I could skip for you.');
-			msg.channel.send('Skipped :thumbsup:')
-			serverQueue.connection.dispatcher.end('Skipped');
-			return undefined;
-		} else if (command === 'stop') {
-			if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
-			if (!serverQueue) return msg.channel.send(':x: There is nothing playing that I could stop for you.');
-			msg.channel.send('Stopped the music! :stop_button:')
-			serverQueue.songs = [];
-			serverQueue.connection.dispatcher.end('Stopped!');
-			return undefined;
-		} else if (command === 'volume') {
-			if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
-			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
-			if (!args[1]) return msg.channel.send(`The current volume is: **${serverQueue.volume}** :speaker:`);
-			if (isNaN(args[1])) {
-				return msg.channel.send(':x: I\'m sorry, But you need to enter a valid __number__.')
-			}
-			serverQueue.volume = args[1];
-			serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
-			return msg.channel.send(`I set the volume to: **${args[1]}** 🔊`);
-		} else if (command === 'np') {
-			if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
-			return msg.channel.send(`:musical_note: Now playing: **${serverQueue.songs[0].title}**`);
-		} else if (command === "queue") {
-			if (!serverQueue)
-			  return msg.channel.send(":x: There is nothing in the queue.");
-			var queuemessage = `__**Song queue:**__
+			} else if (command === 'skip') {
+				if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
+				if (!serverQueue) return msg.channel.send(':x: There is nothing playing that I could skip for you.');
+				msg.channel.send('Skipped :thumbsup:')
+				serverQueue.connection.dispatcher.end('Skipped');
+				return undefined;
+			} else if (command === 'stop') {
+				if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
+				if (!serverQueue) return msg.channel.send(':x: There is nothing playing that I could stop for you.');
+				msg.channel.send('Stopped the music! :stop_button:')
+				serverQueue.songs = [];
+				serverQueue.connection.dispatcher.end('Stopped!');
+				return undefined;
+			} else if (command === 'volume') {
+				if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
+				if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
+				if (!args[1]) return msg.channel.send(`The current volume is: **${serverQueue.volume}** :speaker:`);
+				if (isNaN(args[1])) {
+					return msg.channel.send(':x: I\'m sorry, But you need to enter a valid __number__.')
+				}
+				serverQueue.volume = args[1];
+				serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
+				return msg.channel.send(`I set the volume to: **${args[1]}** 🔊`);
+			} else if (command === 'np') {
+				if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
+				return msg.channel.send(`:musical_note: Now playing: **${serverQueue.songs[0].title}**`);
+			} else if (command === "queue") {
+				if (!serverQueue)
+					return msg.channel.send(":x: There is nothing in the queue.");
+				var queuemessage = `__**Song queue:**__
 	${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
 	**Now playing:** ${serverQueue.songs[0].title} :musical_note: `;
-			if (queuemessage.length < 2000) {
-			  return msg.channel.send(
-				":x: The queue has too many songs in it to show all in this channel. Try again after a few songs"
-			  );
+				if (queuemessage.length < 2000) {
+					return msg.channel.send(
+						":x: The queue has too many songs in it to show all in this channel. Try again after a few songs"
+					);
+				}
+				return msg.channel.send(queuemessage);
+			} else if (command === 'pause') {
+				if (serverQueue && serverQueue.playing) {
+					serverQueue.playing = false;
+					serverQueue.connection.dispatcher.pause();
+					return msg.channel.send(':pause_button: Paused the music for you!');
+				}
+				return msg.channel.send(':x: There is nothing playing.');
+			} else if (command === 'resume') {
+				if (serverQueue && !serverQueue.playing) {
+					serverQueue.playing = true;
+					serverQueue.connection.dispatcher.resume();
+					return msg.channel.send(':play_pause: Resumed the music for you!');
+				}
+				return msg.channel.send(':x: There is nothing playing.');
 			}
-			return msg.channel.send(queuemessage);
-		} else if (command === 'pause') {
-			if (serverQueue && serverQueue.playing) {
-				serverQueue.playing = false;
-				serverQueue.connection.dispatcher.pause();
-				return msg.channel.send(':pause_button: Paused the music for you!');
-			}
-			return msg.channel.send(':x: There is nothing playing.');
-		} else if (command === 'resume') {
-			if (serverQueue && !serverQueue.playing) {
-				serverQueue.playing = true;
-				serverQueue.connection.dispatcher.resume();
-				return msg.channel.send(':play_pause: Resumed the music for you!');
-			}
-			return msg.channel.send(':x: There is nothing playing.');
 		}
-	}
-	if (msg.content === `${PREFIX}`) {
+		if (msg.content === `${PREFIX}`) {
+			return undefined;
+		}
+		msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
 		return undefined;
-	}
-	msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
-	return undefined;
 	}
 });
 
