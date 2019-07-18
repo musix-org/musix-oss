@@ -379,4 +379,27 @@ function play(guild, song) {
 	serverQueue.textChannel.send(`:musical_note: Start playing: **${song.title}**`);
 }
 
+function parseDate(ms, times) {
+	var d = new Date(ms);
+	var obj = {};
+	for (var i = 0; i < times.length; i++) {
+		if (times[i] === 'ms') {
+			obj[times[i]] = d.getMilliseconds();
+		} else if (times[i] === 's') {
+			obj[times[i]] = d.getSeconds();
+		} else if (times[i] === 'm') {
+			obj[times[i]] = d.getMinutes();
+		} else if (times[i] === 'h') {
+			obj[times[i]] = d.getHours();
+		} else if (times[i] === 'd') {
+			obj[times[i]] = d.getDate();
+		} else if (times[i] === 'mo') {
+			obj[times[i]] = d.getMonth();
+		} else if (times[i] === 'y') {
+			obj[times[i]] = d.getFullYear() - 1970;
+		}
+	}
+	return obj;
+}
+
 client.login(process.env.BOT_TOKEN);
