@@ -183,8 +183,7 @@ Please provide a value to select one of the search results ranging from __1-10__
 			}
 			msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
 			return;
-		}
-		else {
+		} else {
 			const args = msg.content.split(' ');
 			const searchString = args.slice(1).join(' ');
 			const url = args[1] ? args[1].replace(/<(.+)>/g, '$1') : '';
@@ -194,6 +193,7 @@ Please provide a value to select one of the search results ranging from __1-10__
 			command = command.slice(PREFIX.length)
 
 			if (command === 'play') {
+				return msg.channel.send(':x: I\'m sorry but Musix is currently unavaiable to playing music. :cry:')
 				if (!args[1]) return msg.channel.send(':x: I think you forgot what you wanted to play!');
 				const voiceChannel = msg.member.voiceChannel;
 				if (!voiceChannel) return msg.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
