@@ -39,7 +39,7 @@ client.on('message', async msg => {
 			} else {
 				finalUptime = `${Math.round((uptime.d + (uptime.h / 24)) * 10) / 10} days`;
 			}
-			msg.channel.send(`I've been up & running for **${finalUptime}.**`);
+			return msg.channel.send(`I've been up & running for **${finalUptime}.**`);
 		}
 		if (msg.content === `${PREFIX}help`) {
 			const embed = new Discord.RichEmbed()
