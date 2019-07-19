@@ -166,10 +166,10 @@ Please provide a value to select one of the search results ranging from __1-10__
 					if (!serverQueue)
 						return msg.channel.send(":x: There is nothing in the queue.");
 					var queuemessage = `__**Song queue:**__
-	${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
-	**Now playing:** ${serverQueue.songs[0].title} :musical_note: `;
+${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
+**Now playing:** ${serverQueue.songs[0].title} :musical_note: `;
 					if (queuemessage.length > 2000) {
-						return msg.channel.send(":x: The queue has too many songs in it to show all in this channel. Try again after a few songs");
+						return msg.channel.send(":x: The queue has too many songs in it to show all in this channel. Try again after a few songs.");
 					}
 					return msg.channel.send(queuemessage);
 				} else if (command === 'pause') {
