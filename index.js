@@ -6,6 +6,7 @@ const PREFIX = ('-')
 const client = new Client({ disableEveryone: true });
 const youtube = new YouTube(process.env.API_KEY);
 const queue = new Map();
+client.login(process.env.BOT_TOKEN);
 client.on('ready', () => {
 	client.user.setActivity('-help', { type: 'LISTENING' })
 	client.user.setStatus('dnd');
@@ -21,15 +22,24 @@ client.on('message', async msg => {
 			return;
 		}
 		if (msg.content === `${PREFIX}uptime`) {
-			var uptime = parseDate(client.uptime, ['h', 'm']);
-			var finalUptime
-			if (uptime.h === 0) {
-				console.log('first');
-				finalUptime = uptime.m + ' minutes';
-			} else {
+			var rawUptime = client.uptime;
+			var uptime = {};
+			uptime['d'] = rawUptime / 86400000;
+			uptime['h'] = rawUptime / 3600000;
+			uptime['m'] = rawUptime / 60000;
 
+			var finalUptime;
+			if (uptime.d < 1) {
+				finalUptime = `${Math.round((uptime.h + (uptime.m / 60)) * 10) / 10} hours`;
+				if (uptime.h < 1) {
+					finalUptime = `${Math.round(uptime.m * 10) / 10} minutes`;
+				} else {
+					finalUptime = `${Math.round((uptime.h + (uptime.m / 60)) * 10) / 10} hours`;
+				}
+			} else {
+				finalUptime = `${Math.round((uptime.d + (uptime.h / 24)) * 10) / 10} days`;
 			}
-			return msg.channel.send(`I've been up & running for ${finalUptime}.`);
+			msg.channel.send(`I've been up & running for **${finalUptime}.**`);
 		}
 		if (msg.content === `${PREFIX}help`) {
 			const embed = new Discord.RichEmbed()
@@ -60,7 +70,7 @@ client.on('message', async msg => {
 				.addField('If your current guild has a role called \'DJ\' you will need it to use music commands! If your current guild doesn\'t have a role called \'DJ\' everyone can use music commands!', 'DJ role existance: ' + dj, true)
 				.addField('If you encounter any errors with musix please report about them on the offical musix support server!', 'https://discord.gg/rvHuJtB', true)
 				.addField('On errors you can do -stop to reset the queue and try again!', line, true)
-				.addField('Current Ping in milliseconds', `${client.ping}`, true)
+				.addField('Current Ping in milliseconds', `${Math.floor(client.ping * 10) / 10} ms`, true)
 				.setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
 				.setColor('#b50002')
 			msg.channel.send(embed);
@@ -81,7 +91,6 @@ client.on('message', async msg => {
 				command = command.slice(PREFIX.length)
 
 				if (command === 'play') {
-					return msg.channel.send(':x: I\'m sorry but Musix is currently unable to play music. :cry:')
 					if (!args[1]) return msg.channel.send(':x: I\'m sorry but you didn\'t specify a song');
 					const voiceChannel = msg.member.voiceChannel;
 					if (!voiceChannel) return msg.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
@@ -160,9 +169,7 @@ Please provide a value to select one of the search results ranging from __1-10__
 	${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
 	**Now playing:** ${serverQueue.songs[0].title} :musical_note: `;
 					if (queuemessage.length < 2000) {
-						return msg.channel.send(
-							":x: The queue has too many songs in it to show all in this channel. Try again after a few songs"
-						);
+						return msg.channel.send(":x: The queue has too many songs in it to show all in this channel. Try again after a few songs");
 					}
 					return msg.channel.send(queuemessage);
 				} else if (command === 'pause') {
@@ -206,7 +213,6 @@ Please provide a value to select one of the search results ranging from __1-10__
 			command = command.slice(PREFIX.length)
 
 			if (command === 'play') {
-				return msg.channel.send(':x: I\'m sorry but Musix is currently unable to play music. :cry:')
 				if (!args[1]) return msg.channel.send(':x: I think you forgot what you wanted to play!');
 				const voiceChannel = msg.member.voiceChannel;
 				if (!voiceChannel) return msg.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
@@ -290,9 +296,7 @@ Please provide a value to select one of the search results ranging from 1-10.
 	${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
 	**Now playing:** ${serverQueue.songs[0].title} :musical_note: `;
 				if (queuemessage.length < 2000) {
-					return msg.channel.send(
-						":x: The queue has too many songs in it to show all in this channel. Try again after a few songs"
-					);
+					return msg.channel.send(":x: The queue has too many songs in it to show all in this channel. Try again after a few songs");
 				}
 				return msg.channel.send(queuemessage);
 			} else if (command === 'pause') {
@@ -378,28 +382,3 @@ function play(guild, song) {
 
 	serverQueue.textChannel.send(`:musical_note: Start playing: **${song.title}**`);
 }
-
-function parseDate(ms, times) {
-	var d = new Date(ms);
-	var obj = {};
-	for (var i = 0; i < times.length; i++) {
-		if (times[i] === 'ms') {
-			obj[times[i]] = d.getMilliseconds();
-		} else if (times[i] === 's') {
-			obj[times[i]] = d.getSeconds();
-		} else if (times[i] === 'm') {
-			obj[times[i]] = d.getMinutes();
-		} else if (times[i] === 'h') {
-			obj[times[i]] = d.getHours();
-		} else if (times[i] === 'd') {
-			obj[times[i]] = d.getDate();
-		} else if (times[i] === 'mo') {
-			obj[times[i]] = d.getMonth();
-		} else if (times[i] === 'y') {
-			obj[times[i]] = d.getFullYear() - 1970;
-		}
-	}
-	return obj;
-}
-
-client.login(process.env.BOT_TOKEN);
