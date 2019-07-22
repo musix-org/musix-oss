@@ -21,26 +21,6 @@ client.on('message', async msg => {
 			msg.channel.send(`My current Ping: **${Math.floor(client.ping * 10) / 10} ms**.`)
 			return;
 		}
-		if (msg.content === `${PREFIX}uptime`) {
-			var rawUptime = client.uptime;
-			var uptime = {};
-			uptime['d'] = rawUptime / 86400000;
-			uptime['h'] = rawUptime / 3600000;
-			uptime['m'] = rawUptime / 60000;
-
-			var finalUptime;
-			if (uptime.d < 1) {
-				finalUptime = `${Math.round((uptime.h + (uptime.m / 60)) * 10) / 10} hours`;
-				if (uptime.h < 1) {
-					finalUptime = `${Math.round(uptime.m * 10) / 10} minutes`;
-				} else {
-					finalUptime = `${Math.round((uptime.h + (uptime.m / 60)) * 10) / 10} hours`;
-				}
-			} else {
-				finalUptime = `${Math.round((uptime.d + (uptime.h / 24)) * 10) / 10} days`;
-			}
-			return msg.channel.send(`I've been up & running for **${finalUptime}.**`);
-		}
 		if (msg.content === `${PREFIX}help`) {
 			const embed = new Discord.RichEmbed()
 				.setTitle('Commands for Musix!')
