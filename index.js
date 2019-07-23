@@ -34,7 +34,6 @@ client.on('message', async msg => {
 				.addField('```-skip```', 'Skip a song.', true)
 				.addField('```-invite```', 'Invite Musix.', true)
 				.addField('```-ping```', 'See the current ping for Musix', true)
-				.addField('```-uptime```', 'See the current uptime for Musix', true)
 				.addField('```-info```', 'Display info and instructions.', true)
 				.addField('```-help```', 'Display the help.', true)
 				.setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
@@ -121,6 +120,7 @@ Please provide a value to select one of the search results ranging from __1-10__
 				} else if (command === 'skip') {
 					if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
 					if (!serverQueue) return msg.channel.send(':x: There is nothing playing that I could skip for you.');
+					if (!serverQueue.songs[1]) return msg.channel.send(':x: Theres nothing to skip to!')
 					serverQueue.connection.dispatcher.end('Skipped');
 					return undefined;
 				} else if (command === 'stop') {
@@ -172,7 +172,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
 				return undefined;
 			}
 			if (msg.content === `${PREFIX}`) return;
-			var coms = ['-play', '-queue', '-np', '-volume', '-pause', '-resume', '-stop', '-skip', '-uptime', '-ping']
+			var coms = ['-play', '-queue', '-np', '-volume', '-pause', '-resume', '-stop', '-skip', '-ping']
 			for (var i = 0; i < coms.length; i++) {
 				if (msg.content.includes(coms[i])) {
 					if (!msg.member.roles.find(x => x.name === 'DJ')) {
