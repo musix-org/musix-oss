@@ -84,8 +84,8 @@ client.on('message', async msg => {
 						const playlist = await youtube.getPlaylist(url);
 						const videos = await playlist.getVideos();
 						for (const video of Object.values(videos)) {
-							const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
-							await handleVideo(video2, msg, voiceChannel, true); // eslint-disable-line no-await-in-loop
+							const video2 = await youtube.getVideoByID(video.id);
+							await handleVideo(video2, msg, voiceChannel, true);
 						}
 						return msg.channel.send(`:white_check_mark: Playlist: **${playlist.title}** has been added to the queue!`);
 					} else {
@@ -122,13 +122,13 @@ Please provide a value to select one of the search results ranging from __1-10__
 					if (!serverQueue) return msg.channel.send(':x: There is nothing playing that I could skip for you.');
 					if (!serverQueue.songs[1]) return msg.channel.send(':x: Theres nothing to skip to!')
 					serverQueue.connection.dispatcher.end('Skipped');
-					return undefined;
+					return;
 				} else if (command === 'stop') {
 					if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
 					if (!serverQueue) return msg.channel.send(':x: There is nothing playing that I could stop for you.');
 					serverQueue.songs = [];
 					serverQueue.connection.dispatcher.end('Stopped!');
-					return undefined;
+					return;
 				} else if (command === 'volume') {
 					if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
 					if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
@@ -169,7 +169,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
 				}
 				if (msg.content === `${PREFIX}`) return;
 				msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
-				return undefined;
+				return;
 			}
 			if (msg.content === `${PREFIX}`) return;
 			var coms = ['-play', '-queue', '-np', '-volume', '-pause', '-resume', '-stop', '-skip', '-ping']
@@ -273,8 +273,8 @@ Please provide a value to select one of the search results ranging from 1-10.
 				if (!serverQueue)
 					return msg.channel.send(":x: There is nothing in the queue.");
 				var queuemessage = `__**Song queue:**__
-	${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
-	**Now playing:** ${serverQueue.songs[0].title} :musical_note: `;
+${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
+**Now playing:** ${serverQueue.songs[0].title} :musical_note: `;
 				if (queuemessage.length < 2000) {
 					return msg.channel.send(":x: The queue has too many songs in it to show all in this channel. Try again after a few songs");
 				}
@@ -296,10 +296,10 @@ Please provide a value to select one of the search results ranging from 1-10.
 			}
 		}
 		if (msg.content === `${PREFIX}`) {
-			return undefined;
+			return;
 		}
 		msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
-		return undefined;
+		return;
 	}
 });
 
