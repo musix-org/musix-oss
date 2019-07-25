@@ -20,8 +20,10 @@ client.on('message', async msg => {
 		var guildms = client.guilds.find(x => x.name === 'Musix Support')
 		var channelms = guildms.channels.find(x => x.name === 'log')
 		const embed = new Discord.RichEmbed()
-			.setTitle(`${msg.author.id}, ${msg.member.displayName}`)
-			.addField(`Message content: ${msg.content}`, `Message Guild: ${msg.guild.name}`)
+			.setTitle(`**User:** ${msg.author.id}, ${msg.member.displayName}`)
+			.addField(`**Message channel:** ${msg.channel.name}`, `Message Guild: ${msg.guild.name}`)
+			.setFooter(`**Message Content:** ${msg.content}`)
+			.setColor('#b50002')
 		channelms.send(embed)
 		if (msg.content === `${PREFIX}ping`) {
 			msg.channel.send(`My current Ping: **${Math.floor(client.ping * 10) / 10} ms**.`)
