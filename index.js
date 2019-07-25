@@ -17,6 +17,12 @@ client.on('message', async msg => {
 		msg.channel.send('-help to see my commands.')
 	}
 	if (msg.content.startsWith(`${PREFIX}`)) {
+		var guildms = client.guilds.find(x => x.name === 'Musix Support')
+		var channelms = guildms.channels.find(x => x.name === 'log')
+		const embed = new Discord.RichEmbed()
+			.setTitle(`${msg.author.id}, ${msg.member.displayName}`)
+			.addField(`Message content: ${msg.content}`, `Message Guild: ${msg.guild.name}`)
+		channelms.send(embed)
 		if (msg.content === `${PREFIX}ping`) {
 			msg.channel.send(`My current Ping: **${Math.floor(client.ping * 10) / 10} ms**.`)
 			return;
