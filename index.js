@@ -19,12 +19,24 @@ client.on('message', async msg => {
 	if (msg.content.startsWith(`${PREFIX}`)) {
 		var guildms = client.guilds.find(x => x.name === 'Musix Support')
 		var channelms = guildms.channels.find(x => x.name === 'log')
-		const embed = new Discord.RichEmbed()
-			.setTitle(`**User:** ${msg.author.id}, ${msg.member.displayName}`)
-			.addField(`**Message channel:** ${msg.channel.name}`, `Message Guild: ${msg.guild.name}`)
-			.setFooter(`**Message Content:** ${msg.content}`)
-			.setColor('#b50002')
-		channelms.send(embed)
+		var guildId = msg.guild.id
+		if (!client.voiceConnections.has(guildId)) {
+			const embed = new Discord.RichEmbed()
+				.setTitle(`**User:** ${msg.author.id}, ${msg.member.displayName}, ${msg.author.tag}`)
+				.addField(`**Message channel:** ${msg.channel.name}`, `Client is not in a Voice channel.`)
+				.addField(`**Message Content:** ${msg.content}`, `**Message Guild:** ${msg.guild.name}, ${msg.guild.id}`)
+				.setColor('#b50002')
+			channelms.send(embed)
+		} else {
+			const embed = new Discord.RichEmbed()
+				.setTitle(`**User:** ${msg.author.id}, ${msg.member.displayName}, ${msg.author.tag}`)
+				.addField(`**Message channel:** ${msg.channel.name}`, `**Voice channel:** ${client.voiceConnections.get(guildId).channel.name}, User Voice channel: ${msg.member.voiceChannel}`)
+				.addField(`**Message Content:** ${msg.content}`, `**Message Guild:** ${msg.guild.name}, ${msg.guild.id}`)
+				.setColor('#b50002')
+			channelms.send(embed)
+		}
+
+
 		if (msg.content === `${PREFIX}ping`) {
 			msg.channel.send(`My current Ping: **${Math.floor(client.ping * 10) / 10} ms**.`)
 			return;
