@@ -35,8 +35,6 @@ client.on('message', async msg => {
 				.setColor('#b50002')
 			channelms.send(embed)
 		}
-
-
 		if (msg.content === `${PREFIX}ping`) {
 			msg.channel.send(`My current Ping: **${Math.floor(client.ping * 10) / 10} ms**.`)
 			return;
@@ -89,7 +87,7 @@ client.on('message', async msg => {
 				let command = msg.content.toLowerCase().split(' ')[0];
 				command = command.slice(PREFIX.length)
 
-				if (command === 'play') {
+				if (command === 'play' || command === 'p') {
 					if (!args[1]) return msg.channel.send(':x: I\'m sorry but you didn\'t specify a song');
 					const voiceChannel = msg.member.voiceChannel;
 					if (!voiceChannel) return msg.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
@@ -137,7 +135,7 @@ Please provide a value to select one of the search results ranging from __1-10__
 						}
 						return handleVideo(video, msg, voiceChannel);
 					}
-				} else if (command === 'skip') {
+				} else if (command === 'skip' || command === 's') {
 					if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
 					if (!serverQueue) return msg.channel.send(':x: There is nothing playing that I could skip for you.');
 					if (!serverQueue.songs[1]) return msg.channel.send(':x: Theres nothing to skip to!')
@@ -212,7 +210,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
 			let command = msg.content.toLowerCase().split(' ')[0];
 			command = command.slice(PREFIX.length)
 
-			if (command === 'play') {
+			if (command === 'play' || command === 'p') {
 				if (!args[1]) return msg.channel.send(':x: I think you forgot what you wanted to play!');
 				const voiceChannel = msg.member.voiceChannel;
 				if (!voiceChannel) return msg.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
@@ -263,7 +261,7 @@ Please provide a value to select one of the search results ranging from 1-10.
 					}
 					return handleVideo(video, msg, voiceChannel);
 				}
-			} else if (command === 'skip') {
+			} else if (command === 'skip' || command === 's') {
 				if (!msg.member.voiceChannel) return msg.channel.send(':x: You are not in a voice channel!');
 				if (!serverQueue) return msg.channel.send(':x: There is nothing playing that I could skip for you.');
 				msg.channel.send('Skipped :thumbsup:')
