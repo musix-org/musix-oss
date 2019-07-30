@@ -74,7 +74,7 @@ client.on('message', async msg => {
 			return undefined;
 		}
 		if (msg.content === `${PREFIX}invite`) {
-			msg.channel.send('Invite me with: https://bit.ly/2V3D0p7')
+			msg.channel.send('Invite me with: https://bit.ly/2VGcuBR')
 			return undefined;
 		}
 		if (msg.member.guild.roles.find(x => x.name === 'DJ')) {
