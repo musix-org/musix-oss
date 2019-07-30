@@ -18,13 +18,14 @@ client.on('message', async msg => {
 	}
 	if (msg.content.startsWith('>')) {
 		if (msg.author.id !== '360363051792203779') return msg.channel.send(':x: Developement commands are not avaiable for public usage!')
-		if (msg.author.id === '360363051792203779') {
+		if (msg.author.id === '360363051792203779' || msg.author.id === '384002606621655040') {
 			if (msg.content === '>devstop') {
 				serverQueue.songs = [];
 				serverQueue.connection.dispatcher.end('Stop');
 			}
 			if (msg.content.startsWith('>eval')) {
-				msg.channel.send(eval(args.join(' ')));
+				const args = msg.content.slice(6)
+				msg.channel.send(eval(args));
 			}
 		}
 	}
