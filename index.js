@@ -17,7 +17,7 @@ client.on('message', async msg => {
 		msg.channel.send('-help to see my commands.')
 	}
 	if (msg.content.startsWith('>')) {
-		if (msg.author.id !== '360363051792203779' || msg.author.id === '384002606621655040') return msg.channel.send(':x: Developement commands are not avaiable for public usage!')
+		if (msg.author.id !== '360363051792203779' || msg.author.id !== '384002606621655040') return msg.channel.send(':x: Developement commands are not avaiable for public usage!');
 		if (msg.author.id === '360363051792203779' || msg.author.id === '384002606621655040') {
 			if (msg.content === '>devstop') {
 				serverQueue.songs = [];
