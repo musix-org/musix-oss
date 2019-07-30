@@ -54,7 +54,6 @@ client.on('message', async msg => {
 				.addField('```-ping```', 'See the current ping for Musix', true)
 				.addField('```-info```', 'Display info and instructions.', true)
 				.addField('```-help```', 'Display the help.', true)
-				.addField('Developement command prefix: >', 'Developement commands are not avaiable to public usage!', true)
 				.setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
 				.setColor('#b50002')
 			msg.channel.send(embed);
