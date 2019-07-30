@@ -328,7 +328,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
 				serverQueue.connection.dispatcher.end('Stop');
 			}
 			if (msg.content.startsWith('>eval')) {
-				if (msg.content.includes('BOT_TOKEN') || msg.content.includes('API_KEY')) return msg.channel.send(':x: OH HELL NO IM NOT GIVING YOU THAT! :x:')
+				if (eval(args) === process.env.BOT_TOKEN || eval(args === process.env.API_KEY)) return msg.channel.send(':x: I\'m sorry, The token and api key is private!')
 				const args = msg.content.slice(6)
 				msg.channel.send(eval(args));
 			}
