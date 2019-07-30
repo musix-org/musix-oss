@@ -16,20 +16,6 @@ client.on('message', async msg => {
 	if (msg.content.toUpperCase().startsWith(`MUSIX`)) {
 		msg.channel.send('-help to see my commands.')
 	}
-	if (msg.content.startsWith('>')) {
-		if (msg.author.id === '360363051792203779' || msg.author.id === '384002606621655040') {
-			if (msg.content === '>devstop') {
-				serverQueue.songs = [];
-				serverQueue.connection.dispatcher.end('Stop');
-			}
-			if (msg.content.startsWith('>eval')) {
-				if (msg.content.includes('process.env.BOT_TOKEN') || msg.content.includes('API_KEY')) return msg.channel.send(':x: OH HELL NO IM NOT GIVING YOU THAT! :x:')
-				const args = msg.content.slice(6)
-				msg.channel.send(eval(args));
-			}
-			return
-		} else return msg.channel.send(':x: Developement commands are not avaiable for public usage!');
-	}
 	if (msg.content.startsWith(`${PREFIX}`)) {
 		var guildms = client.guilds.find(x => x.name === 'Musix Support')
 		var channelms = guildms.channels.find(x => x.name === 'log')
@@ -334,6 +320,20 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
 		}
 		msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
 		return;
+	}
+	if (msg.content.startsWith('>')) {
+		if (msg.author.id === '360363051792203779' || msg.author.id === '384002606621655040') {
+			if (msg.content === '>devstop') {
+				serverQueue.songs = [];
+				serverQueue.connection.dispatcher.end('Stop');
+			}
+			if (msg.content.startsWith('>eval')) {
+				if (msg.content.includes('BOT_TOKEN') || msg.content.includes('API_KEY')) return msg.channel.send(':x: OH HELL NO IM NOT GIVING YOU THAT! :x:')
+				const args = msg.content.slice(6)
+				msg.channel.send(eval(args));
+			}
+			return
+		} else return msg.channel.send(':x: Developement commands are not avaiable for public usage!');
 	}
 });
 
