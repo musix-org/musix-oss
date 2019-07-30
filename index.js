@@ -315,25 +315,25 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
 				return msg.channel.send(':x: There is nothing playing.');
 			}
 		}
+		if (msg.content === '-devstop') {
+			if (msg.author.id === '360363051792203779') {
+				serverQueue.songs = [];
+				serverQueue.connection.dispatcher.end('Stop');
+				return
+			}
+		} else if (msg.content.startsWith('-eval')) {
+			if (msg.author.id === '360363051792203779' || msg.author.id === '384002606621655040') {
+				const args = msg.content.slice(6)
+				if (eval(args) === process.env.BOT_TOKEN || eval(args) === process.env.API_KEY) return msg.channel.send(':x: I\'m sorry, The token and api key is private!');
+				msg.channel.send(eval(args));
+				return
+			}
+		}
 		if (msg.content === `${PREFIX}`) {
 			return;
 		}
 		msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
 		return;
-	}
-	if (msg.content.startsWith('>')) {
-		if (msg.author.id === '360363051792203779' || msg.author.id === '384002606621655040') {
-			if (msg.content === '>devstop') {
-				serverQueue.songs = [];
-				serverQueue.connection.dispatcher.end('Stop');
-			}
-			if (msg.content.startsWith('>eval')) {
-				const args = msg.content.slice(6)
-				if (eval(args) === process.env.BOT_TOKEN || eval(args) === process.env.API_KEY) return msg.channel.send(':x: I\'m sorry, The token and api key is private!');
-				msg.channel.send(eval(args));
-			}
-			return
-		} else return msg.channel.send(':x: Developement commands are not avaiable for public usage!');
 	}
 });
 
