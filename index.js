@@ -23,7 +23,7 @@ client.on('message', async msg => {
 				serverQueue.connection.dispatcher.end('Stop');
 			}
 			if (msg.content.startsWith('>eval')) {
-				if (msg.content === '>eval process.env.BOT_TOKEN' || msg.content === '>eval process.env.API_KEY') return msg.channel.send(':x: OH HELL NO IM NOT GIVING YOU THE API KEY TWAT! :x:')
+				if (msg.content.includes('process.env.BOT_TOKEN') || msg.content.includes('API_KEY')) return msg.channel.send(':x: OH HELL NO IM NOT GIVING YOU THE API KEY TWAT! :x:')
 				const args = msg.content.slice(6)
 				msg.channel.send(eval(args));
 			}
