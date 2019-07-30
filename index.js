@@ -12,9 +12,20 @@ client.on('ready', () => {
 	client.user.setStatus('dnd');
 });
 client.on('message', async msg => {
-	if (!msg.guild || msg.author.bot) return undefined;
+	if (!msg.guild || msg.author.bot) return;
 	if (msg.content.toUpperCase().startsWith(`MUSIX`)) {
 		msg.channel.send('-help to see my commands.')
+	}
+	if (msg.content.startsWith('>')) {
+		if (msg.author.id === '360363051792203779') {
+			if (msg.content === '>devstop') {
+				serverQueue.songs = [];
+				serverQueue.connection.dispatcher.end('Stop');
+			}
+			if (msg.content === '>url') {
+				msg.channel.send(`${serverQueue.songs[0].url}`)
+			}
+		}
 	}
 	if (msg.content.startsWith(`${PREFIX}`)) {
 		var guildms = client.guilds.find(x => x.name === 'Musix Support')
@@ -68,6 +79,7 @@ client.on('message', async msg => {
 				.addField('If you encounter any errors with musix please report about them on the offical musix support server!', 'https://discord.gg/rvHuJtB', true)
 				.addField('On errors you can do -stop to reset the queue and try again!', line, true)
 				.addField('Current Ping in milliseconds', `${Math.floor(client.ping * 10) / 10} ms`, true)
+				.addField('Be careful with the Volume command! Volume is not recommended to be put over 3 with user volume at 100%!', 'Volume will reset to 1 always when a new song begins!', true)
 				.setAuthor('Musix', 'https://cdn.discordapp.com/avatars/572405135658188800/04c6f22b7600ddecfbc245dd3ec10f9f.png?size=2048')
 				.setColor('#b50002')
 			msg.channel.send(embed);
