@@ -23,10 +23,7 @@ client.on('message', async msg => {
 				serverQueue.songs = [];
 				serverQueue.connection.dispatcher.end('Stop');
 			}
-			if (msg.content === '>url') {
-				msg.channel.send(`${serverQueue.songs[0].url}`)
-			}
-			if (msg.content === '>eval') {
+			if (msg.content.startsWith('>eval')) {
 				msg.channel.send(eval(args.join(' ')));
 			}
 		}
