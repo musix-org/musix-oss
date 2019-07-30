@@ -328,8 +328,8 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
 				serverQueue.connection.dispatcher.end('Stop');
 			}
 			if (msg.content.startsWith('>eval')) {
-				if (eval(args) === process.env.BOT_TOKEN || eval(args) === process.env.API_KEY) return msg.channel.send(':x: I\'m sorry, The token and api key is private!')
 				const args = msg.content.slice(6)
+				if (eval(args) === process.env.BOT_TOKEN || eval(args) === process.env.API_KEY) return msg.channel.send(':x: I\'m sorry, The token and api key is private!');
 				msg.channel.send(eval(args));
 			}
 			return
