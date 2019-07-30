@@ -42,14 +42,14 @@ client.on('message', async msg => {
 		if (msg.content === `${PREFIX}help`) {
 			const embed = new Discord.RichEmbed()
 				.setTitle('Commands for Musix!')
-				.addField('```-play```', 'Play a song.', true)
-				.addField('```-queue```', 'Display the queue.', true)
-				.addField('```-np```', 'Display whats currently playing.', true)
+				.addField('```-play | -p```', 'Play a song.', true)
+				.addField('```-queue | -q```', 'Display the queue.', true)
+				.addField('```-nowplaying | -np```', 'Display whats currently playing.', true)
 				.addField('```-volume```', 'Change or check the volume.', true)
 				.addField('```-pause```', 'Pause the music.', true)
 				.addField('```-resume```', 'Resume the music.', true)
 				.addField('```-stop```', 'Stop the music, Clear the queue and leave the current voice channel.', true)
-				.addField('```-skip```', 'Skip a song.', true)
+				.addField('```-skip | -s```', 'Skip a song.', true)
 				.addField('```-invite```', 'Invite Musix.', true)
 				.addField('```-ping```', 'See the current ping for Musix', true)
 				.addField('```-info```', 'Display info and instructions.', true)
@@ -157,10 +157,10 @@ Please provide a value to select one of the search results ranging from __1-10__
 					serverQueue.volume = args[1];
 					serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
 					return msg.channel.send(`I set the volume to: **${args[1]}** 🔊`);
-				} else if (command === 'np') {
+				} else if (command === 'np' || command === 'nowplaying') {
 					if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
 					return msg.channel.send(`:musical_note: Now playing: **${serverQueue.songs[0].title}**`);
-				} else if (command === "queue") {
+				} else if (command === "queue" || command === 'q') {
 					if (!serverQueue)
 						return msg.channel.send(":x: There is nothing in the queue.");
 					var queuemessage = `__**Song queue:**__
@@ -190,7 +190,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
 				return;
 			}
 			if (msg.content === `${PREFIX}`) return;
-			var coms = ['-play', '-queue', '-np', '-volume', '-pause', '-resume', '-stop', '-skip', '-ping']
+			var coms = ['-play', '-queue', '-np', '-volume', '-pause', '-resume', '-stop', '-skip', '-ping', '-q', '-nowplaying', '-p', '-s']
 			for (var i = 0; i < coms.length; i++) {
 				if (msg.content.includes(coms[i])) {
 					if (!msg.member.roles.find(x => x.name === 'DJ')) {
@@ -284,10 +284,10 @@ Please provide a value to select one of the search results ranging from 1-10.
 				serverQueue.volume = args[1];
 				serverQueue.connection.dispatcher.setVolumeLogarithmic(args[1] / 5);
 				return msg.channel.send(`I set the volume to: **${args[1]}** 🔊`);
-			} else if (command === 'np') {
+			} else if (command === 'np' || command === 'nowplaying') {
 				if (!serverQueue) return msg.channel.send(':x: There is nothing playing.');
 				return msg.channel.send(`:musical_note: Now playing: **${serverQueue.songs[0].title}**`);
-			} else if (command === "queue") {
+			} else if (command === "queue" || command === 'q') {
 				if (!serverQueue)
 					return msg.channel.send(":x: There is nothing in the queue.");
 				var queuemessage = `__**Song queue:**__
