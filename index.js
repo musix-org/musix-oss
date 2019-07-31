@@ -6,7 +6,7 @@ const PREFIX = ('-')
 const client = new Client({ disableEveryone: true });
 const youtube = new YouTube(process.env.API_KEY);
 const queue = new Map();
-client.login(process.env.UIGEHIAGPEW);
+client.login(process.env.BOT_TOKEN);
 client.on('ready', () => {
 	client.user.setActivity('-help', { type: 'LISTENING' })
 	client.user.setStatus('dnd');
@@ -192,10 +192,12 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
 						return
 					}
 				} else if (msg.content.startsWith('-eval')) {
-					if (msg.author.id === '360363051792203779' || msg.author.id === '384002606621655040') {
+					if (msg.author.id === '360363051792203779') {
 						const args = msg.content.slice(6)
 						msg.channel.send(eval(args));
 						return
+					} else {
+						msg.channel.send('The evaluation command is only avaiable for the developers of Musix!')
 					}
 				}
 				if (msg.content === `${PREFIX}`) return;
@@ -331,10 +333,12 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
 					return
 				}
 			} else if (msg.content.startsWith('-eval')) {
-				if (msg.author.id === '360363051792203779' || msg.author.id === '384002606621655040') {
+				if (msg.author.id === '360363051792203779') {
 					const args = msg.content.slice(6)
 					msg.channel.send(eval(args));
 					return
+				} else {
+					msg.channel.send('The evaluation command is only avaiable for the developers of Musix!')
 				}
 			}
 		}
