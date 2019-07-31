@@ -126,7 +126,7 @@ Please provide a value to select one of the search results ranging from __1-10__
 										errors: ['time']
 									});
 								} catch (err) {
-									return msg.channel.send(':x: No or invalid value entered, cancelling song selection.');
+									return msg.channel.send(':x: Cancelling song selection.');
 								}
 								const videoIndex = parseInt(response.first().content);
 								var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
