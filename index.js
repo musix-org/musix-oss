@@ -192,7 +192,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
 						return
 					}
 				} else if (msg.content.startsWith('-eval')) {
-					if (msg.author.id === '360363051792203779') {
+					if (msg.author.id === '360363051792203779' || msg.author.id === '384002606621655040') {
 						const args = msg.content.slice(6)
 						msg.channel.send(eval(args));
 						return
