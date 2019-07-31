@@ -6,7 +6,7 @@ const PREFIX = ('-')
 const client = new Client({ disableEveryone: true });
 const youtube = new YouTube(process.env.API_KEY);
 const queue = new Map();
-client.login(process.env.BOT_TOKEN);
+client.login(process.env.UIGEHIAGPEW);
 client.on('ready', () => {
 	client.user.setActivity('-help', { type: 'LISTENING' })
 	client.user.setStatus('dnd');
