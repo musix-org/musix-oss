@@ -1,5 +1,5 @@
 const YouTube = require("simple-youtube-api");
-const youtube = new YouTube("AIzaSyBPFfx6Kq2Nvn9lpB_M2T2Y6V2N-8K9Uvo");
+const youtube = new YouTube(process.env.API_KEY);
 
 module.exports = {
     name: 'p',
