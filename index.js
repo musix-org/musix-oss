@@ -19,9 +19,8 @@ for (const file of commandFiles) {
 }
 
 client.on('ready', () => {
-	client.user.setActivity('+help', { type: 'LISTENING' })
+	client.user.setActivity('V2 | -help', { type: 'LISTENING' })
 	client.user.setStatus('dnd');
-	console.log('ready')
 });
 client.on('message', message => {
 	if (!message.content.startsWith(client.config.prefix) || message.author.bot) return;
