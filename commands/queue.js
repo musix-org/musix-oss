@@ -24,7 +24,7 @@ module.exports = {
 			.setTitle("__Song queue__")
 			.setDescription(queuemessage)
 			.setFooter(`🎶 **Now playing:** ${serverQueue.songs[0].title}`)
-			.setColor("#2780cd")
+			.setColor("#b50002")
 		return message.channel.send(embed);
 	}
 };

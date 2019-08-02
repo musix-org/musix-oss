@@ -10,7 +10,7 @@ module.exports = {
             .addField('Current Ping in milliseconds', `${Math.floor(client.ping * 10) / 10} ms`, true)
             .addField('Be careful with the Volume command! Volume is not recommended to be put over 3 with user volume at 100%!', 'Volume will reset to 1 always when a new song begins!', true)
             .setAuthor(client.user.username, client.user.displayAvatarURL)
-            .setColor('#2780cd')
+            .setColor('#b50002')
         return message.channel.send(embed);
     }
 };
