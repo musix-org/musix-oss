@@ -7,7 +7,7 @@ module.exports = {
         if (!serverQueue) return message.channel.send(':x: There is nothing playing.');
         let page = parseInt(args[1]);
         if (!page) page = 1;
-        let queuesongs = serverQueue.songs.slice((page - 1) * 10 + 1, page * 20 + 1);
+        let queuesongs = serverQueue.songs.slice((page - 1) * 20 + 1, page * 20 + 1);
         let queuemessage = `${queuesongs.map(song => `**#** ${song.title}`).join('\n')}`
         if (queuemessage.length >= 1972) {
             let finalQueuemessage = queuemessage.slice(0, 1972).split('**#**').slice(0, -1).join('**#**');
