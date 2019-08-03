@@ -13,6 +13,7 @@ module.exports = {
         const serverQueue = client.queue.get(message.guild.id);
         const voiceChannel = message.member.voiceChannel;
         if (!voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
+        if (!args[1]) return message.channel.send(':x: You need to use a link or search for a song!');
         const permissions = voiceChannel.permissionsFor(message.client.user);
         if (!permissions.has('CONNECT')) {
             return message.channel.send(':x: I cannot connect to your voice channel, make sure I have the proper permissions!');
