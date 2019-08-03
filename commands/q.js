@@ -22,8 +22,7 @@ module.exports = {
         }
         const embed = new RichEmbed()
             .setTitle("__Song queue__")
-            .setDescription(queuemessage)
-            .setFooter(`🎶 **Now playing:** ${serverQueue.songs[0].title}`)
+            .setDescription(`🎶 **Now playing:** ${serverQueue.songs[0].title}\n${queuemessage}`)
             .setColor("#b50002")
         return message.channel.send(embed);
     }
