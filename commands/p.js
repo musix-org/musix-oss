@@ -39,7 +39,7 @@ module.exports = {
                     const embed = new RichEmbed()
                         .setTitle("__Song Selection__")
                         .setDescription(`${videos.map(video2 => `**${++index}** \`${video2.title}\` `).join('\n')}`)
-                        .setFooter("Please provide a number ranging from __1-10__ to select one of the search results.")
+                        .setFooter("Please provide a number ranging from 1-10 to select one of the search results.")
                         .setColor("#b50002")
                     message.channel.send(embed);
                     try {

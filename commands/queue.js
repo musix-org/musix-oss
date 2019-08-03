@@ -14,12 +14,6 @@ module.exports = {
 		if (page === 1) pagetext = ':arrow_down: Next in queue :arrow_down:'
 		let queuesongs = serverQueue.songs.slice((page - 1) * 20 + 1, page * 20 + 1);
 		let queuemessage = `${queuesongs.map(song => `**#** ${song.title}`).join('\n')}`
-		if (queuemessage.length >= 1972) {
-			let finalQueuemessage = queuemessage.slice(0, 1972).split('**#**').slice(0, -1).join('**#**');
-			const overflowSongsAmount = queuemessage.replace(finalQueuemessage, '').split('**#**').length;
-			finalQueuemessage += `\nI could not display all the songs at once. ${overflowSongsAmount} songs were not displayed here.`;
-			queuemessage = finalQueuemessage;
-		}
 		const hashs = queuemessage.split('**#**').length;
 		for (let i = 0; i < hashs; i++) {
 			queuemessage = queuemessage.replace('**#**', `**${i + 1}**`);

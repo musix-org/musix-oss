@@ -15,7 +15,7 @@ module.exports = {
             .addField('```-skip | -s```', 'Skip a song.', true)
             .addField('```-invite```', 'Invite Musix.', true)
             .addField('```-ping```', 'See the current ping for Musix', true)
-            .addField('```-info```', 'Display info and instructions.', true)
+            .addField('```-info```', 'Display the info', true)
             .addField('```-help```', 'Display the help.', true)
             .setAuthor(client.user.username, client.user.displayAvatarURL)
             .setColor('#b50002')
