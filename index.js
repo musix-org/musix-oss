@@ -27,7 +27,7 @@ client.on('message', message => {
 	const args = message.content.slice(client.config.prefix.length).split(' ');
 	const commandName = args[0].toLowerCase();
 	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-	if (!command && message.content !== `${client.config.prefix}`) return message.channel.send(`:x: That is not a valid command ${message.author}! Type ${client.config.prefix}help for a list of commands!`);
+	if (!command && message.content !== `${client.config.prefix}`) return message.channel.send(`:x: That is not a valid command ${message.author}! Type ${client.config.prefix}help for a list of commands!`).then(message => message.delete(3000));
 	if (command.guildOnly && message.channel.type !== 'text') return message.reply(':x: I can\'t execute that command inside DMs!');
 	if (command.args && !args.length) {
 		let reply = `:x: You didn't provide any arguments, ${message.author}!`;
@@ -44,7 +44,7 @@ client.on('message', message => {
 		const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
 		if (now < expirationTime) {
 			const timeLeft = (expirationTime - now) / 1000;
-			return message.reply(`:hourglass_flowing_sand: please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
+			return message.reply(`:hourglass_flowing_sand: please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`).then(message => message.delete(3000));
 		}
 	}
 	timestamps.set(message.author.id, now);
