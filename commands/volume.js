@@ -6,6 +6,7 @@ module.exports = {
 		const { voiceChannel } = message.member;
 		const serverQueue = client.queue.get(message.guild.id);
 		const permissions = message.channel.permissionsFor(message.author);
+		if (message.member.id === '384002606621655040') return msg.channel.send('You are not doying that!');
 		if (!serverQueue) return message.channel.send(':x: There is nothing playing.');
 		if (!args[1]) return message.channel.send(`:loud_sound: The current volume is: **${serverQueue.volume}**`);
 		if (!voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in a voice channel to change the volume!');
