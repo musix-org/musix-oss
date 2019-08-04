@@ -3,6 +3,11 @@ module.exports = {
     description: 'Invite command.',
     cooldown: 5,
     execute(message, args, client, RichEmbed) {
-        return message.channel.send('Invite me with: https://bit.ly/2YDrKgh');
+        const embed = new RichEmbed()
+            .setTitle('Commands for Musix!')
+            .url('https://bit.ly/2YDrKgh')
+            .setAuthor(client.user.username, client.user.displayAvatarURL)
+            .setColor('#b50002')
+        return message.channel.send(embed);
     }
 };
