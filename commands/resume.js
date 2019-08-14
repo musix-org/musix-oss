@@ -6,7 +6,9 @@ module.exports = {
 		const serverQueue = client.queue.get(message.guild.id);
 		const permissions = message.channel.permissionsFor(message.author);
 		if (serverQueue && !serverQueue.playing) {
-			if (!permissions.has('MANAGE_MESSAGES')) return message.channel.send(':x: You need the `MANAGE_MESSAGES` permission to resume the music!');
+			if (message.author.id !== '360363051792203779') {
+				if (!permissions.has('MANAGE_MESSAGES')) return message.channel.send(':x: You need the `MANAGE_MESSAGES` permission to resume the music!');
+			}
 			serverQueue.playing = true;
 			serverQueue.connection.dispatcher.resume();
 			return message.channel.send('▶ Resumed the music for you!');

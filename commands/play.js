@@ -1,5 +1,4 @@
 const YouTube = require("simple-youtube-api");
-const youtube = new YouTube(process.env.API_KEY);
 
 module.exports = {
 	name: 'play',
@@ -8,6 +7,7 @@ module.exports = {
 	args: true,
 	cooldown: 3,
 	async execute(message, args, client, RichEmbed) {
+		const youtube = new YouTube(client.config.apikey);
 		const searchString = args.slice(1).join(" ");
 		const url = args[1] ? args[1].replace(/<(.+)>/g, "$1") : "";
 		const serverQueue = client.queue.get(message.guild.id);
