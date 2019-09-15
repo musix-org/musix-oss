@@ -1,122 +1,83 @@
-const fs = require('fs');
-const { join } = require('path');
-const { Util } = require('discord.js');
+const Discord = require('discord.js');
 const { Collection, Client, RichEmbed } = require('discord.js');
-const client = new Client({ disableEveryone: true, disabledEvents: ['TYPING_START'] });
+const client = new Discord.Client({ disableEveryone: true, disabledEvents: ['TYPING_START'] });
 const ytdl = require('ytdl-core');
+const fs = require('fs');
+const dotenv = require('dotenv');
+const firebase = require('firebase/app');
+const admin = require('firebase-admin');
+const serviceAccount = require('./serviceAccount.json');
+require('dotenv/config');
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
+
+client.db = admin.firestore();
+client.db.FieldValue = require('firebase-admin').firestore.FieldValue;
 client.commands = new Collection();
+client.events = new Collection();
 client.cooldowns = new Collection();
 client.queue = new Map();
-client.config = {
-	token: process.env.BOT_TOKEN,
-	prefix: '-',
-};
+client.funcs = {};
 
+client.funcs.setPrefix = require('./funcs/setPrefix.js');
+
+client.funcs.handleVideo = require('./funcs/handleVideo.js');
+
+client.funcs.play = require('./funcs/play.js');
+
+client.config = {
+  token: process.env.MUSIX_TOKEN,
+  apikey: process.env.API_KEY,
+  prefix: '>',
+  test: 'success',
+};
 const commandFiles = fs.readdirSync('./commands/').filter(f => f.endsWith('.js'));
 for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	client.commands.set(command.name, command);
+  const command = require(`./commands/${file}`);
+  client.commands.set(command.name, command);
+}
+const eventFiles = fs.readdirSync('./events/').filter(f => f.endsWith('.js'));
+for (const file of eventFiles) {
+  const event = require(`./events/${file}`);
+  client.events.set(event.name, event);
 }
 
-client.on('ready', () => {
-	client.user.setActivity('V2 | -help', { type: 'LISTENING' })
-	client.user.setStatus('dnd');
+client.on('ready', async () => {
+  const eventName = 'ready';
+  const event = client.events.get(eventName) || client.events.find(ent => ent.aliases && ent.aliases.includes(eventName));
+  event.execute(client);
 });
+
 client.on('message', message => {
-	if (!message.content.startsWith(client.config.prefix) || message.author.bot) return;
-	const args = message.content.slice(client.config.prefix.length).split(' ');
-	const commandName = args[0].toLowerCase();
-	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-	if (!command && message.content !== `${client.config.prefix}`) return message.channel.send(`:x: That is not a valid command ${message.author}! Type ${client.config.prefix}help for a list of commands!`).then(message => message.delete(3000));
-	if (command.guildOnly && message.channel.type !== 'text') return message.reply(':x: I can\'t execute that command inside DMs!');
-	if (command.args && !args.length) {
-		let reply = `:x: You didn't provide any arguments, ${message.author}!`;
-		if (command.usage) reply += `\nThe proper usage would be: \`${client.config.prefix}${command.name} ${command.usage}\``;
-		return message.channel.send(reply);
-	}
-	if (!client.cooldowns.has(command.name)) {
-		client.cooldowns.set(command.name, new Collection());
-	}
-	const now = Date.now();
-	const timestamps = client.cooldowns.get(command.name);
-	const cooldownAmount = (command.cooldown || 3) * 1000;
-	if (timestamps.has(message.author.id)) {
-		const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
-		if (now < expirationTime) {
-			const timeLeft = (expirationTime - now) / 1000;
-			return message.reply(`:hourglass_flowing_sand: please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`).then(message => message.delete(3000));
-		}
-	}
-	timestamps.set(message.author.id, now);
-	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
-
-	try {
-		command.execute(message, args, client, RichEmbed);
-	} catch (error) {
-		console.error(error);
-		message.reply(':x: there was an error trying to execute that command!');
-	}
+  const eventName = 'message';
+  const event = client.events.get(eventName) || client.events.find(ent => ent.aliases && ent.aliases.includes(eventName));
+  event.execute(client, message);
 });
 
-client.handleVideo = async function (video, message, voiceChannel, playlist = false) {
-	const serverQueue = client.queue.get(message.guild.id);
-	const song = {
-		id: video.id,
-		title: Util.escapeMarkdown(video.title),
-		url: `https://www.youtube.com/watch?v=${video.id}`
-	};
-	if (!serverQueue) {
-		const queueConstruct = {
-			textChannel: message.channel,
-			voiceChannel: voiceChannel,
-			connection: null,
-			songs: [],
-			volume: 5,
-			playing: true
-		};
-		queueConstruct.songs.push(song);
-		client.queue.set(message.guild.id, queueConstruct);
+client.on('guildCreate', async (guild) => {
+  const eventName = 'guildcreate';
+  const event = client.events.get(eventName) || client.events.find(ent => ent.aliases && ent.aliases.includes(eventName));
+  event.execute(client, guild);
+});
 
+client.on('guildDelete', (guild) => {
+  const eventName = 'guilddelete';
+  const event = client.events.get(eventName) || client.events.find(ent => ent.aliases && ent.aliases.includes(eventName));
+  event.execute(client, guild);
+});
 
-		try {
-			var connection = await voiceChannel.join();
-			queueConstruct.connection = connection;
-			play(message.guild, queueConstruct.songs[0]);
-		} catch (error) {
-			console.error(`I could not join the voice channel: ${error}`);
-			client.queue.delete(message.guild.id);
-			return message.channel.send(`:x: I could not join the voice channel: ${error}`);
-		}
-	} else {
-		serverQueue.songs.push(song);
-		if (playlist) return undefined;
-		else
-			return message.channel.send(`:white_check_mark: **${song.title}** has been added to the queue!`);
-	}
-	return undefined;
-}
+client.on('guildMemberRemove', () => {
+  const eventName = 'guildmemberremove';
+  const event = client.events.get(eventName) || client.events.find(ent => ent.aliases && ent.aliases.includes(eventName));
+  event.execute(client);
+});
 
-function play(guild, song) {
-	const serverQueue = client.queue.get(guild.id);
-	if (!song) {
-		serverQueue.voiceChannel.leave();
-		client.queue.delete(guild.id);
-		return;
-	}
-	const dispatcher = serverQueue.connection
-		.playStream(ytdl(song.url, { quality: `highestaudio`, filter: "audioonly" }), { seek: 0 })
-		.on("end", reason => {
-			if (reason === "Stream is not generating quickly enough.")
-				console.log("Song ended");
-			else console.log(reason);
-			serverQueue.songs.shift();
-			play(guild, serverQueue.songs[0]);
-		})
-	dispatcher.setVolumeLogarithmic(1 / 5);
-	serverQueue.volume = 1
-	dispatcher.on("error", error => console.error(error));
-
-	serverQueue.textChannel.send(`:musical_note: Start playing: **${song.title}**`);
-}
+client.on('guildMemberAdd', () => {
+  const eventName = 'guildmemberadd';
+  const event = client.events.get(eventName) || client.events.find(ent => ent.aliases && ent.aliases.includes(eventName));
+  event.execute(client);
+});
 
 client.login(client.config.token);

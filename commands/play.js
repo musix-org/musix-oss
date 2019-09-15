@@ -38,7 +38,7 @@ module.exports = {
 					let index = 0;
 					const embed = new RichEmbed()
 						.setTitle("__Song Selection__")
-						.setDescription(`${videos.map(video2 => `**${++index}** \`${video2.title}\` `).join('\n')}`)
+						.setDescription(`${videos.map(video2 => `**${++index}** ${video2.title} `).join('\n')}`)
 						.setFooter("Please provide a number ranging from 1-10 to select one of the search results.")
 						.setColor("#b50002")
 					message.channel.send(embed);
@@ -59,7 +59,7 @@ module.exports = {
 					return message.channel.send(':x: I could not obtain any search results.');
 				}
 			}
-			return client.handleVideo(video, message, voiceChannel);
+			return client.funcs.handleVideo(video, message, voiceChannel, client);
 		}
 	}
 };

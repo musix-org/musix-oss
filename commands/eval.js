@@ -12,7 +12,6 @@ module.exports = {
             output = await eval(input);
         } catch (error) {
             output = error.toString();
-            embed.setColor('#FF0000');
         }
         const embed = new RichEmbed()
             .setTitle('Evaluation Command')
