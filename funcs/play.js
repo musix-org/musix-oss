@@ -1,29 +1,35 @@
-module.exports = async function (guild, song, client) {
+module.exports = async function (guild, song, client, message, seek) {
     const Discord = require('discord.js');
     const ytdl = require('ytdl-core');
     const serverQueue = client.queue.get(guild.id);
     if (!song) {
-        serverQueue.textChannel.send(':stop_button: Music ended!');
         serverQueue.voiceChannel.leave();
         client.queue.delete(guild.id);
         return;
     }
     const dispatcher = serverQueue.connection
-        .playStream(ytdl(song.url, { quality: `highestaudio`, filter: "audioonly" }), { seek: 0 })
+        .playStream(ytdl(song.url, { quality: `highestaudio`, filter: "audioonly" }), { seek: seek })
         .on("end", reason => {
-            if (reason === "Stream is not generating quickly enough.")
+            if (reason === "Stream is not generating quickly enough.") {
                 console.log("Song ended");
-            else console.log(reason);
+            } else if (reason === "seek") {
+                return;
+            } else {
+                console.log(reason);
+            }
             serverQueue.songs.shift();
-            client.funcs.play(guild, serverQueue.songs[0], client);
+            if (serverQueue.looping && serverQueue.songs.length === 0) {
+                serverQueue.songs = [...client.secondaryQueue];
+            }
+            client.funcs.play(guild, serverQueue.songs[0], client, message);
         });
-    dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
+    dispatcher.setVolume(serverQueue.volume / 10);
     dispatcher.on("error", error => console.error(error));
-    const data = await Promise.resolve(ytdl.getInfo(serverQueue.songs[0].url));
-    const totallength = Math.floor(data.length_seconds / 60) + ':' + (data.length_seconds - (Math.floor(data.length_seconds / 60) * 60))
+    let data = await Promise.resolve(ytdl.getInfo(serverQueue.songs[0].url));
+    let songtime = (data.length_seconds * 1000).toFixed(0);
     const embed = new Discord.RichEmbed()
         .setTitle(`:musical_note: Start playing: **${song.title}**`)
-        .setDescription(`Song duration: \`${totallength}\``)
+        .setDescription(`Song duration: \`${client.funcs.msToTime(songtime)}\``)
         .setColor("#b50002")
     serverQueue.textChannel.send(embed);
 }

@@ -1,7 +1,8 @@
+console.log('- Starting FutoX & Musix -');
 const Discord = require('discord.js');
-const { Collection, Client, RichEmbed } = require('discord.js');
 const client = new Discord.Client({ disableEveryone: true, disabledEvents: ['TYPING_START'] });
-const ytdl = require('ytdl-core');
+const DBL = require("dblapi.js");
+const dbl = new DBL(process.env.MUSIX_DBLTOKEN, client);
 const fs = require('fs');
 const dotenv = require('dotenv');
 const firebase = require('firebase/app');
@@ -15,17 +16,25 @@ admin.initializeApp({
 
 client.db = admin.firestore();
 client.db.FieldValue = require('firebase-admin').firestore.FieldValue;
-client.commands = new Collection();
-client.events = new Collection();
-client.cooldowns = new Collection();
+client.global = {
+  db: {
+    guilds: {},
+    musix_guilds: {},
+    specs: {},
+  },
+};
+
+client.commands = new Discord.Collection();
+client.events = new Discord.Collection();
+client.cooldowns = new Discord.Collection();
 client.queue = new Map();
+client.secondaryQueue = [];
 client.funcs = {};
 
-client.funcs.setPrefix = require('./funcs/setPrefix.js');
-
 client.funcs.handleVideo = require('./funcs/handleVideo.js');
-
 client.funcs.play = require('./funcs/play.js');
+client.funcs.msToTime = require('./funcs/msToTime.js');
+client.funcs.dbget = require('./funcs/dbget.js');
 
 client.config = {
   token: process.env.MUSIX_TOKEN,
@@ -47,13 +56,13 @@ for (const file of eventFiles) {
 client.on('ready', async () => {
   const eventName = 'ready';
   const event = client.events.get(eventName) || client.events.find(ent => ent.aliases && ent.aliases.includes(eventName));
-  event.execute(client);
+  event.execute(client, dbl);
 });
 
 client.on('message', message => {
   const eventName = 'message';
   const event = client.events.get(eventName) || client.events.find(ent => ent.aliases && ent.aliases.includes(eventName));
-  event.execute(client, message);
+  event.execute(client, message, Discord);
 });
 
 client.on('guildCreate', async (guild) => {
@@ -61,23 +70,12 @@ client.on('guildCreate', async (guild) => {
   const event = client.events.get(eventName) || client.events.find(ent => ent.aliases && ent.aliases.includes(eventName));
   event.execute(client, guild);
 });
+dbl.on('posted', () => {
+  console.log('erver count posted!');
+})
 
-client.on('guildDelete', (guild) => {
-  const eventName = 'guilddelete';
-  const event = client.events.get(eventName) || client.events.find(ent => ent.aliases && ent.aliases.includes(eventName));
-  event.execute(client, guild);
-});
+dbl.on('error', error => {
+  console.log(`Error with DBL! ${error}`);
+})
 
-client.on('guildMemberRemove', () => {
-  const eventName = 'guildmemberremove';
-  const event = client.events.get(eventName) || client.events.find(ent => ent.aliases && ent.aliases.includes(eventName));
-  event.execute(client);
-});
-
-client.on('guildMemberAdd', () => {
-  const eventName = 'guildmemberadd';
-  const event = client.events.get(eventName) || client.events.find(ent => ent.aliases && ent.aliases.includes(eventName));
-  event.execute(client);
-});
-
-client.login(client.config.token);
+client.login(client.config.token).catch(err => { console.log('- Failed To Login -> ' + err); });
