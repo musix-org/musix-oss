@@ -67,9 +67,6 @@ client.on('guildCreate', async (guild) => {
   const event = client.events.get(eventName) || client.events.find(ent => ent.aliases && ent.aliases.includes(eventName));
   event.execute(client, guild);
 });
-dbl.on('posted', () => {
-  console.log('erver count posted!');
-})
 
 dbl.on('error', error => {
   console.log(`Error with DBL! ${error}`);
