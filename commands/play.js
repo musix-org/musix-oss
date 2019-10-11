@@ -1,4 +1,5 @@
 const YouTube = require("simple-youtube-api");
+const he = require('he');
 
 module.exports = {
 	name: 'play',
@@ -42,7 +43,7 @@ module.exports = {
 					let index = 0;
 					const embed = new Discord.RichEmbed()
 						.setTitle("__Song Selection__")
-						.setDescription(`${videos.map(video2 => `**${++index}** ${video2.title} `).join('\n')}`)
+						.setDescription(`${videos.map(video2 => `**${++index}** ${he.decode(video2.title)} `).join('\n')}`)
 						.setFooter("Please provide a number ranging from 1-10 to select one of the search results.")
 						.setColor("#b50002")
 					message.channel.send(embed);
@@ -54,13 +55,13 @@ module.exports = {
 						});
 					} catch (err) {
 						console.error(err);
-						return message.channel.send(':x: Cancelling video selection or no results.');
+						return message.channel.send(':x: Cancelling video selection');
 					}
 					const videoIndex = parseInt(response.first().content);
 					var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
 				} catch (err) {
 					console.error(err);
-					return message.channel.send(':x: Cancelling video selection or no results');
+					return message.channel.send(':x: I could not obtain any search results!');
 				}
 			}
 			return client.funcs.handleVideo(video, message, voiceChannel, client, false);
