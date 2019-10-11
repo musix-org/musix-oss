@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client({ disableEveryone: true, disabledEvents: ['TYPING_START'] });
 const DBL = require("dblapi.js");
-const dbl = new DBL(process.env.MUSIX_DBLTOKEN, client);
+const dbl = new DBL(process.env.DBLTOKEN, client);
 const fs = require('fs');
 const dotenv = require('dotenv');
 const firebase = require('firebase/app');
@@ -34,7 +34,7 @@ client.funcs.msToTime = require('./funcs/msToTime.js');
 client.funcs.dbget = require('./funcs/dbget.js');
 
 client.config = {
-  token: process.env.MUSIX_REALTOKEN,
+  token: process.env.TOKEN,
   apikey: process.env.API_KEY,
   prefix: '>',
   test: 'success',
