@@ -4,21 +4,21 @@ module.exports = {
         if (message.author.bot || !message.guild) return;
         if (message.content.startsWith('->reset') && message.author.id === '360363051792203779') {
             client.guilds.forEach(guild => {
-                client.global.db.musix_guilds[guild.id] = {
-                    musix_prefix: ">",
+                client.global.db.guilds[guild.id] = {
+                    prefix: ">",
                     defaultVolume: 5,
-                    permissions: true,
+                    permissions: false,
                 };
             });
             return message.channel.send(':white_check_mark: Reset all guild settings!')
         } else if (message.content.startsWith('->resetguildsettings') && message.author.id === '360363051792203779') {
-            client.global.db.musix_guilds[message.guild.id] = {
-                musix_prefix: ">",
+            client.global.db.guilds[message.guild.id] = {
+                prefix: ">",
                 defaultVolume: 5,
-                permissions: true,
+                permissions: false,
             };
         }
-        let prefix = client.global.db.musix_guilds[message.guild.id].musix_prefix;
+        let prefix = client.global.db.guilds[message.guild.id].prefix;
         if (process.env.LOCALLYHOSTED === "true") {
             prefix = "-";
             if (message.author.id === "360363051792203779" || message.author.id === "384002606621655040") {
@@ -30,7 +30,7 @@ module.exports = {
             if (message.mentions.users.first().id === '607266889537945605' && args[1] === 'help') return client.commands.get('help').execute(message, args, client, Discord, prefix, client);
             if (message.mentions.users.first().id === '607266889537945605' && args[1] === 'prefix') return message.channel.send(`My prefix here is: \`${prefix}\`.`);
         }
-        if (!message.content.startsWith(prefix)) return;
+        if (!message.content.startsWith(prefix) || message.guild.id !== '583597555095437312') return;
         if (!args[0]) return;
         let commandName = args[0].toLowerCase();
         if (commandName === `p`) {

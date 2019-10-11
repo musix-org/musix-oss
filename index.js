@@ -1,4 +1,3 @@
-console.log('- Starting FutoX & Musix -');
 const Discord = require('discord.js');
 const client = new Discord.Client({ disableEveryone: true, disabledEvents: ['TYPING_START'] });
 const DBL = require("dblapi.js");
@@ -19,8 +18,6 @@ client.db.FieldValue = require('firebase-admin').firestore.FieldValue;
 client.global = {
   db: {
     guilds: {},
-    musix_guilds: {},
-    specs: {},
   },
 };
 
@@ -37,7 +34,7 @@ client.funcs.msToTime = require('./funcs/msToTime.js');
 client.funcs.dbget = require('./funcs/dbget.js');
 
 client.config = {
-  token: process.env.MUSIX_TOKEN,
+  token: process.env.MUSIX_REALTOKEN,
   apikey: process.env.API_KEY,
   prefix: '>',
   test: 'success',

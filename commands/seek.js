@@ -12,7 +12,7 @@ module.exports = {
             if (message.author.id !== '360363051792203779') {
                 return message.channel.send(':x: This command is currently disabled!');
                 if (voiceChannel !== serverQueue.voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in the same voiceChannel as Musix to seek the song!');
-                if (client.global.db.musix_guilds[message.guild.id].permissions === true) {
+                if (client.global.db.guilds[message.guild.id].permissions === true) {
                     if (!permissions.has('MANAGE_MESSAGES')) return message.channel.send(':x: You need the `MANAGE_MESSAGES` permission to seek the song!');
                 }
             }

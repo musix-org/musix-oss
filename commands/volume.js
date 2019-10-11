@@ -11,7 +11,7 @@ module.exports = {
 		if (!args[1]) return message.channel.send(`:loud_sound: The current volume is: **${serverQueue.volume}**`);
 		if (message.author.id !== '360363051792203779') {
 			if (!voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in a voice channel to change the volume!');
-			if (client.global.db.musix_guilds[message.guild.id].permissions === true) {
+			if (client.global.db.guilds[message.guild.id].permissions === true) {
 				if (!permissions.has('MANAGE_CHANNELS')) return message.channel.send(':x: You need the `MANAGE_CHANNELS` permission to change the volume!');
 			}
 			if (isNaN(args[1])) return message.channel.send(':x: I\'m sorry, But you need to enter a valid __number__.');
