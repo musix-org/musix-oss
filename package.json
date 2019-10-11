@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ."
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "MatteZ02",
+  "license": "MIT",
+  "homepage": "https://https://github.com/MatteZ02/Musix-V2",
   "dependencies": {
     "dblapi.js": "^2.3.0",
     "discord.js": "^11.5.1",
