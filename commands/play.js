@@ -54,13 +54,13 @@ module.exports = {
 						});
 					} catch (err) {
 						console.error(err);
-						return Message.channel.send(':x: Cancelling video selection.');
+						return message.channel.send(':x: Cancelling video selection or no results.');
 					}
 					const videoIndex = parseInt(response.first().content);
 					var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
 				} catch (err) {
 					console.error(err);
-					return message.channel.send(':x: I could not obtain any search results.');
+					return message.channel.send(':x: Cancelling video selection or no results');
 				}
 			}
 			return client.funcs.handleVideo(video, message, voiceChannel, client, false);
