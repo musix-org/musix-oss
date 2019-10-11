@@ -1,4 +1,5 @@
 const YouTube = require("simple-youtube-api");
+const he = require('he');
 
 module.exports = {
 	name: 'play',
@@ -42,7 +43,7 @@ module.exports = {
 					let index = 0;
 					const embed = new Discord.RichEmbed()
 						.setTitle("__Song Selection__")
-						.setDescription(`${videos.map(video2 => `**${++index}** ${video2.title} `).join('\n')}`)
+						.setDescription(`${videos.map(video2 => `**${++index}** ${he.decode(video2.title)} `).join('\n')}`)
 						.setFooter("Please provide a number ranging from 1-10 to select one of the search results.")
 						.setColor("#b50002")
 					message.channel.send(embed);
