@@ -1,2 +1,2 @@
-# Musix-V2
-V2 for Musix
+# Musix
+Musix is a Discord music bot that plays music from youtube straight into your server!
