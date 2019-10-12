@@ -35,6 +35,9 @@ module.exports = async function (video, message, voiceChannel, client, playlist 
         }
     } else {
         serverQueue.songs.push(song);
+        if (serverQueue.looping) {
+            client.secondaryQueue.push(song);
+        }
         if (playlist) return undefined;
         return message.channel.send(`:white_check_mark: **${song.title}** has been added to the queue!`);
     }

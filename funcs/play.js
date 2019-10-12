@@ -17,10 +17,10 @@ module.exports = async function (guild, song, client, message, seek) {
             } else {
                 console.log(reason);
             }
-            if (serverQueue.looping) {
-                serverQueue.songs.push(serverQueue.songs[0]);
-            }
             serverQueue.songs.shift();
+            if (serverQueue.looping && serverQueue.songs.length === 0) {
+                serverQueue.songs = [...client.secondaryQueue];
+            }
             client.funcs.play(guild, serverQueue.songs[0], client, message);
         });
     dispatcher.setVolume(serverQueue.volume / 10);

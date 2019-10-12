@@ -14,10 +14,12 @@ module.exports = {
                 }
             }
             if (!serverQueue.looping) {
+                client.secondaryQueue = [...serverQueue.songs]
                 serverQueue.looping = true;
                 message.channel.send(':repeat: Looping the queue now!');
             } else {
                 serverQueue.looping = false;
+                client.secondaryQueue = [];
                 message.channel.send(':repeat: No longer looping the queue!');
             }
         } else {
