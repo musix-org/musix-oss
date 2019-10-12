@@ -8,12 +8,14 @@ module.exports = {
 	args: true,
 	cooldown: 3,
 	async execute(message, args, client, Discord, prefix) {
+		console.log("play command")
 		const youtube = new YouTube(client.config.apikey);
 		const searchString = args.slice(1).join(" ");
 		const url = args[1] ? args[1].replace(/<(.+)>/g, "$1") : "";
 		const serverQueue = client.queue.get(message.guild.id);
 		const voiceChannel = message.member.voiceChannel;
 		if (!serverQueue) {
+			console.log("no serverQueue")
 			if (!voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
 		} else {
 			if (voiceChannel !== serverQueue.voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in the same voiceChannel as Musix to play music!');
@@ -21,12 +23,15 @@ module.exports = {
 		if (!args[1]) return message.channel.send(':x: You need to use a link or search for a song!');
 		const permissions = voiceChannel.permissionsFor(message.client.user);
 		if (!permissions.has('CONNECT')) {
+			console.log("no connect perms")
 			return message.channel.send(':x: I cannot connect to your voice channel, make sure I have the proper permissions!');
 		}
 		if (!permissions.has('SPEAK')) {
+			console.log("no speaking perms")
 			return message.channel.send(':x: I cannot speak in your voice channel, make sure I have the proper permissions!');
 		}
 		if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
+			console.log("playlist")
 			const playlist = await youtube.getPlaylist(url);
 			const videos = await playlist.getVideos();
 			for (const video of Object.values(videos)) {
@@ -39,6 +44,7 @@ module.exports = {
 				var video = await youtube.getVideo(url);
 			} catch (error) {
 				try {
+					console.log("song selection")
 					var videos = await youtube.searchVideos(searchString, 10);
 					let index = 0;
 					const embed = new Discord.RichEmbed()
@@ -47,23 +53,28 @@ module.exports = {
 						.setFooter("Please provide a number ranging from 1-10 to select one of the search results.")
 						.setColor("#b50002")
 					message.channel.send(embed);
+					console.log("song select embed sent")
 					try {
+						console.log("response")
 						var response = await message.channel.awaitMessages(message2 => message2.content > 0 && message2.content < 11, {
 							maxMatches: 1,
 							time: 10000,
 							errors: ['time']
 						});
 					} catch (err) {
+						console.log("cancelling video selection")
 						console.error(err);
 						return message.channel.send(':x: Cancelling video selection');
 					}
 					const videoIndex = parseInt(response.first().content);
 					var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
 				} catch (err) {
+					console.log("no results")
 					console.error(err);
 					return message.channel.send(':x: I could not obtain any search results!');
 				}
 			}
+			console.log("Handlevideo")
 			return client.funcs.handleVideo(video, message, voiceChannel, client, false);
 		}
 	}
