@@ -2,8 +2,12 @@ module.exports = {
     name: 'ready',
     async execute(client, dbl) {
         const remoteMusixGuildsData = await client.funcs.dbget('guilds', null, client);
+        const remoteMusixPlaylistsData = await client.funcs.dbget('playlists', null, client);
         remoteMusixGuildsData.forEach(guildData => {
             client.global.db.guilds[guildData.id] = guildData.d;
+        });
+        remoteMusixPlaylistsData.forEach(guildData => {
+            client.global.db.playlists[guildData.id] = guildData.d;
         });
         console.log('- DB Set -');
         client.user.setActivity(`@musix help | 🎶`, { type: 'LISTENING' });
