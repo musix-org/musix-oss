@@ -20,7 +20,7 @@ module.exports = {
                 premium: false,
             };
         }
-        let prefix = "-"//client.global.db.guilds[message.guild.id].prefix;
+        let prefix = client.global.db.guilds[message.guild.id].prefix;
         const args = message.content.slice(prefix.length).split(' ');
         if (message.mentions.users.first()) {
             if (message.mentions.users.first().id === '607266889537945605' && args[1] === 'help') return client.commands.get('help').execute(message, args, client, Discord, prefix, client);
