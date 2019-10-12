@@ -25,7 +25,6 @@ client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 client.queue = new Map();
-client.secondaryQueue = [];
 client.funcs = {};
 
 client.funcs.handleVideo = require('./funcs/handleVideo.js');
@@ -34,7 +33,7 @@ client.funcs.msToTime = require('./funcs/msToTime.js');
 client.funcs.dbget = require('./funcs/dbget.js');
 
 client.config = {
-  token: process.env.TOKEN,
+  token: process.env.TESTTOKEN,
   apikey: process.env.API_KEY,
   prefix: '>',
   test: 'success',
