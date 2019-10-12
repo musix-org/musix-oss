@@ -7,7 +7,6 @@ module.exports = {
         });
         console.log('- DB Set -');
         client.user.setActivity(`@musix help | 🎶`, { type: 'LISTENING' });
-        client.user.setStatus('dnd');
         console.log('- Activated -');
         setInterval(async () => {
             client.guilds.forEach(guild => {
