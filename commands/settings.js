@@ -41,7 +41,7 @@ module.exports = {
             saved: false,
           };
           client.global.db.guilds[guild.id].premium = true;
-          message.channel.send(`:white_check_mark: Guild ${guild.name} | ${guild.id} is now premium! :party~1:`)
+          message.channel.send(`:white_check_mark: Guild ${guild.name} | ${guild.id} is now premium! :tada:`)
         } else {
           client.global.db.guilds[guild.id].premium = false;
           message.channel.send(`:white_check_mark: Guild ${guild.name} | ${guild.id} is no longer premium!`)
@@ -54,7 +54,7 @@ module.exports = {
             saved: false,
           };
           client.global.db.guilds[message.guild.id].premium = true;
-          message.channel.send(':white_check_mark: This guild is now premium! :party~1:')
+          message.channel.send(':white_check_mark: This guild is now premium! :tada:')
         } else {
           client.global.db.guilds[message.guild.id].premium = false;
           message.channel.send(":white_check_mark: This guild is no longer premium!")
