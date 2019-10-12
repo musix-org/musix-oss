@@ -20,6 +20,7 @@ module.exports = {
                 if (client.global.db.guilds[guild.id].premium) {
                     client.db.collection('playlists').doc(guild.id).set({
                         songs: client.global.db.playlists[message.guild.id].songs,
+                        saved: client.global.db.playlists[message.guild.id].saved,
                     });
                 }
             });
