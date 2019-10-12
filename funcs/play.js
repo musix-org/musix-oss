@@ -3,7 +3,6 @@ module.exports = async function (guild, song, client, message, seek) {
     const ytdl = require('ytdl-core');
     const serverQueue = client.queue.get(guild.id);
     if (!song) {
-        console.log("no song")
         serverQueue.voiceChannel.leave();
         client.queue.delete(guild.id);
         return;
@@ -24,17 +23,13 @@ module.exports = async function (guild, song, client, message, seek) {
             serverQueue.songs.shift();
             client.funcs.play(guild, serverQueue.songs[0], client, message);
         });
-    console.log("settings volume")
     dispatcher.setVolume(serverQueue.volume / 10);
     dispatcher.on("error", error => console.error(error));
-    console.log("defining data & songtime")
     let data = await Promise.resolve(ytdl.getInfo(serverQueue.songs[0].url));
     let songtime = (data.length_seconds * 1000).toFixed(0);
-    console.log("defining embed")
     const embed = new Discord.RichEmbed()
         .setTitle(`:musical_note: Start playing: **${song.title}**`)
         .setDescription(`Song duration: \`${client.funcs.msToTime(songtime)}\``)
         .setColor("#b50002")
-    console.log("sending embed")
     serverQueue.textChannel.send(embed);
 }
