@@ -4,7 +4,11 @@ module.exports = {
     description: 'Save and load queues',
     cooldown: 10,
     async execute(message, args, client, Discord, prefix) {
+        const permissions = message.channel.permissionsFor(message.author);
         const serverQueue = client.queue.get(message.guild.id);
+        if (message.author.id !== '360363051792203779') {
+            if (!permissions.has('MANAGE_GUILD')) return message.channel.send(':x: You need the `MANAGE_SERVER` permission to modify the playlist!');
+        }
         if (client.global.db.guilds[message.guild.id].premium) {
             if (args[1] === 'play') {
                 if (client.global.db.playlists[message.guild.id].saved) {

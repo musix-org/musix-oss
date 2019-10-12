@@ -31,6 +31,14 @@ module.exports = {
           message.channel.send(`:white_check_mark: Permissions requirement now set to: \`false\``);
         } else return message.channel.send(':x: That value is already `false`!');
       } else return message.channel.send(':x: Please define a boolean! (true/false)');
+    } else if (args[1] === 'setPremium' && message.author.id === '360363051792203779') {
+      if (!client.global.db.guilds[message.guild.id].premium) {
+        client.global.db.guilds[message.guild.id].premium = true;
+        message.channel.send(':white_check_mark: This guild is now premium! :party~1:')
+      } else {
+        client.global.db.guilds[message.guild.id].premium = false;
+        message.channel.send(":white_check_mark: This guild is no longer premium!")
+      }
     } else {
       const embed = new Discord.RichEmbed()
         .setTitle('Guild settings for Musix')

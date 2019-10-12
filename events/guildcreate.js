@@ -5,11 +5,13 @@ module.exports = {
             prefix: '>',
             defaultVolume: 5,
             permissions: false,
+            premium: false,
         });
         client.global.db.guilds[guild.id] = {
             prefix: ">",
             defaultVolume: 5,
             permissions: false,
+            premium: false,
         };
     }
 }
