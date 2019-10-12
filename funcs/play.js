@@ -28,13 +28,13 @@ module.exports = async function (guild, song, client, message, seek) {
     dispatcher.setVolume(serverQueue.volume / 10);
     dispatcher.on("error", error => console.error(error));
     console.log("defining data & songtime")
-    //let data = await Promise.resolve(ytdl.getInfo(serverQueue.songs[0].url));
-    //let songtime = (data.length_seconds * 1000).toFixed(0);
+    let data = await Promise.resolve(ytdl.getInfo(serverQueue.songs[0].url));
+    let songtime = (data.length_seconds * 1000).toFixed(0);
     console.log("defining embed")
-    //const embed = new Discord.RichEmbed()
-    //.setTitle(`:musical_note: Start playing: **${song.title}**`)
-    //.setDescription(`Song duration: \`${client.funcs.msToTime(songtime)}\``)
-    //.setColor("#b50002")
+    const embed = new Discord.RichEmbed()
+        .setTitle(`:musical_note: Start playing: **${song.title}**`)
+        .setDescription(`Song duration: \`${client.funcs.msToTime(songtime)}\``)
+        .setColor("#b50002")
     console.log("sending embed")
-    serverQueue.textChannel.send("Playing");
+    serverQueue.textChannel.send(embed);
 }
