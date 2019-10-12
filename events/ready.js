@@ -16,8 +16,13 @@ module.exports = {
                     defaultVolume: client.global.db.guilds[guild.id].defaultVolume,
                     permissions: client.global.db.guilds[guild.id].permissions,
                 });
+                if (client.global.db.guilds[guild.id].premium) {
+                    client.db.collection('playlists').doc(guild.id).set({
+                        songs: client.global.db.playlists[message.guild.id].songs,
+                    });
+                }
             });
             dbl.postStats(client.guilds.size);
-        }, 1200000);
+        }, 1800000);
     }
 }

@@ -18,6 +18,7 @@ client.db.FieldValue = require('firebase-admin').firestore.FieldValue;
 client.global = {
   db: {
     guilds: {},
+    playlists: {},
   },
 };
 
@@ -34,7 +35,7 @@ client.funcs.dbget = require('./funcs/dbget.js');
 
 client.config = {
   token: process.env.TOKEN,
-  apikey: process.env.API_KEY,
+  apikey: process.env.API_KEY2,
   prefix: '>',
   test: 'success',
 };

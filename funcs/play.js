@@ -25,11 +25,11 @@ module.exports = async function (guild, song, client, message, seek) {
         });
     dispatcher.setVolume(serverQueue.volume / 10);
     dispatcher.on("error", error => console.error(error));
-    //let data = await Promise.resolve(ytdl.getInfo(serverQueue.songs[0].url));
-    //let songtime = (data.length_seconds * 1000).toFixed(0);
+    let data = await Promise.resolve(ytdl.getInfo(serverQueue.songs[0].url));
+    let songtime = (data.length_seconds * 1000).toFixed(0);
     const embed = new Discord.RichEmbed()
         .setTitle(`:musical_note: Start playing: **${song.title}**`)
-        //.setDescription(`Song duration: \`${client.funcs.msToTime(songtime)}\``)
+        .setDescription(`Song duration: \`${client.funcs.msToTime(songtime)}\``)
         .setColor("#b50002")
     serverQueue.textChannel.send(embed);
 }
