@@ -32,12 +32,33 @@ module.exports = {
         } else return message.channel.send(':x: That value is already `false`!');
       } else return message.channel.send(':x: Please define a boolean! (true/false)');
     } else if (args[1] === 'setPremium' && message.author.id === '360363051792203779') {
-      if (!client.global.db.guilds[message.guild.id].premium) {
-        client.global.db.guilds[message.guild.id].premium = true;
-        message.channel.send(':white_check_mark: This guild is now premium! :party~1:')
+      if (args[2]) {
+        const guild = client.guilds.get(args[2]);
+        if (!client.global.db.guilds[guild.id].premium) {
+          client.global.db.playlists[guild.id] = {
+            songs: [],
+            firstSong: undefined,
+            saved: false,
+          };
+          client.global.db.guilds[guild.id].premium = true;
+          message.channel.send(`:white_check_mark: Guild ${guild.name} | ${guild.id} is now premium! :party~1:`)
+        } else {
+          client.global.db.guilds[guild.id].premium = false;
+          message.channel.send(`:white_check_mark: Guild ${guild.name} | ${guild.id} is no longer premium!`)
+        }
       } else {
-        client.global.db.guilds[message.guild.id].premium = false;
-        message.channel.send(":white_check_mark: This guild is no longer premium!")
+        if (!client.global.db.guilds[message.guild.id].premium) {
+          client.global.db.playlists[message.guild.id] = {
+            songs: [],
+            firstSong: undefined,
+            saved: false,
+          };
+          client.global.db.guilds[message.guild.id].premium = true;
+          message.channel.send(':white_check_mark: This guild is now premium! :party~1:')
+        } else {
+          client.global.db.guilds[message.guild.id].premium = false;
+          message.channel.send(":white_check_mark: This guild is no longer premium!")
+        }
       }
     } else {
       const embed = new Discord.RichEmbed()
