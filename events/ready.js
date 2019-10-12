@@ -16,7 +16,7 @@ module.exports = {
                     permissions: client.global.db.guilds[guild.id].permissions,
                 });
             });
-            dbl.postStats(client.guilds.size);
+            //dbl.postStats(client.guilds.size);
         }, 1200000);
     }
 }
