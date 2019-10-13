@@ -13,6 +13,7 @@ module.exports = {
         }
         if (client.global.db.guilds[message.guild.id].premium) {
             if (args[1] === 'play') {
+                if (!voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
                 if (client.global.db.playlists[message.guild.id].saved) {
                     if (!serverQueue) {
                         const construct = {
