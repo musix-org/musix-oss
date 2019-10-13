@@ -41,6 +41,7 @@ module.exports = {
                     }
                 } else return message.channel.send(':x: There is no queue set for this server!')
             } else if (args[1] === 'save') {
+                if (!serverQueue) return message.channel.send(':x: There is nothing playing!');
                 client.global.db.playlists[message.guild.id] = {
                     songs: serverQueue.songs,
                     firstSong: serverQueue.songs[0],
