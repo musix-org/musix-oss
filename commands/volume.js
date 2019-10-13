@@ -12,7 +12,9 @@ module.exports = {
 		if (message.author.id !== '360363051792203779') {
 			if (!voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in a voice channel to change the volume!');
 			if (client.global.db.guilds[message.guild.id].permissions === true) {
-				if (!permissions.has('MANAGE_CHANNELS')) return message.channel.send(':x: You need the `MANAGE_CHANNELS` permission to change the volume!');
+				if (client.global.db.guilds[message.guild.id].dj) {
+					if (!message.member.roles.has(client.global.db.guilds[message.guild.id].djrole)) return message.channel.send(':x: You need the `DJ` role to change the volume!');
+				} else if (!permissions.has('MANAGE_CHANNELS')) return message.channel.send(':x: You need the `MANAGE_CHANNELS` permission to change the volume!');
 			}
 			if (isNaN(args[1])) return message.channel.send(':x: I\'m sorry, But you need to enter a valid __number__.');
 			if (args[1] > 100) return message.channel.send(':x: The max volume is `100`!');

@@ -20,6 +20,8 @@ module.exports = {
                     defaultVolume: client.global.db.guilds[guild.id].defaultVolume,
                     permissions: client.global.db.guilds[guild.id].permissions,
                     premium: client.global.db.guilds[guild.id].premium,
+                    dj: client.global.db.guilds[guild.id].dj,
+                    djrole: client.global.db.guilds[guild.id].djrole,
                 });
                 if (client.global.db.guilds[guild.id].premium) {
                     client.db.collection('playlists').doc(guild.id).set({

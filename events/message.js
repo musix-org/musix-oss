@@ -9,6 +9,8 @@ module.exports = {
                     defaultVolume: 5,
                     permissions: false,
                     premium: false,
+                    dj: false,
+                    djrole: null
                 };
             });
             return message.channel.send(':white_check_mark: Reset all guild settings!')
@@ -18,6 +20,8 @@ module.exports = {
                 defaultVolume: 5,
                 permissions: false,
                 premium: false,
+                dj: false,
+                djrole: null
             };
         }
         let prefix = client.global.db.guilds[message.guild.id].prefix;

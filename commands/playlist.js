@@ -7,7 +7,9 @@ module.exports = {
         const permissions = message.channel.permissionsFor(message.author);
         const serverQueue = client.queue.get(message.guild.id);
         if (message.author.id !== '360363051792203779') {
-            if (!permissions.has('MANAGE_GUILD')) return message.channel.send(':x: You need the `MANAGE_SERVER` permission to modify the playlist!');
+            if (client.global.db.guilds[message.guild.id].dj) {
+                if (!message.member.roles.has(client.global.db.guilds[message.guild.id].djrole)) return message.channel.send(':x: You need the `DJ` role to modify or play the playlist!');
+            } else if (!permissions.has('MANAGE_GUILD')) return message.channel.send(':x: You need the `MANAGE_SERVER` permission to modify the playlist!');
         }
         if (client.global.db.guilds[message.guild.id].premium) {
             if (args[1] === 'play') {
@@ -49,7 +51,7 @@ module.exports = {
                 const embed = new Discord.RichEmbed()
                     .setTitle('Options for playlist!')
                     .addField('play', 'Play the guild specific queue.', true)
-                    .addField('save', 'Save the currently playing queue.')
+                    .addField('save', 'Save the currently playing queue.', true)
                     .setFooter(`how to use: ${prefix}playlist <Option>`)
                     .setAuthor(client.user.username, client.user.displayAvatarURL)
                     .setColor('#b50002')
