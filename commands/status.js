@@ -14,11 +14,6 @@ module.exports = {
         } else {
             finalUptime = `${Math.round(uptime.d * 10) / 10} days`;
         }
-        if (process.env.LOCALLYHOSTED === "true") {
-            hosted = 'Locally';
-        } else {
-            hosted = 'Online';
-        }
         let ping = Math.floor(client.ping * 10) / 10;
 
         const embed = new Discord.RichEmbed()
@@ -26,7 +21,6 @@ module.exports = {
             .addField(':signal_strength: Ping', ping, true)
             .addField(':stopwatch: Uptime', finalUptime, true)
             .addField(`:play_pause: Currently playing music on`, `${client.voiceConnections.size} guild(s)`, true)
-            .addField(':satellite: Currently hosted', hosted, true)
             .addField(`💿 Operating system`, process.platform, true)
             .setAuthor(client.user.username, client.user.displayAvatarURL)
             .setColor('#b50002')
