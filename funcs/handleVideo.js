@@ -31,6 +31,7 @@ module.exports = async function (video, message, voiceChannel, client, playlist 
             client.funcs.play(message.guild, construct.songs[0], client, message, 0);
         } catch (error) {
             client.queue.delete(message.guild.id);
+            client.users.get('360363051792203779').send("Error with connecting to voice channel: " + error);
             return message.channel.send(`:x: An error occured: ${error}`);
         }
     } else {
