@@ -58,6 +58,7 @@ module.exports = {
                 .setDescription(error.stack.replace(/at /g, '**at **'))
                 .setColor('#b50002');
             client.fetchUser('360363051792203779').then(user => user.send(embed)).catch(console.error);
+            client.channels.get('634718645188034560').send(embed);
         }
     }
 }
