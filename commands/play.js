@@ -16,7 +16,7 @@ module.exports = {
 		if (!serverQueue) {
 			if (!voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
 		} else {
-			if (voiceChannel !== serverQueue.voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in the same voiceChannel as Musix to play music!');
+			if (voiceChannel !== serverQueue.voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in the same voice channel as Musix to play music!');
 		}
 		if (!args[1]) return message.channel.send(':x: You need to use a link or search for a song!');
 		const permissions = voiceChannel.permissionsFor(message.client.user);

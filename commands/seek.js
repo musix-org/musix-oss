@@ -11,7 +11,7 @@ module.exports = {
         if (serverQueue) {
             if (message.author.id !== '360363051792203779') {
                 return message.channel.send(':x: This command is currently disabled!');
-                if (voiceChannel !== serverQueue.voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in the same voiceChannel as Musix to seek the song!');
+                if (voiceChannel !== serverQueue.voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in the same voice channel as Musix to seek the song!');
                 if (client.global.db.guilds[message.guild.id].permissions === true) {
                     if (client.global.db.guilds[message.guild.id].dj) {
                         if (!message.member.roles.has(client.global.db.guilds[message.guild.id].djrole)) return message.channel.send(':x: You need the `DJ` role to seek the song!');

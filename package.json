@@ -12,9 +12,8 @@
   "homepage": "https://https://github.com/MatteZ02/Musix",
   "dependencies": {
     "dblapi.js": "^2.3.0",
-    "discord.js": "^11.5.1",
+    "discord.js": "github:discordjs/discord.js",
     "dotenv": "^8.1.0",
-    "ffmpeg-binaries": "^4.0.0",
     "firebase": "^6.6.2",
     "firebase-admin": "^8.6.0",
     "fs": "0.0.1-security",

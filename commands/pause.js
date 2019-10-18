@@ -7,7 +7,7 @@ module.exports = {
 		const permissions = message.channel.permissionsFor(message.author);
 		const { voiceChannel } = message.member;
 		if (serverQueue && serverQueue.playing === true) {
-			if (voiceChannel !== serverQueue.voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in the same voiceChannel as Musix to pause the music!');
+			if (voiceChannel !== serverQueue.voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in the same voice channel as Musix to pause the music!');
 			if (message.author.id !== '360363051792203779') {
 				if (client.global.db.guilds[message.guild.id].permissions === true) {
 					if (client.global.db.guilds[message.guild.id].dj) {
