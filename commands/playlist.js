@@ -17,6 +17,7 @@ module.exports = {
         if (client.global.db.guilds[message.guild.id].premium) {
             if (args[1] === 'play') {
                 const voiceChannel = message.member.voiceChannel;
+                if (!voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
                 const permissions = voiceChannel.permissionsFor(message.client.user);
                 if (!permissions.has('CONNECT')) {
                     return message.channel.send(':x: I cannot connect to your voice channel, make sure I have the proper permissions!');
