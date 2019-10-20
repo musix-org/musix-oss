@@ -12,7 +12,7 @@
   "homepage": "https://https://github.com/MatteZ02/Musix",
   "dependencies": {
     "dblapi.js": "^2.3.0",
-    "discord.js": "github:discordjs/discord.js",
+    "discord.js": "^11.5.1",
     "dotenv": "^8.2.0",
     "firebase": "^6.6.2",
     "firebase-admin": "^8.6.1",
