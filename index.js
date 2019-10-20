@@ -34,8 +34,8 @@ client.funcs.msToTime = require('./funcs/msToTime.js');
 client.funcs.dbget = require('./funcs/dbget.js');
 
 client.config = {
-  token: process.env.TOKEN,
-  apikey: process.env.API_KEY,
+  token: process.env.TESTTOKEN,
+  apikey: process.env.API_KEY2,
   prefix: '>',
   test: 'success',
 };
