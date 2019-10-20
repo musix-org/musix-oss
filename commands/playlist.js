@@ -17,6 +17,7 @@ module.exports = {
         if (client.global.db.guilds[message.guild.id].premium) {
             if (args[1] === 'play') {
                 const voiceChannel = message.member.voiceChannel;
+return message.channel.send(':x: I\'m sorry but playing music is not available due to an error with FFMPEG! You can still add songs with the playlist add command!');
                 if (!voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
                 const permissions = voiceChannel.permissionsFor(message.client.user);
                 if (!permissions.has('CONNECT')) {
