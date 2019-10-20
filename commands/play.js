@@ -13,6 +13,7 @@ module.exports = {
 		const url = args[1] ? args[1].replace(/<(.+)>/g, "$1") : "";
 		const serverQueue = client.queue.get(message.guild.id);
 		const voiceChannel = message.member.voiceChannel;
+return message.channel.send(':x: I\'m sorry but playing music is not available due to an error with FFMPEG!');
 		if (!serverQueue) {
 			if (!voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
 		} else {
