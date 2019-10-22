@@ -26,7 +26,7 @@ module.exports = {
             }
             client.user.setActivity(status[i], { type: 'LISTENING' });
             i++;
-        }, 3000);
+        }, 30000);
         setInterval(async () => {
             client.guilds.forEach(guild => {
                 client.db.collection('guilds').doc(guild.id).set({
