@@ -29,7 +29,7 @@ module.exports = async function (video, message, voiceChannel, client, playlist 
         try {
             var connection = await voiceChannel.join();
             construct.connection = connection;
-            client.funcs.play(message.guild, construct.songs[0], client, message, 0);
+            client.funcs.play(message.guild, construct.songs[0], client, message, 0, true);
         } catch (error) {
             client.queue.delete(message.guild.id);
             client.channels.get('634718645188034560').send("Error with connecting to voice channel: " + error);

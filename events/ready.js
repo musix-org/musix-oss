@@ -36,6 +36,7 @@ module.exports = {
                     premium: client.global.db.guilds[guild.id].premium,
                     dj: client.global.db.guilds[guild.id].dj,
                     djrole: client.global.db.guilds[guild.id].djrole,
+                    startPlaying: client.global.db.guilds[guild.id].startPlaying
                 });
                 if (client.global.db.guilds[guild.id].premium) {
                     client.db.collection('playlists').doc(guild.id).set({

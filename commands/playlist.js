@@ -50,7 +50,7 @@ module.exports = {
                         try {
                             var connection = await message.member.voiceChannel.join();
                             construct.connection = connection;
-                            client.funcs.play(message.guild, construct.songs[0], client, message, 0);
+                            client.funcs.play(message.guild, construct.songs[0], client, message, 0, false);
                         } catch (error) {
                             client.queue.delete(message.guild.id);
                             return message.channel.send(`:x: An error occured: ${error}`);
@@ -70,7 +70,7 @@ module.exports = {
                 };
                 message.channel.send(":white_check_mark: Queue saved!");
             } else if (args[1] === 'add') {
-                if (client.global.db.playlists[args[2]].saved) {
+                if (client.global.db.playlists[message.guild.id].saved) {
                     const youtube = new YouTube(client.config.apikey);
                     const searchString = args.slice(2).join(" ");
                     const url = args[2] ? args[2].replace(/<(.+)>/g, "$1") : "";
@@ -112,12 +112,42 @@ module.exports = {
                     client.global.db.playlists[message.guild.id].songs.push(song);
                     message.channel.send(`:white_check_mark: ${song.title} added to the playlist!`);
                 } else return message.channel.send(':x: There is no playlist saved! Start by using the save option!')
+            } else if (args[1] === 'remove') {
+                if (client.global.db.playlists[message.guild.id].saved) {
+                    if (!args[2]) return message.channel.send(':x: Please provide a number on the position of the song that you wan\'t to remove!');
+                    const songNum = parseInt(args[2]) - 1;
+                    if (isNaN(songNum)) return message.channel.send(':x: You need to enter a __number__!');
+                    if (songNum === 0) return message.channel.send(':x: You can not remove the currently playing song!');
+                    if (parseInt(songNum) > client.global.db.playlists[message.guild.id].songs.size) return message.channel.send(`:x: There is only ${serverQueue.songs.size} amount of songs in the queue!`);
+                    message.channel.send(`🗑️ removed \`${client.global.db.playlists[message.guild.id].songs[songNum].title}\` from the queue!`);
+                    return client.global.db.playlists[message.guild.id].songs.splice(songNum, 1);
+                } else return message.channel.send(':x: There is no playlist saved! Start by using the save option!')
+            } else if (args[1] === 'list') {
+                if (args[2]) {
+                    if (isNaN(args[2])) return msg.channel.send(':x: I\'m sorry, But you need to enter a valid __number__.');
+                }
+                let page = parseInt(args[2]);
+                if (!page) page = 1;
+                let pagetext = `:page_facing_up: Page: ${page} :page_facing_up:`
+                let queuesongs = client.global.db.playlists[message.guild.id].songs.slice((page - 1) * 20, page * 20);
+                let queuemessage = `${queuesongs.map(song => `**#** ${song.title}`).join('\n')}`
+                const hashs = queuemessage.split('**#**').length;
+                for (let i = 0; i < hashs; i++) {
+                    queuemessage = queuemessage.replace('**#**', `**${i + 1}**`);
+                }
+                const embed = new Discord.RichEmbed()
+                    .setTitle("__playlist queue__")
+                    .setDescription(`${pagetext}\n${queuemessage}`)
+                    .setColor("#b50002")
+                return message.channel.send(embed);
             } else {
                 const embed = new Discord.RichEmbed()
                     .setTitle('Options for playlist!')
                     .addField('play', 'Play the guild specific queue.', true)
                     .addField('save', 'Save the currently playing queue. Note that this will overwrite the currently saved queue!', true)
                     .addField('add', 'Add songs to the playlist. Like song selection', true)
+                    .addField('remove', 'Remove songs from the playlist.', true)
+                    .addField('list', 'Display the playlist.', true)
                     .setFooter(`how to use: ${prefix}playlist <Option> <Optional option>`)
                     .setAuthor(client.user.username, client.user.displayAvatarURL)
                     .setColor('#b50002')

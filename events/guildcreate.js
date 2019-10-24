@@ -7,7 +7,8 @@ module.exports = {
             permissions: false,
             premium: false,
             dj: false,
-            djrole: null
+            djrole: null,
+            startPlaying: true
         });
         client.global.db.guilds[guild.id] = {
             prefix: ">",
@@ -15,7 +16,8 @@ module.exports = {
             permissions: false,
             premium: false,
             dj: false,
-            djrole: null
+            djrole: null,
+            startPlaying: true
         };
     }
 }

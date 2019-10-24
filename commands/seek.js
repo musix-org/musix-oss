@@ -19,12 +19,12 @@ module.exports = {
                 }
             }
             if (!args[1]) return message.channel.send(`:x: Correct usage: \`${prefix}seek <seeking point in seconds>\``);
-            if (isNaN(args[1])) return message.channel.send(':x: I\'m sorry, But you need to enter a valid __number__.');
-            const argsNumber = parseInt(args[1]);
-            if (argsNumber < 0) return message.channel.send(':x: The seeking point needs to be a positive number!');
-            if (argsNumber > data.length_seconds) return message.channel.send(`:x: The lenght of this song is ${data.length_seconds} seconds! You can't seek further than that!`);
+            const pos = parseInt(args[1])
+            if (isNaN(pos)) return message.channel.send(':x: I\'m sorry, But you need to enter a valid __number__.');
+            if (pos < 0) return message.channel.send(':x: The seeking point needs to be a positive number!');
+            if (pos > data.length_seconds) return message.channel.send(`:x: The lenght of this song is ${data.length_seconds} seconds! You can't seek further than that!`);
             serverQueue.connection.dispatcher.end('seek');
-            client.funcs.play(message.guild, serverQueue.songs[0], client, message, args[1]);
+            client.funcs.play(message.guild, serverQueue.songs[0], client, message, pos, false);
         } else {
             message.channel.send(':x: There is nothing playing!');
         }

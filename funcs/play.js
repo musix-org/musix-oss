@@ -1,4 +1,4 @@
-module.exports = async function (guild, song, client, message, seek) {
+module.exports = async function (guild, song, client, message, seek, play) {
     const Discord = require('discord.js');
     const ytdl = require('ytdl-core');
     const serverQueue = client.queue.get(guild.id);
@@ -25,11 +25,13 @@ module.exports = async function (guild, song, client, message, seek) {
         });
     dispatcher.setVolume(serverQueue.volume / 10);
     dispatcher.on("error", error => console.error(error));
-    let data = await Promise.resolve(ytdl.getInfo(serverQueue.songs[0].url));
-    let songtime = (data.length_seconds * 1000).toFixed(0);
-    const embed = new Discord.RichEmbed()
-        .setTitle(`:musical_note: Start playing: **${song.title}**`)
-        .setDescription(`Song duration: \`${client.funcs.msToTime(songtime)}\``)
-        .setColor("#b50002")
-    serverQueue.textChannel.send(embed);
+    if (client.global.db.guilds[guild.id].startPlaying || play) {
+        let data = await Promise.resolve(ytdl.getInfo(serverQueue.songs[0].url));
+        let songtime = (data.length_seconds * 1000).toFixed(0);
+        const embed = new Discord.RichEmbed()
+            .setTitle(`:musical_note: Start playing: **${song.title}**`)
+            .setDescription(`Song duration: \`${client.funcs.msToTime(songtime)}\``)
+            .setColor("#b50002")
+        serverQueue.textChannel.send(embed);
+    }
 }
