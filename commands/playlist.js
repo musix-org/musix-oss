@@ -119,7 +119,7 @@ module.exports = {
                     if (isNaN(songNum)) return message.channel.send(':x: You need to enter a __number__!');
                     if (songNum === 0) return message.channel.send(':x: You can not remove the currently playing song!');
                     if (parseInt(songNum) > client.global.db.playlists[message.guild.id].songs.size) return message.channel.send(`:x: There is only ${serverQueue.songs.size} amount of songs in the queue!`);
-                    message.channel.send(`🗑️ removed \`${client.global.db.playlists[message.guild.id].songs[songNum].title}\` from the queue!`);
+                    message.channel.send(`🗑️ removed \`${client.global.db.playlists[message.guild.id].songs[songNum].title}\` from the playlist!`);
                     return client.global.db.playlists[message.guild.id].songs.splice(songNum, 1);
                 } else return message.channel.send(':x: There is no playlist saved! Start by using the save option!')
             } else if (args[1] === 'list') {
