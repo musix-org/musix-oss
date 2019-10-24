@@ -15,7 +15,7 @@ module.exports = {
         const embed = new Discord.RichEmbed()
             .setTitle("__Now playing__")
             .setDescription(`🎶**Now playing:** ${serverQueue.songs[0].title}\n${array.join('')} | \`${client.funcs.msToTime(completed)} / ${client.funcs.msToTime(songtime)}\``)
-            .setFooter(`Queued by \`${serverQueue.songs[0].author.tag}\``)
+            .setFooter(`Queued by ${serverQueue.songs[0].author.tag}`)
             .setURL(serverQueue.songs[0].url)
             .setColor("#b50002")
         return message.channel.send(embed);
