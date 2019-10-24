@@ -86,10 +86,10 @@ module.exports = {
     } else if (args[1] === 'announcesongs') {
       if (client.global.db.guilds[message.guild.id].startPlaying) {
         client.global.db.guilds[message.guild.id].startPlaying = false;
-        return message.channel.send(':white_check_mark: announcesong set to `false`!');
+        return message.channel.send(':white_check_mark: announcesongs now set to `false`!');
       } else {
         client.global.db.guilds[message.guild.id].startPlaying = true;
-        return message.channel.send(':white_check_mark: announcesong set to `true`!');
+        return message.channel.send(':white_check_mark: announcesongs now set to `true`!');
       }
     } else {
       const embed = new Discord.RichEmbed()
