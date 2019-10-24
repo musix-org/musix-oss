@@ -3,7 +3,8 @@ module.exports = async function (video, message, voiceChannel, client, playlist 
     let song = {
         id: video.id,
         title: Discord.Util.escapeMarkdown(video.title),
-        url: `https://www.youtube.com/watch?v=${video.id}`
+        url: `https://www.youtube.com/watch?v=${video.id}`,
+        author: message.author
     }
     const serverQueue = client.queue.get(message.guild.id);
     if (client.global.db.guilds[message.guild.id].defaultVolume === undefined) {
