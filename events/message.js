@@ -45,6 +45,9 @@ module.exports = {
         if (commandName === 'np') {
             commandName = 'nowplaying';
         }
+        if (commandName === 'rm') {
+            commandName = 'remove';
+        }
         const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
         const permissions = message.channel.permissionsFor(message.client.user);
         if (!permissions.has('EMBED_LINKS')) return message.channel.send(':x: I cannot send embeds (Embed links), make sure I have the proper permissions!');
