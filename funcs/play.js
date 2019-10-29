@@ -3,6 +3,7 @@ module.exports = async function (guild, song, client, message, seek, play) {
     const ytdl = require('ytdl-core');
     const serverQueue = client.queue.get(guild.id);
     if (!song) {
+        console.log('No song')
         serverQueue.voiceChannel.leave();
         client.queue.delete(guild.id);
         return;
