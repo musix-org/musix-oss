@@ -30,7 +30,7 @@ module.exports = {
         const args = message.content.slice(prefix.length).split(' ');
         let commandName;
         if (message.mentions.users.first()) {
-            if (message.mentions.users.first().id === client.config.botId) {
+            if (message.mentions.users.first().id === client.user.id) {
                 if (!args[1]) return;
                 if (args[1] === 'prefix') return message.channel.send(`My prefix here is: \`${prefix}\`.`);
                 commandName = args[1].toLowerCase();
