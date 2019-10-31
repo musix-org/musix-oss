@@ -10,7 +10,7 @@ module.exports = {
         const { voiceChannel } = message.member;
         let data = await Promise.resolve(ytdl.getInfo(serverQueue.songs[0].url));
         if (serverQueue) {
-            if (message.author.id !== client.global.devId) {
+            if (message.author.id !== client.config.devId) {
                 return message.channel.send(':x: This command is currently disabled!');
                 if (voiceChannel !== serverQueue.voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in the same voice channel as Musix to seek the song!');
                 if (client.global.db.guilds[message.guild.id].permissions === true) {
