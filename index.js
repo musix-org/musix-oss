@@ -40,7 +40,6 @@ client.funcs.exe = require('./funcs/exe.js');
 client.config = {
   token: process.env.TOKEN,
   apikey: process.env.API_KEY,
-  botId: "607266889537945605",
   devId: "360363051792203779",
   prefix: '>',
 };
