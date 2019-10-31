@@ -10,7 +10,7 @@ module.exports = {
             client.global.db.playlists[guildData.id] = guildData.d;
         });
         console.log('- DB Set -');
-        client.user.setActivity(`@musix help | 🎶`, { type: 'LISTENING' });
+        client.user.setActivity(`@${client.user.username} help | 🎶`, { type: 'LISTENING' });
         client.user.setStatus('dnd');
         dbl.postStats(client.guilds.size);
         console.log('- Activated -');
@@ -18,7 +18,7 @@ module.exports = {
         client.guilds.forEach(guild => {
             users += guild.memberCount;
         })
-        let status = [`${users} users on ${client.guilds.size} guilds!`, '@musix help | 🎶'];
+        let status = [`${users} users on ${client.guilds.size} guilds!`, `@${client.user.username} help | 🎶`];
         let i = 0;
         setInterval(() => {
             if (i == status.length) {
