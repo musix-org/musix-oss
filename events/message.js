@@ -2,7 +2,7 @@ module.exports = {
     name: 'message',
     async execute(client, message, Discord) {
         if (message.author.bot || !message.guild) return;
-        if (message.content === '->reset' && message.author.id === client.global.devId) {
+        if (message.content === '->reset' && message.author.id === client.config.devId) {
             client.guilds.forEach(guild => {
                 client.global.db.guilds[guild.id] = {
                     prefix: client.config.prefix,
@@ -15,7 +15,7 @@ module.exports = {
                 return message.channel.send(':white_check_mark: Reset all guild settings for __all__ guilds!');
             });
             return message.channel.send(':white_check_mark: Reset all guild settings!')
-        } else if (message.content === '->resetguildsettings' && message.author.id === client.global.devId) {
+        } else if (message.content === '->resetguildsettings' && message.author.id === client.config.devId) {
             client.global.db.guilds[message.guild.id] = {
                 prefix: client.config.prefix,
                 defaultVolume: 5,
