@@ -1,6 +1,7 @@
 module.exports = {
     name: 'nowplaying',
     description: 'Now playing command.',
+    alias: 'np',
     cooldown: 5,
     async execute(message, args, client, Discord, prefix) {
         const ytdl = require('ytdl-core');

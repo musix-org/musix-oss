@@ -1,6 +1,7 @@
 module.exports = {
     name: 'bug',
     description: 'Report a bug',
+    alias: 'bug',
     cooldown: 5,
     async execute(message, args, client, Discord, prefix) {
         const embed = new Discord.RichEmbed()

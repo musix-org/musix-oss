@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'queue',
 	description: 'Queue command.',
+	alias: 'q',
 	cooldown: 5,
 	async execute(message, args, client, Discord, prefix) {
 		const serverQueue = client.queue.get(message.guild.id);

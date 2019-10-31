@@ -1,6 +1,7 @@
 module.exports = {
     name: 'invite',
     description: 'Invite command.',
+    alias: 'invite',
     cooldown: 5,
     execute(message, args, client, Discord, prefix) {
         const embed = new Discord.RichEmbed()

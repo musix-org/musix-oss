@@ -1,6 +1,7 @@
 module.exports = {
     name: 'help',
     description: 'Help command.',
+    alias: 'help',
     cooldown: 5,
     execute(message, args, client, Discord, prefix) {
         const embed = new Discord.RichEmbed()
