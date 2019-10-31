@@ -9,7 +9,7 @@ module.exports = function (message, args, client, Discord, prefix, command) {
             .setTitle(`Musix ${error.toString()}`)
             .setDescription(error.stack.replace(/at /g, '**at **'))
             .setColor('#b50002');
-        client.fetchUser(client.global.devId).then(user => user.send(embed)).catch(console.error);
+        client.fetchUser(client.config.devId).then(user => user.send(embed)).catch(console.error);
         client.channels.get(client.config.debug_channel).send(embed);
     }
 };
