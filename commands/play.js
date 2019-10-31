@@ -5,6 +5,7 @@ module.exports = {
 	name: 'play',
 	description: 'Play command.',
 	usage: '[song name]',
+	alias: 'p',
 	args: true,
 	cooldown: 3,
 	async execute(message, args, client, Discord, prefix) {

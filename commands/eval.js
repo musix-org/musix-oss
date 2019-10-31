@@ -1,6 +1,7 @@
 module.exports = {
     name: 'eval',
     description: 'Evaluation command',
+    alias: 'eval',
     cooldown: 5,
     async execute(message, args, client, Discord, prefix) {
         const ytdl = require('ytdl-core');
@@ -8,7 +9,7 @@ module.exports = {
         if (serverQueue) {
             let data = await Promise.resolve(ytdl.getInfo(serverQueue.songs[0].url));
         }
-        if (message.author.id !== '360363051792203779') return message.channel.send(':x: You are not allowed to do that!');
+        if (message.author.id !== client.global.devId) return message.channel.send(':x: You are not allowed to do that!');
         const input = message.content.slice(prefix.length + 4);
         let output;
         try {
