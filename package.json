@@ -10,6 +10,10 @@
   "author": "MatteZ02",
   "license": "MIT",
   "homepage": "https://https://github.com/MatteZ02/Musix",
+  "repository": {
+    "type": "git",
+    "url": "https://https://github.com/MatteZ02/Musix"
+  },
   "dependencies": {
     "dblapi.js": "^2.3.0",
     "discord.js": "^11.5.1",
