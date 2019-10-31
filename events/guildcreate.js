@@ -5,11 +5,19 @@ module.exports = {
             prefix: '>',
             defaultVolume: 5,
             permissions: false,
+            premium: false,
+            dj: false,
+            djrole: null,
+            startPlaying: true
         });
         client.global.db.guilds[guild.id] = {
             prefix: ">",
             defaultVolume: 5,
             permissions: false,
+            premium: false,
+            dj: false,
+            djrole: null,
+            startPlaying: true
         };
     }
 }

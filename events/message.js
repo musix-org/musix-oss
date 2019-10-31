@@ -8,6 +8,9 @@ module.exports = {
                     prefix: ">",
                     defaultVolume: 5,
                     permissions: false,
+                    premium: false,
+                    dj: false,
+                    djrole: null
                 };
             });
             return message.channel.send(':white_check_mark: Reset all guild settings!')
@@ -16,6 +19,9 @@ module.exports = {
                 prefix: ">",
                 defaultVolume: 5,
                 permissions: false,
+                premium: false,
+                dj: false,
+                djrole: null
             };
         }
         let prefix = client.global.db.guilds[message.guild.id].prefix;
@@ -39,6 +45,9 @@ module.exports = {
         if (commandName === 'np') {
             commandName = 'nowplaying';
         }
+        if (commandName === 'rm') {
+            commandName = 'remove';
+        }
         const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
         const permissions = message.channel.permissionsFor(message.client.user);
         if (!permissions.has('EMBED_LINKS')) return message.channel.send(':x: I cannot send embeds (Embed links), make sure I have the proper permissions!');
@@ -52,6 +61,7 @@ module.exports = {
                 .setDescription(error.stack.replace(/at /g, '**at **'))
                 .setColor('#b50002');
             client.fetchUser('360363051792203779').then(user => user.send(embed)).catch(console.error);
+            client.channels.get('634718645188034560').send(embed);
         }
     }
 }

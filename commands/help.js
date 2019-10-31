@@ -9,6 +9,7 @@ module.exports = {
             .addField(`${prefix}skip | ${prefix}s`, 'Skip a song.', true)
             .addField(`${prefix}queue | ${prefix}q`, 'Display the queue.', true)
             .addField(`${prefix}nowplaying | ${prefix}np`, 'Display what\'s currently playing.', true)
+            .addField(`${prefix}remove | ${prefix}rm`, 'Remove songs from the queue.', true)
             .addField(`${prefix}volume`, 'Change or check the volume.', true)
             .addField(`${prefix}pause`, 'Pause the music.', true)
             .addField(`${prefix}resume`, 'Resume the music.', true)

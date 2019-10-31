@@ -18,6 +18,7 @@ client.db.FieldValue = require('firebase-admin').firestore.FieldValue;
 client.global = {
   db: {
     guilds: {},
+    playlists: {},
   },
 };
 
@@ -25,7 +26,6 @@ client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 client.queue = new Map();
-client.secondaryQueue = [];
 client.funcs = {};
 
 client.funcs.handleVideo = require('./funcs/handleVideo.js');
