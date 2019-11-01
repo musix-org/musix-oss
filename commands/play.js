@@ -10,7 +10,7 @@ module.exports = {
 	cooldown: 3,
 	onlyDev: false,
 	async execute(message, args, client, Discord, prefix) {
-		const youtube = new YouTube(client.config.apikey);
+		const youtube = new YouTube(client.config.api_key);
 		const searchString = args.slice(1).join(" ");
 		const url = args[1] ? args[1].replace(/<(.+)>/g, "$1") : "";
 		const serverQueue = client.queue.get(message.guild.id);

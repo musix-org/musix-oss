@@ -27,7 +27,6 @@ client.commandAliases = new Discord.Collection();
 client.playlistCmd = new Discord.Collection();
 client.settingCmd = new Discord.Collection();
 client.events = new Discord.Collection();
-client.cooldowns = new Discord.Collection();
 client.queue = new Map();
 client.funcs = {};
 
@@ -45,6 +44,7 @@ for (const file of commandFiles) {
   client.commands.set(command.name, command);
   client.commandAliases.set(command.alias, command);
 }
+
 const eventFiles = fs.readdirSync('./events/').filter(f => f.endsWith('.js'));
 for (const file of eventFiles) {
   const event = require(`./events/${file}`);
