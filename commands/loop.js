@@ -3,12 +3,13 @@ module.exports = {
     description: 'loop command.',
     alias: 'loop',
     cooldown: 10,
+    onlyDev: false,
     async execute(message, args, client, Discord, prefix) {
         const serverQueue = client.queue.get(message.guild.id);
         const permissions = message.channel.permissionsFor(message.author);
         const { voiceChannel } = message.member;
         if (serverQueue) {
-            if (message.author.id !== client.config.devId) {
+            if (message.author.id !== client.config.dev) {
                 if (voiceChannel !== serverQueue.voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in the same voice channel as Musix to loop the queue!');
                 if (client.global.db.guilds[message.guild.id].permissions === true) {
                     if (client.global.db.guilds[message.guild.id].dj) {

@@ -4,6 +4,7 @@ module.exports = {
   description: 'Change the settings',
   alias: 'settings',
   cooldown: 10,
+  onlyDev: false,
   async execute(message, args, client, Discord, prefix) {
     const embed = new Discord.RichEmbed()
       .setTitle('Guild settings for Musix')
@@ -16,7 +17,7 @@ module.exports = {
       .setAuthor(client.user.username, client.user.displayAvatarURL)
       .setColor('#b50002')
     const permissions = message.channel.permissionsFor(message.author);
-    if (message.author.id !== client.config.devId) {
+    if (message.author.id !== client.config.dev) {
       if (!permissions.has('MANAGE_GUILD')) return message.channel.send(':x: You need the `MANAGE_SERVER` permission to change the settings!');
     }
     if (args[1]) {

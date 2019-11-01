@@ -3,6 +3,7 @@ module.exports = {
     description: 'Status command.',
     alias: 'status',
     cooldown: 5,
+    onlyDev: false,
     execute(message, args, client, Discord, prefix) {
         let rawUptime = client.uptime;
         let uptime = {};

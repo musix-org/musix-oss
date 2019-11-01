@@ -3,8 +3,8 @@ module.exports = {
     description: 'force stop command.',
     alias: 'fs',
     cooldown: 5,
+    onlyDev: true,
     execute(message, args, client, Discord, prefix) {
-        if (message.author.id !== client.config.devId) return message.channel.send(':x: You are not allowed to do that!')
         client.queue.delete(message.guild.id);
         message.channel.send('queue deleted')
     }

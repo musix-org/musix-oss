@@ -8,6 +8,7 @@ module.exports = {
 	alias: 'p',
 	args: true,
 	cooldown: 3,
+	onlyDev: false,
 	async execute(message, args, client, Discord, prefix) {
 		const youtube = new YouTube(client.config.apikey);
 		const searchString = args.slice(1).join(" ");

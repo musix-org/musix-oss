@@ -7,6 +7,7 @@ module.exports = {
     description: 'Save and load queues',
     alias: 'pl',
     cooldown: 10,
+    onlyDev: false,
     async execute(message, args, client, Discord, prefix) {
         const embed = new Discord.RichEmbed()
             .setTitle('Options for playlist!')
@@ -19,7 +20,7 @@ module.exports = {
             .setAuthor(client.user.username, client.user.displayAvatarURL)
             .setColor('#b50002')
         const permissions = message.channel.permissionsFor(message.author);
-        if (message.author.id !== client.config.devId) {
+        if (message.author.id !== client.config.dev) {
             if (client.global.db.guilds[message.guild.id].dj) {
                 if (!message.member.roles.has(client.global.db.guilds[message.guild.id].djrole)) return message.channel.send(':x: You need the `DJ` role to modify or play the playlist!');
             } else if (!permissions.has('MANAGE_GUILD')) return message.channel.send(':x: You need the `MANAGE_SERVER` permission to modify the playlist!');

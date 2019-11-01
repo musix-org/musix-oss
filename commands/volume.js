@@ -3,15 +3,15 @@ module.exports = {
 	description: 'Volume command.',
 	alias: 'volume',
 	cooldown: 5,
+	onlyDev: false,
 	execute(message, args, client, Discord, prefix) {
 		const { voiceChannel } = message.member;
 		const serverQueue = client.queue.get(message.guild.id);
 		const permissions = message.channel.permissionsFor(message.author);
-		if (message.author.id === '384002606621655040') return message.channel.send('You are not doying that!');
 		if (!serverQueue) return message.channel.send(':x: There is nothing playing.');
 		if (!args[1]) return message.channel.send(`:loud_sound: The current volume is: **${serverQueue.volume}**`);
 		const volume = parseFloat(args[1]);
-		if (message.author.id !== client.config.devId) {
+		if (message.author.id !== client.config.dev) {
 			if (!voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in a voice channel to change the volume!');
 			if (client.global.db.guilds[message.guild.id].permissions === true) {
 				if (client.global.db.guilds[message.guild.id].dj) {

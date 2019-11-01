@@ -3,6 +3,7 @@ module.exports = {
     description: 'Report a bug',
     alias: 'bug',
     cooldown: 5,
+    onlyDev: false,
     async execute(message, args, client, Discord, prefix) {
         const embed = new Discord.RichEmbed()
             .setTitle(`Found a bug with ${client.user.username}?\nDM the core developer:`)

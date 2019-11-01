@@ -3,6 +3,7 @@ module.exports = {
     description: 'Help command.',
     alias: 'help',
     cooldown: 5,
+    onlyDev: false,
     execute(message, args, client, Discord, prefix) {
         const embed = new Discord.RichEmbed()
             .setTitle('Commands for Musix!')

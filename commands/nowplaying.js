@@ -3,6 +3,7 @@ module.exports = {
     description: 'Now playing command.',
     alias: 'np',
     cooldown: 5,
+    onlyDev: false,
     async execute(message, args, client, Discord, prefix) {
         const ytdl = require('ytdl-core');
         const serverQueue = client.queue.get(message.guild.id);

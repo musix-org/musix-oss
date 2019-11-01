@@ -3,6 +3,7 @@ module.exports = {
 	description: 'Queue command.',
 	alias: 'q',
 	cooldown: 5,
+	onlyDev: false,
 	async execute(message, args, client, Discord, prefix) {
 		const serverQueue = client.queue.get(message.guild.id);
 		if (!serverQueue) return message.channel.send(':x: There is nothing playing.');

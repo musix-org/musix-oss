@@ -37,13 +37,7 @@ client.funcs.msToTime = require('./funcs/msToTime.js');
 client.funcs.dbget = require('./funcs/dbget.js');
 client.funcs.exe = require('./funcs/exe.js');
 
-client.config = {
-  token: process.env.DISCORD_TOKEN,
-  debug_channel: process.env.DISCORD_DEBUG_CHANNEL_ID,
-  apikey: process.env.YOUTUBE_KEY,
-  devId: process.env.DISCORD_DEV_UID,
-  prefix: process.env.PREFIX
-};
+client.config = require('./config/config.js');
 
 const commandFiles = fs.readdirSync('./commands/').filter(f => f.endsWith('.js'));
 for (const file of commandFiles) {
