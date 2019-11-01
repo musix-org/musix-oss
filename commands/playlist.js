@@ -19,7 +19,7 @@ module.exports = {
             .setAuthor(client.user.username, client.user.displayAvatarURL)
             .setColor('#b50002')
         const permissions = message.channel.permissionsFor(message.author);
-        if (message.author.id !== client.global.devId) {
+        if (message.author.id !== client.config.devId) {
             if (client.global.db.guilds[message.guild.id].dj) {
                 if (!message.member.roles.has(client.global.db.guilds[message.guild.id].djrole)) return message.channel.send(':x: You need the `DJ` role to modify or play the playlist!');
             } else if (!permissions.has('MANAGE_GUILD')) return message.channel.send(':x: You need the `MANAGE_SERVER` permission to modify the playlist!');
@@ -38,7 +38,7 @@ module.exports = {
                         .setDescription(error.stack.replace(/at /g, '**at **'))
                         .setColor('#b50002');
                     client.fetchUser(client.config.devId).then(user => user.send(embed)).catch(console.error);
-                    client.channels.get('634718645188034560').send(embed);
+                    client.channels.get(client.config.debug_channel).send(embed);
                     console.log(error);
                 }
             } else {

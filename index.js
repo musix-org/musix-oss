@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client({ disableEveryone: true, disabledEvents: ['TYPING_START'] });
 const DBL = require("dblapi.js");
-const dbl = new DBL(process.env.DBLTOKEN, client);
+const dbl = new DBL(process.env.DBL_TOKEN, client);
 const fs = require('fs');
 const dotenv = require('dotenv');
 const firebase = require('firebase/app');
@@ -38,11 +38,11 @@ client.funcs.dbget = require('./funcs/dbget.js');
 client.funcs.exe = require('./funcs/exe.js');
 
 client.config = {
-  token: process.env.TOKEN,
-  apikey: process.env.API_KEY,
-  botId: "607266889537945605",
-  devId: "360363051792203779",
-  prefix: '>',
+  token: process.env.DISCORD_TOKEN,
+  debug_channel: process.env.DISCORD_DEBUG_CHANNEL_ID,
+  apikey: process.env.YOUTUBE_KEY,
+  devId: process.env.DISCORD_DEV_UID,
+  prefix: process.env.PREFIX
 };
 
 const commandFiles = fs.readdirSync('./commands/').filter(f => f.endsWith('.js'));

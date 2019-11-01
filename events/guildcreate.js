@@ -2,7 +2,7 @@ module.exports = {
     name: 'guildcreate',
     async execute(client, guild) {
         client.db.collection('guilds').doc(guild.id).set({
-            prefix: '>',
+            prefix: client.config.prefix,
             defaultVolume: 5,
             permissions: false,
             premium: false,
@@ -11,7 +11,7 @@ module.exports = {
             startPlaying: true
         });
         client.global.db.guilds[guild.id] = {
-            prefix: ">",
+            prefix: client.config.prefix,
             defaultVolume: 5,
             permissions: false,
             premium: false,
