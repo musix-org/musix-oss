@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'skip',
 	description: 'Skip command.',
-	alias: 'skip',
+	alias: 's',
 	cooldown: 5,
 	onlyDev: false,
 	execute(message, args, client, Discord, prefix) {
