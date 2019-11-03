@@ -6,7 +6,7 @@ module.exports = {
     async execute(message, args, client, Discord, prefix) {
         if (client.global.db.playlists[message.guild.id].saved) {
             const serverQueue = client.queue.get(message.guild.id);
-            const youtube = new YouTube(client.config.apikey);
+            const youtube = new YouTube(client.config.api_key);
             const searchString = args.slice(2).join(" ");
             const url = args[2] ? args[2].replace(/<(.+)>/g, "$1") : "";
             if (!args[2]) return message.channel.send(':x: You need to use a link or search for a song!');
