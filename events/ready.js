@@ -26,6 +26,10 @@ module.exports = {
             }
             client.user.setActivity(status[i], { type: 'LISTENING' });
             i++;
+            users = 0;
+            client.guilds.forEach(guild => {
+                users += guild.memberCount;
+            })
         }, 30000);
         setInterval(async () => {
             client.guilds.forEach(guild => {
