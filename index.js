@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client({ disableEveryone: true, disabledEvents: ['TYPING_START'] });
 const DBL = require("dblapi.js");
-const dbl = new DBL(process.env.DBL_TOKEN, client);
+const dbl = new DBL(process.env.DBLTOKEN, client);
 const fs = require('fs');
 const dotenv = require('dotenv');
 const firebase = require('firebase/app');
