@@ -36,7 +36,7 @@ module.exports = {
 				await client.funcs.handleVideo(video2, message, voiceChannel, client, true);
 			}
 			return message.channel.send(`:white_check_mark: Playlist: **${playlist.title}** has been added to the queue!`);
-		} else {
+		} else if (client.global.db.guilds[message.guild.id].songSelection) {
 			try {
 				var video = await youtube.getVideo(url);
 			} catch (error) {
@@ -61,6 +61,19 @@ module.exports = {
 					}
 					const videoIndex = parseInt(response.first().content);
 					var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
+				} catch (err) {
+					console.error(err);
+					return message.channel.send(':x: I could not obtain any search results!');
+				}
+			}
+			return client.funcs.handleVideo(video, message, voiceChannel, client, false);
+		} else {
+			try {
+				var video = await youtube.getVideo(url);
+			} catch (error) {
+				try {
+					var videos = await youtube.searchVideos(searchString, 1);
+					var video = await youtube.getVideoByID(videos[0].id);
 				} catch (err) {
 					console.error(err);
 					return message.channel.send(':x: I could not obtain any search results!');
