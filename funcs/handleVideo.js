@@ -22,7 +22,10 @@ module.exports = async function (video, message, voiceChannel, client, playlist 
             songs: [],
             volume: client.global.db.guilds[message.guild.id].defaultVolume,
             playing: true,
-            looping: false
+            looping: false,
+            votes: 0,
+            voters: [],
+            votesNeeded: null
         };
         construct.songs.push(song);
         client.queue.set(message.guild.id, construct);

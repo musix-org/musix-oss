@@ -29,7 +29,10 @@ module.exports = {
                     songs: [...songs],
                     volume: client.global.db.guilds[message.guild.id].defaultVolume,
                     playing: true,
-                    looping: false
+                    looping: false,
+                    votes: 0,
+                    voters: [],
+                    votesNeeded: null
                 };
                 client.queue.set(message.guild.id, construct);
                 message.channel.send(":white_check_mark: Queue set!");
