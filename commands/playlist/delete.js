@@ -1,5 +1,5 @@
 module.exports = {
-    name: 'setpremium',
+    name: 'delete',
     async execute(message, args, client, Discord, prefix) {
         client.global.db.playlists[message.guild.id] = {
             songs: [],
