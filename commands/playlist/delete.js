@@ -6,6 +6,6 @@ module.exports = {
             firstSong: undefined,
             saved: false,
         };
-        message.channel.send(':white_check_mark: This guild is now premium! :tada:')
+        message.channel.send(':wastebasket: Deleted the playlist.');
     }
 };
