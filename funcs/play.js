@@ -33,6 +33,7 @@ module.exports = async function (guild, song, client, message, seek, play) {
             .setTitle(`:musical_note: Start playing: **${song.title}**`)
             .setDescription(`Song duration: \`${client.funcs.msToTime(songtime)}\``)
             .setColor("#b50002")
+        serverQueue.playing = true;
         serverQueue.textChannel.send(embed);
     }
 }

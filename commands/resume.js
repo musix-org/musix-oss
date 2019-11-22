@@ -8,7 +8,7 @@ module.exports = {
 		const serverQueue = client.queue.get(message.guild.id);
 		const permissions = message.channel.permissionsFor(message.author);
 		const { voiceChannel } = message.member;
-		if (serverQueue && !serverQueue.playing) {
+		if (serverQueue.playing && serverQueue.paused) {
 			if (message.author.id !== client.config.dev) {
 				if (voiceChannel !== serverQueue.voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in the same voice channel as Musix to loop the queue!');
 				if (client.global.db.guilds[message.guild.id].permissions === true) {
@@ -17,7 +17,7 @@ module.exports = {
 					} else if (!permissions.has('MANAGE_MESSAGES')) return message.channel.send(':x: You need the `MANAGE_MESSAGES` permission to resume the music!');
 				}
 			}
-			serverQueue.playing = true;
+			serverQueue.paused = false;
 			serverQueue.connection.dispatcher.resume();
 			return message.channel.send('▶ Resumed the music!');
 		}

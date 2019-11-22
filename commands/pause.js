@@ -8,7 +8,7 @@ module.exports = {
 		const serverQueue = client.queue.get(message.guild.id);
 		const permissions = message.channel.permissionsFor(message.author);
 		const { voiceChannel } = message.member;
-		if (serverQueue && serverQueue.playing === true) {
+		if (serverQueue.playing && !serverQueue.paused) {
 			if (voiceChannel !== serverQueue.voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in the same voice channel as Musix to pause the music!');
 			if (message.author.id !== client.config.dev) {
 				if (client.global.db.guilds[message.guild.id].permissions === true) {
@@ -17,10 +17,9 @@ module.exports = {
 					} else if (!permissions.has('MANAGE_MESSAGES')) return message.channel.send(':x: You need the `MANAGE_MESSAGES` permission to pause the music!');
 				}
 			}
-			serverQueue.playing = false;
+			serverQueue.paused = true;
 			serverQueue.connection.dispatcher.pause();
 			return message.channel.send('⏸ Paused the music!');
-		}
-		return message.channel.send(':x: There is nothing playing.');
+		} else return message.channel.send(':x: There is nothing playing.');
 	}
 };

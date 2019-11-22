@@ -7,7 +7,7 @@ module.exports = {
     async execute(message, args, client, Discord, prefix) {
         const ytdl = require('ytdl-core');
         const serverQueue = client.queue.get(message.guild.id);
-        if (!serverQueue) return message.channel.send(':x: There is nothing playing.');
+        if (!serverQueue.playing) return message.channel.send(':x: There is nothing playing.');
         let data = await Promise.resolve(ytdl.getInfo(serverQueue.songs[0].url));
         let songtime = (data.length_seconds * 1000).toFixed(0);
         let completed = (serverQueue.connection.dispatcher.time).toFixed(0);

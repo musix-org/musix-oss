@@ -3,16 +3,15 @@ module.exports = {
     description: 'seek command.',
     alias: 'seek',
     cooldown: 10,
-    onlyDev: false,
+    onlyDev: true,
     async execute(message, args, client, Discord, prefix) {
         const ytdl = require('ytdl-core');
         const serverQueue = client.queue.get(message.guild.id);
         const permissions = message.channel.permissionsFor(message.author);
         const { voiceChannel } = message.member;
         let data = await Promise.resolve(ytdl.getInfo(serverQueue.songs[0].url));
-        if (serverQueue) {
-            if (message.author.id !== client.config.dev) {
-                return message.channel.send(':x: This command is currently disabled!');
+        if (serverQueue.playing) {
+            if (message.author.id !== client.config.devId) {
                 if (voiceChannel !== serverQueue.voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in the same voice channel as Musix to seek the song!');
                 if (client.global.db.guilds[message.guild.id].permissions === true) {
                     if (client.global.db.guilds[message.guild.id].dj) {

@@ -8,7 +8,7 @@ module.exports = {
         const { voiceChannel } = message.member;
         const serverQueue = client.queue.get(message.guild.id);
         const permissions = message.channel.permissionsFor(message.author);
-        if (!serverQueue) return message.channel.send(':x: There is nothing playing');
+        if (!serverQueue.playing) return message.channel.send(':x: There is nothing playing');
         if (!args[1]) return message.channel.send(':x: Please provide a song position in queue for me to remove!');
         const pos = parseInt(args[1]);
         if (isNaN(pos)) return message.channel.send(':x: You need to enter a number!');
