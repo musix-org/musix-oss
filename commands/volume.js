@@ -8,6 +8,7 @@ module.exports = {
 		const { voiceChannel } = message.member;
 		const serverQueue = client.queue.get(message.guild.id);
 		const permissions = message.channel.permissionsFor(message.author);
+		if (!serverQueue) return message.channel.send(':x: There is nothing playing.');
 		if (!serverQueue.playing) return message.channel.send(':x: There is nothing playing.');
 		if (!args[1]) return message.channel.send(`:loud_sound: The current volume is: **${serverQueue.volume}**`);
 		const volume = parseFloat(args[1]);

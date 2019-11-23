@@ -6,6 +6,7 @@ module.exports = {
 	onlyDev: false,
 	async execute(message, args, client, Discord, prefix) {
 		const serverQueue = client.queue.get(message.guild.id);
+		if (!serverQueue) return message.channel.send(':x: There is nothing playing.');
 		if (!serverQueue.playing) return message.channel.send(':x: There is nothing playing.');
 		if (args[1]) {
 			if (isNaN(args[1])) return msg.channel.send(':x: I\'m sorry, But you need to enter a valid __number__.');

@@ -9,6 +9,7 @@ module.exports = {
         const serverQueue = client.queue.get(message.guild.id);
         const permissions = message.channel.permissionsFor(message.author);
         const { voiceChannel } = message.member;
+        if (!serverQueue) return message.channel.send(':x: There is nothing playing.');
         let data = await Promise.resolve(ytdl.getInfo(serverQueue.songs[0].url));
         if (serverQueue.playing) {
             if (message.author.id !== client.config.devId) {

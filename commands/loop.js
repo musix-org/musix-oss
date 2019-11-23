@@ -8,6 +8,7 @@ module.exports = {
         const serverQueue = client.queue.get(message.guild.id);
         const permissions = message.channel.permissionsFor(message.author);
         const { voiceChannel } = message.member;
+        if (!serverQueue) return message.channel.send(':x: There is nothing playing.');
         if (serverQueue.playing) {
             if (message.author.id !== client.config.dev) {
                 if (voiceChannel !== serverQueue.voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in the same voice channel as Musix to loop the queue!');
