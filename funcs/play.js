@@ -18,6 +18,7 @@ module.exports = async function (guild, song, client, message, seek, play) {
             } else {
                 console.log(reason);
             }
+            serverQueue.playing = false;
             if (serverQueue.looping) {
                 serverQueue.songs.push(serverQueue.songs[0]);
             }
