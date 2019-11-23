@@ -10,7 +10,7 @@ module.exports = {
 		const permissions = message.channel.permissionsFor(message.author);
 		if (!serverQueue) return message.channel.send(':x: There is nothing playing that I could stop for you.');
 		if (!serverQueue.playing) return message.channel.send(':x: There is nothing playing that I could stop for you.');
-		if (message.author.id !== client.config.dev) {
+		if (message.author.id !== client.config.devId) {
 			if (voiceChannel !== serverQueue.voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in the same voice channel as Musix to stop the music!');
 			if (client.global.db.guilds[message.guild.id].permissions === true) {
 				if (client.global.db.guilds[message.guild.id].dj) {

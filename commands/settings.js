@@ -18,7 +18,7 @@ module.exports = {
       .setAuthor(client.user.username, client.user.displayAvatarURL)
       .setColor('#b50002')
     const permissions = message.channel.permissionsFor(message.author);
-    if (message.author.id !== client.config.dev) {
+    if (message.author.id !== client.config.devId) {
       if (!permissions.has('MANAGE_GUILD')) return message.channel.send(':x: You need the `MANAGE_SERVER` permission to change the settings!');
     }
     if (args[1]) {

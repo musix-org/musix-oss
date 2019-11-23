@@ -15,7 +15,7 @@ module.exports = {
         if (isNaN(pos)) return message.channel.send(':x: You need to enter a number!');
         if (pos === 0) return message.channel.send(':x: You can not remove the currently playing song!');
         if (pos > serverQueue.songs.size) return message.channel.send(`:x: There is only ${serverQueue.songs.size} amount of songs in the queue!`);
-        if (message.author.id !== client.config.dev) {
+        if (message.author.id !== client.config.devId) {
             if (voiceChannel !== serverQueue.voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in the same voice channel as Musix to remove songs!');
             if (client.global.db.guilds[message.guild.id].dj) {
                 if (serverQueue.songs[pos].author !== message.author) {
