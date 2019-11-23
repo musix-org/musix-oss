@@ -28,8 +28,9 @@ module.exports = {
                     connection: null,
                     songs: [...songs],
                     volume: client.global.db.guilds[message.guild.id].defaultVolume,
-                    playing: true,
+                    playing: false,
                     looping: false,
+                    paused: false,
                     votes: 0,
                     voters: [],
                     votesNeeded: null
