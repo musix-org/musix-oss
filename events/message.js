@@ -19,7 +19,7 @@ module.exports = {
         const commandName = args[0].toLowerCase();
         const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName)) || client.commandAliases.get(commandName);
         if (!command && message.content !== `${prefix}`) return;
-        if (command.onlyDev && message.author.id !== client.config.dev) return message.channel.send(':x: You are not allowed to do that!');
+        if (command.onlyDev && message.author.id !== client.config.devId) return message.channel.send(':x: You are not allowed to do that!');
         client.funcs.exe(message, args, client, Discord, prefix, command);
     }
 }
