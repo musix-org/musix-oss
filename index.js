@@ -41,6 +41,7 @@ client.config = require('./config/config.js');
 const commandFiles = fs.readdirSync('./commands/').filter(f => f.endsWith('.js'));
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
+  command.uses = 0;
   client.commands.set(command.name, command);
   client.commandAliases.set(command.alias, command);
 }
