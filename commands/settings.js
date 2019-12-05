@@ -16,7 +16,7 @@ module.exports = {
       .addField('songselection', 'Will i ask to select a song from the top 10 queries or start playing the first result instantly.')
       .setFooter(`how to use: ${prefix}settings <Setting name> <value>`)
       .setAuthor(client.user.username, client.user.displayAvatarURL)
-      .setColor('#b50002')
+      .setColor(client.embedColor)
     const permissions = message.channel.permissionsFor(message.author);
     if (message.author.id !== client.config.devId) {
       if (!permissions.has('MANAGE_GUILD')) return message.channel.send(':x: You need the `MANAGE_SERVER` permission to change the settings!');
@@ -32,7 +32,7 @@ module.exports = {
         const embed = new Discord.RichEmbed()
           .setTitle(`Musix ${error.toString()}`)
           .setDescription(error.stack.replace(/at /g, '**at **'))
-          .setColor('#b50002');
+          .setColor(client.config.embedColor);
         client.fetchUser(client.config.devId).then(user => user.send(embed)).catch(console.error);
         client.channels.get(client.config.debug_channel).send(embed);
       }

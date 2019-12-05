@@ -6,7 +6,7 @@ module.exports = {
     onlyDev: false,
     execute(message, args, client, Discord, prefix) {
         const embed = new Discord.RichEmbed()
-            .setTitle('Commands for Musix!')
+            .setTitle(`Commands for ${client.user.username}!`)
             .addField(`${prefix}play | ${prefix}p`, 'Play a song.', true)
             .addField(`${prefix}skip | ${prefix}s`, 'Skip a song.', true)
             .addField(`${prefix}queue | ${prefix}q`, 'Display the queue.', true)
@@ -22,8 +22,8 @@ module.exports = {
             .addField(`${prefix}bug`, 'Report a bug.', true)
             .addField(`${prefix}settings`, 'Change the guild specific settings.', true)
             .addField(`${prefix}help`, 'Display the help.', true)
-            .setAuthor(client.user.username, client.user.displayAvatarURL)
-            .setColor('#b50002')
+            .setAuthor(message.member.username, message.member.displayAvatarURL)
+            .setColor(client.config.embedColor)
         return message.channel.send(embed);
     }
 };

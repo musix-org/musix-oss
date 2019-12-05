@@ -19,7 +19,7 @@ module.exports = {
         }
         const embed = new Discord.RichEmbed()
             .setTitle('Evaluation Command')
-            .setColor('#b50002')
+            .setColor(client.config.embedColor)
             .setDescription(`Input: \`\`\`js\n${input.replace(/; /g, ';').replace(/;/g, ';\n')}\n\`\`\`\nOutput: \`\`\`\n${output}\n\`\`\``);
         return message.channel.send(embed);
     },

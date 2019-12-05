@@ -6,9 +6,9 @@ module.exports = {
     onlyDev: false,
     execute(message, args, client, Discord, prefix) {
         const embed = new Discord.RichEmbed()
-            .setTitle('Invite Musix to your Discord server!')
-            .setURL('https://bit.ly/2YDrKgh')
-            .setColor('#b50002')
+            .setTitle(`Invite ${client.user.username} to your Discord server!`)
+            .setURL(client.config.invite)
+            .setColor(client.config.embedColor)
         return message.channel.send(embed);
     }
 };

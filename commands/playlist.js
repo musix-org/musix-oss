@@ -18,7 +18,7 @@ module.exports = {
             .addField('list', 'Display the playlist.', true)
             .setFooter(`how to use: ${prefix}playlist <Option> <Optional option>`)
             .setAuthor(client.user.username, client.user.displayAvatarURL)
-            .setColor('#b50002')
+            .setColor(client.config.embedColor)
         const permissions = message.channel.permissionsFor(message.author);
         if (message.author.id !== client.config.devId) {
             if (client.global.db.guilds[message.guild.id].dj) {
@@ -37,7 +37,7 @@ module.exports = {
                     const embed = new Discord.RichEmbed()
                         .setTitle(`Musix ${error.toString()}`)
                         .setDescription(error.stack.replace(/at /g, '**at **'))
-                        .setColor('#b50002');
+                        .setColor(client.config.embedColor);
                     client.fetchUser(client.config.devId).then(user => user.send(embed)).catch(console.error);
                     client.channels.get(client.config.debug_channel).send(embed);
                     console.log(error);

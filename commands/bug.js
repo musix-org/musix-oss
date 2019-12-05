@@ -8,7 +8,7 @@ module.exports = {
         const embed = new Discord.RichEmbed()
             .setTitle(`Found a bug with ${client.user.username}?\nDM the core developer:`)
             .setDescription(`Matte#0002\nOr join the support server: https://discord.gg/rvHuJtB`)
-            .setColor('#b50002');
+            .setColor(client.config.embedColor);
         message.channel.send(embed);
     },
 };

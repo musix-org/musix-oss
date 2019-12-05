@@ -1,40 +1,10 @@
 const Discord = require('discord.js');
-const client = new Discord.Client({ disableEveryone: true, disabledEvents: ['TYPING_START'] });
+const MusicClient = require('./Struct/Client');
+const client = new MusicClient({});
 const DBL = require("dblapi.js");
 const dbl = new DBL(process.env.DBLTOKEN, client);
 const fs = require('fs');
-const dotenv = require('dotenv');
-const firebase = require('firebase/app');
-const admin = require('firebase-admin');
-const serviceAccount = require('./serviceAccount.json');
 require('dotenv/config');
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
-
-client.db = admin.firestore();
-client.db.FieldValue = require('firebase-admin').firestore.FieldValue;
-client.global = {
-  db: {
-    guilds: {},
-    playlists: {},
-  },
-};
-
-client.commands = new Discord.Collection();
-client.commandAliases = new Discord.Collection();
-client.playlistCmd = new Discord.Collection();
-client.settingCmd = new Discord.Collection();
-client.events = new Discord.Collection();
-client.queue = new Map();
-client.funcs = {};
-
-client.funcs.handleVideo = require('./funcs/handleVideo.js');
-client.funcs.play = require('./funcs/play.js');
-client.funcs.msToTime = require('./funcs/msToTime.js');
-client.funcs.dbget = require('./funcs/dbget.js');
-client.funcs.exe = require('./funcs/exe.js');
 
 client.config = require('./config/config.js');
 
@@ -85,5 +55,4 @@ client.on('guildCreate', async (guild) => {
 dbl.on('error', error => {
   console.log(`Error with DBL! ${error}`);
 })
-
 client.login(client.config.token).catch(err => { console.log('- Failed To Login -> ' + err); });

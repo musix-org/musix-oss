@@ -20,7 +20,7 @@ module.exports = {
             .setDescription(`🎶**Now playing:** ${serverQueue.songs[0].title}\n${array.join('')} | \`${client.funcs.msToTime(completed)} / ${client.funcs.msToTime(songtime)}\``)
             .setFooter(`Queued by ${serverQueue.songs[0].author.tag}`)
             .setURL(serverQueue.songs[0].url)
-            .setColor("#b50002")
+            .setColor(client.config.embedColor)
         return message.channel.send(embed);
     }
 };

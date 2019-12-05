@@ -25,14 +25,14 @@ module.exports = {
 			const embed = new Discord.RichEmbed()
 				.setTitle("__Song queue__")
 				.setDescription(`**Now playing:** ${serverQueue.songs[0].title}🎶\n${pagetext}\n${queuemessage}`)
-				.setColor("#b50002")
+				.setColor(client.config.embedColor)
 			return message.channel.send(embed);
 		} else {
 			const embed = new Discord.RichEmbed()
 				.setTitle("__Song queue__")
 				.setDescription(`**Now playing:** ${serverQueue.songs[0].title}🎶\n${pagetext}\n${queuemessage}`)
 				.setFooter('🔁 Currently looping the queue!')
-				.setColor("#b50002")
+				.setColor(client.config.embedColor)
 			return message.channel.send(embed);
 		}
 	}

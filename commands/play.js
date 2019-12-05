@@ -47,7 +47,7 @@ module.exports = {
 						.setTitle("__Song Selection__")
 						.setDescription(`${videos.map(video2 => `**${++index}** ${he.decode(video2.title)} `).join('\n')}`)
 						.setFooter("Please provide a number ranging from 1-10 to select one of the search results.")
-						.setColor("#b50002")
+						.setColor(client.config.embedColor)
 					message.channel.send(embed);
 					try {
 						var response = await message.channel.awaitMessages(message2 => message2.content > 0 && message2.content < 11, {

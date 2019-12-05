@@ -22,7 +22,7 @@ module.exports = {
             .setTitle('Musix Command Usage During Current Uptime')
             .setDescription('```ml\n' + markdownrows.join('\n') + '\n```')
             .setFooter('These statistics are from the current uptime.')
-            .setColor('#b50002');
+            .setColor(client.config.embedColor);
         msg.channel.send(embed);
     },
 };

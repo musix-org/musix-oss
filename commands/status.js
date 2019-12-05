@@ -25,7 +25,7 @@ module.exports = {
             .addField(`:play_pause: Currently playing music on`, `${client.voiceConnections.size} guild(s)`, true)
             .addField(`💿 Operating system`, process.platform, true)
             .setAuthor(client.user.username, client.user.displayAvatarURL)
-            .setColor('#b50002')
+            .setColor(client.config.embedColor)
         return message.channel.send(embed);
     }
 };
