@@ -9,7 +9,6 @@ module.exports = {
         const permissions = message.channel.permissionsFor(message.author);
         const { voiceChannel } = message.member;
         if (!serverQueue) return message.channel.send(':x: There is nothing playing.');
-        if (serverQueue.playing) {
             if (message.author.id !== client.config.devId) {
                 if (voiceChannel !== serverQueue.voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in the same voice channel as Musix to loop the queue!');
                 if (client.global.db.guilds[message.guild.id].permissions === true) {
@@ -25,8 +24,5 @@ module.exports = {
                 serverQueue.looping = false;
                 message.channel.send(':repeat: No longer looping the queue!');
             }
-        } else {
-            message.channel.send(':x: There is nothing playing!');
-        }
     }
 };
