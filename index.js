@@ -37,7 +37,7 @@ for (const file of settingFiles) {
 client.on('ready', async () => {
   const eventName = 'ready';
   const event = client.events.get(eventName) || client.events.find(ent => ent.aliases && ent.aliases.includes(eventName));
-  event.execute(client, dbl);
+  event.execute(client, dbl, Discord);
 });
 
 client.on('message', message => {

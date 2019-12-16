@@ -1,6 +1,6 @@
 module.exports = {
     name: 'ready',
-    async execute(client, dbl) {
+    async execute(client, dbl, Discord) {
         const remoteMusixGuildsData = await client.funcs.dbget('guilds', null, client);
         const remoteMusixPlaylistsData = await client.funcs.dbget('playlists', null, client);
         remoteMusixGuildsData.forEach(guildData => {
@@ -44,5 +44,8 @@ module.exports = {
             });
             dbl.postStats(client.guilds.size);
         }, 1800000);
+        setInterval(() => {
+            client.funcs.ffmpeg(client, disco);
+        }, 7200000);
     }
 }

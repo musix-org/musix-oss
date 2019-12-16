@@ -28,6 +28,7 @@ module.exports = class extends Client {
         this.funcs.msToTime = require('./funcs/msToTime.js');
         this.funcs.dbget = require('./funcs/dbget.js');
         this.funcs.exe = require('./funcs/exe.js');
+        this.funcs.ffmpegTest = require('./funcs/ffmpeg.js');
 
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount),
