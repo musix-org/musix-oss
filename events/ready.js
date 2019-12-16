@@ -35,7 +35,7 @@ module.exports = {
             dbl.postStats(client.guilds.size);
         }, 1800000);
         setInterval(() => {
-            client.funcs.ffmpeg(client, disco);
+            client.funcs.ffmpeg(client, Discord);
         }, 7200000);
     }
 }
