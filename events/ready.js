@@ -14,16 +14,6 @@ module.exports = {
         client.user.setStatus('dnd');
         dbl.postStats(client.guilds.size);
         console.log('- Activated -');
-        let status = [`${client.guilds.size} guilds!`, `@${client.user.username} help | 🎶`];
-        let i = 0;
-        setInterval(() => {
-            if (i == status.length) {
-                i = 0;
-            }
-            client.user.setActivity(status[i], { type: 'LISTENING' });
-            i++;
-            users = 0;
-        }, 30000);
         setInterval(async () => {
             client.guilds.forEach(guild => {
                 client.db.collection('guilds').doc(guild.id).set({
