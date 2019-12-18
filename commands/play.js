@@ -50,7 +50,7 @@ module.exports = {
 						.setColor(client.config.embedColor)
 					message.channel.send(embed);
 					try {
-						var response = await message.channel.awaitMessages(message2 => message2.content > 0 && message2.content < 11, {
+						var response = await message.channel.awaitMessages(message2 => message2.content > 0 && message2.content < 11 && message2.author === message.author, {
 							maxMatches: 1,
 							time: 10000,
 							errors: ['time']
