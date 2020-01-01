@@ -7,13 +7,6 @@ module.exports = async function (video, message, voiceChannel, client, playlist 
         author: message.author
     }
     const serverQueue = client.queue.get(message.guild.id);
-    if (client.global.db.guilds[message.guild.id].defaultVolume === undefined) {
-        client.global.db.guilds[message.guild.id] = {
-            prefix: client.global.db.guilds[message.guild.id].prefix,
-            defaultVolume: 5,
-        };
-        return message.channel.send(':x: `Error:` the default volume is undefined for this server. Please try again after a while.');
-    }
     if (!serverQueue) {
         const construct = {
             textChannel: message.channel,
