@@ -1,0 +1,37 @@
+{
+  "name": "musix",
+  "version": "1.0.0",
+  "description": "V3 for Musix the discord music bot",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatteZ02/Musix-V3.git"
+  },
+  "author": "Matte",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MatteZ02/Musix-V3/issues"
+  },
+  "homepage": "https://github.com/MatteZ02/Musix-V3#readme",
+  "dependencies": {
+    "dblapi.js": "^2.3.1",
+    "discord.js": "github:discordjs/discord.js",
+    "dotenv": "^8.2.0",
+    "ffmpeg": "0.0.4",
+    "firebase": "^7.8.0",
+    "firebase-admin": "^8.9.2",
+    "fs": "0.0.1-security",
+    "he": "^1.2.0",
+    "ms": "^2.1.2",
+    "node-opus": "^0.3.3",
+    "prism-media": "github:hydrabolt/prism-media",
+    "request": "^2.88.0",
+    "simple-youtube-api": "^5.2.1",
+    "video-thumbnail-url": "^1.0.1",
+    "ytdl-core": "^1.0.7",
+    "ytdl-core-discord": "^1.1.0"
+  }
+}
