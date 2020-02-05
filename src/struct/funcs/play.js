@@ -28,7 +28,7 @@ module.exports = async function (guild, song, client, seek, play) {
             .setTitle(`<a:aNotes:674602408105476106> Start playing: **${song.title}**`)
             .setDescription(`Song duration: \`${client.funcs.msToTime(songtime)}\``)
             .setThumbnail(thumbnail._rejectionHandler0)
-            .setColor("#b50002")
+            .setColor(client.config.embedColor)
         serverQueue.textChannel.send(embed);
     }
     serverQueue.playing = true;
