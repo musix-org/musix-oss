@@ -18,7 +18,12 @@ module.exports = async function (guild, song, client, seek, play) {
     dispatcher.on('start', () => {
         dispatcher.player.streamingData.pausedTime = 0;
     });
-    dispatcher.on('error', error => console.error(error));
+    dispatcher.on('error', error => {
+        console.error(error);
+        serverQueue.voiceChannel.leave();
+        client.queue.delete(guild.id);
+        return serverQueue.textChannel.send('<:redx:674263474704220182> An error has occured while playing music! The queue has been deleted.');
+    });
     dispatcher.setVolume(serverQueue.volume / 10);
     if (client.global.db.guilds[guild.id].startPlaying || play) {
         const data = await Promise.resolve(ytdl.getInfo(serverQueue.songs[0].url));
