@@ -63,7 +63,7 @@ module.exports = class extends Client {
             require(`${events}msg`).execute(this, msg, Discord);
         });
         this.on('guildCreate', (guild) => {
-            require(`${events}msg`).execute(this, guild);
+            require(`${events}guildCreate`).execute(this, guild);
         });
         this.on('voiceStateUpdate', (newMember) => {
             require(`${events}voiceStateUpdate`).execute(this, newMember);
