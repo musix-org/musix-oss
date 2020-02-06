@@ -13,7 +13,7 @@ module.exports = {
             const pos = parseInt(args[1]);
             if (isNaN(pos)) return msg.channel.send('<:redx:674263474704220182> You need to enter a number!');
             if (pos === 0) return msg.channel.send('<:redx:674263474704220182> You can not remove the currently playing song!');
-            if (pos > serverQueue.songs.size) return msg.channel.send(`<:redx:674263474704220182> There is only ${serverQueue.songs.size} amount of songs in the queue!`);
+            if (pos > serverQueue.songs.length) return msg.channel.send(`<:redx:674263474704220182> There is only ${serverQueue.songs.length} amount of songs in the queue!`);
             msg.channel.send(`🗑️ removed \`${serverQueue.songs[pos].title}\` from the queue!`);
             return serverQueue.songs.splice(pos, 1);
         }
