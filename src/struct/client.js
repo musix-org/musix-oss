@@ -52,6 +52,10 @@ module.exports = class extends Client {
 
         this.db.FieldValue = require('firebase-admin').firestore.FieldValue;
 
+        if (this.config.devMode) {
+            this.config.token = this.config.devToken;
+        }
+
         this.on('ready', () => {
             require(`${events}ready`).execute(this, Discord);
         });
