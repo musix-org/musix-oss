@@ -31,7 +31,7 @@ function skipSong(serverQueue, msg) {
 	serverQueue.connection.dispatcher.end('skipped');
 };
 function vote(serverQueue, msg) {
-	serverQueue.votesNeeded = Math.floor(msg.guild.voiceConnection.channel.members.size / 2);
+	serverQueue.votesNeeded = Math.floor(serverQueue.voiceChannel.members.size / 2);
 	serverQueue.votesNeeded.toFixed();
 	if (msg.guild.voiceConnection.channel.members.size > 2) {
 		if (serverQueue.voters.includes(msg.member.id)) return msg.channel.send('<:redx:674263474704220182> You have already voted to skip!');
