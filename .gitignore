@@ -3,5 +3,4 @@ dev/
 .env
 .vscode/
 package-lock.json
-src/struct/config/.env
 src/struct/config/serviceAccount.json

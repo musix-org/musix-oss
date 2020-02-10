@@ -3,7 +3,7 @@ module.exports = {
     alias: 'j',
     usage: 'join',
     description: 'Make Musix join the channel your channel',
-    onlyDev: false,
+    onlyDev: true,
     permission: 'none',
     category: 'util',
     async execute(msg, args, client, Discord, prefix) {

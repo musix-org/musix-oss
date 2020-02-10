@@ -1,9 +1,15 @@
+require('dotenv/config');
+
 module.exports = {
     //credentials
     token: process.env.TOKEN,
-    api_key: process.env.API_KEY,
+    devToken: process.env.DEVTOKEN,
+    dblKey: process.env.DBLKEY,
+    api_key: process.env.GOOGLE_API_KEY,
     //channels
     debug_channel: "634718645188034560",
+    primary_test_channel: "617633098296721409",
+    secondary_test_channel: "570531724002328577",
     devId: "360363051792203779",
     //misc
     embedColor: "#B127CD",
@@ -13,7 +19,7 @@ module.exports = {
     dblApi: false,
     saveDB: false,
     //db values
-    prefix: "-",
+    prefix: "*",
     defaultVolume: 5,
     permissions: false,
     dj: false,

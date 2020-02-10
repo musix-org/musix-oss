@@ -15,9 +15,9 @@ module.exports = {
                 }
             }
         }
-        if (client.config.devMode && msg.member.id !== client.config.devId) return msg.channel.send('<:redx:674263474704220182> Dev mode has been turned on! Commands are only available to developer(s)!');
         if (!msg.content.startsWith(prefix)) return;
         if (!args[0]) return;
+        if (client.config.devMode && msg.member.id !== client.config.devId) return msg.channel.send('<:redx:674263474704220182> Dev mode has been turned on! Commands are only available to developer(s)!');
         const commandName = args[0].toLowerCase();
         const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName)) || client.commandAliases.get(commandName);
         if (!command && msg.content !== `${prefix}`) return;
