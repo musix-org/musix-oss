@@ -31,7 +31,7 @@ module.exports = async function (guild, song, client, seek, play) {
         const thumbnail = getThumb(serverQueue.songs[0].url);
         const embed = new Discord.MessageEmbed()
             .setTitle(`<a:aNotes:674602408105476106> Start playing: **${song.title}**`)
-            .setDescription(`Song duration: \`${client.funcs.msToTime(songtime)}\``)
+            .setDescription(`Song duration: \`${client.funcs.msToTime(songtime, "hh:mm:ss")}\``)
             .setThumbnail(thumbnail._rejectionHandler0)
             .setColor(client.config.embedColor)
         serverQueue.textChannel.send(embed);

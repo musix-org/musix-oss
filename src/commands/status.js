@@ -7,7 +7,7 @@ module.exports = {
     permission: 'none',
     category: 'info',
     execute(msg, args, client, Discord, prefix) {
-        const uptime = client.funcs.msToTime(client.uptime);
+        const uptime = client.funcs.msToTime(client.uptime, "dd:hh:mm:ss");
         const ping = Math.floor(client.ping * 10) / 10;
         msg.channel.send('<a:loading:674284196700618783> Pinging...').then(m => {
             const latency = m.createdTimestamp - msg.createdTimestamp;
