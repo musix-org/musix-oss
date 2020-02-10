@@ -10,7 +10,6 @@ module.exports = function msToTime(duration, format) {
     seconds = (seconds < 10) ? "0" + seconds : seconds;
 
     if (format === "hh:mm:ss") {
-        console.log(format)
         return `${hours}:${minutes}:${seconds}`;
     } else if (format === "dd:hh:mm:ss") {
         return `${days}:${hours}:${minutes}:${seconds}`;
