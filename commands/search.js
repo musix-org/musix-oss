@@ -29,6 +29,7 @@ module.exports = {
             return msg.channel.send('<:redx:674263474704220182> I cannot speak in your voice channel, make sure I have the proper permissions!');
         }
         if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
+            console.log('link')
             const lmsg = await msg.channel.send('<a:loading:674284196700618783> Loading song(s)');
             const playlist = await youtube.getPlaylist(url);
             const videos = await playlist.getVideos();
@@ -39,6 +40,7 @@ module.exports = {
             return lmsg.edit(`<:green_check_mark:674265384777416705> Playlist: **${playlist.title}** has been added to the queue!`);
         } else {
             try {
+                console.log('searching videos')
                 var video = await youtube.getVideo(url);
             } catch (error) {
                 try {
@@ -51,8 +53,9 @@ module.exports = {
                         .setColor(client.config.embedColor)
                     msg.channel.send(embed);
                     try {
+                        console.log('waiting response')
                         var response = await msg.channel.awaitMessages(message2 => message2.content > 0 && message2.content < 11 && message2.author === msg.author, {
-                            maxMatches: 1,
+                            max: 1,
                             time: 10000,
                             errors: ['time']
                         });
@@ -60,6 +63,7 @@ module.exports = {
                         console.error(err);
                         return msg.channel.send('<:redx:674263474704220182> Cancelling video selection');
                     }
+                    console.log('getting video')
                     const videoIndex = parseInt(response.first().content);
                     var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
                 } catch (err) {
@@ -67,6 +71,7 @@ module.exports = {
                     return msg.channel.send('<:redx:674263474704220182> I could not obtain any search results!');
                 }
             }
+            console.log('handlevideo')
             return client.funcs.handleVideo(video, msg, voiceChannel, client, false);
         }
     }
