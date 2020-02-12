@@ -32,6 +32,7 @@ module.exports = {
         console.log('- Activated -');
         setInterval(async () => {
             if (client.config.saveDB && !client.config.devMode) {
+                console.log('DB saved');
                 client.guilds.forEach(guild => {
                     client.db.collection('guilds').doc(guild.id).set({
                         prefix: client.global.db.guilds[guild.id].prefix,
