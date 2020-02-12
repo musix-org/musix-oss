@@ -22,7 +22,7 @@ module.exports = {
         console.log('- DB Set -');
         client.user.setActivity(`@${client.user.username} help | 🎶`, { type: 'LISTENING' });
         client.user.setStatus('dnd');
-        const dbl = new DBL(client.config.DBLTOKEN, client);
+        const dbl = new DBL(client.config.dblkey, client);
         if (client.config.dblApi && !client.config.devMode) {
             dbl.on('error', error => {
                 console.log('Error with DBL: ' + error);
