@@ -12,6 +12,8 @@ module.exports = async function (client, reason, guild) {
         if (serverQueue.looping) {
             serverQueue.songs.push(serverQueue.songs[0]);
         }
+        serverQueue.votes = 0;
+        serverQueue.voters = [];
         serverQueue.songs.shift();
     }
     client.funcs.play(guild, serverQueue.songs[0], client, 0, true);
