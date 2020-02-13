@@ -21,7 +21,7 @@ module.exports = {
         }
         console.log('- DB Set -');
         client.user.setActivity(`@${client.user.username} help | 🎶`, { type: 'LISTENING' });
-        client.user.setStatus('dnd');
+        client.user.setStatus('online');
         const dbl = new DBL(client.config.dblkey, client);
         if (client.config.dblApi && !client.config.devMode) {
             dbl.on('error', error => {
