@@ -6,7 +6,7 @@ module.exports = {
                 client.global.db.guilds[msg.guild.id].permissions = true;
             }
             if (msg.guild.roles.cache.find(x => x.name === "DJ")) {
-                client.global.db.guilds[msg.guild.id].djrole = msg.guild.roles.find(x => x.name === "DJ").id;
+                client.global.db.guilds[msg.guild.id].djrole = msg.guild.roles.cache.find(x => x.name === "DJ").id;
                 msg.channel.send('<:green_check_mark:674265384777416705> I found a `DJ` role from this guild! This role is now the DJ role.');
                 client.global.db.guilds[msg.guild.id].dj = true;
             } else {
