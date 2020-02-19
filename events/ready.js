@@ -8,7 +8,7 @@ module.exports = {
             client.global.db.guilds[guildData.id] = guildData.d;
         });
         if (client.devMode) {
-            client.guilds.forEach(guild => {
+            client.guilds.cache.forEach(guild => {
                 client.global.db.guilds[guild.id] = {
                     prefix: client.config.prefix,
                     defaultVolume: client.config.defaultVolume,
@@ -33,7 +33,7 @@ module.exports = {
         setInterval(async () => {
             if (client.config.saveDB && !client.config.devMode) {
                 console.log('DB saved');
-                client.guilds.forEach(guild => {
+                client.guilds.cache.forEach(guild => {
                     client.db.collection('guilds').doc(guild.id).set({
                         prefix: client.global.db.guilds[guild.id].prefix,
                         defaultVolume: client.global.db.guilds[guild.id].defaultVolume,
