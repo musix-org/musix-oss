@@ -13,7 +13,7 @@ module.exports = {
 		if (msg.author.id !== client.config.devId) {
 			if (msg.member.voice.channel !== serverQueue.voiceChannel) return msg.channel.send('<:redx:674263474704220182> I\'m sorry but you need to be in the same voice channel as Musix!');
 			if (client.global.db.guilds[msg.guild.id].permissions === true) {
-				if (!msg.member.roles.has(client.global.db.guilds[msg.guild.id].djrole) && !permissions.has(command.permission)) {
+				if (!msg.member.roles.cache.has(client.global.db.guilds[msg.guild.id].djrole) && !permissions.has(command.permission)) {
 					return vote(serverQueue, msg, client);
 				} else {
 					return skipSong(serverQueue, msg);
