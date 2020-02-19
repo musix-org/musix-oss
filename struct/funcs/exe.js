@@ -12,6 +12,7 @@ module.exports = function (msg, args, client, Discord, prefix, command) {
             .setDescription(error.stack.replace(/at /g, '**at **'))
             .setColor('#b50002');
         //client.fetchUser(client.config.devId).then(user => user.send(embed)).catch(console.error);
-        client.channels.get(client.config.debug_channel).send(embed);
+        //client.channels.get(client.config.debug_channel).send(embed);
+        console.error(error);
     }
 };
