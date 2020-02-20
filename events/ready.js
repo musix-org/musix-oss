@@ -17,7 +17,6 @@ module.exports = {
                     dj: client.config.dj,
                     djrole: client.config.djrole,
                     startPlaying: client.config.startPlaying,
-                    bass: client.config.bass,
                 };
             });
         }
@@ -44,7 +43,6 @@ module.exports = {
                         dj: client.global.db.guilds[guild.id].dj,
                         djrole: client.global.db.guilds[guild.id].djrole,
                         startPlaying: client.global.db.guilds[guild.id].startPlaying,
-                        bass: client.global.db.guilds[guild.id].bass,
                     });
                 });
             }

@@ -7,7 +7,7 @@ module.exports = {
             permissions: client.config.permissions,
             dj: client.config.dj,
             djrole: client.config.djrole,
-            startPlaying: client.config.startPlaying
+            startPlaying: client.config.startPlaying,
         });
         client.global.db.guilds[guild.id] = {
             prefix: client.config.prefix,
@@ -15,7 +15,7 @@ module.exports = {
             permissions: client.config.permissions,
             dj: client.config.dj,
             djrole: client.config.djrole,
-            startPlaying: client.config.startPlaying
+            startPlaying: client.config.startPlaying,
         };
     }
 }

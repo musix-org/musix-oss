@@ -26,5 +26,4 @@ module.exports = {
     dj: false,
     djrole: null,
     startPlaying: true,
-    bass: false,
 }
