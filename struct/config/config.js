@@ -20,9 +20,11 @@ module.exports = {
     saveDB: true,
     //db values
     prefix: ">",
+    devPrefix: "-",
     defaultVolume: 5,
     permissions: false,
     dj: false,
     djrole: null,
     startPlaying: true,
+    bass: false,
 }

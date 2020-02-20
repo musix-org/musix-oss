@@ -7,7 +7,8 @@ module.exports = {
         remoteMusixGuildsData.forEach(guildData => {
             client.global.db.guilds[guildData.id] = guildData.d;
         });
-        if (client.devMode) {
+        if (client.config.devMode) {
+            console.log('dev mode');
             client.guilds.cache.forEach(guild => {
                 client.global.db.guilds[guild.id] = {
                     prefix: client.config.prefix,
@@ -15,7 +16,8 @@ module.exports = {
                     permissions: client.config.permissions,
                     dj: client.config.dj,
                     djrole: client.config.djrole,
-                    startPlaying: client.config.startPlaying
+                    startPlaying: client.config.startPlaying,
+                    bass: client.config.bass,
                 };
             });
         }
@@ -41,7 +43,8 @@ module.exports = {
                         premium: client.global.db.guilds[guild.id].premium,
                         dj: client.global.db.guilds[guild.id].dj,
                         djrole: client.global.db.guilds[guild.id].djrole,
-                        startPlaying: client.global.db.guilds[guild.id].startPlaying
+                        startPlaying: client.global.db.guilds[guild.id].startPlaying,
+                        bass: client.global.db.guilds[guild.id].bass,
                     });
                 });
             }

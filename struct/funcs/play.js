@@ -2,6 +2,7 @@ module.exports = async function (guild, song, client, seek, play) {
     const Discord = require('discord.js');
     const ytdl = require('ytdl-core');
     const getThumb = require('video-thumbnail-url');
+    const prism = require('prism-media');
 
     const serverQueue = client.queue.get(guild.id);
     if (!song) {
@@ -10,8 +11,9 @@ module.exports = async function (guild, song, client, seek, play) {
         client.queue.delete(guild.id);
         return;
     }
+
     const dispatcher = serverQueue.connection
-        .play(await ytdl(song.url, { filter: "audio", highWaterMark: /*512*/1 << 25, volume: false }), { seek: seek, bitrate: 1024, passes: 10, volume: 1 })
+        .play(ytdl(song.url), { filter: "audio", highWaterMark: 1 << 25, volume: false, seek: seek, bitrate: 1024, passes: 10, bassboost: client.global.db.guilds[guild.id].bass })
         .on("finish", reason => {
             client.dispatcher.finish(client, reason, guild);
         });
