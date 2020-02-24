@@ -9,7 +9,7 @@ module.exports = {
     async execute(msg, args, client, Discord, prefix, command) {
         client.destroy()
         const MusicClient = require('../struct/client.js');
-        const client = new MusicClient({});
+        const newClient = new MusicClient({});
         msg.channel.send('restarted!');
     }
 };
