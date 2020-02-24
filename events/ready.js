@@ -39,7 +39,6 @@ module.exports = {
                         prefix: client.global.db.guilds[guild.id].prefix,
                         defaultVolume: client.global.db.guilds[guild.id].defaultVolume,
                         permissions: client.global.db.guilds[guild.id].permissions,
-                        premium: client.global.db.guilds[guild.id].premium,
                         dj: client.global.db.guilds[guild.id].dj,
                         djrole: client.global.db.guilds[guild.id].djrole,
                         startPlaying: client.global.db.guilds[guild.id].startPlaying,
