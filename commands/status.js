@@ -1,7 +1,7 @@
 module.exports = {
     name: 'status',
     alias: 'stats',
-    usage: 'status',
+    usage: '',
     description: 'See the current status for Musix.',
     onlyDev: false,
     permission: 'none',

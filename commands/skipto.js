@@ -1,7 +1,7 @@
 module.exports = {
     name: 'skipto',
     alias: 'st',
-    usage: 'skipto <point in queue>',
+    usage: '<point in queue>',
     description: 'Skip to a point in the queue',
     onlyDev: false,
     permission: 'MANAGE_MESSAGES',

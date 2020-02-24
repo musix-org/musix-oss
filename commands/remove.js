@@ -1,7 +1,7 @@
 module.exports = {
     name: 'remove',
     alias: 'rm',
-    usage: 'remove <song pos>',
+    usage: '<song pos>',
     description: 'Remove a song from the queue',
     onlyDev: false,
     permission: 'MANAGE_MESSAGES',

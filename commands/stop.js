@@ -2,6 +2,7 @@ module.exports = {
 	name: 'stop',
 	description: 'Stop command.',
 	alias: 'none',
+	usage: '',
 	onlyDev: false,
 	permission: 'MANAGE_CHANNELS',
 	category: 'music',

@@ -1,7 +1,7 @@
 module.exports = {
     name: 'loopsong',
     alias: 'loops',
-    usage: 'loopsong',
+    usage: '',
     description: 'loop the currently playing song.',
     onlyDev: false,
     permission: 'MANAGE_MESSAGES',

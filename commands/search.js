@@ -4,7 +4,7 @@ const he = require('he');
 module.exports = {
     name: 'search',
     alias: 'sr',
-    usage: 'search <search word(s)>',
+    usage: '<search word(s)>',
     description: 'Search the top 10 queryes and choose one.',
     onlyDev: false,
     permission: 'none',

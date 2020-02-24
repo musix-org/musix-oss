@@ -3,7 +3,7 @@ const YouTube = require("simple-youtube-api");
 module.exports = {
 	name: 'play',
 	alias: 'p',
-	usage: 'play <song name>',
+	usage: '<song name>',
 	description: 'Play some music.',
 	onlyDev: false,
 	permission: 'none',

@@ -1,7 +1,7 @@
 module.exports = {
     name: 'disconnect',
     alias: 'dc',
-    usage: 'disconnect',
+    usage: '',
     description: 'Disconnect the bot from a voice channel.',
     onlyDev: true,
     permission: 'MANAGE_CHANNELS',

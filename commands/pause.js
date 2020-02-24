@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'pause',
 	alias: 'none',
-	usage: 'pause',
+	usage: '',
 	description: 'Pause the currently playing music.',
 	onlyDev: false,
 	permission: 'MANAGE_MESSAGES',

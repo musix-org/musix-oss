@@ -1,7 +1,7 @@
 module.exports = {
     name: 'nowplaying',
     alias: 'np',
-    usage: 'nowplaying',
+    usage: '',
     description: 'See the currently playing song position and length.',
     onlyDev: false,
     permission: 'none',

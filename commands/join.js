@@ -1,7 +1,7 @@
 module.exports = {
     name: 'join',
     alias: 'j',
-    usage: 'join',
+    usage: '',
     description: 'Make Musix join the channel your channel',
     onlyDev: true,
     permission: 'none',

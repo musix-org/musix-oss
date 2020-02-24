@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'resume',
 	alias: 'none',
-	usage: 'resume',
+	usage: '',
 	description: 'Resume the paused music.',
 	onlyDev: false,
 	permission: 'MANAGE_MESSAGES',

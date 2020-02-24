@@ -1,7 +1,7 @@
 module.exports = {
     name: 'help',
     alias: 'h',
-    usage: 'help <command(opt)>',
+    usage: '<command(opt)>',
     description: 'See the help for Musix.',
     onlyDev: false,
     permission: 'none',

@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'queue',
 	alias: 'q',
-	usage: 'queue <page(opt)>',
+	usage: '<page(opt)>',
 	description: 'See the queue.',
 	onlyDev: false,
 	permission: 'none',

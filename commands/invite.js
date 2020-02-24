@@ -1,7 +1,7 @@
 module.exports = {
     name: 'invite',
     alias: 'i',
-    usage: 'invite',
+    usage: '',
     description: 'Invite Musix.',
     onlyDev: false,
     permission: 'none',

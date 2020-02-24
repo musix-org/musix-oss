@@ -1,7 +1,7 @@
 module.exports = {
     name: 'seek',
     alias: 'none',
-    usage: 'seek <point in song(seconds)>',
+    usage: '<point in song(seconds)>',
     description: 'Seek to a specific point in the currently playing song.',
     onlyDev: true,
     permission: 'MANAGE_MESSAGES',

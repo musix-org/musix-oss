@@ -1,7 +1,7 @@
 module.exports = {
     name: 'loop',
     alias: 'none',
-    usage: 'loop',
+    usage: '',
     description: 'loop the queue.',
     onlyDev: false,
     permission: 'MANAGE_MESSAGES',

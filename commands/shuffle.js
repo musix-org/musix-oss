@@ -1,7 +1,7 @@
 module.exports = {
     name: 'shuffle',
     alias: 'none',
-    usage: 'shuffle',
+    usage: '',
     description: 'Shuffle the queue.',
     onlyDev: false,
     permission: 'MANAGE_MESSAGES',

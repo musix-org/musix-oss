@@ -1,7 +1,7 @@
 module.exports = {
   name: 'settings',
   alias: 'pref',
-  usage: 'settings <setting> <value(opt)>',
+  usage: '<setting> <value(opt)>',
   description: 'Change the server settings for Musix.',
   onlyDev: false,
   permission: 'MANAGE_GUILD',

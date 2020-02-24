@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'skip',
 	alias: 's',
-	usage: 'skip',
+	usage: '',
 	description: 'Skip the currently playing song.',
 	onlyDev: false,
 	permission: 'MANAGE_MESSAGES',

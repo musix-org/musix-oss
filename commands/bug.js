@@ -1,7 +1,7 @@
 module.exports = {
     name: 'bug',
     alias: 'none',
-    usage: 'bug',
+    usage: '',
     description: 'Report a bug',
     onlyDev: false,
     permission: 'none',
