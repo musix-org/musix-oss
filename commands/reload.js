@@ -3,7 +3,7 @@ const path = require('path')
 
 module.exports = {
     name: 'reload',
-    alias: 'reload',
+    alias: 'none',
     usage: '',
     description: 'Reload all files',
     onlyDev: true,
