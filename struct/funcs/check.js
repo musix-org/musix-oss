@@ -6,7 +6,7 @@ module.exports = function (client, msg, command) {
         if (msg.member.voice.channel !== serverQueue.voiceChannel) return msg.channel.send(`<:redx:674263474704220182> I'm sorry but you need to be in the same voice channel as Musix to use this command!`);
         if (client.global.db.guilds[msg.guild.id].permissions === true) {
             if (client.global.db.guilds[msg.guild.id].dj) {
-                if (!msg.member.roles.has(client.global.db.guilds[msg.guild.id].djrole)) {
+                if (!msg.member.cache.roles.cache.has(client.global.db.guilds[msg.guild.id].djrole)) {
                     msg.channel.send('<:redx:674263474704220182> You need the `DJ` role to use this command!');
                     return false;
                 } else return true;
