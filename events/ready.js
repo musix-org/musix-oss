@@ -25,9 +25,12 @@ module.exports = {
         client.user.setStatus('online');
         const dbl = new DBL(client.config.dblKey, client);
         if (client.config.dblApi && !client.config.devMode) {
+            dbl.on('posted', () => {
+                console.log('Server count posted!');
+            });
             dbl.on('error', error => {
                 console.log('Error with DBL: ' + error);
-            })
+            });
             dbl.postStats(client.guilds.size);
         }
         console.log('- Activated -');
