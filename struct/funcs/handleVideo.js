@@ -37,7 +37,7 @@ module.exports = async function (video, msg, voiceChannel, client, playlist = fa
         client.funcs.play(msg.guild, construct.songs[0], client, 0, true);
     } catch (error) {
         client.queue.delete(msg.guild.id);
-        client.channels.get(client.config.debug_channel).send("Error with connecting to voice channel: " + error);
+        //client.channels.get(client.config.debug_channel).send("Error with connecting to voice channel: " + error);
         return msg.channel.send(`<:redx:674263474704220182> An error occured: ${error}`);
     }
     return;
