@@ -11,6 +11,7 @@ module.exports = {
 		if (client.funcs.check(client, msg, command)) {
 			serverQueue.songs = [];
 			serverQueue.looping = false;
+			serverQueue.endReason = "stop";
 			serverQueue.connection.dispatcher.end('Stopped');
 			msg.channel.send('<:stop:674685626108477519> Stopped the music!')
 		}

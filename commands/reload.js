@@ -22,9 +22,9 @@ module.exports = {
             const option = require(`./settings/${file}`);
             client.settingCmd.set(option.name, option);
         }
-        fs.readdirSync(path.join(__dirname, 'funcs')).forEach(filename => {
+        /*fs.readdirSync(path.join(__dirname, 'funcs')).forEach(filename => {
             this.funcs[filename.slice(0, -3)] = require(`../struct/funcs/${filename}`);
-        });
+        });*/
         msg.channel.send('All files reloaded!');
     }
 };

@@ -1,0 +1,17 @@
+module.exports = {
+    textChannel: null,
+    voiceChannel: null,
+    connection: null,
+    songs: [],
+    volume: null,
+    bass: null,
+    playing: false,
+    paused: false,
+    looping: false,
+    songLooping: false,
+    votes: 0,
+    voters: [],
+    votesNeeded: null,
+    time: 0,
+    endReason: null,
+}

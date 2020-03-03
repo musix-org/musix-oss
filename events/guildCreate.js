@@ -8,6 +8,7 @@ module.exports = {
             dj: client.config.dj,
             djrole: client.config.djrole,
             startPlaying: client.config.startPlaying,
+            bass: client.config.bass,
         });
         client.global.db.guilds[guild.id] = {
             prefix: client.config.prefix,
@@ -16,6 +17,7 @@ module.exports = {
             dj: client.config.dj,
             djrole: client.config.djrole,
             startPlaying: client.config.startPlaying,
+            bass: client.config.bass,
         };
     }
 }

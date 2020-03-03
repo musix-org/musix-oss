@@ -68,6 +68,9 @@ module.exports = class extends Client {
         this.on('voiceStateUpdate', (newMember) => {
             require(`${events}voiceStateUpdate`).execute(this, newMember);
         });
+        this.on('error', (error) => {
+            client.channels.fetch(client.config.debug_channel).send('Error: ' + error);
+        });
 
         this.login(this.config.token).catch(err => console.log('Failed to login: ' + err));
     }

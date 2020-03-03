@@ -3,6 +3,8 @@ const DBL = require("dblapi.js");
 module.exports = {
     name: 'ready',
     async execute(client, Discord) {
+        const debugChannel = await client.channels.fetch(client.config.debug_channel);
+        client.debug_channel = debugChannel
         const remoteMusixGuildsData = await client.funcs.dbget('guilds', null, client);
         remoteMusixGuildsData.forEach(guildData => {
             client.global.db.guilds[guildData.id] = guildData.d;
@@ -17,6 +19,7 @@ module.exports = {
                     dj: client.config.dj,
                     djrole: client.config.djrole,
                     startPlaying: client.config.startPlaying,
+                    bass: client.config.bass,
                 };
             });
         }
@@ -45,6 +48,7 @@ module.exports = {
                         dj: client.global.db.guilds[guild.id].dj,
                         djrole: client.global.db.guilds[guild.id].djrole,
                         startPlaying: client.global.db.guilds[guild.id].startPlaying,
+                        bass: client.global.db.guilds[guild.id].bass,
                     });
                 });
             }

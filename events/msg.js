@@ -21,7 +21,7 @@ module.exports = {
         const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName)) || client.commandAliases.get(commandName);
         if (!command && msg.content !== `${prefix}`) return;
         if (command.onlyDev && msg.author.id !== client.config.devId) return msg.channel.send('<:redx:674263474704220182> You are not allowed to do that!');
-        if (client.config.devMode && msg.member.id !== client.config.devId) return msg.channel.send('<:redx:674263474704220182> Dev mode has been turned on! Commands are only available to developer(s)!');
+        //if (client.config.devMode && msg.member.id !== client.config.devId) return msg.channel.send('<:redx:674263474704220182> Dev mode has been turned on! Commands are only available to developer(s)!');
         client.funcs.exe(msg, args, client, Discord, prefix, command);
     }
 }

@@ -28,6 +28,7 @@ module.exports = {
 };
 function skipSong(serverQueue, msg) {
 	msg.channel.send('<:skip:674685614221688832> Skipped the song!');
+	serverQueue.endReason = "skip";
 	serverQueue.connection.dispatcher.end('skipped');
 };
 function vote(serverQueue, msg) {

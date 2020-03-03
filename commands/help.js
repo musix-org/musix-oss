@@ -23,7 +23,7 @@ module.exports = {
             }
             let commands = '';
             for (let i = 0; i < categories.length; i++) {
-                commands += `**» ${categories[i].toUpperCase()}**\n${client.commands.filter(x => x.category === categories[i] && !x.omitFromHelp && !x.onlyDev).map(x => `\`${x.name}\``).join(', ')}\n`;
+                commands += `**» ${categories[i].toUpperCase()}**\n${client.commands.filter(x => x.category === categories[i] && !x.omitFromHelp /*&& !x.onlyDev*/).map(x => `\`${x.name}\``).join(', ')}\n`;
             }
             const embed = new Discord.MessageEmbed()
                 .setTitle(`${client.user.username} help:`)
