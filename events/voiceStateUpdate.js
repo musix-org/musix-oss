@@ -1,12 +1,19 @@
 module.exports = {
     name: 'voiceStateUpdate',
-    async execute(client, newMember) {
-        const serverQueue = client.queue.get(newMember.guild.id);
+    async execute(client, oldState, newState) {
+        const serverQueue = client.queue.get(newState.guild.id);
         if (!serverQueue) return;
-        if (newMember === client.user) {
-            if (newMember.voice.channel !== serverQueue.voiceChannel) {
-                serverQueue.voiceChannel = newMember.voice.channel;
-                console.log(`Changed serverQueue voiceChannel since Musix was moved to a different channel!`);
+        if (newState.member.id === client.user.id && oldState.member.id === client.user.id) {
+            if (newState.member.voice.channel === null) {
+                serverQueue.songs = [];
+                serverQueue.looping = false;
+                serverQueue.endReason = "manual disconnect";
+                return client.queue.delete(newState.guild.id);
+            }
+            if (newState.member.voice.channel !== serverQueue.voiceChannel) {
+                serverQueue.voiceChannel = newState.member.voice.channel;
+                serverQueue.connection = newState.connection;
+                return;
             }
         }
     }
