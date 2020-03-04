@@ -2,5 +2,4 @@
 dev/
 .env
 .vscode/
-package-lock.json
 struct/config/serviceAccount.json
