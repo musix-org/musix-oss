@@ -48,7 +48,7 @@ module.exports = {
                         dj: client.global.db.guilds[guild.id].dj,
                         djrole: client.global.db.guilds[guild.id].djrole,
                         startPlaying: client.global.db.guilds[guild.id].startPlaying,
-                        bass: client.global.db.guilds[guild.id].bass,
+                        //bass: client.global.db.guilds[guild.id].bass,
                     });
                 });
             }
