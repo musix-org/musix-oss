@@ -5,15 +5,13 @@ module.exports = async function (guild, song, client, seek, play) {
 
     const serverQueue = client.queue.get(guild.id);
     if (!song) {
-        console.log('No song')
         serverQueue.voiceChannel.leave();
         client.queue.delete(guild.id);
         return;
     }
-
     const dispatcher = serverQueue.connection
         .play(await ytdl(song.url, { filter: "audio", highWaterMark: 1 << 25, volume: false }), { seek: seek, bitrate: 1024, passes: 10, volume: 1, bassboost: serverQueue.bass })
-        .on("end", () => {
+        .on("finish", () => {
             client.dispatcher.finish(client, serverQueue.endReason, guild);
         });
     dispatcher.on('start', () => {

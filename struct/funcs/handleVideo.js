@@ -16,12 +16,14 @@ module.exports = async function (video, msg, voiceChannel, client, playlist = fa
     }
 
     const construct = require("../config/queueConfig.js");
+
     construct.textChannel = msg.channel;
     construct.voiceChannel = voiceChannel;
     construct.volume = client.global.db.guilds[msg.guild.id].defaultVolume;
     construct.bass = client.global.db.guilds[msg.guild.id].bass;
 
     construct.songs.push(song);
+
     client.queue.set(msg.guild.id, construct);
 
     try {
