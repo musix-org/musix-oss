@@ -65,8 +65,8 @@ module.exports = class extends Client {
         this.on('guildCreate', (guild) => {
             require(`${events}guildCreate`).execute(this, guild);
         });
-        this.on('voiceStateUpdate', (newState, oldState) => {
-            require(`${events}voiceStateUpdate`).execute(this, newState, oldState);
+        this.on('voiceStateUpdate', (oldState, newState) => {
+            require(`${events}voiceStateUpdate`).execute(this, oldState, newState);
         });
         this.on('error', (error) => {
             client.channels.fetch(client.config.debug_channel).send('Error: ' + error);
