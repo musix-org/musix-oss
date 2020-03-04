@@ -7,7 +7,7 @@ module.exports = {
     permission: 'dev',
     category: 'util',
     async execute(msg, args, client, Discord, prefix, command) {
-        client.queue.delete(guild.id);
+        client.queue.delete(msg.guild.id);
         msg.channel.send('Queue deleted!');
     }
 };
