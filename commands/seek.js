@@ -16,7 +16,7 @@ module.exports = {
             if (isNaN(pos)) return msg.channel.send('<:redx:674263474704220182> I\'m sorry, But you need to enter a valid __number__.');
             if (pos < 0) return msg.channel.send('<:redx:674263474704220182> The seeking point needs to be a positive number!');
             if (pos > data.length_seconds) return msg.channel.send(`<:redx:674263474704220182> The lenght of this song is ${data.length_seconds} seconds! You can't seek further than that!`);
-            serverQueue.connection.dispatcher.end('seek');
+            serverQueue.connection.dispatcher.end();
             serverQueue.endReason = "seek";
             client.funcs.play(msg.guild, serverQueue.songs[0], client, msg, pos, false);
         }

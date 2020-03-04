@@ -29,7 +29,7 @@ module.exports = {
 function skipSong(serverQueue, msg) {
 	msg.channel.send('<:skip:674685614221688832> Skipped the song!');
 	serverQueue.endReason = "skip";
-	serverQueue.connection.dispatcher.end('skipped');
+	serverQueue.connection.dispatcher.end();
 };
 function vote(serverQueue, msg) {
 	serverQueue.votesNeeded = Math.floor(serverQueue.voiceChannel.members.size / 2);

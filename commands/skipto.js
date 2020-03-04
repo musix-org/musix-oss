@@ -20,7 +20,7 @@ module.exports = {
                 serverQueue.songs.shift();
             }
             serverQueue.endReason = "skipto";
-            serverQueue.connection.dispatcher.end('skipto');
+            serverQueue.connection.dispatcher.end();
         }
     }
 };

@@ -12,7 +12,7 @@ module.exports = {
 			serverQueue.songs = [];
 			serverQueue.looping = false;
 			serverQueue.endReason = "stop";
-			serverQueue.connection.dispatcher.end('Stopped');
+			serverQueue.connection.dispatcher.end();
 			msg.channel.send('<:stop:674685626108477519> Stopped the music!')
 		}
 	}
