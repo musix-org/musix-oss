@@ -4,7 +4,7 @@ module.exports = {
     alias: 'none',
     usage: '<bass>',
     cooldown: 5,
-    onlyDev: false,
+    onlyDev: true,
     permission: 'MANAGE_MESSAGES',
     category: 'music',
     execute(msg, args, client, Discord, prefix, command) {
