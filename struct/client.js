@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const admin = require('firebase-admin');
 const serviceAccount = require('./config/serviceAccount.json');
 const fs = require('fs');
-const path = require('path')
+const path = require('path');
 const events = '../events/';
 
 module.exports = class extends Client {
