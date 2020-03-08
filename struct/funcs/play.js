@@ -10,7 +10,7 @@ module.exports = async function (guild, song, client, seek, play) {
         return;
     }
     const dispatcher = serverQueue.connection
-        .play(await ytdl(song.url, { filter: "audio", highWaterMark: 1 << 25, volume: false }), { seek: seek, bitrate: 1024, passes: 10, volume: 1, bassboost: serverQueue.bass })
+        .play(await ytdl(song.url, { filter: "audio", highWaterMark: 1 << 25, volume: false, begin: seek }), { seek: 0, bitrate: 1024, passes: 10, volume: 1, bassboost: serverQueue.bass })
         .on("finish", () => {
             client.dispatcher.finish(client, serverQueue.endReason, guild);
         });

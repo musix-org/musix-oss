@@ -12,13 +12,16 @@ module.exports = {
         if (client.funcs.check(client, msg, command)) {
             let data = await Promise.resolve(ytdl.getInfo(serverQueue.songs[0].url));
             if (!args[1]) return msg.channel.send(`<:redx:674263474704220182> Correct usage: \`${prefix}seek <seeking point in seconds>\``);
+            let point = args[1];
             const pos = parseInt(args[1]);
-            if (isNaN(pos)) return msg.channel.send('<:redx:674263474704220182> I\'m sorry, But you need to enter a valid __number__.');
-            if (pos < 0) return msg.channel.send('<:redx:674263474704220182> The seeking point needs to be a positive number!');
-            if (pos > data.length_seconds) return msg.channel.send(`<:redx:674263474704220182> The lenght of this song is ${data.length_seconds} seconds! You can't seek further than that!`);
+            if (isNaN(pos)) {
+                if (pos < 0) return msg.channel.send('<:redx:674263474704220182> The seeking point needs to be a positive number!');
+                if (pos > data.length_seconds) return msg.channel.send(`<:redx:674263474704220182> The lenght of this song is ${data.length_seconds} seconds! You can't seek further than that!`);
+                point = pos;
+            }
             serverQueue.connection.dispatcher.end();
             serverQueue.endReason = "seek";
-            client.funcs.play(msg.guild, serverQueue.songs[0], client, msg, pos, false);
+            client.funcs.play(msg.guild, serverQueue.songs[0], client, msg, point, false);
         }
     }
 };
