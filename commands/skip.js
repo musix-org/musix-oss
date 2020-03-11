@@ -19,7 +19,7 @@ module.exports = {
 					return skipSong(serverQueue, msg);
 				}
 			} else {
-				return vote(serverQueue, msg, client);
+				return skipSong(serverQueue, msg);
 			}
 		} else {
 			return skipSong(serverQueue, msg);
