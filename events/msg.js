@@ -18,6 +18,7 @@ module.exports = {
         if (!msg.content.startsWith(prefix)) return;
         if (!args[0]) return;
         const commandName = args[0].toLowerCase();
+        if (commandName === "none") return;
         const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName)) || client.commandAliases.get(commandName);
         if (!command && msg.content !== `${prefix}`) return;
         if (command.onlyDev && msg.author.id !== client.config.devId) return msg.channel.send('<:redx:674263474704220182> You are not allowed to do that!');
