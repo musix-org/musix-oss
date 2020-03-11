@@ -6,10 +6,12 @@ module.exports = function (msg, args, client, Discord, prefix, command) {
         command.uses++;
         command.execute(msg, args, client, Discord, prefix, command);
     } catch (error) {
+        const date = new Date();
         msg.reply(`<:redx:674263474704220182> there was an error trying to execute that command! Please contact support with \`${prefix}bug\`!`);
         const embed = new Discord.MessageEmbed()
             .setTitle(`Musix ${error.toString()}`)
             .setDescription(error.stack.replace(/at /g, '**at **'))
+            .setFooter(`guild: ${msg.guild.id}, user: ${msg.member.id}, channel: ${msg.channel.id}, date: ${date}`)
             .setColor('#b50002');
         client.debug_channel.send(embed);
         console.error(error);
