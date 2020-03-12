@@ -9,6 +9,6 @@ module.exports = {
             dj: false,
             djrole: null
         };
-        msg.channel.send('<:green_check_mark:674265384777416705> Reset __all__ guild settings!');
+        msg.channel.send(client.messages.reset);
     }
 };

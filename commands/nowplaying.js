@@ -10,8 +10,7 @@ module.exports = {
         const getThumb = require('video-thumbnail-url');
         const ytdl = require('ytdl-core');
         const serverQueue = client.queue.get(msg.guild.id);
-        if (!serverQueue) return msg.channel.send('<:redx:674263474704220182> There is nothing playing.');
-        if (!serverQueue.playing) return msg.channel.send('<:redx:674263474704220182> There is nothing playing.');
+        if (!serverQueue || !serverQueue.playing) return msg.channel.send(client.messages.noServerQueue);
         let data = await Promise.resolve(ytdl.getInfo(serverQueue.songs[0].url));
         let songtime = (data.length_seconds * 1000).toFixed(0);
         serverQueue.time = serverQueue.connection.dispatcher.streamTime;
@@ -21,7 +20,7 @@ module.exports = {
         let array = []; for (let i = 0; i < completedpercent - 1; i++) { array.push('⎯'); } array.push('⭗'); for (let i = 0; i < barlength - completedpercent - 1; i++) { array.push('⎯'); }
         const thumbnail = getThumb(serverQueue.songs[0].url);
         const embed = new Discord.MessageEmbed()
-            .setTitle("__Now playing__")
+            .setTitle(client.messages.nowPlaying)
             .setDescription(`<a:aNotes:674602408105476106>**Now playing:** ${serverQueue.songs[0].title}\n${array.join('')} | \`${client.funcs.msToTime(completed, "hh:mm:ss")} / ${client.funcs.msToTime(songtime, "hh:mm:ss")}\``)
             .setFooter(`Queued by ${serverQueue.songs[0].author.tag}`)
             .setURL(serverQueue.songs[0].url)

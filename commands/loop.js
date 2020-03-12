@@ -11,10 +11,10 @@ module.exports = {
         if (client.funcs.check(client, msg, command)) {
             if (!serverQueue.looping) {
                 serverQueue.looping = true;
-                msg.channel.send('<:repeat1:674685561377914892> Looping the queue now!');
+                msg.channel.send(client.messages.looping);
             } else {
                 serverQueue.looping = false;
-                msg.channel.send('<:repeat1:674685561377914892> No longer looping the queue!');
+                msg.channel.send(client.messages.noLooping);
             }
         }
     }

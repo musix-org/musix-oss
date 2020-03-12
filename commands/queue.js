@@ -8,9 +8,9 @@ module.exports = {
 	category: 'music',
 	async execute(msg, args, client, Discord, prefix) {
 		const serverQueue = client.queue.get(msg.guild.id);
-		if (!serverQueue) return msg.channel.send('<:redx:674263474704220182> There is nothing playing.');
+		if (!serverQueue) return msg.channel.send(client.messages.noServerQueue);
 		if (args[1]) {
-			if (isNaN(args[1])) return msg.channel.send('<:redx:674263474704220182> I\'m sorry, But you need to enter a valid __number__.');
+			if (isNaN(args[1])) return msg.channel.send(client.messages.validNumber);
 		}
 		let page = parseInt(args[1]);
 		if (!page) page = 1;

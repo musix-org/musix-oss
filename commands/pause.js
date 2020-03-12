@@ -9,10 +9,10 @@ module.exports = {
 	execute(msg, args, client, Discord, prefix, command) {
 		const serverQueue = client.queue.get(msg.guild.id);
 		if (client.funcs.check(client, msg, command)) {
-			if (serverQueue.paused) return msg.channel.send('<:redx:674263474704220182> The music is already paused!');
+			if (serverQueue.paused) return msg.channel.send(client.messages.alreadyPaused);
 			serverQueue.paused = true;
 			serverQueue.connection.dispatcher.pause(true);
-			return msg.channel.send('<:pause:674685548610322462> Paused the music!');
+			return msg.channel.send(client.messages.paused);
 		}
 	}
 };

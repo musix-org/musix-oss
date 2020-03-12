@@ -12,7 +12,8 @@ module.exports = async function (video, msg, voiceChannel, client, playlist = fa
     if (serverQueue) {
         serverQueue.songs.push(song);
         if (playlist) return;
-        return msg.channel.send(`<:green_check_mark:674265384777416705> **${song.title}** has been added to the queue!`);
+        client.messages.songsAdded = client.messages.songAdded.replace("%TITLE%", song.title);
+        return msg.channel.send(client.messages.songAdded);
     }
 
     const construct = require("../config/queueConfig.js");
@@ -32,8 +33,8 @@ module.exports = async function (video, msg, voiceChannel, client, playlist = fa
         client.funcs.play(msg.guild, construct.songs[0], client, 0, true);
     } catch (error) {
         client.queue.delete(msg.guild.id);
-        client.debug_channel.send("Error with connecting to voice channel: " + error);
-        return msg.channel.send(`<:redx:674263474704220182> An error occured: ${error}`);
+        client.debug_channel.send(client.messages.errorConnecting + error);
+        return msg.channel.send(client.messages.error);
     }
     return;
 }

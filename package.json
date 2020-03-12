@@ -1,6 +1,6 @@
 {
   "name": "musix",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "V3 for Musix the discord music bot",
   "main": "./index.js",
   "scripts": {
@@ -18,11 +18,11 @@
   "homepage": "https://github.com/MatteZ02/Musix-V3#readme",
   "dependencies": {
     "@discordjs/opus": "^0.1.0",
-    "dblapi.js": "^2.3.1",
-    "discord.js": "^12.0.1",
+    "dblapi.js": "^2.4.0",
+    "discord.js": "^12.0.2",
     "dotenv": "^8.2.0",
     "ffmpeg": "0.0.4",
-    "firebase": "^7.9.3",
+    "firebase": "^7.10.0",
     "firebase-admin": "^8.9.2",
     "fs": "0.0.1-security",
     "he": "^1.2.0",

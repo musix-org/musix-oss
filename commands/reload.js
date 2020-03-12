@@ -25,6 +25,6 @@ module.exports = {
         /*fs.readdirSync(path.join(__dirname, 'funcs')).forEach(filename => {
             this.funcs[filename.slice(0, -3)] = require(`../struct/funcs/${filename}`);
         });*/
-        msg.channel.send('All files reloaded!');
+        msg.channel.send(client.messages.reloaded);
     }
 };

@@ -22,7 +22,7 @@ module.exports = async function (guild, song, client, seek, play) {
         client.debug_channel.send('Error with the dispatcher: ' + error);
         serverQueue.voiceChannel.leave();
         client.queue.delete(guild.id);
-        return serverQueue.textChannel.send('<:redx:674263474704220182> An error has occured while playing music! The queue has been deleted.');
+        return serverQueue.textChannel.send(client.messages.errorDispatcher);
     });
     dispatcher.setVolume(serverQueue.volume / 10);
     if (client.global.db.guilds[guild.id].startPlaying || play) {
@@ -30,7 +30,7 @@ module.exports = async function (guild, song, client, seek, play) {
         const songtime = (data.length_seconds * 1000).toFixed(0);
         const thumbnail = getThumb(serverQueue.songs[0].url);
         const embed = new Discord.MessageEmbed()
-            .setTitle(`<a:aNotes:674602408105476106> Start playing: **${song.title}**`)
+            .setTitle(`${client.messages.startPlaying}**${song.title}**`)
             .setDescription(`Song duration: \`${client.funcs.msToTime(songtime, "hh:mm:ss")}\``)
             .setThumbnail(thumbnail._rejectionHandler0)
             .setColor(client.config.embedColor)

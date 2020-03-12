@@ -19,6 +19,7 @@ module.exports = class extends Client {
         this.funcs = {};
         this.dispatcher = {};
         this.config = require('./config/config.js');
+        this.messages = require('./config/messages.js');
         this.dispatcher.finish = require('../events/dispatcher/finish.js');
 
         fs.readdirSync(path.join(__dirname, 'funcs')).forEach(filename => {

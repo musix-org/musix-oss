@@ -9,11 +9,11 @@ module.exports = {
     async execute(msg, args, client, Discord, prefix, command) {
         const serverQueue = client.queue.get(msg.guild.id);
         if (client.funcs.check(client, msg, command)) {
-            if (!args[1]) return msg.channel.send(`<:redx:674263474704220182> correct usage: \`${command.usage}\``);
+            if (!args[1]) return msg.channel.send(`${client.messages.correctUsage}\`${command.usage}\``);
             const point = parseInt(args[1] - 1);
-            if (isNaN(point)) return msg.channel.send('<:redx:674263474704220182> I\'m sorry, But you need to enter a valid __number__.');
-            if (point > serverQueue.songs.size) return msg.channel.send('<:redx:674263474704220182> That song does not exist!');
-            if (point < 1) return msg.channel.send('<:redx:674263474704220182> You can\'t skip to the song currently playing!');
+            if (isNaN(point)) return msg.channel.send(client.messages.validNumber);
+            if (point > serverQueue.songs.size) return msg.channel.send(client.messages.noSongs);
+            if (point < 1) return msg.channel.send(client.messages.cantSkipToCurrent);
             let i = 0;
             while (i < point) {
                 i++;

@@ -10,7 +10,7 @@ module.exports = {
         const serverQueue = client.queue.get(msg.guild.id);
         if (client.funcs.check(client, msg, command)) {
             client.funcs.shuffle(serverQueue.songs);
-            msg.channel.send('<:shuffle:674685595980791871> Queue suffled!');
+            msg.channel.send(client.messages.shuffled);
         }
     }
 };

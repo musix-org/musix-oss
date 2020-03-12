@@ -15,31 +15,28 @@ module.exports = {
 		const serverQueue = client.queue.get(msg.guild.id);
 		const voiceChannel = msg.member.voice.channel;
 		if (!serverQueue) {
-			if (!msg.member.voice.channel) return msg.channel.send('<:redx:674263474704220182> I\'m sorry but you need to be in a voice channel to play music!');
+			if (!msg.member.voice.channel) return msg.channel.send(client.messages.noVoiceChannel);
 		} else {
-			if (voiceChannel !== serverQueue.voiceChannel) return msg.channel.send('<:redx:674263474704220182> I\'m sorry but you need to be in the same voice channel as Musix to play music!');
+			if (voiceChannel !== serverQueue.voiceChannel) return msg.channel.send(client.messages.wrongVoiceChannel);
 		}
-		if (!args[1]) return msg.channel.send('<:redx:674263474704220182> You need to use a link or search for a song!');
+		if (!args[1]) return msg.channel.send(client.messages.noQuery);
 		const permissions = voiceChannel.permissionsFor(msg.client.user);
 		if (!permissions.has('CONNECT')) {
-			return msg.channel.send('<:redx:674263474704220182> I cannot connect to your voice channel, make sure I have the proper permissions!');
+			return msg.channel.send(client.messages.noPermsConnect);
 		}
 		if (!permissions.has('SPEAK')) {
-			return msg.channel.send('<:redx:674263474704220182> I cannot speak in your voice channel, make sure I have the proper permissions!');
+			return msg.channel.send(client.messages.noPermsSpeak);
 		}
 		if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
-			const lmsg = await msg.channel.send('<a:loading:674284196700618783> Loading song(s)');
+			const lmsg = await msg.channel.send(client.messages.loadingSongs);
 			const playlist = await youtube.getPlaylist(url);
 			const videos = await playlist.getVideos();
 			for (const video of Object.values(videos)) {
-				const video2 = await youtube.getVideoByID(video.id)
-					.catch(err => {
-						console.error(err);
-						return lmsg.edit(`<:redx:674263474704220182> Error loading songs!\nNot all songs we're loaded! This may have been caused by the playlist containing privated/deleted videos!`);
-					});
+				const video2 = await youtube.getVideoByID(video.id);
 				await client.funcs.handleVideo(video2, msg, voiceChannel, client, true);
 			}
-			return lmsg.edit(`<:green_check_mark:674265384777416705> Playlist: **${playlist.title}** has been added to the queue!`);
+			client.messages.playlistAdded = client.messages.playlistAdded.replace("%TITLE%", playlist.title);
+			return lmsg.edit(client.messages.playlistAdded);
 		} else {
 			try {
 				var video = await youtube.getVideo(url);
@@ -49,7 +46,7 @@ module.exports = {
 					var video = await youtube.getVideoByID(videos[0].id);
 				} catch (err) {
 					console.error(err);
-					return msg.channel.send('<:redx:674263474704220182> I could not obtain any search results!');
+					return msg.channel.send(client.messages.noResults);
 				}
 			}
 			return client.funcs.handleVideo(video, msg, voiceChannel, client, false);

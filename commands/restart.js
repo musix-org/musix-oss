@@ -9,6 +9,6 @@ module.exports = {
     async execute(msg, args, client, Discord, prefix, command) {
         client.destroy();
         require('../index.js');
-        msg.channel.send('restarted!');
+        msg.channel.send(client.messages.restart);
     }
 };

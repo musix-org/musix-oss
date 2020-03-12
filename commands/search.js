@@ -16,27 +16,28 @@ module.exports = {
         const serverQueue = client.queue.get(msg.guild.id);
         const voiceChannel = msg.member.voice.channel;
         if (!serverQueue) {
-            if (!msg.member.voice.channel) return msg.channel.send('<:redx:674263474704220182> I\'m sorry but you need to be in a voice channel to play music!');
+            if (!msg.member.voice.channel) return msg.channel.send(client.messages.noVoiceChannel);
         } else {
-            if (voiceChannel !== serverQueue.voiceChannel) return msg.channel.send('<:redx:674263474704220182> I\'m sorry but you need to be in the same voice channel as Musix to play music!');
+            if (voiceChannel !== serverQueue.voiceChannel) return msg.channel.send(client.messages.wrongVoiceChannel);
         }
-        if (!args[1]) return msg.channel.send('<:redx:674263474704220182> You need to use a link or search for a song!');
+        if (!args[1]) return msg.channel.send(client.messages.noQuery);
         const permissions = voiceChannel.permissionsFor(msg.client.user);
         if (!permissions.has('CONNECT')) {
-            return msg.channel.send('<:redx:674263474704220182> I cannot connect to your voice channel, make sure I have the proper permissions!');
+            return msg.channel.send(client.messages.noPermsConnect);
         }
         if (!permissions.has('SPEAK')) {
-            return msg.channel.send('<:redx:674263474704220182> I cannot speak in your voice channel, make sure I have the proper permissions!');
+            return msg.channel.send(client.messages.noPermsSpeak);
         }
         if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
-            const lmsg = await msg.channel.send('<a:loading:674284196700618783> Loading song(s)');
+            const lmsg = await msg.channel.send(client.messages.loadingSongs);
             const playlist = await youtube.getPlaylist(url);
             const videos = await playlist.getVideos();
             for (const video of Object.values(videos)) {
                 const video2 = await youtube.getVideoByID(video.id);
                 await client.funcs.handleVideo(video2, msg, voiceChannel, client, true);
             }
-            return lmsg.edit(`<:green_check_mark:674265384777416705> Playlist: **${playlist.title}** has been added to the queue!`);
+            client.messages.playlistAdded = client.messages.playlistAdded.replace("%TITLE%", playlist.title);
+            return lmsg.edit(client.messages.playlistAdded);
         } else {
             try {
                 var video = await youtube.getVideo(url);
@@ -45,9 +46,9 @@ module.exports = {
                     var videos = await youtube.searchVideos(searchString, 10);
                     let index = 0;
                     const embed = new Discord.MessageEmbed()
-                        .setTitle("__Song Selection__")
+                        .setTitle(client.messages.songSelection)
                         .setDescription(`${videos.map(video2 => `**${++index}** ${he.decode(video2.title)} `).join('\n')}`)
-                        .setFooter("Please provide a number ranging from 1-10 to select one of the search results.")
+                        .setFooter(client.messages.provideANumber)
                         .setColor(client.config.embedColor)
                     msg.channel.send(embed);
                     try {
@@ -58,13 +59,13 @@ module.exports = {
                         });
                     } catch (err) {
                         console.error(err);
-                        return msg.channel.send('<:redx:674263474704220182> Cancelling video selection');
+                        return msg.channel.send(client.messages.cancellingVideoSelection);
                     }
                     const videoIndex = parseInt(response.first().content);
                     var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
                 } catch (err) {
                     console.error(err);
-                    return msg.channel.send('<:redx:674263474704220182> I could not obtain any search results!');
+                    return msg.channel.send(client.messages.noResults);
                 }
             }
             return client.funcs.handleVideo(video, msg, voiceChannel, client, false);

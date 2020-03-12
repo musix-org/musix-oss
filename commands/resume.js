@@ -9,10 +9,10 @@ module.exports = {
 	execute(msg, args, client, Discord, prefix, command) {
 		const serverQueue = client.queue.get(msg.guild.id);
 		if (client.funcs.check(client, msg, command)) {
-			if (!serverQueue.paused) return msg.channel.send('<:redx:674263474704220182> The music in not paused!');
+			if (!serverQueue.paused) return msg.channel.send(client.messages.notPaused);
 			serverQueue.paused = false;
 			serverQueue.connection.dispatcher.resume(true);
-			return msg.channel.send('<:resume:674685585478254603> Resumed the music!');
+			return msg.channel.send(client.messages.resumed);
 		}
 	}
 };

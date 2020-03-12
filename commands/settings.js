@@ -20,7 +20,7 @@ module.exports = {
       .setColor(client.embedColor)
     const permissions = msg.channel.permissionsFor(msg.author);
     if (msg.author.id !== client.config.devId) {
-      if (!permissions.has(command.permission)) return msg.channel.send('<:redx:674263474704220182> You need the `MANAGE_SERVER` permission to change the settings!');
+      if (!permissions.has(command.permission)) return msg.channel.send(client.messages.noPermsManageSettings);
     }
     if (args[1]) {
       const optionName = args[1].toLowerCase();
@@ -29,7 +29,7 @@ module.exports = {
       try {
         option.execute(msg, args, client, Discord, prefix);
       } catch (error) {
-        msg.reply(`<:redx:674263474704220182> there was an error trying to execute that option! Please contact support with \`${prefix}bug\`!`);
+        msg.reply(client.messages.errorExeOpt);
         const embed = new Discord.MessageEmbed()
           .setTitle(`Musix ${error.toString()}`)
           .setDescription(error.stack.replace(/at /g, '**at **'))
