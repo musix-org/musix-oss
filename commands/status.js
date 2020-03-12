@@ -12,10 +12,10 @@ module.exports = {
             const latency = m.createdTimestamp - msg.createdTimestamp;
 
             const embed = new Discord.MessageEmbed()
-                .setTitle(`Status for ${client.user.username}`)
-                .addField(':signal_strength: Ping', client.ws.ping, true)
-                .addField('Latency', latency, true)
-                .addField(':stopwatch: Uptime', uptime, true)
+                .setTitle(client.messages.statusTitle)
+                .addField(client.messages.statusField1, client.ws.ping, true)
+                .addField(client.messages.statusField2, latency, true)
+                .addField(client.messages.statusField3, uptime, true)
                 .setAuthor(client.user.username, client.user.displayAvatarURL)
                 .setColor(client.config.embedColor)
             m.delete();

@@ -22,9 +22,9 @@ module.exports = {
         });
         const embed = new Discord.MessageEmbed();
         embed
-            .setTitle('Musix Command Usage During Current Uptime')
+            .setTitle(client.messages.cmdUsesTitle)
             .setDescription('```ml\n' + markdownrows.join('\n') + '\n```')
-            .setFooter('These statistics are from the current uptime.')
+            .setFooter(client.messages.cmdUsesFooter)
             .setColor(client.config.embedColor);
         msg.channel.send(embed);
     },

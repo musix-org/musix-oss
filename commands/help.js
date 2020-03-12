@@ -13,7 +13,7 @@ module.exports = {
             const embed = new Discord.MessageEmbed()
                 .setTitle(`${client.global.db.guilds[msg.guild.id].prefix}${command.name} ${command.usage}`)
                 .setDescription(command.description)
-                .setFooter(`Command Alias: \`${command.alias}\``)
+                .setFooter(`${client.messages.helpCmdFooter} \`${command.alias}\``)
                 .setColor(client.config.embedColor)
             msg.channel.send(embed);
         } else {
@@ -25,10 +25,11 @@ module.exports = {
             for (let i = 0; i < categories.length; i++) {
                 commands += `**» ${categories[i].toUpperCase()}**\n${client.commands.filter(x => x.category === categories[i] && !x.omitFromHelp && !x.onlyDev).map(x => `\`${x.name}\``).join(', ')}\n`;
             }
+            client.messages.help = client.messages.help.replace("%PREFIX%", prefix);
             const embed = new Discord.MessageEmbed()
-                .setTitle(`${client.user.username} help:`)
+                .setTitle(`${client.user.username} ${client.messages.help}`)
                 .setDescription(commands)
-                .setFooter(`"${client.global.db.guilds[msg.guild.id].prefix}help <command>" to see more information about a command.`)
+                .setFooter(client.messages.helpFooter)
                 .setColor(client.config.embedColor)
             msg.channel.send(embed);
         }

@@ -14,24 +14,25 @@ module.exports = {
 		}
 		let page = parseInt(args[1]);
 		if (!page) page = 1;
-		let pagetext = `:page_facing_up: Page: ${page} :page_facing_up:`
-		if (page === 1) pagetext = ':arrow_down: Next in queue :arrow_down:'
+		let pagetext = client.messages.queuePages;
+		if (page === 1) pagetext = client.messages.queueFirstPage;
 		let queuesongs = serverQueue.songs.slice((page - 1) * 20 + 1, page * 20 + 1);
 		let queuemessage = `${queuesongs.map(song => `**#** ${song.title}`).join('\n')}`
 		const hashs = queuemessage.split('**#**').length;
 		for (let i = 0; i < hashs; i++) {
 			queuemessage = queuemessage.replace('**#**', `**${i + 1}**`);
 		}
+		client.messages.queueDesc = client.messages.queueDesc.replace("%SONG%", song.title);
 		if (!serverQueue.looping) {
 			const embed = new Discord.MessageEmbed()
-				.setTitle("__Song queue__")
-				.setDescription(`**Now playing:** ${serverQueue.songs[0].title}<a:aNotes:674602408105476106>\n${pagetext}\n${queuemessage}`)
+				.setTitle(client.messages.queueTitle)
+				.setDescription(`${client.messages.queueDesc}\n${pagetext}\n${queuemessage}`)
 				.setColor(client.config.embedColor)
 			return msg.channel.send(embed);
 		} else {
 			const embed = new Discord.MessageEmbed()
-				.setTitle("__Song queue__")
-				.setDescription(`**Now playing:** ${serverQueue.songs[0].title}<a:aNotes:674602408105476106>\n${pagetext}\n${queuemessage}`)
+				.setTitle(client.messages.queueTitle)
+				.setDescription(`${client.messages.queueDesc}\n${pagetext}\n${queuemessage}`)
 				.setFooter('<:repeat1:674685561377914892> Currently looping the queue!')
 				.setColor(client.config.embedColor)
 			return msg.channel.send(embed);

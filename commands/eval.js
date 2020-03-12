@@ -21,7 +21,7 @@ module.exports = {
             output = error.toString();
         }
         const embed = new Discord.MessageEmbed()
-            .setTitle('Evaluation Command')
+            .setTitle(client.messages.evalTitle)
             .setColor(client.config.embedColor)
             .setDescription(`Input: \`\`\`js\n${input.replace(/; /g, ';').replace(/;/g, ';\n')}\n\`\`\`\nOutput: \`\`\`\n${output}\n\`\`\``);
         return msg.channel.send(embed);

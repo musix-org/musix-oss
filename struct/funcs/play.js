@@ -19,7 +19,7 @@ module.exports = async function (guild, song, client, seek, play) {
     });
     dispatcher.on('error', error => {
         console.error(error);
-        client.debug_channel.send('Error with the dispatcher: ' + error);
+        client.debug_channel.send(client.messages.dispatcherError + error);
         serverQueue.voiceChannel.leave();
         client.queue.delete(guild.id);
         return serverQueue.textChannel.send(client.messages.errorDispatcher);

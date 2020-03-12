@@ -8,14 +8,14 @@ module.exports = {
   category: 'util',
   async execute(msg, args, client, Discord, prefix, command) {
     const embed = new Discord.MessageEmbed()
-      .setTitle('Guild settings for Musix')
-      .addField('prefix', 'Change the guild specific prefix. (string)', true)
-      .addField('volume', 'Change the default volume that the bot will start playing at. (number)', true)
-      .addField('permissions', 'Change whether to require permissions to use eg `skip, stop, pause, loop, etc...`', true)
-      .addField('setdj', 'Set a DJ role. This will allow chosen users to freely use all Musix commands. This will automatically set the `permissions` settings to true in order for the `DJ` role to have effect!', true)
-      .addField('announcesongs', 'Whether to announce songs that start playing or not.')
-      .addField('bass', 'Change the default bass level `Not supported`', true)
-      .setFooter(`how to use: ${prefix}settings <Setting name> <value>`)
+      .setTitle(client.messages.settingsTitle)
+      .addField(client.messages.settingsPrefix, client.messages.settingsPrefixDesc, true)
+      .addField(client.messages.settingsVolume, client.messages.settingsVolumeDesc, true)
+      .addField(client.messages.settingsPermissions, client.messages.settingsPermissionsDesc, true)
+      .addField(client.messages.settingsSetDj, client.messages.settingsSetDjDesc, true)
+      .addField(client.messages.settingsAnnounceSongs, client.messages.settingsAnnounceSongsDesc)
+      .addField(client.messages.settingsBass, client.messages.settingsBassDesc, true)
+      .setFooter(client.messages.settingsFooter)
       .setAuthor(client.user.username, client.user.displayAvatarURL)
       .setColor(client.embedColor)
     const permissions = msg.channel.permissionsFor(msg.author);

@@ -21,7 +21,7 @@ module.exports = {
         const thumbnail = getThumb(serverQueue.songs[0].url);
         const embed = new Discord.MessageEmbed()
             .setTitle(client.messages.nowPlaying)
-            .setDescription(`<a:aNotes:674602408105476106>**Now playing:** ${serverQueue.songs[0].title}\n${array.join('')} | \`${client.funcs.msToTime(completed, "hh:mm:ss")} / ${client.funcs.msToTime(songtime, "hh:mm:ss")}\``)
+            .setDescription(`${client.messages.nowPlayingDesc} ${serverQueue.songs[0].title}\n${array.join('')} | \`${client.funcs.msToTime(completed, "hh:mm:ss")} / ${client.funcs.msToTime(songtime, "hh:mm:ss")}\``)
             .setFooter(`Queued by ${serverQueue.songs[0].author.tag}`)
             .setURL(serverQueue.songs[0].url)
             .setThumbnail(thumbnail._rejectionHandler0)
