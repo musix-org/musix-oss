@@ -16,8 +16,9 @@ module.exports = {
             const pos = parseInt(args[1]);
             if (isNaN(pos)) {
                 if (pos < 0) return msg.channel.send(client.messages.seekingPointPositive);
-                client.messages.seekMax = client.messages.seekMax.replace("%LENGTH%", data.length_seconds);
-                if (pos > data.length_seconds) return msg.channel.send(client.messages.seekMax);
+                let message;
+                message = client.messages.seekMax.replace("%LENGTH%", data.length_seconds);
+                if (pos > data.length_seconds) return msg.channel.send(message);
                 point = pos;
             }
             serverQueue.connection.dispatcher.end();

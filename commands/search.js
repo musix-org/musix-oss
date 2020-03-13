@@ -36,8 +36,9 @@ module.exports = {
                 const video2 = await youtube.getVideoByID(video.id);
                 await client.funcs.handleVideo(video2, msg, voiceChannel, client, true);
             }
-            client.messages.playlistAdded = client.messages.playlistAdded.replace("%TITLE%", playlist.title);
-            return lmsg.edit(client.messages.playlistAdded);
+            let message;
+            message = client.messages.playlistAdded.replace("%TITLE%", playlist.title);
+            return lmsg.edit(message);
         } else {
             try {
                 var video = await youtube.getVideo(url);

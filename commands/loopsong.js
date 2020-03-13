@@ -11,11 +11,12 @@ module.exports = {
         if (client.funcs.check(client, msg, command)) {
             if (!serverQueue.songLooping) {
                 serverQueue.songLooping = true;
-                client.messages.loopingSong = client.messages.loopingSong.replace("%TITLE%", serverQueue.songs[0].title);
-                msg.channel.send(client.messages.loopingSong);
+                let message;
+                message = client.messages.loopingSong.replace("%TITLE%", serverQueue.songs[0].title);
+                msg.channel.send(message);
             } else {
                 serverQueue.songLooping = false;
-                msg.channel.send(client.messages.noLoopingSong);
+                msg.channel.send(message);
             }
         }
     }

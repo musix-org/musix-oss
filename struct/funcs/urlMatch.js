@@ -7,8 +7,9 @@ module.exports = async function (client, msg, youtube, voiceChannel, url) {
             const video2 = await youtube.getVideoByID(video.id);
             await client.funcs.handleVideo(video2, msg, voiceChannel, client, true);
         }
-        client.messages.playlistAdded = client.messages.playlistAdded.replace("%TITLE%", playlist.title);
-        lmsg.edit(client.messages.playlistAdded);
+        let message;
+        message = client.messages.playlistAdded.replace("%TITLE%", playlist.title);
+        lmsg.edit(message);
         return true;
     } else {
         return false;

@@ -10,7 +10,7 @@ module.exports = {
         const getThumb = require('video-thumbnail-url');
         const ytdl = require('ytdl-core');
         const serverQueue = client.queue.get(msg.guild.id);
-        if (!serverQueue || !serverQueue.playing) return msg.channel.send(client.messages.noServerQueue);
+        if (!serverQueue) return msg.channel.send(client.messages.noServerQueue);
         let data = await Promise.resolve(ytdl.getInfo(serverQueue.songs[0].url));
         let songtime = (data.length_seconds * 1000).toFixed(0);
         serverQueue.time = serverQueue.connection.dispatcher.streamTime;

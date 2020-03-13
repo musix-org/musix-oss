@@ -22,7 +22,7 @@ module.exports = {
         const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName)) || client.commandAliases.get(commandName);
         if (!command && msg.content !== `${prefix}`) return;
         if (command.onlyDev && msg.author.id !== client.config.devId) return msg.channel.send(client.messages.notAllowed);
-        if (client.config.devMode && msg.member.id !== client.config.devId) return msg.channel.send(client.messages.devMode);
+        //if (client.config.devMode && msg.member.id !== client.config.devId) return msg.channel.send(client.messages.devMode);
         client.funcs.exe(msg, args, client, Discord, prefix, command);
     }
 }

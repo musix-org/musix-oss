@@ -25,11 +25,12 @@ module.exports = {
             for (let i = 0; i < categories.length; i++) {
                 commands += `**» ${categories[i].toUpperCase()}**\n${client.commands.filter(x => x.category === categories[i] && !x.omitFromHelp && !x.onlyDev).map(x => `\`${x.name}\``).join(', ')}\n`;
             }
-            client.messages.help = client.messages.help.replace("%PREFIX%", prefix);
+            let message;
+            message = client.messages.helpFooter.replace("%PREFIX%", prefix);
             const embed = new Discord.MessageEmbed()
-                .setTitle(`${client.user.username} ${client.messages.help}`)
+                .setTitle(`${client.user.username} ${client.messages.helpTitle}`)
                 .setDescription(commands)
-                .setFooter(client.messages.helpFooter)
+                .setFooter(message)
                 .setColor(client.config.embedColor)
             msg.channel.send(embed);
         }

@@ -17,7 +17,7 @@ module.exports = {
       .addField(client.messages.settingsBass, client.messages.settingsBassDesc, true)
       .setFooter(client.messages.settingsFooter)
       .setAuthor(client.user.username, client.user.displayAvatarURL)
-      .setColor(client.embedColor)
+      .setColor(client.config.embedColor)
     const permissions = msg.channel.permissionsFor(msg.author);
     if (msg.author.id !== client.config.devId) {
       if (!permissions.has(command.permission)) return msg.channel.send(client.messages.noPermsManageSettings);

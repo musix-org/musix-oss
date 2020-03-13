@@ -12,8 +12,9 @@ module.exports = async function (video, msg, voiceChannel, client, playlist = fa
     if (serverQueue) {
         serverQueue.songs.push(song);
         if (playlist) return;
-        client.messages.songsAdded = client.messages.songAdded.replace("%TITLE%", song.title);
-        return msg.channel.send(client.messages.songAdded);
+        let message;
+        message = client.messages.songAdded.replace("%TITLE%", song.title);
+        return msg.channel.send(message);
     }
 
     const construct = require("../config/queueConfig.js");

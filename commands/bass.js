@@ -16,8 +16,9 @@ module.exports = {
             if (bass > 100) return msg.channel.send(client.messages.maxBass);
             if (bass < 0) return msg.channel.send(client.messages.positiveBass);
             serverQueue.bass = bass;
-            client.messages.bassApplied = client.messages.bassApplied.replace("%BASS%", bass);
-            return msg.channel.send(client.messages.bassApplied);
+            let message;
+            message = client.messages.bassApplied.replace("%BASS%", bass);
+            return msg.channel.send(message);
         }
     }
 };
