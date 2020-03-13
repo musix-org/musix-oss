@@ -17,7 +17,7 @@ module.exports = {
     devMode: false,
     dblApi: false,
     saveDB: true,
-    shards: 8,
+    shards: 10,
     shardDelay: 5000,
     spawnTimeout: 30000,
     respawnDelay: 1000,
