@@ -14,7 +14,7 @@ module.exports = {
     embedColor: "#b50002",
     invite: "https://discordapp.com/api/oauth2/authorize?client_id=607266889537945605&permissions=3427328&redirect_uri=https%3A%2F%2Fdiscordapp.com%2Foauth2%2Fauthorize%3Fclient_id%3D607266889537945605%26%3Bscope%3Dbot%26%3Bpermissions%3D0&scope=bot",
     //Settings
-    devMode: true,
+    devMode: false,
     dblApi: false,
     saveDB: true,
     shards: 8,
