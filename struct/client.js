@@ -38,6 +38,9 @@ module.exports = class extends Client {
             const option = require(`../commands/settings/${file}`);
             this.settingCmd.set(option.name, option);
         }
+        if (this.config.devMode) {
+            this.config.token = this.config.devToken;
+        }
 
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount),
@@ -53,10 +56,6 @@ module.exports = class extends Client {
 
         this.db.FieldValue = require('firebase-admin').firestore.FieldValue;
 
-        if (this.config.devMode) {
-            this.config.token = this.config.devToken;
-        }
-
         this.on('ready', () => {
             require(`${events}ready`).execute(this, Discord);
         });
@@ -70,7 +69,7 @@ module.exports = class extends Client {
             require(`${events}voiceStateUpdate`).execute(this, oldState, newState);
         });
         this.on('error', (error) => {
-            client.channels.fetch(client.config.debug_channel).send('Error: ' + error);
+            client.channels.fetch(client.config.debug_channel).send(`Error: ${error} on shard: ${this.shard}`);
         });
 
         this.login(this.config.token).catch(err => console.log('Failed to login: ' + err));

@@ -16,6 +16,7 @@ module.exports = {
                 .addField(client.messages.statusField1, client.ws.ping, true)
                 .addField(client.messages.statusField2, latency, true)
                 .addField(client.messages.statusField3, uptime, true)
+                .addField(client.messages.statusField4, client.shard.ids)
                 .setAuthor(client.user.username, client.user.displayAvatarURL)
                 .setColor(client.config.embedColor)
             m.delete();

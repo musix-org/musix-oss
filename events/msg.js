@@ -2,6 +2,7 @@ module.exports = {
     name: 'message',
     async execute(client, msg, Discord) {
         if (msg.author.bot || !msg.guild) return;
+        if (!client.global.db.guilds[msg.guild.id]) return;
         let prefix = client.global.db.guilds[msg.guild.id].prefix;
         if (client.config.devMode) prefix = client.config.devPrefix;
         const args = msg.content.slice(prefix.length).split(' ');

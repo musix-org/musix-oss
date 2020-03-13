@@ -2,13 +2,11 @@ module.exports = {
     name: 'restart',
     alias: 'none',
     usage: '',
-    description: 'Restart the bot',
+    description: 'restart all shards',
     onlyDev: true,
-    permission: 'none',
+    permission: 'dev',
     category: 'util',
     async execute(msg, args, client, Discord, prefix, command) {
-        client.destroy();
-        require('../index.js');
-        msg.channel.send(client.messages.restart);
+        client.shard.respawnAll(client.config.shardDelay, client.config.respawnDelay, client.config.spawnTimeout);
     }
 };

@@ -11,7 +11,7 @@ module.exports = function (msg, args, client, Discord, prefix, command) {
         const embed = new Discord.MessageEmbed()
             .setTitle(`Musix ${error.toString()}`)
             .setDescription(error.stack.replace(/at /g, '**at **'))
-            .setFooter(`guild: ${msg.guild.id}, user: ${msg.member.id}, channel: ${msg.channel.id}, date: ${date}`)
+            .setFooter(`guild: ${msg.guild.id} (${msg.guild.name}), user: ${msg.member.id} (${msg.member.displayName}), channel: ${msg.channel.id} (${msg.channel.name}), date: ${date}, Shard: ${client.shard.ids}`)
             .setColor('#b50002');
         client.debug_channel.send(embed);
         console.error(error);

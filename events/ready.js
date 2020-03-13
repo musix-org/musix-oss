@@ -23,7 +23,7 @@ module.exports = {
                 };
             });
         }
-        console.log('- DB Set -');
+        console.log(`- DB Set - Shard: ${client.shard.ids} -`);
         client.user.setActivity(`@${client.user.username} help | 🎶`, { type: 'LISTENING' });
         client.user.setStatus('online');
         const dbl = new DBL(client.config.dblKey, client);
@@ -36,7 +36,7 @@ module.exports = {
             });
             dbl.postStats(client.guilds.size);
         }
-        console.log('- Activated -');
+        console.log(`- Activated - Shard: ${client.shard.ids} -`);
         setInterval(async () => {
             if (client.config.saveDB && !client.config.devMode) {
                 console.log('DB saved');
