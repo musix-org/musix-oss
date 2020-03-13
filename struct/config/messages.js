@@ -85,7 +85,7 @@ module.exports = {
     provideASong: "<:redx:674263474704220182> Please provide a song position in queue for me to remove!",
     queueDeleted: "Queue deleted!",
     queueDesc: "**Now playing:** %SONG%<a:aNotes:674602408105476106>\n:arrow_down: Next in queue :arrow_down:",
-    queueFooter: "More songs in the queue!",
+    queueFooter: "songs in the queue!",
     queueLength: "<:redx:674263474704220182> There are only %SONGS% amount of songs in the queue!",
     queueTitle: "__Song queue__",
     reloaded: "All files reloaded!",
