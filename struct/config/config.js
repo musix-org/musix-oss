@@ -18,8 +18,8 @@ module.exports = {
     dblApi: false,
     saveDB: true,
     shards: 10,
-    shardDelay: 5000,
-    spawnTimeout: 30000,
+    shardDelay: 10000,
+    spawnTimeout: 60000,
     respawnDelay: 1000,
     //db values
     prefix: ">",
