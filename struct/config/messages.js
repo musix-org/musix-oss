@@ -1,8 +1,3 @@
-/*
-THIS FILE CONTAINS ALL MESSAGES THAT MUSIX SENDS!
-THIS IS MUSIX BRANDING AND YOU'RE NOT PERMITTED TO COPY THE VISUALS OF MUSIX!
-IF YOU CLONED THIS REPOSITORY PLEASE MODIFY THESE MESSAGES!
-*/
 module.exports = {
     alreadyPaused: "<:redx:674263474704220182> The music is already paused!",
     alreadyVoted: "<:redx:674263474704220182> You have already voted to skip!",
