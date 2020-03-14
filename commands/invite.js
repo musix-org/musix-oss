@@ -6,7 +6,7 @@ module.exports = {
     onlyDev: false,
     permission: 'none',
     category: 'info',
-    execute(msg, args, client, Discord, prefix) {
+    execute(msg, args, client, Discord, prefix, command) {
         const embed = new Discord.MessageEmbed()
             .setTitle(client.messages.inviteTitle)
             .setURL(client.config.invite)

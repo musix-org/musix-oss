@@ -7,10 +7,10 @@ module.exports = async function (video, msg, voiceChannel, client, playlist = fa
         author: msg.author
     }
 
-    const serverQueue = client.queue.get(msg.guild.id);
+    const queue = client.queue.get(msg.guild.id);
 
-    if (serverQueue) {
-        serverQueue.songs.push(song);
+    if (queue) {
+        queue.songs.push(song);
         if (playlist) return;
         let message;
         message = client.messages.songAdded.replace("%TITLE%", song.title);

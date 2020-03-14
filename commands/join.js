@@ -6,13 +6,13 @@ module.exports = {
     onlyDev: true,
     permission: 'none',
     category: 'util',
-    async execute(msg, args, client, Discord, prefix) {
+    async execute(msg, args, client, Discord, prefix, command) {
         try {
-            const serverQueue = client.queue.get(msg.guild.id);
+            const queue = client.queue.get(msg.guild.id);
             const voiceChannel = msg.member.voice.channel;
             const connection = await voiceChannel.join();
-            if (serverQueue) {
-                serverQueue.connection = connection;
+            if (queue) {
+                queue.connection = connection;
             }
             msg.channel.send(`${client.messages.joined} ${voiceChannel.name}!`);
         } catch (error) {

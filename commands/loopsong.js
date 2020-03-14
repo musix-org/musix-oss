@@ -7,15 +7,15 @@ module.exports = {
     permission: 'MANAGE_MESSAGES',
     category: 'music',
     async execute(msg, args, client, Discord, prefix, command) {
-        const serverQueue = client.queue.get(msg.guild.id);
+        const queue = client.queue.get(msg.guild.id);
         if (client.funcs.check(client, msg, command)) {
-            if (!serverQueue.songLooping) {
-                serverQueue.songLooping = true;
+            if (!queue.songLooping) {
+                queue.songLooping = true;
                 let message;
-                message = client.messages.loopingSong.replace("%TITLE%", serverQueue.songs[0].title);
+                message = client.messages.loopingSong.replace("%TITLE%", queue.songs[0].title);
                 msg.channel.send(message);
             } else {
-                serverQueue.songLooping = false;
+                queue.songLooping = false;
                 msg.channel.send(message);
             }
         }

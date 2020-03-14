@@ -6,7 +6,7 @@ module.exports = {
     onlyDev: true,
     permission: 'dev',
     category: 'info',
-    async execute(msg, args, client, Discord) {
+    async execute(msg, args, client, Discord, prefix, command) {
         const cmduses = [];
         client.commands.forEach((value, key) => {
             cmduses.push([key, value.uses]);

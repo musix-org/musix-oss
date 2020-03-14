@@ -7,13 +7,13 @@ module.exports = {
     permission: 'MANAGE_MESSAGES',
     category: 'music',
     async execute(msg, args, client, Discord, prefix, command) {
-        const serverQueue = client.queue.get(msg.guild.id);
+        const queue = client.queue.get(msg.guild.id);
         if (client.funcs.check(client, msg, command)) {
-            if (!serverQueue.looping) {
-                serverQueue.looping = true;
+            if (!queue.looping) {
+                queue.looping = true;
                 msg.channel.send(client.messages.looping);
             } else {
-                serverQueue.looping = false;
+                queue.looping = false;
                 msg.channel.send(client.messages.noLooping);
             }
         }

@@ -8,9 +8,9 @@ module.exports = {
     category: 'music',
     async execute(msg, args, client, Discord, prefix, command) {
         const ytdl = require('ytdl-core');
-        const serverQueue = client.queue.get(msg.guild.id);
+        const queue = client.queue.get(msg.guild.id);
         if (client.funcs.check(client, msg, command)) {
-            let data = await Promise.resolve(ytdl.getInfo(serverQueue.songs[0].url));
+            let data = await Promise.resolve(ytdl.getInfo(queue.songs[0].url));
             if (!args[1]) return msg.channel.send(`${client.messages.correctUsage}\`${prefix}seek ${command.usage}\``);
             let point = args[1];
             const pos = parseInt(args[1]);
@@ -21,9 +21,9 @@ module.exports = {
                 if (pos > data.length_seconds) return msg.channel.send(message);
                 point = pos;
             }
-            serverQueue.connection.dispatcher.end();
-            serverQueue.endReason = "seek";
-            client.funcs.play(msg.guild, serverQueue.songs[0], client, msg, point, false);
+            queue.connection.dispatcher.end();
+            queue.endReason = "seek";
+            client.funcs.play(msg.guild, queue.songs[0], client, msg, point, false);
         }
     }
 };

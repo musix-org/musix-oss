@@ -1,17 +1,17 @@
 module.exports = async function (client, reason, guild) {
-    const serverQueue = client.queue.get(guild.id);
-    serverQueue.playing = false;
+    const queue = client.queue.get(guild.id);
+    queue.playing = false;
     if (reason === "seek") {
         return;
     }
-    if (!serverQueue.songLooping) {
-        if (serverQueue.looping) {
-            serverQueue.songs.push(serverQueue.songs[0]);
+    if (!queue.songLooping) {
+        if (queue.looping) {
+            queue.songs.push(queue.songs[0]);
         }
 
-        serverQueue.votes = 0;
-        serverQueue.voters = [];
-        serverQueue.songs.shift();
+        queue.votes = 0;
+        queue.voters = [];
+        queue.songs.shift();
     }
-    client.funcs.play(guild, serverQueue.songs[0], client, 0, true);
+    client.funcs.play(guild, queue.songs[0], client, 0, true);
 };

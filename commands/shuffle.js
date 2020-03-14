@@ -7,9 +7,9 @@ module.exports = {
     permission: 'MANAGE_MESSAGES',
     category: 'music',
     execute(msg, args, client, Discord, prefix, command) {
-        const serverQueue = client.queue.get(msg.guild.id);
+        const queue = client.queue.get(msg.guild.id);
         if (client.funcs.check(client, msg, command)) {
-            client.funcs.shuffle(serverQueue.songs);
+            client.funcs.shuffle(queue.songs);
             msg.channel.send(client.messages.shuffled);
         }
     }

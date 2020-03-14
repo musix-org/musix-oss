@@ -7,12 +7,12 @@ module.exports = {
 	permission: 'MANAGE_CHANNELS',
 	category: 'music',
 	execute(msg, args, client, Discord, prefix, command) {
-		const serverQueue = client.queue.get(msg.guild.id);
+		const queue = client.queue.get(msg.guild.id);
 		if (client.funcs.check(client, msg, command)) {
-			serverQueue.songs = [];
-			serverQueue.looping = false;
-			serverQueue.endReason = "stop";
-			serverQueue.connection.dispatcher.end();
+			queue.songs = [];
+			queue.looping = false;
+			queue.endReason = "stop";
+			queue.connection.dispatcher.end();
 			msg.channel.send(client.messages.stop)
 		}
 	}

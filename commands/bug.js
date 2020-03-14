@@ -6,7 +6,7 @@ module.exports = {
     onlyDev: false,
     permission: 'none',
     category: 'info',
-    async execute(msg, args, client, Discord, prefix) {
+    async execute(msg, args, client, Discord, prefix, command) {
         const embed = new Discord.MessageEmbed()
             .setTitle(client.messages.bugTitle)
             .setDescription(client.messages.bugDesc)

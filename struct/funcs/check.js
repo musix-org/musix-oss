@@ -1,12 +1,12 @@
 module.exports = function (client, msg, command) {
-    const serverQueue = client.queue.get(msg.guild.id);
+    const queue = client.queue.get(msg.guild.id);
     const permissions = msg.channel.permissionsFor(msg.author);
-    if (!serverQueue || !serverQueue.playing) {
+    if (!queue || !queue.playing) {
         msg.channel.send(client.messages.noServerQueue);
         return false;
     }
     if (msg.author.id !== client.config.devId) {
-        if (msg.member.voice.channel !== serverQueue.voiceChannel) {
+        if (msg.member.voice.channel !== queue.voiceChannel) {
             msg.channel.send(client.messages.wrongVoiceChannel);
             return false;
         }
