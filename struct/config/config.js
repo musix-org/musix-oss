@@ -5,6 +5,7 @@ module.exports = {
     devToken: process.env.DEVTOKEN,
     dblKey: process.env.DBLKEY,
     api_key: process.env.GOOGLE_API_KEY,
+    testServer: "489111553321336832",
     debug_channel: "634718645188034560",
     primary_test_channel: "617633098296721409",
     secondary_test_channel: "570531724002328577",

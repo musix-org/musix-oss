@@ -1,5 +1,5 @@
 module.exports = async function (client) {
-    if (!client.guild.find('489111553321336832')) return;
+    if (!client.guilds.cache.has(client.config.testServer)) return;
     try {
         await client.channels.fetch(client.config.secondary_test_channel)
             .then(x => x.join());
