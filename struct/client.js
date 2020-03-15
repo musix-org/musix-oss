@@ -59,17 +59,13 @@ module.exports = class extends Client {
 
         this.on('ready', () => {
             require(`${events}ready`).execute(this, Discord);
-        });
-        this.on('message', (msg) => {
+        }).on('message', (msg) => {
             require(`${events}msg`).execute(this, msg, Discord);
-        });
-        this.on('guildCreate', (guild) => {
+        }).on('guildCreate', (guild) => {
             require(`${events}guildCreate`).execute(this, guild);
-        });
-        this.on('voiceStateUpdate', (oldState, newState) => {
+        }).on('voiceStateUpdate', (oldState, newState) => {
             require(`${events}voiceStateUpdate`).execute(this, oldState, newState);
-        });
-        this.on('error', (error) => {
+        }).on('error', (error) => {
             client.channels.fetch(client.config.debug_channel).send(`Error: ${error} on shard: ${this.shard}`);
         });
 

@@ -1,6 +1,7 @@
 module.exports = async function (guild, song, client, seek, play) {
     const Discord = require('discord.js');
     const ytdl = require('ytdl-core');
+    const streamConfig = require("../config/streamConfig.js");
     const getThumb = require('video-thumbnail-url');
 
     const queue = client.queue.get(guild.id);
@@ -10,16 +11,13 @@ module.exports = async function (guild, song, client, seek, play) {
         return;
     }
     const dispatcher = queue.connection
-        .play(await ytdl(song.url, { filter: "audio", highWaterMark: 1 << 25, volume: false, begin: seek }), { seek: 0, bitrate: 1024, passes: 10, volume: 1, bassboost: queue.bass })
-        .on("finish", () => {
+        .play(await ytdl(song.url, streamConfig.ytdlOptions), streamConfig.options).on("finish", () => {
             client.dispatcher.finish(client, queue.endReason, guild);
+        }).on('start', () => {
+            dispatcher.player.streamingData.pausedTime = 0;
+        }).on('error', error => {
+            client.dispatcher.error(client, error, guild);
         });
-    dispatcher.on('start', () => {
-        dispatcher.player.streamingData.pausedTime = 0;
-    });
-    dispatcher.on('error', error => {
-        client.dispatcher.error(client, error, guild);
-    });
     dispatcher.setVolume(queue.volume / 10);
     if (client.global.db.guilds[guild.id].startPlaying || play) {
         const data = await Promise.resolve(ytdl.getInfo(queue.songs[0].url));
