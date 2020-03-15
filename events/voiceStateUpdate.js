@@ -27,7 +27,7 @@ module.exports = {
                     queue.endReason = "Timeout";
                     queue.connection.dispatcher.end();
                 }
-            }, 12000);
+            }, 120000);
         }
     }
 }
