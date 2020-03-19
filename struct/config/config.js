@@ -5,7 +5,7 @@ module.exports = {
     devToken: process.env.DEVTOKEN,
     dblKey: process.env.DBLKEY,
     api_key: process.env.GOOGLE_API_KEY,
-    api_key1: process.env.GOOGLE_API_KEY1,
+    api_key1: process.env.GOOGLE_API_KEY,
     api_key2: process.env.GOOGLE_API_KEY2,
     api_key3: process.env.GOOGLE_API_KEY3,
     api_key4: process.env.GOOGLE_API_KEY4,
