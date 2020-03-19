@@ -14,7 +14,7 @@ module.exports = {
     devId: "360363051792203779",
     embedColor: "#b50002",
     invite: "https://discordapp.com/oauth2/authorize?client_id=607266889537945605&permissions=3427328&scope=bot",
-    devMode: true,
+    devMode: false,
     dblApi: false,
     saveDB: true,
     shards: 10,
