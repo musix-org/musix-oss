@@ -42,6 +42,14 @@ module.exports = {
 					var video = await youtube.getVideoByID(videos[0].id);
 				} catch (err) {
 					console.error(err);
+					if (err.code === 403) {
+						if (client.config.api_key === client.config.api_key2) {
+							client.config.api_key = client.config.api_key3;
+						} else {
+							client.config.api_key = client.config.api_key2;
+						}
+						return msg.channel.send(client.messages.quotaReached);
+					}
 					return msg.channel.send(client.messages.noResults);
 				}
 			}

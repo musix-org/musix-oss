@@ -1,16 +1,19 @@
 const { Client, Collection } = require('discord.js');
-const Discord = require('discord.js');
 const admin = require('firebase-admin');
 const serviceAccount = require('./config/serviceAccount.json');
 const fs = require('fs');
 const path = require('path');
-const events = '../events/';
+const events = require('../events/events.js');
 
 module.exports = class extends Client {
     constructor() {
         super({
             disableEveryone: true,
             disabledEvents: ['TYPING_START']
+        });
+
+        admin.initializeApp({
+            credential: admin.credential.cert(serviceAccount),
         });
         this.commands = new Collection();
         this.commandAliases = new Collection();
@@ -20,8 +23,14 @@ module.exports = class extends Client {
         this.dispatcher = {};
         this.config = require('./config/config.js');
         this.messages = require('./config/messages.js');
-        this.dispatcher.finish = require('../events/dispatcher/finish.js');
-        this.dispatcher.error = require('../events/dispatcher/error.js');
+        this.db = admin.firestore();
+        this.db.FieldValue = require('firebase-admin').firestore.FieldValue;
+        this.dispatcher.finish = require('../events/dispatcherEvents/finish.js');
+        this.global = {
+            db: {
+                guilds: {},
+            },
+        };
 
         fs.readdirSync(path.join(__dirname, 'funcs')).forEach(filename => {
             this.funcs[filename.slice(0, -3)] = require(`./funcs/${filename}`);
@@ -43,31 +52,7 @@ module.exports = class extends Client {
             this.config.token = this.config.devToken;
         }
 
-        admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount),
-        });
-
-        this.db = admin.firestore();
-
-        this.global = {
-            db: {
-                guilds: {},
-            },
-        };
-
-        this.db.FieldValue = require('firebase-admin').firestore.FieldValue;
-
-        this.on('ready', () => {
-            require(`${events}ready`).execute(this, Discord);
-        }).on('message', (msg) => {
-            require(`${events}msg`).execute(this, msg, Discord);
-        }).on('guildCreate', (guild) => {
-            require(`${events}guildCreate`).execute(this, guild);
-        }).on('voiceStateUpdate', (oldState, newState) => {
-            require(`${events}voiceStateUpdate`).execute(this, oldState, newState);
-        }).on('error', (error) => {
-            client.channels.fetch(client.config.debug_channel).send(`Error: ${error} on shard: ${this.shard}`);
-        });
+        events(this);
 
         this.login(this.config.token).catch(err => console.log('Failed to login: ' + err));
     }

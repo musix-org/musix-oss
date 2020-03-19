@@ -38,21 +38,8 @@ module.exports = {
         }
         console.log(`- Activated - Shard: ${client.shard.ids} -`);
         setInterval(async () => {
-            if (client.config.saveDB && !client.config.devMode) {
-                console.log('DB saved');
-                client.guilds.cache.forEach(guild => {
-                    client.db.collection('guilds').doc(guild.id).set({
-                        prefix: client.global.db.guilds[guild.id].prefix,
-                        defaultVolume: client.global.db.guilds[guild.id].defaultVolume,
-                        permissions: client.global.db.guilds[guild.id].permissions,
-                        dj: client.global.db.guilds[guild.id].dj,
-                        djrole: client.global.db.guilds[guild.id].djrole,
-                        startPlaying: client.global.db.guilds[guild.id].startPlaying,
-                        //bass: client.global.db.guilds[guild.id].bass,
-                    });
-                });
-            }
-            if (client.config.dblApi && !client.config.devMode) dbl.postStats(client.guilds.size);
+            client.funcs.saveDB(client);
+            if (client.config.dblApi && !client.config.devMode) dbl.postStats(client.guilds.cache.size);
         }, 1800000);
         setInterval(() => {
             client.funcs.ffmpeg(client, Discord);
