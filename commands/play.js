@@ -42,7 +42,6 @@ module.exports = {
 					var video = await youtube.getVideoByID(videos[0].id);
 				} catch (err) {
 					console.error(err);
-					client.debug_channel.send(err);
 					if (err.code === 403) {
 						if (client.config.api_key === client.config.api_key) {
 							client.config.api_key = client.config.api_key2;
