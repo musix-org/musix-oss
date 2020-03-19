@@ -43,16 +43,6 @@ module.exports = {
 				} catch (err) {
 					console.error(err);
 					if (err.code === 403) {
-						if (client.config.api_key === client.config.api_key) {
-							client.config.api_key = client.config.api_key2;
-						} else if (client.config.api_key === client.config.api_key2) {
-							client.config.api_key = client.config.api_key3;
-						} else if (client.config.api_key === client.config.api_key3) {
-							client.config.api_key = client.config.api_key4;
-						}
-						else if (client.config.api_key === client.config.api_key4) {
-							client.config.api_key = client.config.api_key1;
-						}
 						return msg.channel.send(client.messages.quotaReached);
 					}
 					return msg.channel.send(client.messages.noResults);

@@ -85,7 +85,7 @@ module.exports = {
     queueFooter: "songs in the queue!",
     queueLength: "<:redx:674263474704220182> There are only %SONGS% amount of songs in the queue!",
     queueTitle: "__Song queue__",
-    quotaReached: "<:redx:674263474704220182> Could not search for results please try again!",
+    quotaReached: "<:redx:674263474704220182> Quota reached please try again after midnight Pacific Time (PT)!",
     reloaded: "All files reloaded!",
     removed: "🗑️ removed `%SONG%` from the queue!",
     reset: "<:green_check_mark:674265384777416705> Reset __all__ guild settings!",
