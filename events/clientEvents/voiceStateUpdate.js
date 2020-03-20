@@ -1,6 +1,7 @@
 module.exports = {
     name: 'voiceStateUpdate',
     async execute(client, oldState, newState) {
+        if (oldState.channel === null) return newState.setSelfDeaf(true);
         let change = false;
         const queue = client.queue.get(newState.guild.id);
         if (!queue) return;
@@ -17,7 +18,6 @@ module.exports = {
                 queue.connection = newState.connection;
             }
         }
-        if (oldState.channel === null) return;
         if (oldState.channel.members.size === 1 && oldState.channel === queue.voiceChannel || change) {
             setTimeout(() => {
                 if (!queue) return;
