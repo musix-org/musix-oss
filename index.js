@@ -1,4 +1,4 @@
-const config = require("./struct/config/config.js");
+const config = require("./src/struct/config/config.js");
 
 if (config.devMode) {
     config.token = config.devToken;
@@ -6,7 +6,7 @@ if (config.devMode) {
 }
 
 const { ShardingManager } = require('discord.js');
-const manager = new ShardingManager('./bot.js', { token: config.token, respawn: true, totalShards: config.shards });
+const manager = new ShardingManager('./src/bot.js', { token: config.token, respawn: config.respawn, totalShards: config.shards });
 
 console.log('Launching shards...');
 manager.spawn(config.shards, config.shardDelay, config.shardTimeout);
