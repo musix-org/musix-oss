@@ -1,9 +1,8 @@
 module.exports = async function (video, msg, voiceChannel, client, playlist = false) {
     const Discord = require('discord.js');
     const song = {
-        id: video.id,
         title: Discord.Util.escapeMarkdown(video.title),
-        url: `https://www.youtube.com/watch?v=${video.id}`,
+        url: video.url,
         author: msg.author
     }
 

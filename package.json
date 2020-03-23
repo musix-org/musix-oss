@@ -31,6 +31,7 @@
     "request": "^2.88.2",
     "simple-youtube-api": "^5.2.1",
     "video-thumbnail-url": "^1.0.1",
+    "yt-search": "^1.1.2",
     "ytdl-core": "^1.0.9",
     "ytdl-core-discord": "^1.1.0"
   }

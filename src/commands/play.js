@@ -1,4 +1,5 @@
 const YouTube = require("simple-youtube-api");
+const search = require('yt-search');
 
 module.exports = {
 	name: 'play',
@@ -37,16 +38,15 @@ module.exports = {
 			try {
 				var video = await youtube.getVideo(url);
 			} catch (error) {
-				try {
-					const videos = await youtube.searchVideos(searchString, 1);
-					var video = await youtube.getVideoByID(videos[0].id);
-				} catch (err) {
-					console.error(err);
-					if (err.code === 403) {
-						return msg.channel.send(client.messages.quotaReached);
+				search(searchString, function (err, res) {
+					if (err) return console.log(err);
+					if (res.videos.length === 0) {
+						msg.channel.send(client.messages.noResults);
+					} else {
+						client.funcs.handleVideo(res.videos[0], msg, voiceChannel, client, false);
 					}
-					return msg.channel.send(client.messages.noResults);
-				}
+				})
+				return;
 			}
 			return client.funcs.handleVideo(video, msg, voiceChannel, client, false);
 		}
