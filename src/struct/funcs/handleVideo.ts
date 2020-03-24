@@ -16,7 +16,7 @@ module.exports = async function (video, msg, voiceChannel, client, playlist = fa
         return msg.channel.send(message);
     }
 
-    const construct = require("../config/queueConfig.js");
+    const construct = require("../config/queueConfig.ts");
 
     construct.textChannel = msg.channel;
     construct.voiceChannel = voiceChannel;

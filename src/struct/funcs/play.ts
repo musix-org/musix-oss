@@ -1,7 +1,7 @@
 module.exports = async function (guild, song, client, seek, play) {
     const Discord = require('discord.js');
     const ytdl = require('ytdl-core');
-    const streamConfig = require("../config/streamConfig.js");
+    const streamConfig = require("../config/streamConfig.ts");
     const getThumb = require('video-thumbnail-url');
     const prism = require('prism-media');
 
@@ -20,7 +20,7 @@ module.exports = async function (guild, song, client, seek, play) {
         "-f", "s16le",
         "-ar", "48000",
         "-ac", "2",
-        "-af", `bass=g=${queue.bass}`
+        "-af", `bass=g=${queue.bass}`,
     ];
     const transcoder = new prism.FFmpeg({ args: ffmpegArgs });
 

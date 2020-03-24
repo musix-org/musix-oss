@@ -35,20 +35,11 @@ module.exports = {
 			client.messages.playlistAdded = client.messages.playlistAdded.replace("%TITLE%", playlist.title);
 			return lmsg.edit(client.messages.playlistAdded);
 		} else {
-			try {
-				var video = await youtube.getVideo(url);
-			} catch (error) {
-				search(searchString, function (err, res) {
-					if (err) return console.log(err);
-					if (res.videos.length === 0) {
-						msg.channel.send(client.messages.noResults);
-					} else {
-						client.funcs.handleVideo(res.videos[0], msg, voiceChannel, client, false);
-					}
-				})
-				return;
-			}
-			return client.funcs.handleVideo(video, msg, voiceChannel, client, false);
+			search(searchString, function (err, res) {
+				if (err) return console.log(err);
+				if (res.videos.length === 0) return msg.channel.send(client.messages.noResults);
+				client.funcs.handleVideo(res.videos[0], msg, voiceChannel, client, false);
+			})
 		}
 	}
 };

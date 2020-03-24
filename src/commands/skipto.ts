@@ -10,7 +10,8 @@ module.exports = {
         const queue = client.queue.get(msg.guild.id);
         if (client.funcs.check(client, msg, command)) {
             if (!args[1]) return msg.channel.send(`${client.messages.correctUsage}\`${command.usage}\``);
-            const point = parseInt(args[1] - 1);
+            let point = parseInt(args[1]);
+            point = point - 1;
             if (isNaN(point)) return msg.channel.send(client.messages.validNumber);
             if (point > queue.songs.size) return msg.channel.send(client.messages.noSongs);
             if (point < 0) return msg.channel.send(client.messages.cantSkipToCurrent);

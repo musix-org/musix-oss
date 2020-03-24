@@ -3,7 +3,7 @@ const admin = require('firebase-admin');
 const serviceAccount = require('./config/serviceAccount.json');
 const fs = require('fs');
 const path = require('path');
-const events = require('../events/events.js');
+const events = require('../events/events.ts');
 
 module.exports = class extends Client {
     constructor() {
@@ -21,12 +21,12 @@ module.exports = class extends Client {
         this.queue = new Map();
         this.funcs = {};
         this.dispatcher = {};
-        this.config = require('./config/config.js');
-        this.messages = require('./config/messages.js');
+        this.config = require('./config/config.ts');
+        this.messages = require('./config/messages.ts');
         this.db = admin.firestore();
         this.db.FieldValue = require('firebase-admin').firestore.FieldValue;
-        this.dispatcher.finish = require('../events/dispatcherEvents/finish.js');
-        this.dispatcher.error = require('../events/dispatcherEvents/error.js');
+        this.dispatcher.finish = require('../events/dispatcherEvents/finish.ts');
+        this.dispatcher.error = require('../events/dispatcherEvents/error.ts');
         this.global = {
             db: {
                 guilds: {},
@@ -37,14 +37,14 @@ module.exports = class extends Client {
             this.funcs[filename.slice(0, -3)] = require(`./funcs/${filename}`);
         });
 
-        const commandFiles = fs.readdirSync(path.join(path.dirname(__dirname), 'commands')).filter(f => f.endsWith('.js'));
+        const commandFiles = fs.readdirSync(path.join(path.dirname(__dirname), 'commands')).filter(f => f.endsWith('.ts'));
         for (const file of commandFiles) {
             const command = require(`../commands/${file}`);
             command.uses = 0;
             this.commands.set(command.name, command);
             this.commandAliases.set(command.alias, command);
         }
-        const settingFiles = fs.readdirSync(path.join(path.dirname(__dirname), 'commands/settings')).filter(f => f.endsWith('.js'));
+        const settingFiles = fs.readdirSync(path.join(path.dirname(__dirname), 'commands/settings')).filter(f => f.endsWith('.ts'));
         for (const file of settingFiles) {
             const option = require(`../commands/settings/${file}`);
             this.settingCmd.set(option.name, option);
