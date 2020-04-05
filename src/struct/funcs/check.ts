@@ -18,7 +18,7 @@ module.exports = function (client, msg, command) {
                 } else return true;
             } else if (!permissions.has(command.permission)) {
                 let message
-                message = client.messages.noPerms.replace("%PERMS%", commands.permissions);
+                message = client.messages.noPerms.replace("%PERMS%", command.permissions);
                 msg.channel.send(message);
                 return false;
             } else return true;

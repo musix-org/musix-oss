@@ -11,7 +11,6 @@ module.exports = {
     category: 'music',
     async execute(msg, args, client, Discord, command) {
         const searchString = args.slice(1).join(" ");
-        const url = args[1] ? args[1].replace(/<(.+)>/g, "$1") : "";
         const queue = client.queue.get(msg.guild.id);
         const voiceChannel = msg.member.voice.channel;
         if (!queue) {

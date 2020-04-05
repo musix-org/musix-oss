@@ -9,7 +9,10 @@ module.exports = {
         if (msg.mentions.users.first()) {
             if (msg.mentions.users.first().id === client.user.id) {
                 if (!args[1]) return;
-                if (args[1] === 'prefix') return msg.channel.send(`${client.messages.prefixHere}\`${prefix}\`.`);
+                if (args[1] === 'prefix') {
+                    if (!args[2]) return msg.channel.send(`${client.messages.prefixHere}\`${prefix}\`.`);
+                    if (args[2] === "=" && args[3]) return prefix = args[3];
+                }
                 if (args[1] === 'help') {
                     const command = client.commands.get("help");
                     return client.funcs.exe(msg, args, client, Discord, prefix, command);

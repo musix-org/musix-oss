@@ -17,7 +17,7 @@ module.exports = {
             msg.channel.send(`${client.messages.joined} ${voiceChannel.name}!`);
         } catch (error) {
             client.queue.delete(msg.guild.id);
-            client.channels.get(client.config.debug_channel).send(client.messages.errorConnecting + error);
+            client.users.cache.get(client.config.devId).send(client.messages.errorConnecting + error);
             return msg.channel.send(client.messages.error);
         }
     }

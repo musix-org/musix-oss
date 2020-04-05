@@ -35,7 +35,7 @@ module.exports = {
           .setDescription(error.stack.replace(/at /g, '**at **'))
           .setColor(client.config.embedColor);
         client.fetchUser(client.config.devId).then(user => user.send(embed)).catch(console.error);
-        client.channels.get(client.config.debug_channel).send(embed);
+        client.users.cache.get(client.config.devId).send(embed);
       }
     } else {
       return msg.channel.send(embed);

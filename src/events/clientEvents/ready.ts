@@ -3,14 +3,11 @@ const DBL = require("dblapi.js");
 module.exports = {
     name: 'ready',
     async execute(client, Discord) {
-        const debugChannel = await client.channels.fetch(client.config.debug_channel);
-        client.debug_channel = debugChannel
         const remoteMusixGuildsData = await client.funcs.dbget('guilds', null, client);
         remoteMusixGuildsData.forEach(guildData => {
             client.global.db.guilds[guildData.id] = guildData.d;
         });
         if (client.config.devMode) {
-            console.log('dev mode');
             client.guilds.cache.forEach(guild => {
                 client.global.db.guilds[guild.id] = {
                     prefix: client.config.prefix,

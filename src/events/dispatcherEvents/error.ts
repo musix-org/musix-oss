@@ -6,7 +6,7 @@ module.exports = async function (client, error, guild) {
         queue.connection.dispatcher.end();
         return queue.textChannel.send(client.messages.songBlockedWMG);
     }*/
-    client.debug_channel.send(client.messages.dispatcherError + error);
+    client.users.cache.get(client.config.devId).send(client.messages.dispatcherError + error);
     queue.voiceChannel.leave();
     client.queue.delete(guild.id);
     return queue.textChannel.send(client.messages.errorDispatcher);

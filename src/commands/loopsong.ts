@@ -16,7 +16,7 @@ module.exports = {
                 msg.channel.send(message);
             } else {
                 queue.songLooping = false;
-                msg.channel.send(message);
+                msg.channel.send(client.messages.noLoopingSong);
             }
         }
     }

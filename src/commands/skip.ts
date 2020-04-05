@@ -42,9 +42,9 @@ function vote(queue, msg, client) {
 			queue.voters = [];
 			queue.votes = 0;
 			queue.votesNeeded = null;
-			return skipSong(queue, msg);
+			return skipSong(queue, msg, client);
 		} else return msg.channel.send(`${client.messages.notEnoughVotes} ${queue.votes} / ${queue.votesNeeded}!`);
 	} else {
-		return skipSong(queue, msg);
+		return skipSong(queue, msg, client);
 	}
 };
