@@ -2,7 +2,7 @@ module.exports = {
     garbage: "🗑️ ",
     green_check_mark: "<:green_check_mark:674265384777416705> ",
     loading: "<a:loading:674284196700618783> ",
-    loudSoung: ":loud_sound: ",
+    loudSound: ":loud_sound: ",
     megaPhone: "📣 ",
     notes: "<a:aNotes:674602408105476106>",
     pause: "<:pause:674685548610322462> ",
@@ -15,6 +15,6 @@ module.exports = {
     skip: "<:skip:674685614221688832> ",
     speaker: ":speaker: ",
     stop: "<:stop:674685626108477519> ",
-    stopwatch: ":stopWatch: ",
+    stopWatch: ":stopWatch: ",
     volumeHigh: "<:volumehigh:674685637626167307> "
 }

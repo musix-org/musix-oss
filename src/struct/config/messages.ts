@@ -122,7 +122,7 @@ module.exports = {
     statusField3: emojis.stopWatch + "Uptime",
     statusField4: "Shard: ",
     statusTitle: "Status for Musix",
-    stop: "Stopped the music!",
+    stop: emojis.stop + "Stopped the music!",
     validNumber: emojis.redx + "I'm sorry, But you need to enter a valid __number__.",
     wrongVoiceChannel: emojis.redx + "I'm sorry but you need to be in the same voice channel as Musix to use this command!",
 };

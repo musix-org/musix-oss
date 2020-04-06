@@ -7,6 +7,8 @@ module.exports = {
   permission: 'MANAGE_GUILD',
   category: 'util',
   async execute(msg, args, client, Discord, command) {
+    let footer;
+    footer = client.messages.settingsFooter.replace("%PREFIX%", client.global.db.guilds[msg.guild.id].prefix);
     const embed = new Discord.MessageEmbed()
       .setTitle(client.messages.settingsTitle)
       .addField(client.messages.settingsPrefix, client.messages.settingsPrefixDesc, true)
@@ -15,7 +17,7 @@ module.exports = {
       .addField(client.messages.settingsSetDj, client.messages.settingsSetDjDesc, true)
       .addField(client.messages.settingsAnnounceSongs, client.messages.settingsAnnounceSongsDesc)
       .addField(client.messages.settingsBass, client.messages.settingsBassDesc, true)
-      .setFooter(client.messages.settingsFooter)
+      .setFooter(footer)
       .setAuthor(client.user.username, client.user.displayAvatarURL)
       .setColor(client.config.embedColor)
     const permissions = msg.channel.permissionsFor(msg.author);
