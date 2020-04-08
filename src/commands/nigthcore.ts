@@ -17,7 +17,7 @@ module.exports = {
         queue.nigthCore = true;
       } else if (args[1] === "false") {
         queue.nigthCore = false;
-      }
+      } else return msg.channel.send(client.messages.boolean);
       let message;
       message = client.messages.nigthCoreApplied.replace("%BOOLEAN%", args[1]);
       return msg.channel.send(message);
