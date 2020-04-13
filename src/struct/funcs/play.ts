@@ -37,7 +37,7 @@ module.exports = async function (guild, song, client, seek, play) {
 
   const dispatcher = queue.connection
     .play(
-      await ytdl(song.url, streamConfig.ytdlOptions).pipe(transcoder),
+      ytdl(song.url, streamConfig.ytdlOptions).pipe(transcoder),
       streamConfig.options
     )
     .on("finish", () => {
