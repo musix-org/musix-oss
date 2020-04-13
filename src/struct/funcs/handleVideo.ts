@@ -5,7 +5,6 @@ module.exports = async function (
   client,
   playlist = false
 ) {
-  const queueConfig = require("../config/queueConfig.ts");
   const Discord = require("discord.js");
   const song = {
     title: Discord.Util.escapeMarkdown(video.title),
@@ -23,7 +22,24 @@ module.exports = async function (
     return msg.channel.send(message);
   }
 
-  const construct = { ...queueConfig };
+  const construct = {
+    textChannel: null,
+    voiceChannel: null,
+    connection: null,
+    songs: [],
+    volume: null,
+    bass: null,
+    nigthCore: false,
+    playing: false,
+    paused: false,
+    looping: false,
+    songLooping: false,
+    votes: 0,
+    voters: [],
+    votesNeeded: null,
+    time: 0,
+    endReason: null,
+  };
 
   construct.textChannel = msg.channel;
   construct.voiceChannel = voiceChannel;
