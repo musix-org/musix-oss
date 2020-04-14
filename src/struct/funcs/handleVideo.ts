@@ -16,6 +16,7 @@ module.exports = async function (
 
   if (queue) {
     queue.songs.push(song);
+    queue.textChannel = msg.channel;
     if (playlist) return;
     let message;
     message = client.messages.songAdded.replace("%TITLE%", song.title);
