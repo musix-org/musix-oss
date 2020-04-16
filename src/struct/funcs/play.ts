@@ -12,7 +12,7 @@ module.exports = async function (guild, song, client, seek, play) {
     return;
   }
 
-  streamConfig.ytdlOptions.begin = seek;
+  streamConfig.options.seek = seek;
 
   const ffmpegArgs = [
     "-analyzeduration",

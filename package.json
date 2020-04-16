@@ -1,6 +1,6 @@
 {
   "name": "musix",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "V3 for Musix the discord music bot",
   "main": "./index.js",
   "scripts": {
@@ -17,20 +17,25 @@
   },
   "homepage": "https://github.com/MatteZ02/Musix-V3#readme",
   "dependencies": {
-    "@discordjs/opus": "^0.1.0",
+    "bufferutil": "^4.0.1",
     "dblapi.js": "^2.4.0",
     "discord.js": "^12.1.1",
     "dotenv": "^8.2.0",
+    "erlpack": "github:discordapp/erlpack",
     "firebase": "^7.14.0",
     "firebase-admin": "^8.10.0",
     "fs": "0.0.1-security",
     "he": "^1.2.0",
+    "libsodium-wrappers": "^0.7.6",
     "ms": "^2.1.2",
+    "node-opus": "^0.3.3",
     "prism-media": "github:hydrabolt/prism-media",
     "request": "^2.88.2",
     "simple-youtube-api": "^5.2.1",
+    "utf-8-validate": "^5.0.2",
     "video-thumbnail-url": "^1.0.1",
     "yt-search": "^1.1.2",
-    "ytdl-core": "^2.1.0"
+    "ytdl-core": "^2.1.0",
+    "zlib-sync": "^0.1.6"
   }
 }
