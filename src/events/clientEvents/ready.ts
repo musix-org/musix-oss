@@ -22,6 +22,7 @@ module.exports = {
           startPlaying: client.config.startPlaying,
           bass: client.config.bass,
           blacklist: [],
+          premium: true,
         };
       });
     }

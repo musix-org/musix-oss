@@ -18,5 +18,7 @@ module.exports = async function (client) {
       client.global.db.guilds[guild.id].bass = client.config.bass;
     if (client.global.db.guilds[guild.id].blacklsit === undefined)
       client.global.db.guilds[guild.id].blacklist = [];
+    if (client.global.db.guilds[guild.id].premium === undefined)
+      client.global.db.guilds[guild.id].premium = false;
   });
 };

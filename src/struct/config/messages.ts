@@ -150,7 +150,7 @@ module.exports = {
   prefixHere: "My prefix here is: ",
   prefixMaxLength: "The prefix must be shorter or equal to 5 letters!",
   prefixSet: emojis.green_check_mark + "New prefix set to:",
-  premiumUsage: emojis.redx + "`settings premium <guild id>`",
+  premiumUsage: "`settings premium <guild id>`",
   provideANumber:
     "Please provide a number ranging from 1-10 to select one of the search results.",
   provideASong:
