@@ -77,9 +77,11 @@ module.exports = {
   helpTitle: "help",
   idOrMentionChannel:
     emojis.redx + "Please provide a channel id or mention a channel!",
+  invalidGuild: emojis.redx + "Invalid guild id!",
   inviteTitle: "Invite Musix to your Discord server!",
   joined: emojis.green_check_mark + "Joined",
   joinSupport: "Join the musix support server: ",
+  keySet: emojis.green_check_mark + "Key set!",
   loadingSongs: emojis.loading + "Loading song(s)",
   looping: emojis.repeat + "Looping the queue now!",
   loopingSong: emojis.repeatSong + "Looping **%TITLE%** now!",
@@ -120,6 +122,9 @@ module.exports = {
   noQuery: emojis.redx + "you need to use a link or search for a song!",
   noResults: emojis.redx + "I could not obtain any search results!",
   noResultsLyrics: emojis.redx + "I could not obtain any results!",
+  noResultsSpotify:
+    emojis.redx +
+    "I could not obtain any results! Make sure you have a key set! More info with the setkey setting.",
   noServerQueue: emojis.redx + "There is nothing playing!",
   noSongs: emojis.redx + "That song does not exist!",
   notPremium: emojis.redx + "This is not a premium guild!",
@@ -150,7 +155,7 @@ module.exports = {
   prefixHere: "My prefix here is: ",
   prefixMaxLength: "The prefix must be shorter or equal to 5 letters!",
   prefixSet: emojis.green_check_mark + "New prefix set to:",
-  premiumUsage: "`settings premium <guild id>`",
+  premiumState: "Premium status: ",
   provideANumber:
     "Please provide a number ranging from 1-10 to select one of the search results.",
   provideASong:
@@ -175,6 +180,8 @@ module.exports = {
   seekMax:
     emojis.redx +
     "The lenght of this song is %LENGTH% seconds! You can't seek further than that!",
+  setKeyUsage:
+    "Usage: `setkey <key> <guild id>`. Get your key from <https://developer.spotify.com/documentation/web-playback-sdk/quick-start/#> by pressing `Get your web playback sdk access token`.\nThe key will expire in 60 minutes!\nDO THIS COMMAND IN THE DMS! YOUR KEY IS PRIVATE DO NOT SHARE IT WITH ANYONE!",
   settingsAnnounceSongs: "announcesongs",
   settingsAnnounceSongsDesc:
     "Whether to announce songs that start playing or not.",
@@ -192,6 +199,8 @@ module.exports = {
   settingsSetDj: "setdj",
   settingsSetDjDesc:
     "Set a DJ role. This will allow chosen users to freely use all Musix commands. This will automatically set the `permissions` settings to true in order for the `DJ` role to have effect!",
+  settingsSetKey: "setkey",
+  settingsSetKeyDesc: "Get instructions on how to set a spotify key.",
   settingsTitle: "Guild settings for Musix",
   settingsVolume: "volume",
   settingsVolumeDesc:

@@ -16,7 +16,9 @@ module.exports = {
       secret: client.config.spotify_client_secret,
     });
 
-    spotify.setAccessToken(client.config.spotify_access_key);
+    spotify.setAccessToken(
+      client.global.db.guilds[msg.guild.id].spotify_access_key
+    );
 
     const youtube = new YouTube(client.config.api_key);
     const searchString = args.slice(1).join(" ");
@@ -123,7 +125,7 @@ module.exports = {
         },
         function (err) {
           console.log(err);
-          msg.channel.send(client.messages.noResults);
+          msg.channel.send(client.messages.noResultsSpotify);
         }
       );
     } else if (

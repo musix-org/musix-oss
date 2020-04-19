@@ -26,7 +26,7 @@ module.exports = {
       )
       .addField(
         client.messages.settingsBlacklist,
-        client.messages.settingsBlacklist,
+        client.messages.settingsBlacklistDesc,
         true
       )
       .addField(
@@ -46,6 +46,11 @@ module.exports = {
       .addField(
         client.messages.settingsBass,
         client.messages.settingsBassDesc,
+        true
+      )
+      .addField(
+        client.messages.settingsSetKey,
+        client.messages.settingsSetKeyDesc,
         true
       )
       .setFooter(footer)
