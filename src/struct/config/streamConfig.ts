@@ -1,7 +1,7 @@
 module.exports = {
-  ytdlOptions: { filter: "audio", highWaterMark: 1 << 20, volume: false },
+  ytdlOptions: { filter: "audio", highWaterMark: 1 << 25, volume: false },
   options: {
-    seek: 0,
+    seek: null,
     bitrate: 1024,
     volume: 1,
     type: "converted",

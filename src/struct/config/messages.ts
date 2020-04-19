@@ -9,15 +9,27 @@ module.exports = {
   announceSongsTrue:
     emojis.green_check_mark + "announcesongs now set to `true`!",
   bassApplied:
-    emojis.volumeHigh +
-    "The bass level **%BASS%** will be applied when the next song starts playing!",
+    emojis.volumeHigh + "The bass level **%BASS%** has been applied!",
   bassFalse: emojis.green_check_mark + "Bass is now false!",
   bassLevel: emojis.green_check_mark + "Bass level is now",
+  blacklistTitle: "Currently blacklisted channels:",
+  blackListedVC:
+    emojis.redx +
+    "Your voiceChannel is blacklisted! Please choose another channel!",
   boolean: emojis.redx + "Please define a boolean! (true/false)",
   cancellingVideoSelection: emojis.redx + "Cancelling video selection",
   cantSkipToCurrent:
     emojis.redx + "You can't skip to the song currently playing!",
+  channelAdded:
+    emojis.green_check_mark + "Channel %CHANNEL% added to the blacklist!",
+  channelAlreadyBlackListed:
+    emojis.redx + "That channel is already blacklisted!",
   channelFull: emojis.redx + "Your voice channel is full!",
+  channelNotBlackListed:
+    emojis.redx + "That channel is not blacklisted or does not exist!",
+  channelRemoved:
+    emojis.green_check_mark +
+    "Channel %CHANNEL% has been removed from the blacklist!",
   cmdUsesFooter: "These statistics are from the current uptime.",
   cmdUsesTitle: "Musix Command Usage During Current Uptime",
   correctUsage: emojis.redx + "correct usage: ",
@@ -38,6 +50,8 @@ module.exports = {
   devMode:
     emojis.redx +
     "Dev mode has been turned on! Commands are only available to developer(s)!",
+  disableNigthCore:
+    emojis.redx + "Please disable nigthCore in order to use this command!",
   dispatcherError: "Error with the dispatcher: ",
   djFalse: emojis.green_check_mark + "`DJ` now set to `false`",
   djRoleCreated:
@@ -56,24 +70,34 @@ module.exports = {
   errorExeOpt:
     emojis.redx + "there was an error trying to execute that option!",
   evalTitle: "Evaluation Command",
+  failedToLoad: emojis.redx + "Songs failed to load: ",
   helpCmdFooter: "Command Alias:",
   helpFooter:
     '"%PREFIX%help <command>" to see more information about a command.',
   helpTitle: "help",
+  idOrMentionChannel:
+    emojis.redx + "Please provide a channel id or mention a channel!",
   inviteTitle: "Invite Musix to your Discord server!",
   joined: emojis.green_check_mark + "Joined",
   joinSupport: "Join the musix support server: ",
   loadingSongs: emojis.loading + "Loading song(s)",
   looping: emojis.repeat + "Looping the queue now!",
   loopingSong: emojis.repeatSong + "Looping **%TITLE%** now!",
+  lyricsTitle: "Lyrics",
+  lyricsUsage: emojis.redx + "Provide a song to search for!",
   maxBass: emojis.redx + "The max bass is `100`!",
   maxVolume: emojis.redx + "The max volume is `100`!",
+  mentionChannel: emojis.redx + "Please mention a channel!",
+  musicCommandsDisabled:
+    emojis.redx +
+    "This channels has been blacklisted! Music commands cannot be used here!",
   nigthCoreApplied:
     emojis.green_check_mark +
     "NigthCore is now **%BOOLEAN%** this will be applied when the next song starts playing!",
   noDj: emojis.redx + "You need the `DJ` role to use this command!",
   noLooping: emojis.repeat + "No longer looping the queue!",
   noLoopingSong: emojis.repeatSong + "No longer looping the song!",
+  noMorePremium: ":cry: Guild %GUILD% is no longer premium!",
   noPerms: emojis.redx + `You need the %PERMS% permission to use this command!`,
   noPermsConnect:
     emojis.redx +
@@ -95,8 +119,10 @@ module.exports = {
     "I cannot use external emojis, make sure I have the proper permissions!",
   noQuery: emojis.redx + "you need to use a link or search for a song!",
   noResults: emojis.redx + "I could not obtain any search results!",
+  noResultsLyrics: emojis.redx + "I could not obtain any results!",
   noServerQueue: emojis.redx + "There is nothing playing!",
   noSongs: emojis.redx + "That song does not exist!",
+  notPremium: emojis.redx + "This is not a premium guild!",
   nowPlayingDesc: emojis.notes + "**Now playing:**",
   notAllowed: emojis.redx + "You are not allowed to do that!",
   notEnoughVotes: emojis.redx + "Not enough votes!",
@@ -105,6 +131,8 @@ module.exports = {
     emojis.redx +
     "I'm sorry but you need to be in a voice channel to play music!",
   nowPlaying: "__Now playing__",
+  nowPremium: ":tada: Guild %GUILD% is now premium!",
+  onlyDev: emojis.redx + "This command is only available for dev(s)!",
   paused: emojis.pause + "Paused the music!",
   permission: "🔒 Permission requirement:",
   permissionsFalse: emojis.redx + "That value is already `false`!",
@@ -122,6 +150,7 @@ module.exports = {
   prefixHere: "My prefix here is: ",
   prefixMaxLength: "The prefix must be shorter or equal to 5 letters!",
   prefixSet: emojis.green_check_mark + "New prefix set to:",
+  premiumUsage: emojis.redx + "`settings premium <guild id>`",
   provideANumber:
     "Please provide a number ranging from 1-10 to select one of the search results.",
   provideASong:
@@ -151,6 +180,9 @@ module.exports = {
     "Whether to announce songs that start playing or not.",
   settingsBass: "bass",
   settingsBassDesc: "Change the default bass level.",
+  settingsBlacklist: "blacklist",
+  settingsBlacklistDesc:
+    "Blacklist channels that you wan't to block music commands to be executed on or block the bot from joining certain voiceChannels.",
   settingsFooter: "how to use: %PREFIX%settings <Setting name> <value>",
   settingsPermissions: "permissions",
   settingsPermissionsDesc:

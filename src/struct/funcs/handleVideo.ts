@@ -1,15 +1,17 @@
 module.exports = async function (
-  video,
+  resource,
   msg,
   voiceChannel,
   client,
-  playlist = false
+  playlist,
+  type
 ) {
   const Discord = require("discord.js");
   const song = {
-    title: Discord.Util.escapeMarkdown(video.title),
-    url: video.url,
+    title: Discord.Util.escapeMarkdown(resource.title),
+    url: resource.url,
     author: msg.author,
+    type: type,
   };
 
   const queue = client.queue.get(msg.guild.id);
@@ -24,12 +26,12 @@ module.exports = async function (
   }
 
   const construct = {
-    textChannel: null,
-    voiceChannel: null,
+    textChannel: msg.channel,
+    voiceChannel: voiceChannel,
     connection: null,
     songs: [],
-    volume: null,
-    bass: null,
+    volume: client.global.db.guilds[msg.guild.id].defaultVolume,
+    bass: client.global.db.guilds[msg.guild.id].bass,
     nigthCore: false,
     playing: false,
     paused: false,
@@ -41,11 +43,6 @@ module.exports = async function (
     time: 0,
     endReason: null,
   };
-
-  construct.textChannel = msg.channel;
-  construct.voiceChannel = voiceChannel;
-  construct.volume = client.global.db.guilds[msg.guild.id].defaultVolume;
-  construct.bass = client.global.db.guilds[msg.guild.id].bass;
 
   construct.songs.push(song);
 

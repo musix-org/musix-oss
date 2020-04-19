@@ -6,7 +6,7 @@ module.exports = {
   onlyDev: false,
   permission: "MANAGE_MESSAGES",
   category: "music",
-  async execute(msg, args, client, Discord, prefix, command) {
+  async execute(msg, args, client, Discord, command) {
     const queue = client.queue.get(msg.guild.id);
     if (!args[1] && queue)
       return msg.channel.send(
