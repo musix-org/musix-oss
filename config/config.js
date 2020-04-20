@@ -17,10 +17,9 @@ module.exports = {
   secondary_test_channel: "570531724002328577",
   devId: "360363051792203779",
   embedColor: "#b50002",
-  invite:
-    "https://discordapp.com/oauth2/authorize?client_id=607266889537945605&permissions=3427328&scope=bot",
+  invite: "https://discordapp.com/oauth2/authorize?client_id=607266889537945605&permissions=3427328&scope=bot",
   supportServer: "https://discord.gg/rvHuJtB",
-  devMode: true,
+  devMode: false,
   api: false,
   saveDB: true,
   respawn: true,
