@@ -1,6 +1,7 @@
 const YouTube = require("simple-youtube-api");
 const search = require("yt-search");
 const SpotifyApi = require("spotify-web-api-node");
+const { globaldb } = require("../../index.js");
 
 module.exports = {
   name: "play",
@@ -16,9 +17,16 @@ module.exports = {
       secret: client.config.spotify_client_secret,
     });
 
-    spotify.setAccessToken(
-      client.global.db.guilds[msg.guild.id].spotify_access_key
-    );
+    const dbdata = await globaldb
+      .collection("guilds")
+      .doc(msg.guild.id)
+      .get()
+      .catch((err) => {
+        console.log("Error getting document", err);
+        return "error";
+      });
+    const accessKey = dbdata.data();
+    spotify.setAccessToken(accessKey);
 
     const youtube = new YouTube(client.config.api_key);
     const searchString = args.slice(1).join(" ");

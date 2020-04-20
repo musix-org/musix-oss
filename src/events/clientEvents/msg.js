@@ -1,3 +1,5 @@
+const { db } = require("../../../index-.js");
+
 module.exports = {
   name: "message",
   async execute(client, msg, Discord) {
@@ -6,9 +8,9 @@ module.exports = {
       const args = msg.content.split(" ");
       if (!args[1] || !args[2])
         return msg.channel.send(client.messages.setKeyUsage);
-      if (!client.guilds.cache.get(args[2]))
-        return msg.channel.send(client.messages.invalidGuild);
-      client.global.db.guilds[args[2]].spotify_access_key = args[1];
+      client.config.db.collection("guilds").doc(args[2]).set({
+        key: args[1],
+      });
       return msg.channel.send(client.messages.keySet);
     }
     if (!msg.guild) return;

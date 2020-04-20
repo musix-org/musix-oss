@@ -1,34 +1,25 @@
-const emojis = require("./emojis.ts");
+const emojis = require("./emojis.js");
 
 module.exports = {
   alreadyPaused: emojis.redx + "The music is already paused!",
   alreadyVoted: emojis.redx + "You have already voted to skip!",
   announceSongs: emojis.megaPhone + "Current setting:",
-  announceSongsFalse:
-    emojis.green_check_mark + "announcesongs now set to `false`!",
-  announceSongsTrue:
-    emojis.green_check_mark + "announcesongs now set to `true`!",
-  bassApplied:
-    emojis.volumeHigh + "The bass level **%BASS%** has been applied!",
+  announceSongsFalse: emojis.green_check_mark + "announcesongs now set to `false`!",
+  announceSongsTrue: emojis.green_check_mark + "announcesongs now set to `true`!",
+  bassApplied: emojis.volumeHigh + "The bass level **%BASS%** has been applied!",
   bassFalse: emojis.green_check_mark + "Bass is now false!",
   bassLevel: emojis.green_check_mark + "Bass level is now",
   blacklistTitle: "Currently blacklisted channels:",
-  blackListedVC:
-    emojis.redx +
+  blackListedVC: emojis.redx +
     "Your voiceChannel is blacklisted! Please choose another channel!",
   boolean: emojis.redx + "Please define a boolean! (true/false)",
   cancellingVideoSelection: emojis.redx + "Cancelling video selection",
-  cantSkipToCurrent:
-    emojis.redx + "You can't skip to the song currently playing!",
-  channelAdded:
-    emojis.green_check_mark + "Channel %CHANNEL% added to the blacklist!",
-  channelAlreadyBlackListed:
-    emojis.redx + "That channel is already blacklisted!",
+  cantSkipToCurrent: emojis.redx + "You can't skip to the song currently playing!",
+  channelAdded: emojis.green_check_mark + "Channel %CHANNEL% added to the blacklist!",
+  channelAlreadyBlackListed: emojis.redx + "That channel is already blacklisted!",
   channelFull: emojis.redx + "Your voice channel is full!",
-  channelNotBlackListed:
-    emojis.redx + "That channel is not blacklisted or does not exist!",
-  channelRemoved:
-    emojis.green_check_mark +
+  channelNotBlackListed: emojis.redx + "That channel is not blacklisted or does not exist!",
+  channelRemoved: emojis.green_check_mark +
     "Channel %CHANNEL% has been removed from the blacklist!",
   cmdUsesFooter: "These statistics are from the current uptime.",
   cmdUsesTitle: "Musix Command Usage During Current Uptime",
@@ -40,43 +31,33 @@ module.exports = {
   currentPrefix: "Current prefix:",
   currentVolume: emojis.loudSound + "The current volume is: ",
   dbSaved: emojis.green_check_mark + "DB Saved!",
-  defaultVolumeMax:
-    emojis.redx +
+  defaultVolumeMax: emojis.redx +
     "The default volume must be below `100` for quality and safety resons.",
-  defaultVolumeNumber:
-    emojis.redx +
+  defaultVolumeNumber: emojis.redx +
     "I'm sorry, But the default volume needs to be a valid __number__.",
   defaultVolumeSet: emojis.green_check_mark + "Default volume set to:",
-  devMode:
-    emojis.redx +
+  devMode: emojis.redx +
     "Dev mode has been turned on! Commands are only available to developer(s)!",
-  disableNigthCore:
-    emojis.redx + "Please disable nigthCore in order to use this command!",
+  disableNigthCore: emojis.redx + "Please disable nigthCore in order to use this command!",
   dispatcherError: "Error with the dispatcher: ",
   djFalse: emojis.green_check_mark + "`DJ` now set to `false`",
-  djRoleCreated:
-    emojis.green_check_mark +
+  djRoleCreated: emojis.green_check_mark +
     "I did not find a role `DJ` so i have created one for you!",
-  djRoleFound:
-    emojis.green_check_mark +
+  djRoleFound: emojis.green_check_mark +
     "I found a `DJ` role from this guild! This role is now the DJ role.",
   error: emojis.redx + "An error occured!",
   errorConnecting: "Error with connecting to voice channel: ",
   errorDetected: "Error detected: ",
-  errorDispatcher:
-    emojis.redx +
+  errorDispatcher: emojis.redx +
     "An error has occured while playing music! The queue has been deleted.",
   errorExe: emojis.redx + "there was an error trying to execute that command!",
-  errorExeOpt:
-    emojis.redx + "there was an error trying to execute that option!",
+  errorExeOpt: emojis.redx + "there was an error trying to execute that option!",
   evalTitle: "Evaluation Command",
   failedToLoad: emojis.redx + "Songs failed to load: ",
   helpCmdFooter: "Command Alias:",
-  helpFooter:
-    '"%PREFIX%help <command>" to see more information about a command.',
+  helpFooter: '"%PREFIX%help <command>" to see more information about a command.',
   helpTitle: "help",
-  idOrMentionChannel:
-    emojis.redx + "Please provide a channel id or mention a channel!",
+  idOrMentionChannel: emojis.redx + "Please provide a channel id or mention a channel!",
   invalidGuild: emojis.redx + "Invalid guild id!",
   inviteTitle: "Invite Musix to your Discord server!",
   joined: emojis.green_check_mark + "Joined",
@@ -90,40 +71,31 @@ module.exports = {
   maxBass: emojis.redx + "The max bass is `100`!",
   maxVolume: emojis.redx + "The max volume is `100`!",
   mentionChannel: emojis.redx + "Please mention a channel!",
-  musicCommandsDisabled:
-    emojis.redx +
+  musicCommandsDisabled: emojis.redx +
     "This channels has been blacklisted! Music commands cannot be used here!",
-  nigthCoreApplied:
-    emojis.green_check_mark +
+  nigthCoreApplied: emojis.green_check_mark +
     "NigthCore is now **%BOOLEAN%** this will be applied when the next song starts playing!",
   noDj: emojis.redx + "You need the `DJ` role to use this command!",
   noLooping: emojis.repeat + "No longer looping the queue!",
   noLoopingSong: emojis.repeatSong + "No longer looping the song!",
   noMorePremium: ":cry: Guild %GUILD% is no longer premium!",
   noPerms: emojis.redx + `You need the %PERMS% permission to use this command!`,
-  noPermsConnect:
-    emojis.redx +
+  noPermsConnect: emojis.redx +
     "I cannot connect to your voice channel, make sure I have the proper permissions!",
-  noPermsEmbed:
-    emojis.redx +
+  noPermsEmbed: emojis.redx +
     "I cannot send embeds (Embed links), make sure I have the proper permissions!",
-  noPermsManageRoles:
-    emojis.redx +
+  noPermsManageRoles: emojis.redx +
     "I cannot create roles (Manage roles), make sure I have the proper permissions! I will need this permission to create a `DJ` role since i did not find one!",
-  noPermsManageSettings:
-    emojis.redx +
+  noPermsManageSettings: emojis.redx +
     "You need the `MANAGE_SERVER` permission to change the settings!",
-  noPermsSpeak:
-    emojis.redx +
+  noPermsSpeak: emojis.redx +
     "I cannot speak in your voice channel, make sure I have the proper permissions!",
-  noPermsUseExternalEmojis:
-    emojis.redx +
+  noPermsUseExternalEmojis: emojis.redx +
     "I cannot use external emojis, make sure I have the proper permissions!",
   noQuery: emojis.redx + "you need to use a link or search for a song!",
   noResults: emojis.redx + "I could not obtain any search results!",
   noResultsLyrics: emojis.redx + "I could not obtain any results!",
-  noResultsSpotify:
-    emojis.redx +
+  noResultsSpotify: emojis.redx +
     "I could not obtain any results! Make sure you have a key set! More info with the setkey setting.",
   noServerQueue: emojis.redx + "There is nothing playing!",
   noSongs: emojis.redx + "That song does not exist!",
@@ -132,8 +104,7 @@ module.exports = {
   notAllowed: emojis.redx + "You are not allowed to do that!",
   notEnoughVotes: emojis.redx + "Not enough votes!",
   notPaused: emojis.redx + "The music in not paused!",
-  noVoiceChannel:
-    emojis.redx +
+  noVoiceChannel: emojis.redx +
     "I'm sorry but you need to be in a voice channel to play music!",
   nowPlaying: "__Now playing__",
   nowPremium: ":tada: Guild %GUILD% is now premium!",
@@ -141,14 +112,11 @@ module.exports = {
   paused: emojis.pause + "Paused the music!",
   permission: "🔒 Permission requirement:",
   permissionsFalse: emojis.redx + "That value is already `false`!",
-  permissionsSetFalse:
-    emojis.green_check_mark + "Permissions requirement now set to: `false`",
-  permissionsSetTrue:
-    emojis.green_check_mark + "Permissions requirement now set to: `true`",
+  permissionsSetFalse: emojis.green_check_mark + "Permissions requirement now set to: `false`",
+  permissionsSetTrue: emojis.green_check_mark + "Permissions requirement now set to: `true`",
   permissionsTrue: emojis.redx + "That value is already `true`!",
   pinging: emojis.loading + "Pinging...",
-  playlistAdded:
-    emojis.green_check_mark +
+  playlistAdded: emojis.green_check_mark +
     "Playlist: **%TITLE%** has been added to the queue!",
   positiveBass: emojis.redx + "The bass needs to be a positive number!",
   positiveVolume: emojis.redx + "The volume needs to be a positive number!",
@@ -156,62 +124,47 @@ module.exports = {
   prefixMaxLength: "The prefix must be shorter or equal to 5 letters!",
   prefixSet: emojis.green_check_mark + "New prefix set to:",
   premiumState: "Premium status: ",
-  provideANumber:
-    "Please provide a number ranging from 1-10 to select one of the search results.",
-  provideASong:
-    emojis.redx + "Please provide a song position in queue for me to remove!",
+  provideANumber: "Please provide a number ranging from 1-10 to select one of the search results.",
+  provideASong: emojis.redx + "Please provide a song position in queue for me to remove!",
   queueDeleted: "Queue deleted!",
-  queueDesc:
-    "**Now playing:** %SONG%<a:aNotes:674602408105476106>\n:arrow_down: Next in queue :arrow_down:",
+  queueDesc: "**Now playing:** %SONG%<a:aNotes:674602408105476106>\n:arrow_down: Next in queue :arrow_down:",
   queueFooter: "songs in the queue!",
-  queueLength:
-    emojis.redx + "There are only %SONGS% amount of songs in the queue!",
+  queueLength: emojis.redx + "There are only %SONGS% amount of songs in the queue!",
   queueTitle: "__Song queue__",
-  quotaReached:
-    emojis.redx +
+  quotaReached: emojis.redx +
     "Quota reached please try again after midnight Pacific Time (PT)!",
   reloaded: "All files reloaded!",
   removed: emojis.garbage + "removed `%SONG%` from the queue!",
   reset: emojis.green_check_mark + "Reset __all__ guild settings!",
   restart: "restarting all shards...",
   resumed: emojis.resume + "Resumed the music!",
-  seekingPointPositive:
-    emojis.redx + "The seeking point needs to be a positive number!",
-  seekMax:
-    emojis.redx +
+  seekingPointPositive: emojis.redx + "The seeking point needs to be a positive number!",
+  seekMax: emojis.redx +
     "The lenght of this song is %LENGTH% seconds! You can't seek further than that!",
-  setKeyUsage:
-    "Usage: `setkey <key> <guild id>`. Get your key from <https://developer.spotify.com/documentation/web-playback-sdk/quick-start/#> by pressing `Get your web playback sdk access token`.\nThe key will expire in 60 minutes!\nDO THIS COMMAND IN THE DMS! YOUR KEY IS PRIVATE DO NOT SHARE IT WITH ANYONE!",
+  setKeyUsage: "Usage: `setkey <key> <guild id>`. Get your key from <https://developer.spotify.com/documentation/web-playback-sdk/quick-start/#> by pressing `Get your web playback sdk access token`.\nThe key will expire in 60 minutes!\nDO THIS COMMAND IN THE DMS! YOUR KEY IS PRIVATE DO NOT SHARE IT WITH ANYONE!",
   settingsAnnounceSongs: "announcesongs",
-  settingsAnnounceSongsDesc:
-    "Whether to announce songs that start playing or not.",
+  settingsAnnounceSongsDesc: "Whether to announce songs that start playing or not.",
   settingsBass: "bass",
   settingsBassDesc: "Change the default bass level.",
   settingsBlacklist: "blacklist",
-  settingsBlacklistDesc:
-    "Blacklist channels that you wan't to block music commands to be executed on or block the bot from joining certain voiceChannels.",
+  settingsBlacklistDesc: "Blacklist channels that you wan't to block music commands to be executed on or block the bot from joining certain voiceChannels.",
   settingsFooter: "how to use: %PREFIX%settings <Setting name> <value>",
   settingsPermissions: "permissions",
-  settingsPermissionsDesc:
-    "Change whether to require permissions to use eg `skip, stop, pause, loop, etc...`",
+  settingsPermissionsDesc: "Change whether to require permissions to use eg `skip, stop, pause, loop, etc...`",
   settingsPrefix: "prefix",
   settingsPrefixDesc: "Change the guild specific prefix. (string)",
   settingsSetDj: "setdj",
-  settingsSetDjDesc:
-    "Set a DJ role. This will allow chosen users to freely use all Musix commands. This will automatically set the `permissions` settings to true in order for the `DJ` role to have effect!",
+  settingsSetDjDesc: "Set a DJ role. This will allow chosen users to freely use all Musix commands. This will automatically set the `permissions` settings to true in order for the `DJ` role to have effect!",
   settingsSetKey: "setkey",
   settingsSetKeyDesc: "Get instructions on how to set a spotify key.",
   settingsTitle: "Guild settings for Musix",
   settingsVolume: "volume",
-  settingsVolumeDesc:
-    "Change the default volume that the bot will start playing at. (number)",
+  settingsVolumeDesc: "Change the default volume that the bot will start playing at. (number)",
   setVolume: emojis.volumeHigh + "I set the volume to: ",
   shuffled: emojis.shuffle + "Queue suffled!",
   skipped: emojis.skip + "Skipped the song!",
-  songAdded:
-    emojis.green_check_mark + "**%TITLE%** has been added to the queue!",
-  songBlockedWMG:
-    emojis.redx +
+  songAdded: emojis.green_check_mark + "**%TITLE%** has been added to the queue!",
+  songBlockedWMG: emojis.redx +
     "This song had been blocked by WMG (Warner Music Groud).\n<:skip:674685614221688832> Skipped to next song.",
   songSelection: "__Song Selection__",
   startPlaying: emojis.notes + "Start playing: ",
@@ -221,9 +174,7 @@ module.exports = {
   statusField4: "Shard: ",
   statusTitle: "Status for Musix",
   stop: emojis.stop + "Stopped the music!",
-  validNumber:
-    emojis.redx + "I'm sorry, But you need to enter a valid __number__.",
-  wrongVoiceChannel:
-    emojis.redx +
+  validNumber: emojis.redx + "I'm sorry, But you need to enter a valid __number__.",
+  wrongVoiceChannel: emojis.redx +
     "I'm sorry but you need to be in the same voice channel as Musix to use this command!",
 };

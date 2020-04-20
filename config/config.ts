@@ -20,7 +20,7 @@ module.exports = {
   invite:
     "https://discordapp.com/oauth2/authorize?client_id=607266889537945605&permissions=3427328&scope=bot",
   supportServer: "https://discord.gg/rvHuJtB",
-  devMode: false,
+  devMode: true,
   api: false,
   saveDB: true,
   respawn: true,

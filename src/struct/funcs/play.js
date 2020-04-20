@@ -1,8 +1,10 @@
 module.exports = async function (guild, song, client, seek, play) {
-  const { Readable: ReadableStream } = require("stream");
+  const {
+    Readable: ReadableStream
+  } = require("stream");
   const Discord = require("discord.js");
   const ytdl = require("ytdl-core");
-  const streamConfig = require("../config/streamConfig.ts");
+  const streamConfig = require("../config/streamConfig.js");
   const prism = require("prism-media");
   const queue = client.queue.get(guild.id);
   if (!song) {
@@ -41,7 +43,9 @@ module.exports = async function (guild, song, client, seek, play) {
   const args = isStream ? ffmpegArgs.slice() : ["-i", input, ...ffmpegArgs];
   args.unshift("-ss", String(seek));
 
-  const transcoder = new prism.FFmpeg({ args: args });
+  const transcoder = new prism.FFmpeg({
+    args: args
+  });
 
   const stream = input.pipe(transcoder);
 

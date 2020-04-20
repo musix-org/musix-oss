@@ -1,9 +1,12 @@
-const { Client, Collection } = require("discord.js");
+const {
+  Client,
+  Collection
+} = require("discord.js");
 const admin = require("firebase-admin");
 const serviceAccount = require("./config/serviceAccount.json");
 const fs = require("fs");
 const path = require("path");
-const events = require("../events/events.ts");
+const events = require("../events/events.js");
 
 module.exports = class extends Client {
   constructor() {
@@ -21,12 +24,12 @@ module.exports = class extends Client {
     this.queue = new Map();
     this.funcs = {};
     this.dispatcher = {};
-    this.config = require("../../config/config.ts");
-    this.messages = require("./config/messages.ts");
+    this.config = require("../../config/config.js");
+    this.messages = require("./config/messages.js");
     this.db = admin.firestore();
     this.db.FieldValue = require("firebase-admin").firestore.FieldValue;
-    this.dispatcher.finish = require("../events/dispatcherEvents/finish.ts");
-    this.dispatcher.error = require("../events/dispatcherEvents/error.ts");
+    this.dispatcher.finish = require("../events/dispatcherEvents/finish.js");
+    this.dispatcher.error = require("../events/dispatcherEvents/error.js");
     this.global = {
       db: {
         guilds: {},
@@ -39,7 +42,7 @@ module.exports = class extends Client {
 
     const commandFiles = fs
       .readdirSync(path.join(path.dirname(__dirname), "commands"))
-      .filter((f) => f.endsWith(".ts"));
+      .filter((f) => f.endsWith(".js"));
     for (const file of commandFiles) {
       const command = require(`../commands/${file}`);
       command.uses = 0;
@@ -48,7 +51,7 @@ module.exports = class extends Client {
     }
     const settingFiles = fs
       .readdirSync(path.join(path.dirname(__dirname), "commands/settings"))
-      .filter((f) => f.endsWith(".ts"));
+      .filter((f) => f.endsWith(".js"));
     for (const file of settingFiles) {
       const option = require(`../commands/settings/${file}`);
       this.settingCmd.set(option.name, option);

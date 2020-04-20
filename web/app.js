@@ -1,4 +1,4 @@
-const config = require("../config/config.ts");
+const config = require("../config/config.js");
 const express = require("express"); // Express web server framework
 const request = require("request"); // "Request" library
 const cors = require("cors");
@@ -42,13 +42,13 @@ app.get("/login", function (req, res) {
 
   res.redirect(
     "https://accounts.spotify.com/authorize?" +
-      querystring.stringify({
-        response_type: "code",
-        client_id: client_id,
-        scope: scope,
-        redirect_uri: redirect_uri,
-        state: state,
-      })
+    querystring.stringify({
+      response_type: "code",
+      client_id: client_id,
+      scope: scope,
+      redirect_uri: redirect_uri,
+      state: state,
+    })
   );
 });
 
@@ -63,9 +63,9 @@ app.get("/callback", function (req, res) {
   if (state === null || state !== storedState) {
     res.redirect(
       "/#" +
-        querystring.stringify({
-          error: "state_mismatch",
-        })
+      querystring.stringify({
+        error: "state_mismatch",
+      })
     );
   } else {
     res.clearCookie(stateKey);
@@ -77,8 +77,7 @@ app.get("/callback", function (req, res) {
         grant_type: "authorization_code",
       },
       headers: {
-        Authorization:
-          "Basic " +
+        Authorization: "Basic " +
           new Buffer(client_id + ":" + client_secret).toString("base64"),
       },
       json: true,
@@ -105,17 +104,17 @@ app.get("/callback", function (req, res) {
         // we can also pass the token to the browser to make requests from there
         res.redirect(
           "/#" +
-            querystring.stringify({
-              access_token: access_token,
-              refresh_token: refresh_token,
-            })
+          querystring.stringify({
+            access_token: access_token,
+            refresh_token: refresh_token,
+          })
         );
       } else {
         res.redirect(
           "/#" +
-            querystring.stringify({
-              error: "invalid_token",
-            })
+          querystring.stringify({
+            error: "invalid_token",
+          })
         );
       }
     });
@@ -128,8 +127,7 @@ app.get("/refresh_token", function (req, res) {
   var authOptions = {
     url: "https://accounts.spotify.com/api/token",
     headers: {
-      Authorization:
-        "Basic " +
+      Authorization: "Basic " +
         new Buffer(client_id + ":" + client_secret).toString("base64"),
     },
     form: {

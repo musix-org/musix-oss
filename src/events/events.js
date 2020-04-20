@@ -2,16 +2,16 @@ module.exports = function (client) {
     const Discord = require('discord.js');
     const events = './clientEvents/';
     client.on('ready', () => {
-        require(`${events}ready.ts`).execute(client, Discord);
+        require(`${events}ready.js`).execute(client, Discord);
     });
     client.on('message', (msg) => {
-        require(`${events}msg.ts`).execute(client, msg, Discord);
+        require(`${events}msg.js`).execute(client, msg, Discord);
     });
     client.on('guildCreate', (guild) => {
-        require(`${events}guildCreate.ts`).execute(client, guild);
+        require(`${events}guildCreate.js`).execute(client, guild);
     });
     client.on('voiceStateUpdate', (oldState, newState) => {
-        require(`${events}voiceStateUpdate.ts`).execute(client, oldState, newState);
+        require(`${events}voiceStateUpdate.js`).execute(client, oldState, newState);
     });
     client.on('error', (error) => {
         client.channels.fetch(client.config.debug_channel).send(`Error: ${error} on shard: ${client.shard}`);
