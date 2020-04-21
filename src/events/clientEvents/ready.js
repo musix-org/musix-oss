@@ -41,6 +41,7 @@ module.exports = {
       });
       dbl.postStats(client.guilds.size);
     }
+    client.funcs.getSpotifyKey(client);
     console.log(`- Activated - Shard: ${client.shard.ids} -`);
     setInterval(() => {
       if (!client.config.devMode) client.funcs.checkDB(client);
@@ -50,6 +51,9 @@ module.exports = {
       if (client.config.dblApi && !client.config.devMode)
         dbl.postStats(client.guilds.cache.size);
     }, 1800000);
+    setInterval(() => {
+      client.funcs.getSpotifyKey(client);
+    }, 3600000);
     setInterval(() => {
       client.funcs.ffmpeg(client, Discord);
     }, 7200000);

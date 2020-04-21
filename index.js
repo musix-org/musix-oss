@@ -20,4 +20,3 @@ manager.spawn(config.shards, config.shardDelay, config.shardTimeout);
 manager.on("shardCreate", (shard) =>
   console.log(`- Launched shard ${shard.id} -`)
 );
-//require("./src/bot.js");

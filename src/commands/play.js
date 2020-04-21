@@ -15,7 +15,6 @@ module.exports = {
       id: client.config.spotify_client_id,
       secret: client.config.spotify_client_secret,
     });
-
     spotify.setAccessToken(client.config.spotify_access_key);
 
     const youtube = new YouTube(client.config.api_key);
