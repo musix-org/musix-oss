@@ -26,7 +26,7 @@ module.exports = {
         };
       });
     }
-    console.log(`- DB Set - Shard: ${client.shard.ids} -`);
+    console.log(`- DB Set - Shard:${client.shard.ids} -`);
     client.user.setActivity(`@${client.user.username} help | 🎶`, {
       type: "LISTENING",
     });

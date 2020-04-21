@@ -1,5 +1,3 @@
-const { db } = require("../../../index-.js");
-
 module.exports = {
   name: "message",
   async execute(client, msg, Discord) {

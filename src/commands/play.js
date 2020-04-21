@@ -1,9 +1,6 @@
 const YouTube = require("simple-youtube-api");
 const search = require("yt-search");
 const SpotifyApi = require("spotify-web-api-node");
-const {
-  globaldb
-} = require("../../index.js");
 
 module.exports = {
   name: "play",

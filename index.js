@@ -1,17 +1,4 @@
-const config = require("./config/config.js");
-/*const admin = require("firebase-admin");
-const serviceAccount = require("./config/serviceAccount.json");
-const secondaryAppConfig = {
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://global-1f5f9.firebaseio.com",
-};
-const secondary = admin.initializeApp(secondaryAppConfig, "secondary");
-const globaldb = secondary.database();
-const global = {
-  db: {
-    guilds: {},
-  },
-};*/
+const config = require("./src/struct/config/config.js");
 
 if (config.devMode) {
   console.log("- dev mode- ");
@@ -33,3 +20,4 @@ manager.spawn(config.shards, config.shardDelay, config.shardTimeout);
 manager.on("shardCreate", (shard) =>
   console.log(`- Launched shard ${shard.id} -`)
 );
+//require("./src/bot.js");

@@ -1,4 +1,4 @@
-const config = require("../config/config.js");
+const config = require("../src/struct/config/config.js");
 const express = require("express"); // Express web server framework
 const request = require("request"); // "Request" library
 const cors = require("cors");
