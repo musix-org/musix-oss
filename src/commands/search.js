@@ -44,7 +44,7 @@ module.exports = {
                 return msg.channel.send(client.messages.cancellingVideoSelection);
             }
             const videoIndex = parseInt(response.first().content) - 1;
-            return client.funcs.handleVideo(videos[videoIndex], msg, voiceChannel, client, false);
+            return client.funcs.handleVideo(videos[videoIndex], msg, voiceChannel, client, false, "ytdl");
         })
     }
 };
