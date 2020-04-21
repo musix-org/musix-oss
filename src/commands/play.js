@@ -1,7 +1,9 @@
 const YouTube = require("simple-youtube-api");
 const search = require("yt-search");
 const SpotifyApi = require("spotify-web-api-node");
-const { globaldb } = require("../../index.js");
+const {
+  globaldb
+} = require("../../index.js");
 
 module.exports = {
   name: "play",
@@ -17,16 +19,7 @@ module.exports = {
       secret: client.config.spotify_client_secret,
     });
 
-    const dbdata = await globaldb
-      .collection("guilds")
-      .doc(msg.guild.id)
-      .get()
-      .catch((err) => {
-        console.log("Error getting document", err);
-        return "error";
-      });
-    const accessKey = dbdata.data();
-    spotify.setAccessToken(accessKey);
+    spotify.setAccessToken(client.config.spotify_access_key);
 
     const youtube = new YouTube(client.config.api_key);
     const searchString = args.slice(1).join(" ");
@@ -58,83 +51,83 @@ module.exports = {
       const playlistId = url.split("/playlist/")[1].split("?")[0];
       spotify.getPlaylist(playlistId).then(
         async function (data) {
-          const lmsg = await msg.channel.send(client.messages.loadingSongs);
-          let failed = 0;
-          for (let i = 0; data.body.tracks.items.length > i; i++) {
-            const track = await data.body.tracks.items[i].track;
-            await client.funcs.sleep(250);
-            await search(
-              `${track.artists[0].name} ${track.name} audio`,
-              async function (err, res) {
-                if (err) return console.log(err);
-                if (res.videos.length === 0) {
-                  await search(
-                    `${track.artists[0].name} ${track.name} lyrics`,
-                    async function (err, res) {
-                      if (err) return console.log(err);
-                      if (res.videos.length === 0) {
-                        await search(
-                          `${track.artists[0].name} ${track.name}`,
-                          async function (err, res) {
-                            if (err) return console.log(err);
-                            if (res.videos.length === 0) {
-                              failed++;
-                              return;
+            const lmsg = await msg.channel.send(client.messages.loadingSongs);
+            let failed = 0;
+            for (let i = 0; data.body.tracks.items.length > i; i++) {
+              const track = await data.body.tracks.items[i].track;
+              await client.funcs.sleep(250);
+              await search(
+                `${track.artists[0].name} ${track.name} audio`,
+                async function (err, res) {
+                  if (err) return console.log(err);
+                  if (res.videos.length === 0) {
+                    await search(
+                      `${track.artists[0].name} ${track.name} lyrics`,
+                      async function (err, res) {
+                        if (err) return console.log(err);
+                        if (res.videos.length === 0) {
+                          await search(
+                            `${track.artists[0].name} ${track.name}`,
+                            async function (err, res) {
+                              if (err) return console.log(err);
+                              if (res.videos.length === 0) {
+                                failed++;
+                                return;
+                              }
+                              await client.funcs.handleVideo(
+                                res.videos[0],
+                                msg,
+                                voiceChannel,
+                                client,
+                                true,
+                                "ytdl"
+                              );
                             }
-                            await client.funcs.handleVideo(
-                              res.videos[0],
-                              msg,
-                              voiceChannel,
-                              client,
-                              true,
-                              "ytdl"
-                            );
-                          }
+                          );
+                          return;
+                        }
+                        await client.funcs.handleVideo(
+                          res.videos[0],
+                          msg,
+                          voiceChannel,
+                          client,
+                          true,
+                          "ytdl"
                         );
-                        return;
                       }
-                      await client.funcs.handleVideo(
-                        res.videos[0],
-                        msg,
-                        voiceChannel,
-                        client,
-                        true,
-                        "ytdl"
-                      );
-                    }
+                    );
+                    failed++;
+                    return;
+                  }
+                  await client.funcs.handleVideo(
+                    res.videos[0],
+                    msg,
+                    voiceChannel,
+                    client,
+                    true,
+                    "ytdl"
                   );
-                  failed++;
-                  return;
                 }
-                await client.funcs.handleVideo(
-                  res.videos[0],
-                  msg,
-                  voiceChannel,
-                  client,
-                  true,
-                  "ytdl"
-                );
-              }
-            );
-          }
-          let message;
-          if (failed === 0) {
-            message = client.messages.playlistAdded.replace(
-              "%TITLE%",
-              data.body.name
-            );
-          } else {
-            message = `${client.messages.playlistAdded.replace(
+              );
+            }
+            let message;
+            if (failed === 0) {
+              message = client.messages.playlistAdded.replace(
+                "%TITLE%",
+                data.body.name
+              );
+            } else {
+              message = `${client.messages.playlistAdded.replace(
               "%TITLE%",
               data.body.name
             )}\n${client.messages.failedToLoad + failed}`;
+            }
+            lmsg.edit(message);
+          },
+          function (err) {
+            console.log(err);
+            msg.channel.send(client.messages.noResultsSpotify);
           }
-          lmsg.edit(message);
-        },
-        function (err) {
-          console.log(err);
-          msg.channel.send(client.messages.noResultsSpotify);
-        }
       );
     } else if (
       url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)
