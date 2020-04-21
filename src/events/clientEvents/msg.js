@@ -1,17 +1,7 @@
 module.exports = {
   name: "message",
   async execute(client, msg, Discord) {
-    if (msg.author.bot) return;
-    if (!msg.guild && msg.content.startsWith("setkey")) {
-      const args = msg.content.split(" ");
-      if (!args[1] || !args[2])
-        return msg.channel.send(client.messages.setKeyUsage);
-      client.config.db.collection("guilds").doc(args[2]).set({
-        key: args[1],
-      });
-      return msg.channel.send(client.messages.keySet);
-    }
-    if (!msg.guild) return;
+    if (msg.author.bot || !msg.guild) return;
     if (!client.global.db.guilds[msg.guild.id]) return;
     let prefix = client.global.db.guilds[msg.guild.id].prefix;
     const args = msg.content.slice(prefix.length).split(" ");

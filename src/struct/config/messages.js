@@ -96,7 +96,7 @@ module.exports = {
   noResults: emojis.redx + "I could not obtain any search results!",
   noResultsLyrics: emojis.redx + "I could not obtain any results!",
   noResultsSpotify: emojis.redx +
-    "I could not obtain any results! Make sure you have a key set! More info with the setkey setting.",
+    "I could not obtain any results!",
   noServerQueue: emojis.redx + "There is nothing playing!",
   noSongs: emojis.redx + "That song does not exist!",
   notPremium: emojis.redx + "This is not a premium guild!",
@@ -141,7 +141,6 @@ module.exports = {
   seekingPointPositive: emojis.redx + "The seeking point needs to be a positive number!",
   seekMax: emojis.redx +
     "The lenght of this song is %LENGTH% seconds! You can't seek further than that!",
-  setKeyUsage: "Usage: `setkey <key> <guild id>`. Get your key from <https://developer.spotify.com/documentation/web-playback-sdk/quick-start/#> by pressing `Get your web playback sdk access token`.\nThe key will expire in 60 minutes!\nDO THIS COMMAND IN THE DMS! YOUR KEY IS PRIVATE DO NOT SHARE IT WITH ANYONE!",
   settingsAnnounceSongs: "announcesongs",
   settingsAnnounceSongsDesc: "Whether to announce songs that start playing or not.",
   settingsBass: "bass",
@@ -155,8 +154,6 @@ module.exports = {
   settingsPrefixDesc: "Change the guild specific prefix. (string)",
   settingsSetDj: "setdj",
   settingsSetDjDesc: "Set a DJ role. This will allow chosen users to freely use all Musix commands. This will automatically set the `permissions` settings to true in order for the `DJ` role to have effect!",
-  settingsSetKey: "setkey",
-  settingsSetKeyDesc: "Get instructions on how to set a spotify key.",
   settingsTitle: "Guild settings for Musix",
   settingsVolume: "volume",
   settingsVolumeDesc: "Change the default volume that the bot will start playing at. (number)",

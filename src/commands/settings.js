@@ -48,11 +48,6 @@ module.exports = {
         client.messages.settingsBassDesc,
         true
       )
-      .addField(
-        client.messages.settingsSetKey,
-        client.messages.settingsSetKeyDesc,
-        true
-      )
       .setFooter(footer)
       .setAuthor(client.user.username, client.user.displayAvatarURL)
       .setColor(client.config.embedColor);
