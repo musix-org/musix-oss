@@ -3,4 +3,3 @@ dev/
 .env
 .vscode/
 struct/config/serviceAccount.json
-./config/serviceAccount.json
