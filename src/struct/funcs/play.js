@@ -16,7 +16,8 @@ module.exports = async function (guild, song, client, seek, play) {
   streamConfig.options.seek = seek;
 
   let input = song.url;
-  if (song.type === "ytdl") input = ytdl(song.url, streamConfig.ytdlOptions);
+  if (song.type === "ytdl")
+    input = ytdl(song.url, streamConfig.ytdlOptions);
 
   const ffmpegArgs = [
     "-analyzeduration",
@@ -44,10 +45,12 @@ module.exports = async function (guild, song, client, seek, play) {
   args.unshift("-ss", String(seek));
 
   const transcoder = new prism.FFmpeg({
-    args: args
+    args: args,
   });
 
-  const stream = input.pipe(transcoder);
+  const stream = input.pipe(transcoder).on("error", (error) => {
+    console.log(error);
+  });
 
   const dispatcher = queue.connection
     .play(stream, streamConfig.options)
