@@ -90,7 +90,7 @@ module.exports = {
       );
       return lmsg.edit(message);
     } else {
-      ytSearch(searchString, function (err, res) {
+      search(searchString, function (err, res) {
         if (err) return console.log(err);
         if (res.videos.length === 0)
           return msg.channel.send(client.messages.noResults);
