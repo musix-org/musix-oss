@@ -1,7 +1,5 @@
 module.exports = async function (guild, song, client, seek, play) {
-  const {
-    Readable: ReadableStream
-  } = require("stream");
+  const { Readable: ReadableStream } = require("stream");
   const Discord = require("discord.js");
   const ytdl = require("ytdl-core");
   const streamConfig = require("../config/streamConfig.js");
@@ -16,8 +14,7 @@ module.exports = async function (guild, song, client, seek, play) {
   streamConfig.options.seek = seek;
 
   let input = song.url;
-  if (song.type === "ytdl")
-    input = ytdl(song.url, streamConfig.ytdlOptions);
+  if (song.type === "ytdl") input = ytdl(song.url, streamConfig.ytdlOptions);
 
   const ffmpegArgs = [
     "-analyzeduration",
