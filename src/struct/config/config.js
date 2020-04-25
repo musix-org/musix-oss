@@ -4,6 +4,7 @@ module.exports = {
   token: process.env.TOKEN,
   devToken: process.env.DEVTOKEN,
   dblKey: process.env.DBLKEY,
+  bodKey: process.env.BODKEY,
   api_key: process.env.GOOGLE_API_KEY,
   genius_api_key: process.env.GENIUS_API_KEY,
   soundCloud_api_key: process.env.SOUNDCLOUD_API_KEY,
