@@ -10,7 +10,7 @@ module.exports = function (client) {
         .then((results) => {
             guildCount = results.reduce((prev, val) => prev + val, 0);
             dbl.postStats(guildCount * 7, client.shard.ids, client.config.shards);
-            bod.postStats(guildCount * 7, client.shard.ids, client.config.shards)
+            bod.postStats(guildCount * 7, client.shard.ids, client.config.shards);
         })
         .catch(console.error);
 
