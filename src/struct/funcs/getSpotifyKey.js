@@ -1,5 +1,4 @@
 module.exports = async function (client) {
-    let accessKey;
     var request = require("request");
 
     var refresh_token = client.config.spotify_refresh_token;
