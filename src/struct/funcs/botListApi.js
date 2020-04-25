@@ -1,5 +1,4 @@
 module.exports = function (client) {
-    if (client.shard.ids !== 0) return console.log("invalid shard");
     const DBL = require("dblapi.js");
     const dbl = new DBL(client.config.dblKey, client);
     const bod_api = require("bodapi.js");
