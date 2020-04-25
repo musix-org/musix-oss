@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/MatteZ02/Musix-V3#readme",
   "dependencies": {
+    "bodapi.js": "^1.1.1",
     "bufferutil": "^4.0.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",

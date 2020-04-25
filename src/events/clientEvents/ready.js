@@ -1,5 +1,3 @@
-const DBL = require("dblapi.js");
-
 module.exports = {
   name: "ready",
   async execute(client, Discord) {
@@ -30,17 +28,8 @@ module.exports = {
     client.user.setActivity(`@${client.user.username} help | 🎶`, {
       type: "LISTENING",
     });
+    if (client.config.dblApi && !client.config.devMode) client.funcs.botListApi(client);
     client.user.setStatus("online");
-    const dbl = new DBL(client.config.dblKey, client);
-    if (client.config.dblApi && !client.config.devMode) {
-      dbl.on("posted", () => {
-        console.log("Server count posted!");
-      });
-      dbl.on("error", (error) => {
-        console.log("Error with DBL: " + error);
-      });
-      dbl.postStats(client.guilds.size);
-    }
     client.funcs.getSpotifyKey(client);
     console.log(`- Activated - Shard: ${client.shard.ids} -`);
     setInterval(() => {
@@ -48,8 +37,6 @@ module.exports = {
     }, 60000);
     setInterval(async () => {
       client.funcs.saveDB(client);
-      if (client.config.dblApi && !client.config.devMode)
-        dbl.postStats(client.guilds.cache.size);
     }, 1800000);
     setInterval(() => {
       client.funcs.getSpotifyKey(client);
