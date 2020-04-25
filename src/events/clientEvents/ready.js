@@ -28,7 +28,7 @@ module.exports = {
     client.user.setActivity(`@${client.user.username} help | 🎶`, {
       type: "LISTENING",
     });
-    if (client.config.dblApi && !client.config.devMode) client.funcs.botListApi(client);
+    if (client.config.api && !client.config.devMode) client.funcs.botListApi(client);
     client.user.setStatus("online");
     client.funcs.getSpotifyKey(client);
     console.log(`- Activated - Shard: ${client.shard.ids} -`);
