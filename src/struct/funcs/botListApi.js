@@ -17,9 +17,6 @@ module.exports = function (client) {
     dbl.on("error", (e) => {
         console.log(`DBL error: ${e}`);
     });
-    bod.on("posted", (m) => {
-        console.log(m);
-    });
     bod.on("error", (e) => {
         console.log(`BOD error ${e}`);
     });
@@ -38,13 +35,3 @@ module.exports = function (client) {
         dbl.postStats(guildCount * 7, client.shard.ids, client.config.shards);
     }, 1800000);
 };
-const bod_api = require("bodapi.js");
-
-const bod = new bod_api("ApeUyjSHi0tmMYybVwai3PxKvFvq3S", client);
-
-bod.on("posted", (m) => {
-    console.log(m);
-});
-bod.on("error", (e) => {
-    console.log(`BOD error ${e}`);
-});
