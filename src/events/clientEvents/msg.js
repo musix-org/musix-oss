@@ -34,8 +34,7 @@ module.exports = {
       client.commandAliases.get(commandName);
     if (!command && msg.content !== `${prefix}`) return;
     if (command.onlyDev && msg.author.id !== client.config.devId) return;
-    if (client.config.devMode && msg.member.id !== client.config.devId)
-      return msg.channel.send(client.messages.devMode);
+    if (client.config.devMode && msg.member.id !== client.config.devId) return msg.channel.send(client.messages.devMode);
     client.funcs.exe(msg, args, client, Discord, command);
   },
 };
