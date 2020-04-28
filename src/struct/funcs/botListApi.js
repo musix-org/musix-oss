@@ -9,8 +9,8 @@ module.exports = function (client) {
     .broadcastEval("this.guilds.cache.size")
     .then((results) => {
       guildCount = results.reduce((prev, val) => prev + val, 0);
-      dbl.postStats(0, client.shard.ids, client.config.shards);
-      bod.postStats(0, client.shard.ids, client.config.shards);
+      dbl.postStats(1, client.shard.ids, client.config.shards);
+      bod.postStats(1, client.shard.ids, client.config.shards);
     })
     .catch(console.error);
 
