@@ -1,6 +1,6 @@
 {
   "name": "Musix",
-  "version": "1.0.0",
+  "version": "1.2.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,12 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.4.2",
+    "discord.js": "^11.6.4",
     "fs": "0.0.1-security",
-    "ms": "^2.1.1",
+    "ms": "^2.1.2",
     "opusscript": "0.0.6",
-    "request": "^2.88.0",
-    "simple-youtube-api": "^5.1.1",
-    "ytdl-core": "^0.29.2"
+    "request": "^2.88.2",
+    "simple-youtube-api": "^5.2.1",
+    "ytdl-core": "^0.29.7"
   }
 }
