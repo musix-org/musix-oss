@@ -6,6 +6,7 @@ module.exports = {
   megaPhone: "📣 ",
   notes: "<a:aNotes:674602408105476106>",
   pause: "<:pause:674685548610322462> ",
+  previous: "<:reverse:705012312142119012> ",
   redx: "<:redx:674263474704220182> ",
   repeat: "<:repeat1:674685561377914892> ",
   repeatSong: "<:repeatsong:674685573419761716> ",

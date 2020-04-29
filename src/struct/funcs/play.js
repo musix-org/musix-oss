@@ -1,5 +1,7 @@
 module.exports = async function (guild, song, client, seek, play) {
-  const { Readable: ReadableStream } = require("stream");
+  const {
+    Readable: ReadableStream
+  } = require("stream");
   const Discord = require("discord.js");
   const ytdl = require("ytdl-core");
   const streamConfig = require("../config/streamConfig.js");

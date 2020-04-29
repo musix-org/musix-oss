@@ -13,7 +13,10 @@ module.exports = async function (client, reason, guild) {
     queue.time = 0;
     queue.votes = 0;
     queue.voters = [];
-    queue.songs.shift();
+    if (reason !== "replay") {
+      if (reason === "previous") queue.songs.unshift(queue.prevSongs.pop())
+      if (reason !== "previous") queue.prevSongs.push(queue.songs.shift());
+    }
   }
   client.funcs.play(guild, queue.songs[0], client, 0, true);
 };

@@ -20,7 +20,7 @@ module.exports = {
         return msg.channel.send(client.messages.noSongs);
       if (point < 0) return msg.channel.send(client.messages.cantSkipToCurrent);
       for (let i = 0; i < point; i++) {
-        queue.songs.shift();
+        queue.prevSongs.push(queue.songs.shift());
       }
       queue.endReason = "skipto";
       queue.time = 0;

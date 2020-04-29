@@ -30,6 +30,7 @@ module.exports = async function (
     voiceChannel: voiceChannel,
     connection: null,
     songs: [],
+    prevSongs: [],
     volume: client.global.db.guilds[msg.guild.id].defaultVolume,
     bass: client.global.db.guilds[msg.guild.id].bass,
     nigthCore: false,

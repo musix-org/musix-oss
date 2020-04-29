@@ -92,6 +92,7 @@ module.exports = {
     "I cannot speak in your voice channel, make sure I have the proper permissions!",
   noPermsUseExternalEmojis: emojis.redx +
     "I cannot use external emojis, make sure I have the proper permissions!",
+  noPreviousSongs: emojis.redx + "No previous songs!",
   noQuery: emojis.redx + "you need to use a link or search for a song!",
   noResults: emojis.redx + "I could not obtain any search results!",
   noResultsLyrics: emojis.redx + "I could not obtain any results!",
@@ -124,6 +125,7 @@ module.exports = {
   prefixMaxLength: "The prefix must be shorter or equal to 5 letters!",
   prefixSet: emojis.green_check_mark + "New prefix set to:",
   premiumState: "Premium status: ",
+  previousSong: emojis.previous + "Previous",
   provideANumber: "Please provide a number ranging from 1-10 to select one of the search results.",
   provideASong: emojis.redx + "Please provide a song position in queue for me to remove!",
   queueDeleted: "Queue deleted!",
