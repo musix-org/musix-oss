@@ -21,7 +21,7 @@ module.exports = {
       );
       if (pos > queue.songs.length) return msg.channel.send(message1);
       message2 = client.messages.removed.replace(
-        "%SONGS%",
+        "%SONG%",
         queue.songs[pos - 1].title
       );
       msg.channel.send(message2);
