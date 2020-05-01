@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/MatteZ02/Musix-V3#readme",
   "dependencies": {
+    "@discordjs/opus": "^0.2.1",
     "bodapi.js": "^1.1.1",
     "bufferutil": "^4.0.1",
     "cookie-parser": "^1.4.5",
@@ -33,7 +34,6 @@
     "he": "^1.2.0",
     "libsodium-wrappers": "^0.7.6",
     "ms": "^2.1.2",
-    "node-opus": "^0.3.3",
     "node-spotify-api": "^1.1.1",
     "prism-media": "github:hydrabolt/prism-media",
     "request": "^2.88.2",
