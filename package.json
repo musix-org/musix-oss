@@ -26,8 +26,8 @@
     "dotenv": "^8.2.0",
     "erlpack": "github:discordapp/erlpack",
     "express": "^4.17.1",
-    "firebase": "^7.14.1",
-    "firebase-admin": "^8.10.0",
+    "firebase": "^7.14.2",
+    "firebase-admin": "^8.11.0",
     "fs": "0.0.1-security",
     "genius-lyrics-api": "^2.0.3",
     "he": "^1.2.0",
@@ -42,7 +42,7 @@
     "utf-8-validate": "^5.0.2",
     "video-thumbnail-url": "^1.0.1",
     "yt-search": "^1.1.2",
-    "ytdl-core": "^2.1.0",
+    "ytdl-core": "^2.1.1",
     "zlib-sync": "^0.1.6"
   }
 }
