@@ -113,17 +113,17 @@ async function searchVideos(data, client, msg, voiceChannel) {
   for (let i = 0; data.body.tracks.items.length > i; i++) {
     const track = await data.body.tracks.items[i].track;
     await client.funcs.sleep(250);
-    await search(
+    search(
       `${track.artists[0].name} ${track.name} audio`,
       async function (err, res) {
         if (err) return console.log(err);
         if (res.videos.length === 0) {
-          await search(
+          search(
             `${track.artists[0].name} ${track.name} lyrics`,
             async function (err, res) {
               if (err) return console.log(err);
               if (res.videos.length === 0) {
-                await search(
+                search(
                   `${track.artists[0].name} ${track.name}`,
                   async function (err, res) {
                     if (err) return console.log(err);

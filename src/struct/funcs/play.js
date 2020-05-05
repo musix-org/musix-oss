@@ -15,6 +15,11 @@ module.exports = async function (guild, song, client, seek, play) {
 
   streamConfig.options.seek = seek;
 
+  if (!song.url) {
+    queue.songs.shift();
+    song = queue.songs[0]
+  }
+
   let input = song.url;
   if (song.type === "ytdl") input = ytdl(song.url, streamConfig.ytdlOptions);
 
