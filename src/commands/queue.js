@@ -21,7 +21,7 @@ module.exports = {
 		const embed = new Discord.MessageEmbed()
 			.setTitle(client.messages.queueTitle)
 			.setDescription(`${message}\n${queuemessage}`)
-			.setFooter(`${queue.songs.length} ${client.messages.queueFooter}`)
+			.setFooter(`${queue.songs.length - 1} ${client.messages.queueFooter}`)
 			.setColor(client.config.embedColor)
 		return msg.channel.send(embed);
 	}
