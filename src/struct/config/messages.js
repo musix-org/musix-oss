@@ -131,7 +131,7 @@ module.exports = {
   queueDeleted: "Queue deleted!",
   queueDesc: "**Now playing:** %SONG%<a:aNotes:674602408105476106>\n:arrow_down: Next in queue :arrow_down:",
   queueFooter: "songs in the queue!",
-  queueLength: emojis.redx + "There are only %SONGS% amount of songs in the queue!",
+  queueLength: emojis.redx + "There are only %SONGS% song(s) in the queue!",
   queueTitle: "__Song queue__",
   quotaReached: emojis.redx +
     "Quota reached please try again after midnight Pacific Time (PT)!",
