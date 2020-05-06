@@ -22,7 +22,7 @@ module.exports = {
       if (pos > queue.songs.length) return msg.channel.send(message1);
       message2 = client.messages.removed.replace(
         "%SONG%",
-        queue.songs[pos - 1].title
+        queue.songs[pos].title
       );
       msg.channel.send(message2);
       return queue.songs.splice(pos, 1);
