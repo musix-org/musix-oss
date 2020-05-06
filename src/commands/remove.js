@@ -16,10 +16,10 @@ module.exports = {
       let message1;
       let message2;
       message1 = client.messages.queueLength.replace(
-        "%LENGTH%",
+        "%SONGS%",
         queue.songs.length
       );
-      if (pos > queue.songs.length) return msg.channel.send(message1);
+      if (pos >= queue.songs.length) return msg.channel.send(message1);
       message2 = client.messages.removed.replace(
         "%SONG%",
         queue.songs[pos].title
