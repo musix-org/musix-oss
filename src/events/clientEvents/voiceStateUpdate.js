@@ -20,7 +20,7 @@ module.exports = {
         }
         if (oldState.channel.members.size === 1 && oldState.channel === queue.voiceChannel || change) {
             setTimeout(() => {
-                if (!queue) return;
+                if (!queue || !queue.connection.dispatcher || queue.connection.dispatcher === null) return;
                 if (queue.voiceChannel.members.size === 1) {
                     queue.songs = [];
                     queue.looping = false;
