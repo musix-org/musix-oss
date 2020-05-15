@@ -1,6 +1,6 @@
 module.exports = {
     name: 'eval',
-    alias: 'e',
+    alias: ["none"],
     usage: '<code>',
     description: 'Evaluation command. DEV ONLY!',
     onlyDev: true,

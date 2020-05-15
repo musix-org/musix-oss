@@ -1,6 +1,6 @@
 module.exports = {
     name: 'loopsong',
-    alias: 'loops',
+    alias: ["none"],
     usage: '',
     description: 'loop the currently playing song.',
     onlyDev: false,

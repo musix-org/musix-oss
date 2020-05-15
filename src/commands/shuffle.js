@@ -1,6 +1,6 @@
 module.exports = {
     name: 'shuffle',
-    alias: 'none',
+    alias: ["none"],
     usage: '',
     description: 'Shuffle the queue.',
     onlyDev: false,

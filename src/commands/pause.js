@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'pause',
-	alias: 'none',
+	alias: ["none"],
 	usage: '',
 	description: 'Pause the currently playing music.',
 	onlyDev: false,

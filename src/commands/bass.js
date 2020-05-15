@@ -1,7 +1,7 @@
 module.exports = {
   name: "bass",
-  description: "Bassboost command.",
-  alias: "none",
+  description: "Boost the bass in your music!",
+  alias: ["none"],
   usage: "<bass>",
   cooldown: 5,
   onlyDev: false,

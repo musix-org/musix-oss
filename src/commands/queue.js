@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'queue',
-	alias: 'q',
+	alias: ["q", "list", "ls", "songs"],
 	usage: '',
 	description: 'See the queue.',
 	onlyDev: false,

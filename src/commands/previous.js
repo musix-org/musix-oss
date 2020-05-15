@@ -1,6 +1,6 @@
 module.exports = {
     name: 'previous',
-    alias: 'prev',
+    alias: ["prev", "return", "back"],
     usage: '',
     description: 'Play the previous song.',
     onlyDev: false,

@@ -1,6 +1,6 @@
 module.exports = {
   name: "soundcloud",
-  alias: "sc",
+  alias: ["none"],
   usage: "",
   description: "",
   onlyDev: true,
@@ -10,13 +10,18 @@ module.exports = {
     if (!args[1]) return msg.channel.send(client.messages.noQuery);
     const SoundCloud = require("soundcloud-api-client");
     const key = client.config.soundCloud_api_key;
-    const soundcloud = new SoundCloud({ key });
+    const soundcloud = new SoundCloud({
+      key
+    });
 
     const q = "live mix";
     const genres = ["house", "tech-house", "techno"].join(",");
 
     soundcloud
-      .get("/tracks", { q, genres })
+      .get("/tracks", {
+        q,
+        genres
+      })
       .then((tracks) => console.log(tracks))
       .catch((e) => console.error(e));
   },

@@ -1,8 +1,8 @@
 module.exports = {
     name: 'end',
-    alias: 'e',
+    alias: ["none"],
     usage: '',
-    description: 'end the queue',
+    description: 'just end it',
     onlyDev: true,
     permission: 'dev',
     category: 'util',

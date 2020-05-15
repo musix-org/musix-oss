@@ -1,6 +1,6 @@
 module.exports = {
     name: 'replay',
-    alias: 'none',
+    alias: ["rp"],
     usage: '',
     description: 'Replay the currently playing song.',
     onlyDev: false,

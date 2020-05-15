@@ -1,8 +1,8 @@
 module.exports = {
   name: "nigthcore",
-  alias: "nc",
+  alias: ["nc"],
   usage: "<true/false>",
-  description: "Change nigthcore on/off",
+  description: "Change nigthcore audio modifier on/off",
   onlyDev: false,
   permission: "MANAGE_MESSAGES",
   category: "music",

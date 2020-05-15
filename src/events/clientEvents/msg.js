@@ -32,9 +32,8 @@ function getCommand(client, args, msg, Discord) {
   const command =
     client.commands.get(commandName) ||
     client.commands.find(
-      (cmd) => cmd.aliases && cmd.aliases.includes(commandName)
-    ) ||
-    client.commandAliases.get(commandName);
+      (cmd) => cmd.alias && cmd.alias.includes(commandName)
+    );
   if (!command) return;
   if (command.onlyDev && msg.author.id !== client.config.devId) return;
   if (client.config.devMode && msg.member.id !== client.config.devId)

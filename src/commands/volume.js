@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'volume',
 	description: 'Volume command.',
-	alias: 'none',
+	alias: ["none"],
 	usage: '<volume>',
 	cooldown: 5,
 	onlyDev: false,

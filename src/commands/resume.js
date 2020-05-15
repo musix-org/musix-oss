@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'resume',
-	alias: 'none',
+	alias: ["continue"],
 	usage: '',
 	description: 'Resume the paused music.',
 	onlyDev: false,

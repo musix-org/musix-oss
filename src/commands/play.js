@@ -5,7 +5,7 @@ const ytdl = require("ytdl-core")
 
 module.exports = {
   name: "play",
-  alias: "p",
+  alias: ["p", "music"],
   usage: "<song name>",
   description: "Play some music.",
   onlyDev: false,

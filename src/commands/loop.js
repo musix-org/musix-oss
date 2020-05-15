@@ -1,6 +1,6 @@
 module.exports = {
     name: 'loop',
-    alias: 'none',
+    alias: [],
     usage: '',
     description: 'loop the queue.',
     onlyDev: false,

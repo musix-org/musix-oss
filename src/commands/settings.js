@@ -1,6 +1,6 @@
 module.exports = {
   name: "settings",
-  alias: "pref",
+  alias: ["options", "ops", "preferences"],
   usage: "<setting> <value(opt)>",
   description: "Change the server settings for Musix.",
   onlyDev: false,

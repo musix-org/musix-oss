@@ -1,8 +1,10 @@
-const { getLyrics } = require("genius-lyrics-api");
+const {
+  getLyrics
+} = require("genius-lyrics-api");
 
 module.exports = {
   name: "lyrics",
-  alias: "l",
+  alias: ["l"],
   usage: "<song>",
   description: "see the lyrics for a song",
   onlyDev: false,

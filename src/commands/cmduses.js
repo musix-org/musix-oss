@@ -1,6 +1,6 @@
 module.exports = {
     name: 'cmduses',
-    alias: 'none',
+    alias: ["none"],
     usage: '',
     description: 'list all commands and how many times they\'ve been used',
     onlyDev: true,

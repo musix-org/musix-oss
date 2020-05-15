@@ -1,6 +1,6 @@
 module.exports = {
     name: 'restart',
-    alias: 'none',
+    alias: ["none"],
     usage: '',
     description: 'restart all shards',
     onlyDev: true,

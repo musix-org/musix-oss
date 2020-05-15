@@ -1,6 +1,6 @@
 module.exports = {
   name: "seek",
-  alias: "none",
+  alias: ["none"],
   usage: "<point in song (seconds)>",
   description: "Seek to a specific point in the currently playing song.",
   onlyDev: false,

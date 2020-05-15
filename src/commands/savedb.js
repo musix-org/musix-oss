@@ -1,6 +1,6 @@
 module.exports = {
     name: 'savedb',
-    alias: 'save',
+    alias: ["none"],
     usage: '',
     description: 'save the database',
     onlyDev: true,

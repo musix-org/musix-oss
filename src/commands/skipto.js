@@ -1,6 +1,6 @@
 module.exports = {
   name: "skipto",
-  alias: "st",
+  alias: ["st"],
   usage: "<point in queue>",
   description: "Skip to a point in the queue",
   onlyDev: false,

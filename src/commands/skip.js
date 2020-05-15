@@ -1,6 +1,6 @@
 module.exports = {
   name: "skip",
-  alias: "s",
+  alias: ["s", "next"],
   usage: "",
   description: "Skip the currently playing song.",
   onlyDev: false,
@@ -33,12 +33,14 @@ module.exports = {
     }
   },
 };
+
 function skipSong(queue, msg, client) {
   msg.channel.send(client.messages.skipped);
   queue.endReason = "skip";
   queue.time = 0;
   queue.connection.dispatcher.end();
 }
+
 function vote(queue, msg, client) {
   queue.votesNeeded = Math.floor(queue.voiceChannel.members.size / 2);
   queue.votesNeeded.toFixed();

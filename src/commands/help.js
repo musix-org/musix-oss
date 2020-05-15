@@ -1,6 +1,6 @@
 module.exports = {
     name: 'help',
-    alias: 'h',
+    alias: ["h"],
     usage: '<command(opt)>',
     description: 'See the help for Musix.',
     onlyDev: false,
@@ -13,7 +13,7 @@ module.exports = {
             const embed = new Discord.MessageEmbed()
                 .setTitle(`${client.global.db.guilds[msg.guild.id].prefix}${command.name} ${command.usage}`)
                 .setDescription(command.description)
-                .setFooter(`${client.messages.helpCmdFooter} \`${command.alias}\``)
+                .setFooter(`${client.messages.helpCmdFooter} \`${command.alias.map(a => `${a}, `)}\``)
                 .setColor(client.config.embedColor)
             msg.channel.send(embed);
         } else {

@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'stop',
-	description: 'Stop command.',
-	alias: 'none',
+	description: 'Stop the music and clear the queue.',
+	alias: ["none"],
 	usage: '',
 	onlyDev: false,
 	permission: 'MANAGE_CHANNELS',
