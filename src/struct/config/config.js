@@ -31,7 +31,7 @@ module.exports = {
   respawnDelay: 1000,
   prefix: ">",
   devPrefix: "-",
-  defaultVolume: 5,
+  defaultVolume: 50,
   permissions: false,
   dj: false,
   djrole: null,
