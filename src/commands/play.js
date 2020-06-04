@@ -43,9 +43,7 @@ module.exports = {
     if (!voiceChannel.speakable)
       return msg.channel.send(client.messages.noPermsSpeak);
     if (ytdl.validateURL(url)) {
-      const song = await ytdl.getInfo(url);
       const resource = {
-        title: song.title,
         url: url
       }
       client.funcs.handleVideo(
@@ -53,7 +51,7 @@ module.exports = {
         msg,
         voiceChannel,
         client,
-        true,
+        false,
         "ytdl"
       );
     } else if (url.match(/^https?:\/\/(open.spotify.com|spotify.com)(.*)$/)) {

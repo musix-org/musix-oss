@@ -25,11 +25,16 @@ module.exports = {
     getLyrics(options).then((lyrics) => {
       if (lyrics === null)
         return msg.channel.send(client.messages.noResultsLyrics);
-      const embed = new Discord.MessageEmbed()
-        .setTitle(client.messages.lyricsTitle)
-        .setDescription(lyrics)
-        .setColor(client.config.embedColor);
-      msg.channel.send(embed);
+      for (let i = 0; i < lyrics.length; i += 2000) {
+        let toi = ""
+        toi =
+          lyrics.substring(i, Math.min(lyrics.length, i + 2000));
+        const embed = new Discord.MessageEmbed()
+          .setTitle(client.messages.lyricsTitle)
+          .setDescription(toi)
+          .setColor(client.config.embedColor);
+        msg.channel.send(embed);
+      }
     });
   },
 };

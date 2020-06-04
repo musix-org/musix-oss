@@ -65,7 +65,7 @@ module.exports = async function (guild, song, client, seek, play) {
     .on("error", (error) => {
       client.dispatcher.error(client, error, guild);
     });
-  dispatcher.setVolume(queue.volume / 10);
+  dispatcher.setVolume(queue.volume / 100);
   if ((client.global.db.guilds[guild.id].startPlaying && play) || play) {
     if (song.type !== "ytdl") return;
     const data = await Promise.resolve(ytdl.getInfo(queue.songs[0].url));

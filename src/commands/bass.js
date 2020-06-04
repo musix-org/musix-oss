@@ -18,7 +18,7 @@ module.exports = {
       if (queue.nigthCore)
         return msg.channel.send(client.messages.disableNigthCore);
       if (isNaN(bass)) return msg.channel.send(client.messages.validNumber);
-      if (bass > 100) return msg.channel.send(client.messages.maxBass);
+      if (bass > 10) return msg.channel.send(client.messages.maxBass);
       if (bass < 0) return msg.channel.send(client.messages.positiveBass);
       queue.bass = bass;
       client.funcs.end(

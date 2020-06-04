@@ -8,15 +8,13 @@ module.exports = {
   category: "music",
   async execute(msg, args, client, Discord, command) {
     const getThumb = require("video-thumbnail-url");
-    const ytdl = require("ytdl-core");
     const queue = client.queue.get(msg.guild.id);
     if (!queue) return msg.channel.send(client.messages.noServerQueue);
-    let data = await Promise.resolve(ytdl.getInfo(queue.songs[0].url));
-    let songTime = (data.length_seconds * 1000).toFixed(0);
+    let songTime = (queue.songs[0].length * 1000).toFixed(0);
     let completed = (
       queue.connection.dispatcher.streamTime + queue.time
     ).toFixed(0);
-    let barlength = 30;
+    let barlength = 20;
     let completedpercent = ((completed / songTime) * barlength).toFixed(0);
     let array = [];
     for (let i = 0; i < completedpercent - 1; i++) {
@@ -35,7 +33,7 @@ module.exports = {
         }\n${array.join("")} | \`${client.funcs.msToTime(
           completed,
           "hh:mm:ss"
-        )} / ${client.funcs.msToTime(songTime, "hh:mm:ss")}\``
+        )} / ${client.funcs.msToTime(songTime, "hh:mm:ss")}\`\nchannel: \`${queue.songs[0].channel.name}\``
       )
       .setFooter(`Queued by ${queue.songs[0].author.tag}`)
       .setURL(queue.songs[0].url)
@@ -43,7 +41,7 @@ module.exports = {
       .setColor(client.config.embedColor);
     if (queue.nigthCore)
       embed.setDescription(
-        `${client.messages.nowPlayingDesc} ${queue.songs[0].title}`
+        `${client.messages.nowPlayingDesc} ${queue.songs[0].title} \nchannel: \`${queue.songs[0].channel.name}\``
       );
     return msg.channel.send(embed);
   },

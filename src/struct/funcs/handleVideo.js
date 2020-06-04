@@ -1,3 +1,6 @@
+const Discord = require("discord.js");
+const ytdl = require("ytdl-core");
+
 module.exports = async function (
   resource,
   msg,
@@ -6,12 +9,14 @@ module.exports = async function (
   playlist,
   type
 ) {
-  const Discord = require("discord.js");
+  const songInfo = await ytdl.getInfo(resource.url);
   const song = {
-    title: Discord.Util.escapeMarkdown(resource.title),
+    title: Discord.Util.escapeMarkdown(songInfo.title),
     url: resource.url,
     author: msg.author,
+    length: songInfo.length_seconds,
     type: type,
+    channel: songInfo.author
   };
 
   const queue = client.queue.get(msg.guild.id);
