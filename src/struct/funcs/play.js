@@ -79,7 +79,7 @@ module.exports = async function (guild, song, client, seek, play) {
     const embed = new Discord.MessageEmbed()
       .setTitle(`${client.messages.startPlaying}**${song.title}**`)
       .setDescription(
-        `Song duration: \`${client.funcs.msToTime(queue.songs[0].songLength, "hh:mm:ss")}\``
+        `Song duration: \`${client.funcs.msToTime(queue.songs[0].songLength * 1000, "hh:mm:ss")}\``
       )
       .setColor(client.config.embedColor);
     queue.textChannel.send(embed);
