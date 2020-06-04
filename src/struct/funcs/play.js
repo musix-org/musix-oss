@@ -12,6 +12,14 @@ module.exports = async function (guild, song, client, seek, play) {
     client.queue.delete(guild.id);
     return;
   }
+  setTimeout(() => {
+    if (!queue.playing) {
+      queue.textChannel.send(client.messages.tookTooLong);
+      queue.voiceChannel.leave();
+      client.queue.delete(guild.id);
+      return;
+    }
+  }, 45000);
 
   streamConfig.options.seek = seek;
 
