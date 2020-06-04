@@ -10,7 +10,7 @@ module.exports = {
     const getThumb = require("video-thumbnail-url");
     const queue = client.queue.get(msg.guild.id);
     if (!queue) return msg.channel.send(client.messages.noServerQueue);
-    let songTime = (queue.songs[0].length * 1000).toFixed(0);
+    let songTime = (queue.songs[0].songLength * 1000).toFixed(0);
     let completed = (
       queue.connection.dispatcher.streamTime + queue.time
     ).toFixed(0);

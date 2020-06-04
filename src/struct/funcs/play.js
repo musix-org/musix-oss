@@ -76,12 +76,10 @@ module.exports = async function (guild, song, client, seek, play) {
   dispatcher.setVolume(queue.volume / 100);
   if ((client.global.db.guilds[guild.id].startPlaying && play) || play) {
     if (song.type !== "ytdl") return;
-    const data = await Promise.resolve(ytdl.getInfo(queue.songs[0].url));
-    const songtime = (data.length_seconds * 1000).toFixed(0);
     const embed = new Discord.MessageEmbed()
       .setTitle(`${client.messages.startPlaying}**${song.title}**`)
       .setDescription(
-        `Song duration: \`${client.funcs.msToTime(songtime, "hh:mm:ss")}\``
+        `Song duration: \`${client.funcs.msToTime(queue.songs[0].songLength, "hh:mm:ss")}\``
       )
       .setColor(client.config.embedColor);
     queue.textChannel.send(embed);

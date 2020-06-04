@@ -7,12 +7,6 @@ module.exports = {
     permission: 'dev',
     category: 'util',
     async execute(msg, args, client, Discord, command) {
-        const ytdl = require('ytdl-core');
-        const queue = client.queue.get(msg.guild.id);
-        let data;
-        if (queue) {
-            data = await Promise.resolve(ytdl.getInfo(queue.songs[0].url));
-        }
         const input = msg.content.slice(client.global.db.guilds[msg.guild.id].prefix.length + 5);
         let output;
         try {

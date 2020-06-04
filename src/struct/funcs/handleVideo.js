@@ -11,12 +11,12 @@ module.exports = async function (
 ) {
   const songInfo = await ytdl.getInfo(resource.url);
   const song = {
-    title: Discord.Util.escapeMarkdown(songInfo.title),
+    title: Discord.Util.escapeMarkdown(songInfo.videoDetails.title),
     url: resource.url,
     author: msg.author,
-    length: songInfo.length_seconds,
+    songLength: songInfo.videoDetails.length_seconds,
     type: type,
-    channel: songInfo.author
+    channel: songInfo.videoDetails.author
   };
 
   const queue = client.queue.get(msg.guild.id);
