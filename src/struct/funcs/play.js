@@ -9,17 +9,18 @@ module.exports = async function (guild, song, client, seek, play) {
   const queue = client.queue.get(guild.id);
   if (!song) {
     queue.voiceChannel.leave();
+    queue.exists = false;
     client.queue.delete(guild.id);
     return;
   }
   setTimeout(() => {
-    if (!queue.playing && queue) {
+    if (!queue.playing && queue.exists) {
       queue.textChannel.send(client.messages.tookTooLong);
       queue.voiceChannel.leave();
       client.queue.delete(guild.id);
       return;
     }
-  }, 45000);
+  }, 10000);
 
   streamConfig.options.seek = seek;
 

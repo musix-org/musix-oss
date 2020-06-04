@@ -36,7 +36,7 @@ function getCommand(client, args, msg, Discord) {
     );
   if (!command) return;
   if (command.onlyDev && msg.author.id !== client.config.devId) return;
-  if (client.config.devMode && msg.member.id !== client.config.devId)
+  if (client.config.devMode && msg.member.id !== client.config.devId && msg.guild.id !== "718081535240306738")
     return msg.channel.send(client.messages.devMode);
   client.funcs.exe(msg, args, client, Discord, command);
 }

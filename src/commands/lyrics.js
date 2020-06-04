@@ -1,6 +1,4 @@
-const {
-  getLyrics
-} = require("genius-lyrics-api");
+const { getLyrics } = require("genius-lyrics-api");
 
 module.exports = {
   name: "lyrics",
@@ -26,9 +24,8 @@ module.exports = {
       if (lyrics === null)
         return msg.channel.send(client.messages.noResultsLyrics);
       for (let i = 0; i < lyrics.length; i += 2000) {
-        let toi = ""
-        toi =
-          lyrics.substring(i, Math.min(lyrics.length, i + 2000));
+        let toi = "";
+        toi = lyrics.substring(i, Math.min(lyrics.length, i + 2000));
         const embed = new Discord.MessageEmbed()
           .setTitle(client.messages.lyricsTitle)
           .setDescription(toi)

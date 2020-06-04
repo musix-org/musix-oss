@@ -48,6 +48,7 @@ module.exports = async function (
     votesNeeded: null,
     time: 0,
     endReason: null,
+    exists: true
   };
 
   construct.songs.push(song);

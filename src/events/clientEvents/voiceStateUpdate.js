@@ -19,9 +19,6 @@ module.exports = {
             }
         }
         if (oldState.channel.members.size === 1 && oldState.channel === queue.voiceChannel || change) {
-            queue.textChannel.send(client.messages.leftAlonePaused);
-            queue.paused = true;
-            queue.connection.dispatcher.pause(true);
             setTimeout(() => {
                 if (!queue || !queue.connection.dispatcher || queue.connection.dispatcher === null) return;
                 if (queue.voiceChannel.members.size === 1) {
