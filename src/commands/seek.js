@@ -26,9 +26,9 @@ module.exports = {
         let message;
         message = client.messages.seekMax.replace(
           "%LENGTH%",
-          data.videoDetails.length_seconds
+          data.videoDetails.lengthSeconds
         );
-        if (pos > data.videoDetais.length_seconds) return msg.channel.send(message);
+        if (pos > data.videoDetais.lengthSeconds) return msg.channel.send(message);
       }
       client.funcs.end(client, msg, pos, command);
     }

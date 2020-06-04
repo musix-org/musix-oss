@@ -14,7 +14,7 @@ module.exports = async function (
     title: Discord.Util.escapeMarkdown(songInfo.videoDetails.title),
     url: resource.url,
     author: msg.author,
-    songLength: songInfo.videoDetails.length_seconds,
+    songLength: songInfo.videoDetails.lengthSeconds,
     type: type,
     channel: songInfo.videoDetails.author
   };
