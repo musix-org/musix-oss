@@ -13,7 +13,7 @@ module.exports = async function (guild, song, client, seek, play) {
     return;
   }
   setTimeout(() => {
-    if (!queue.playing) {
+    if (!queue.playing && queue) {
       queue.textChannel.send(client.messages.tookTooLong);
       queue.voiceChannel.leave();
       client.queue.delete(guild.id);
