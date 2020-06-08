@@ -4,7 +4,7 @@
   "description": "V3 for Musix the discord music bot",
   "main": "./index.js",
   "scripts": {
-    "start": "node ."
+    "start": "node --max-old-space-size=2048 index.js"
   },
   "repository": {
     "type": "git",
