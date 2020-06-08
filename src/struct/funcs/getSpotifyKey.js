@@ -1,8 +1,8 @@
 module.exports = async function (client) {
-    var request = require("request");
+    const request = require("request");
 
-    var refresh_token = client.config.spotify_refresh_token;
-    var authOptions = {
+    const refresh_token = client.config.spotify_refresh_token;
+    const authOptions = {
         url: "https://accounts.spotify.com/api/token",
         headers: {
             Authorization: "Basic " +
