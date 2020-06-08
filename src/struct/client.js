@@ -1,6 +1,7 @@
 const {
   Client,
-  Collection
+  Collection,
+  Intents
 } = require("discord.js");
 const admin = require("firebase-admin");
 const serviceAccount = require("./config/serviceAccount.json");
@@ -8,11 +9,21 @@ const fs = require("fs");
 const path = require("path");
 const events = require("../events/events.js");
 
+const myIntents = new Intents();
+myIntents.add(
+  1 << 0, // GUILDS
+  1 << 7, // GUILD_VOICE_STATES
+  1 << 9, // GUILD_MESSAGES
+);
+
 module.exports = class extends Client {
   constructor() {
     super({
       disableEveryone: true,
       disabledEvents: ["TYPING_START"],
+      ws: {
+        intents: myIntents
+      }
     });
 
     admin.initializeApp({

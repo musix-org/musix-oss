@@ -1,6 +1,6 @@
 {
   "name": "musix",
-  "version": "3.5.0",
+  "version": "3.5.2",
   "description": "V3 for Musix the discord music bot",
   "main": "./index.js",
   "scripts": {
