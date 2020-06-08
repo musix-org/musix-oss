@@ -45,11 +45,11 @@ module.exports = {
     "I did not find a role `DJ` so i have created one for you!",
   djRoleFound: emojis.green_check_mark +
     "I found a `DJ` role from this guild! This role is now the DJ role.",
-  error: emojis.redx + "An error occured!",
+  error: emojis.redx + "An error occured!.\nError: ",
   errorConnecting: "Error with connecting to voice channel: ",
   errorDetected: "Error detected: ",
   errorDispatcher: emojis.redx +
-    "An error has occured while playing music! The queue has been deleted.",
+    "An error has occured while playing music! The queue has been deleted.\nError: ",
   errorExe: emojis.redx + "there was an error trying to execute that command!",
   errorExeOpt: emojis.redx + "there was an error trying to execute that option!",
   evalTitle: "Evaluation Command",

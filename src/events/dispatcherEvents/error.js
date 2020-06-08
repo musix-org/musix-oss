@@ -9,5 +9,5 @@ module.exports = async function (client, error, guild) {
     client.users.cache.get(client.config.devId).send(client.messages.dispatcherError + error);
     queue.voiceChannel.leave();
     client.queue.delete(guild.id);
-    return queue.textChannel.send(client.messages.errorDispatcher);
+    return queue.textChannel.send(client.messages.errorDispatcher + `\`${error}\``);
 };

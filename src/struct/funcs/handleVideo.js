@@ -64,7 +64,7 @@ module.exports = async function (
     client.users.cache
       .get(client.config.devId)
       .send(client.messages.errorConnecting + error);
-    return msg.channel.send(client.messages.error);
+    return msg.channel.send(client.messages.error + error);
   }
   return;
 };
