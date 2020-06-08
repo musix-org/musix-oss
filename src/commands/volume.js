@@ -16,7 +16,7 @@ module.exports = {
 			if (volume > 100) return msg.channel.send(client.messages.maxVolume);
 			if (volume < 0) return msg.channel.send(client.messages.positiveVolume);
 			queue.volume = volume;
-			queue.connection.dispatcher.setVolume(volume / 5);
+			queue.connection.dispatcher.setVolume(volume / 100);
 			return msg.channel.send(`${client.messages.setVolume}**${volume}**`);
 		}
 	}
