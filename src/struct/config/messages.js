@@ -1,6 +1,7 @@
 const emojis = require("./emojis.js");
 
 module.exports = {
+  emojis: emojis,
   alreadyPaused: emojis.redx + "The music is already paused!",
   alreadyVoted: emojis.redx + "You have already voted to skip!",
   announceSongs: emojis.megaPhone + "Current setting:",
@@ -100,6 +101,7 @@ module.exports = {
   noResultsSpotify: emojis.redx +
     "I could not obtain any results!",
   noServerQueue: emojis.redx + "There is nothing playing!",
+  noSimilarResults: emojis.redx + "No similar songs found!",
   noSongs: emojis.redx + "That song does not exist!",
   noSongsInQueue: emojis.redx + "There are no songs in the queue!",
   notPremium: emojis.redx + "This is not a premium guild!",
@@ -142,6 +144,7 @@ module.exports = {
   reset: emojis.green_check_mark + "Reset __all__ guild settings!",
   restart: "restarting all shards...",
   resumed: emojis.resume + "Resumed the music!",
+  searchSimilarUsage: emojis.redx + "Correct usage: %USAGE%",
   seekingPointPositive: emojis.redx + "The seeking point needs to be a positive number!",
   seekMax: emojis.redx +
     "The lenght of this song is %LENGTH% seconds! You can't seek further than that!",
@@ -167,6 +170,7 @@ module.exports = {
   songAdded: emojis.green_check_mark + "**%TITLE%** has been added to the queue!",
   songBlockedWMG: emojis.redx +
     "This song had been blocked by WMG (Warner Music Groud).\n<:skip:674685614221688832> Skipped to next song.",
+  songsAdded: emojis.green_check_mark + "%AMOUNT% songs added to the queue!",
   songSelection: "__Song Selection__",
   startPlaying: emojis.notes + "Start playing: ",
   statusField1: emojis.signal + "Ping",

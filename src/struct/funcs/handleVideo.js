@@ -14,9 +14,8 @@ module.exports = async function (
     title: Discord.Util.escapeMarkdown(songInfo.videoDetails.title),
     url: resource.url,
     author: msg.author,
-    songLength: songInfo.videoDetails.lengthSeconds,
     type: type,
-    channel: songInfo.videoDetails.author
+    info: songInfo.videoDetails
   };
 
   const queue = client.queue.get(msg.guild.id);

@@ -12,6 +12,8 @@ module.exports = {
   spotify_client_secret: process.env.SPOTIFY_CLIENT_SECRET,
   spotify_client_id: process.env.SPOTIFY_CLIENT_ID,
   spotify_refresh_token: process.env.SPOTIFY_REFRESH_TOKEN,
+  lastfm_api_key: process.env.LASTFM_API_KEY,
+  lastfm_secret: process.env.LASTFM_SECRET,
   port: 8888,
   redirectUri: "http://localhost:8888/callback/",
   testServer: "489111553321336832",

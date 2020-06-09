@@ -43,11 +43,9 @@ module.exports = {
     if (!voiceChannel.speakable)
       return msg.channel.send(client.messages.noPermsSpeak);
     if (ytdl.validateURL(url)) {
-      const resource = {
-        url: url
-      }
-      client.funcs.handleVideo(
-        resource,
+      client.funcs.handleVideo({
+          url: url
+        },
         msg,
         voiceChannel,
         client,
@@ -81,8 +79,7 @@ module.exports = {
           "ytdl"
         );
       }
-      let message;
-      message = client.messages.playlistAdded.replace(
+      const message = client.messages.playlistAdded.replace(
         "%TITLE%",
         playlist.title
       );

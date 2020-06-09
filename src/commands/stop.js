@@ -9,11 +9,20 @@ module.exports = {
 	execute(msg, args, client, Discord, command) {
 		const queue = client.queue.get(msg.guild.id);
 		if (client.funcs.check(client, msg, command)) {
+			if (msg.content.contains("-force")) {
+				if (queue) {
+					queue.voiceChannel.leave();
+					queue.exists = false;
+				}
+				if (msg.guild.voice.channel) msg.guild.voice.channel.leave();
+				client.queue.delete(guild.id);
+				return msg.channel.send(client.messages.stop);
+			}
 			queue.songs = [];
 			queue.looping = false;
 			queue.endReason = "stop";
 			queue.connection.dispatcher.end();
-			msg.channel.send(client.messages.stop)
+			msg.channel.send(client.messages.stop);
 		}
 	}
 };
