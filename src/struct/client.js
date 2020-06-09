@@ -72,7 +72,7 @@ module.exports = class extends Client {
     }
 
     events(this);
-    console.log(this.config.token);
+
     this.login(this.config.token).catch((err) =>
       console.log("Failed to login: " + err)
     );
