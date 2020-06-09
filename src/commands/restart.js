@@ -7,7 +7,7 @@ module.exports = {
     permission: 'dev',
     category: 'util',
     async execute(msg, args, client, Discord, command) {
-        lient.funcs.saveDB(client);
+        client.funcs.saveDB(client);
         msg.channel.send(client.messages.dbSaved);
         msg.channel.send(client.messages.restart);
         client.shard.respawnAll(client.config.shardDelay, client.config.respawnDelay, client.config.spawnTimeout);
