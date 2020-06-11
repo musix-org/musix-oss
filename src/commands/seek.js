@@ -7,12 +7,10 @@ module.exports = {
   permission: "MANAGE_MESSAGES",
   category: "music",
   async execute(msg, args, client, Discord, command) {
-    const ytdl = require("ytdl-core");
     const queue = client.queue.get(msg.guild.id);
     if (client.funcs.check(client, msg, command)) {
       if (queue.nigthCore)
         return msg.channel.send(client.messages.disableNigthCore);
-      let data = await Promise.resolve(ytdl.getInfo(queue.songs[0].url));
       if (!args[1])
         return msg.channel.send(
           `${client.messages.correctUsage}\`${
@@ -26,9 +24,9 @@ module.exports = {
         let message;
         message = client.messages.seekMax.replace(
           "%LENGTH%",
-          data.videoDetails.lengthSeconds
+          queue.songs[0].info.lengthSeconds
         );
-        if (pos > data.videoDetais.lengthSeconds) return msg.channel.send(message);
+        if (pos > queue.songs[0].info.lengthSeconds) return msg.channel.send(message);
       }
       client.funcs.end(client, msg, pos, command);
     }
