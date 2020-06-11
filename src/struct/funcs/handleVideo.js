@@ -9,7 +9,7 @@ module.exports = async function (
   playlist,
   type
 ) {
-  const songInfo = await ytdl.getInfo(resource.url);
+  const songInfo = await ytdl.getInfo(resource.url).catch(err => console.log(err));
   const song = {
     title: Discord.Util.escapeMarkdown(songInfo.videoDetails.title),
     url: resource.url,
