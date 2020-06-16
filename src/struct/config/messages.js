@@ -1,4 +1,6 @@
-const emojis = require("./emojis.js");
+const {
+  emojis
+} = require("./config.js");
 
 module.exports = {
   emojis: emojis,

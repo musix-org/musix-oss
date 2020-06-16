@@ -14,6 +14,7 @@ module.exports = {
   spotify_refresh_token: process.env.SPOTIFY_REFRESH_TOKEN,
   lastfm_api_key: process.env.LASTFM_API_KEY,
   lastfm_secret: process.env.LASTFM_SECRET,
+  webhookUrl: process.env.WEBHOOK_URL,
   port: 8888,
   redirectUri: "http://localhost:8888/callback/",
   testServer: "489111553321336832",
@@ -23,7 +24,7 @@ module.exports = {
   embedColor: "#b50002",
   invite: "https://discordapp.com/oauth2/authorize?client_id=607266889537945605&permissions=3427328&scope=bot",
   supportServer: "https://discord.gg/rvHuJtB",
-  devMode: false,
+  devMode: true,
   api: false,
   saveDB: true,
   respawn: true,
@@ -40,3 +41,61 @@ module.exports = {
   startPlaying: true,
   bass: 1,
 };
+
+module.exports.streamConfig = {
+  ytdlOptions: {
+    filter: "audio",
+    highWaterMark: 1 << 25,
+    volume: false,
+    requestOptions: {
+      maxRedirects: 4
+    }
+  },
+  options: {
+    seek: null,
+    bitrate: 1024,
+    volume: 1,
+    type: "converted",
+  },
+}
+
+module.exports.queueConfig = {
+  textChannel: null,
+  voiceChannel: null,
+  connection: null,
+  songs: [],
+  volume: null,
+  bass: null,
+  nigthCore: false,
+  playing: false,
+  paused: false,
+  looping: false,
+  songLooping: false,
+  votes: 0,
+  voters: [],
+  votesNeeded: null,
+  time: 0,
+  endReason: null,
+}
+
+module.exports.emojis = {
+  garbage: "🗑️ ",
+  green_check_mark: "<:green_check_mark:674265384777416705> ",
+  loading: "<a:loading:674284196700618783> ",
+  loudSound: ":loud_sound: ",
+  megaPhone: "📣 ",
+  notes: "<a:aNotes:674602408105476106>",
+  pause: "<:pause:674685548610322462> ",
+  previous: "<:reverse:705012312142119012> ",
+  redx: "<:redx:674263474704220182> ",
+  repeat: "<:repeat1:674685561377914892> ",
+  repeatSong: "<:repeatsong:674685573419761716> ",
+  resume: "<:resume:674685585478254603> ",
+  shuffle: "<:shuffle:674685595980791871> ",
+  signal: ":signal_strength: ",
+  skip: "<:skip:674685614221688832> ",
+  speaker: ":speaker: ",
+  stop: "<:stop:674685626108477519> ",
+  stopWatch: ":stopwatch: ",
+  volumeHigh: "<:volumehigh:674685637626167307> ",
+}
