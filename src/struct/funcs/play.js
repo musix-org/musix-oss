@@ -1,9 +1,12 @@
 module.exports = async function (guild, song, client, seek, play) {
-  console.log("test");
-  const { Readable: ReadableStream } = require("stream");
+  const {
+    Readable: ReadableStream
+  } = require("stream");
   const Discord = require("discord.js");
   const ytdl = require("ytdl-core");
-  const { streamConfig } = require("../config/config.js");
+  const {
+    streamConfig
+  } = require("../config/config.js");
   const prism = require("prism-media");
   const queue = client.queue.get(guild.id);
   if (!song) {
@@ -26,8 +29,8 @@ module.exports = async function (guild, song, client, seek, play) {
   let input = song.url;
   if (song.type === "ytdl")
     input = ytdl(song.url, streamConfig.ytdlOptions)
-      //.on('info', (info, format) => console.log(format))
-      .on("error", (err) => console.log(err));
+    //.on('info', (info, format) => console.log(format))
+    .on("error", (err) => console.log(err));
 
   const ffmpegArgs = [
     "-analyzeduration",

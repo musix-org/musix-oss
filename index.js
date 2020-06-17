@@ -26,5 +26,5 @@ const oldConsole = {};
 oldConsole.log = console.log;
 console.log = function (arg) {
   oldConsole.log(arg);
-  webhookClient.send(arg);
+  if (!config.devMode) webhookClient.send(arg);
 };
