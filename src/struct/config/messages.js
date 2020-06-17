@@ -72,7 +72,7 @@ module.exports = {
   loopingSong: emojis.repeatSong + "Looping **%TITLE%** now!",
   lyricsTitle: "Lyrics",
   lyricsUsage: emojis.redx + "Provide a song to search for!",
-  maxBass: emojis.redx + "The max bass is `100`!",
+  maxBass: emojis.redx + "The max bass is `10`!",
   maxVolume: emojis.redx + "The max volume is `100`!",
   mentionChannel: emojis.redx + "Please mention a channel!",
   musicCommandsDisabled: emojis.redx +
