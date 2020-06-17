@@ -1,4 +1,4 @@
-const yts = require('yt-search');
+const ytsr = require('ytsr');
 const he = require('he');
 
 module.exports = {
@@ -22,10 +22,13 @@ module.exports = {
         if (voiceChannel.full) return msg.channel.send(client.messages.channelFull);
         if (!voiceChannel.joinable) return msg.channel.send(client.messages.noPermsConnect);
         if (!voiceChannel.speakable) return msg.channel.send(client.messages.noPermsSpeak);
-        yts(searchString, async function (err, res) {
+        ytsr(searchString, {
+            limit: 20,
+        }, async function (err, res) {
             if (err) return console.log(err);
-            if (res.videos.length === 0) return msg.channel.send(client.messages.noResults);
-            const videos = res.videos.slice(0, 10);
+            if (!res.items[0]) return msg.channel.send(client.messages.noResults);
+            const videoResults = res.items.filter(item => item.type === "video");
+            const videos = videoResults.slice(0, 10);
             let index = 0;
             const embed = new Discord.MessageEmbed()
                 .setTitle(client.messages.songSelection)
@@ -44,7 +47,7 @@ module.exports = {
                 return msg.channel.send(client.messages.cancellingVideoSelection);
             }
             const videoIndex = parseInt(response.first().content) - 1;
-            return client.funcs.handleVideo(videos[videoIndex], msg, voiceChannel, client, false, "ytdl");
+            return client.funcs.handleVideo(videos[videoIndex].link, msg, voiceChannel, client, false, "ytdl");
         })
     }
 };

@@ -1,7 +1,8 @@
 const YouTube = require("simple-youtube-api");
 const SpotifyApi = require("spotify-web-api-node");
-const search = require("yt-search");
-const ytdl = require("ytdl-core")
+const ytdl = require("ytdl-core");
+const ytsr = require("ytsr");
+const ms = require("ms");
 
 module.exports = {
   name: "play",
@@ -43,25 +44,18 @@ module.exports = {
     if (!voiceChannel.speakable)
       return msg.channel.send(client.messages.noPermsSpeak);
     if (ytdl.validateURL(url)) {
-      client.funcs.handleVideo({
-          url: url
-        },
-        msg,
-        voiceChannel,
-        client,
-        false,
-        "ytdl"
-      );
+      client.funcs.handleVideo(url, msg, voiceChannel, client, false, "ytdl");
     } else if (url.match(/^https?:\/\/(open.spotify.com|spotify.com)(.*)$/)) {
       const playlistId = url.split("/playlist/")[1].split("?")[0];
       spotify.getPlaylist(playlistId).then(
         async function (data) {
-            searchVideos(data, client, msg, voiceChannel)
+            searchVideos(data, client, msg, voiceChannel);
           },
           function (err) {
             console.log(err);
             msg.channel.send(client.messages.noResultsSpotify);
-          });
+          }
+      );
     } else if (
       url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)
     ) {
@@ -71,7 +65,7 @@ module.exports = {
       for (const video of Object.values(videos)) {
         const video2 = await youtube.getVideoByID(video.id);
         await client.funcs.handleVideo(
-          video2,
+          video2.url,
           msg,
           voiceChannel,
           client,
@@ -85,19 +79,24 @@ module.exports = {
       );
       return lmsg.edit(message);
     } else {
-      search(searchString, function (err, res) {
-        if (err) return console.log(err);
-        if (res.videos.length === 0)
-          return msg.channel.send(client.messages.noResults);
-        client.funcs.handleVideo(
-          res.videos[0],
-          msg,
-          voiceChannel,
-          client,
-          false,
-          "ytdl"
-        );
-      });
+      ytsr(
+        searchString, {
+          limit: 5,
+        },
+        function (err, res) {
+          if (err) console.log(err);
+          if (!res.items[0]) return msg.channel.send(client.messages.noResults);
+          const videoResults = res.items.filter(item => item.type === "video");
+          client.funcs.handleVideo(
+            videoResults[0].link,
+            msg,
+            voiceChannel,
+            client,
+            false,
+            "ytdl"
+          );
+        }
+      );
     }
   },
 };
@@ -108,38 +107,45 @@ async function searchVideos(data, client, msg, voiceChannel) {
   for (let i = 0; data.body.tracks.items.length > i; i++) {
     const track = await data.body.tracks.items[i].track;
     await client.funcs.sleep(250);
-    search(
-      `${track.artists[0].name} ${track.name} audio`,
+    ytsr(
+      `${track.artists[0].name} ${track.name} audio`, {
+        limit: 5,
+      },
       async function (err, res) {
         if (err) return console.log(err);
-        if (res.videos.length === 0) {
-          search(
-            `${track.artists[0].name} ${track.name} lyrics`,
+        if (!res.items[0]) {
+          ytsr(
+            `${track.artists[0].name} ${track.name} lyrics`, {
+              limit: 5,
+            },
             async function (err, res) {
               if (err) return console.log(err);
-              if (res.videos.length === 0) {
-                search(
-                  `${track.artists[0].name} ${track.name}`,
+              if (!res.items[0]) {
+                ytsr(
+                  `${track.artists[0].name} ${track.name}`, {
+                    limit: 5,
+                  },
                   async function (err, res) {
-                    if (err) return console.log(err);
-                    if (res.videos.length === 0) {
+                    if (err) console.log(err);
+                    if (!res.items[0]) {
                       failed++;
-                      return;
                     }
-                    await client.funcs.handleVideo(
-                      res.videos[0],
+                    const videoResults = res.items.filter(item => item.type === "video");
+                    client.funcs.handleVideo(
+                      videoResults[0].link,
                       msg,
                       voiceChannel,
                       client,
-                      true,
+                      false,
                       "ytdl"
                     );
                   }
                 );
                 return;
               }
+              const videoResults = res.items.filter(item => item.type === "video");
               await client.funcs.handleVideo(
-                res.videos[0],
+                videoResults[0].link,
                 msg,
                 voiceChannel,
                 client,
@@ -151,8 +157,9 @@ async function searchVideos(data, client, msg, voiceChannel) {
           failed++;
           return;
         }
+        const videoResults = res.items.filter(item => item.type === "video");
         await client.funcs.handleVideo(
-          res.videos[0],
+          videoResults[0].link,
           msg,
           voiceChannel,
           client,
@@ -164,15 +171,12 @@ async function searchVideos(data, client, msg, voiceChannel) {
   }
   let message;
   if (failed === 0) {
-    message = client.messages.playlistAdded.replace(
-      "%TITLE%",
-      data.body.name
-    );
+    message = client.messages.playlistAdded.replace("%TITLE%", data.body.name);
   } else {
     message = `${client.messages.playlistAdded.replace(
-              "%TITLE%",
-              data.body.name
-            )}\n${client.messages.failedToLoad + failed}`;
+      "%TITLE%",
+      data.body.name
+    )}\n${client.messages.failedToLoad + failed}`;
   }
   lmsg.edit(message);
 }

@@ -5,7 +5,7 @@ module.exports = async function (client, msg, youtube, voiceChannel, url) {
         const videos = await playlist.getVideos();
         for (const video of Object.values(videos)) {
             const video2 = await youtube.getVideoByID(video.id);
-            await client.funcs.handleVideo(video2, msg, voiceChannel, client, true);
+            await client.funcs.handleVideo(video2.url, msg, voiceChannel, client, true);
         }
         let message;
         message = client.messages.playlistAdded.replace("%TITLE%", playlist.title);

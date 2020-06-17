@@ -49,9 +49,8 @@ module.exports = {
                 if (songs.length !== 0) {
                     const lmsg = await msg.channel.send(client.messages.loadingSongs);
                     for (let i = 0; i < songs.length; i++) {
-                        client.funcs.handleVideo({
-                            url: `https://www.youtube.com/watch?v=${songs[i].youtubeId}`
-                        }, msg, voiceChannel, client, true, "ytdl");
+                        client.funcs.handleVideo(
+                            `https://www.youtube.com/watch?v=${songs[i].youtubeId}`, msg, voiceChannel, client, true, "ytdl");
                     }
                     const message = client.messages.songsAdded.replace(
                         "%AMOUNT%",
