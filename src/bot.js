@@ -9,3 +9,9 @@ console.log = function (arg) {
   oldConsole.log(arg);
   if (!client.config.devMode) webhookClient.send(arg);
 };
+
+oldConsole.error = console.error;
+console.error = function (arg) {
+  oldConsole.error(arg);
+  if (!client.config.devMode) webhookClient.send(arg);
+};

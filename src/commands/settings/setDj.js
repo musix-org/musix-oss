@@ -13,10 +13,12 @@ module.exports = {
                 const permissions = msg.channel.permissionsFor(msg.client.user);
                 if (!permissions.has('MANAGE_ROLES')) return msg.channel.send(client.messages.noPermsManageRoles);
                 msg.guild.createRole({
-                    name: 'DJ',
-                })
+                        name: 'DJ',
+                    })
                     .then(role => client.global.db.guilds[msg.guild.id].djrole = role.id)
-                    .catch(console.error)
+                    .catch((error) => {
+                        console.log(error);
+                    })
                 client.global.db.guilds[msg.guild.id].dj = true;
                 msg.channel.send(client.messages.djRoleCreated);
             }

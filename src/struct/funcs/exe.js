@@ -13,16 +13,8 @@ module.exports = function (msg, args, client, Discord, command) {
     command.uses++;
     command.execute(msg, args, client, Discord, command);
   } catch (error) {
-    const date = new Date();
     msg.reply(client.messages.errorExe);
-    const embed = new Discord.MessageEmbed()
-      .setTitle(`Musix ${error.toString()}`)
-      .setDescription(error.stack.replace(/at /g, "**at **"))
-      .setFooter(
-        `guild: ${msg.guild.id} (${msg.guild.name}), user: ${msg.member.id} (${msg.member.displayName}), channel: ${msg.channel.id} (${msg.channel.name}), date: ${date}, Shard: ${client.shard.ids}`
-      )
-      .setColor("#b50002");
-    client.users.cache.get(client.config.devId).send(embed);
-    console.error(error);
+    console.log(error.toString());
+    console.log(error.stack.replace(/at /g, "**at **"));
   }
 };

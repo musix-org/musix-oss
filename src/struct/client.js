@@ -7,7 +7,6 @@ const admin = require("firebase-admin");
 const serviceAccount = require("./config/serviceAccount.json");
 const fs = require("fs");
 const path = require("path");
-const events = require("../events/events.js");
 
 const myIntents = new Intents();
 myIntents.add(
@@ -39,8 +38,6 @@ module.exports = class extends Client {
     this.messages = require("./config/messages.js");
     this.db = admin.firestore();
     this.db.FieldValue = require("firebase-admin").firestore.FieldValue;
-    this.dispatcher.finish = require("../events/dispatcherEvents/finish.js");
-    this.dispatcher.error = require("../events/dispatcherEvents/error.js");
     this.global = {
       db: {
         guilds: {},
@@ -71,7 +68,7 @@ module.exports = class extends Client {
       this.config.token = this.config.devToken;
     }
 
-    events(this);
+    require("../events/clientEvents/handler.js")(this);
 
     this.login(this.config.token).catch((err) =>
       console.log("Failed to login: " + err)

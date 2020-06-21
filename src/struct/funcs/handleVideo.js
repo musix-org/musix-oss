@@ -57,12 +57,11 @@ module.exports = async function (
   try {
     const connection = await voiceChannel.join();
     construct.connection = connection;
+    require("../../events/connectionEvents/handler")(client, connection);
     client.funcs.play(msg.guild, construct.songs[0], client, 0, true);
   } catch (error) {
     client.queue.delete(msg.guild.id);
-    client.users.cache
-      .get(client.config.devId)
-      .send(client.messages.errorConnecting + error);
+    console.log(error);
     return msg.channel.send(client.messages.error + error);
   }
   return;

@@ -68,15 +68,8 @@ module.exports = {
         option.execute(msg, args, client);
       } catch (error) {
         msg.reply(client.messages.errorExeOpt);
-        const embed = new Discord.MessageEmbed()
-          .setTitle(`Musix ${error.toString()}`)
-          .setDescription(error.stack.replace(/at /g, "**at **"))
-          .setColor(client.config.embedColor);
-        client
-          .fetchUser(client.config.devId)
-          .then((user) => user.send(embed))
-          .catch(console.error);
-        client.users.cache.get(client.config.devId).send(embed);
+        console.log(error.toString());
+        console.log(error.stack.replace(/at /g, "**at **"));
       }
     } else {
       return msg.channel.send(embed);

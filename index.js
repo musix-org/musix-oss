@@ -7,7 +7,9 @@ if (config.devMode) {
   config.shards = 1;
 }
 
-const { ShardingManager } = require("discord.js");
+const {
+  ShardingManager
+} = require("discord.js");
 const manager = new ShardingManager("./src/bot.js", {
   token: config.token,
   respawn: config.respawn,
@@ -27,4 +29,10 @@ oldConsole.log = console.log;
 console.log = function (arg) {
   oldConsole.log(arg);
   if (!config.devMode) webhookClient.send(arg);
+};
+
+oldConsole.error = console.error;
+console.error = function (arg) {
+  oldConsole.error(arg);
+  if (!client.config.devMode) webhookClient.send(arg);
 };

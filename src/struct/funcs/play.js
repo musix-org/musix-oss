@@ -30,7 +30,7 @@ module.exports = async function (guild, song, client, seek, play) {
   if (song.type === "ytdl")
     input = ytdl(song.url, streamConfig.ytdlOptions)
     //.on('info', (info, format) => console.log(format))
-    .on("error", (err) => console.log(err));
+    .on("error", (error) => console.log(error));
 
   const ffmpegArgs = [
     "-analyzeduration",
@@ -65,19 +65,9 @@ module.exports = async function (guild, song, client, seek, play) {
     console.log(error);
   });
 
-  const dispatcher = queue.connection
-    .play(stream, streamConfig.options)
-    .on("finish", () => {
-      client.dispatcher.finish(client, queue.endReason, guild);
-    })
-    .on("start", () => {
-      queue.endReason = null;
-      dispatcher.player.streamingData.pausedTime = 0;
-    })
-    .on("error", (error) => {
-      client.dispatcher.error(client, error, guild);
-    });
+  const dispatcher = queue.connection.play(stream, streamConfig.options)
   dispatcher.setVolume(queue.volume / 100);
+  require("../../events/dispatcherEvents/handler")(client, dispatcher, queue, guild);
   if ((client.global.db.guilds[guild.id].startPlaying && play) || play) {
     if (song.type !== "ytdl") return;
     const embed = new Discord.MessageEmbed()
