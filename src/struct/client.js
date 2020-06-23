@@ -43,6 +43,7 @@ module.exports = class extends Client {
         guilds: {},
       },
     };
+    this.logs = [];
 
     fs.readdirSync(path.join(__dirname, "funcs")).forEach((filename) => {
       this.funcs[filename.slice(0, -3)] = require(`./funcs/${filename}`);

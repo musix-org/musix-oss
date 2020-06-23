@@ -18,16 +18,17 @@ module.exports = function (client) {
     }).on('rateLimit', (rateLimitInfo) => {
 
     }).on('shardDisconnect', (event, id) => {
-        console.log(`Shard ${id} disconnected event ${event}`);
+        client.logs.push(`Shard ${id} disconnected event ${event}`);
     }).on('shardError', (error, shardId) => {
-        console.log(`Shard ${shardId} error ${error}`);
+        client.logs.push(`Shard ${shardId} error ${error}`);
     }).on('shardReady', (id, unavailableGuilds) => {
-        console.log(`Shard ${id} ready. Unavailable guilds: ${unavailableGuilds || 0}`);
+        client.logs.push(`Shard ${id} ready. Unavailable guilds: ${unavailableGuilds || 0}`);
     }).on('shardReconnecting', (id) => {
-        console.log(`shard ${id} reconnecting.`);
+        client.logs.push(`shard ${id} reconnecting.`);
     }).on('shardResume', (id, replayedEvents) => {
-        console.log(`shard ${id} resume events ${replayedEvents}`);
+        client.logs.push(`shard ${id} resume events ${replayedEvents}`);
     }).on("warn", (info) => {
+        client.logs.push(`Warn! info: ${info}`);
         console.log(`Warn! info: ${info}`);
     });
 }
