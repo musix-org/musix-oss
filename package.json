@@ -13,9 +13,10 @@
   "author": "Matte",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MatteZ02/Musix-V3/issues"
+    "url": "https://github.com/MatteZ02/Musix-V3/issues",
+    "support": "https://discord.gg/rvHuJtB"
   },
-  "homepage": "https://github.com/MatteZ02/Musix-V3#readme",
+  "homepage": "https://musix-web.herokuapp.com/",
   "dependencies": {
     "@discordjs/opus": "^0.2.1",
     "bodapi.js": "^1.1.1",
