@@ -28,11 +28,11 @@ const oldConsole = {};
 oldConsole.log = console.log;
 console.log = function (arg) {
   oldConsole.log(arg);
-  if (!config.devMode) webhookClient.send(arg);
+  if (!config.devMode && arg) webhookClient.send(arg);
 };
 
 oldConsole.error = console.error;
 console.error = function (arg) {
   oldConsole.error(arg);
-  if (!client.config.devMode) webhookClient.send(arg);
+  if (!client.devMode && arg) webhookClient.send(arg);
 };
