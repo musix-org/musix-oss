@@ -43,7 +43,7 @@ module.exports = async function (client) {
       client.config.startPlaying;
     if (!client.global.db.guilds[guild.id].bass)
       client.global.db.guilds[guild.id].bass = client.config.bass;
-    if (!client.global.db.guilds[guild.id].blacklsit)
+    if (!client.global.db.guilds[guild.id].blacklist)
       client.global.db.guilds[guild.id].blacklist = [];
     if (!client.global.db.guilds[guild.id].premium)
       client.global.db.guilds[guild.id].premium = false;
