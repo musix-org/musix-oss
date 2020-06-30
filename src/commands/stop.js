@@ -9,7 +9,7 @@ module.exports = {
 	execute(msg, args, client, Discord, command) {
 		const queue = client.queue.get(msg.guild.id);
 		if (client.funcs.check(client, msg, command)) {
-			if (msg.content.includes("-force")) {
+			if (msg.content.contains("-force")) {
 				if (queue) {
 					queue.voiceChannel.leave();
 					queue.exists = false;
