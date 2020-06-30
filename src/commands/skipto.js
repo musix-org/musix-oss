@@ -16,12 +16,13 @@ module.exports = {
       let point = parseInt(args[1]);
       point = point - 1;
       if (isNaN(point)) return msg.channel.send(client.messages.validNumber);
-      if (point > queue.songs.size)
+      if (point > queue.songs.length - 1)
         return msg.channel.send(client.messages.noSongs);
       if (point < 0) return msg.channel.send(client.messages.cantSkipToCurrent);
       for (let i = 0; i < point; i++) {
         queue.prevSongs.push(queue.songs.shift());
       }
+      msg.channel.send(client.messages.skipped);
       queue.endReason = "skipto";
       queue.time = 0;
       queue.connection.dispatcher.end();

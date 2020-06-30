@@ -22,7 +22,8 @@ module.exports = {
   secondary_test_channel: "570531724002328577",
   devId: "360363051792203779",
   embedColor: "#b50002",
-  invite: "https://discordapp.com/oauth2/authorize?client_id=607266889537945605&permissions=3427328&scope=bot",
+  invite:
+    "https://discordapp.com/oauth2/authorize?client_id=607266889537945605&permissions=3427328&scope=bot",
   supportServer: "https://discord.gg/rvHuJtB",
   devMode: false,
   api: false,
@@ -40,6 +41,7 @@ module.exports = {
   djrole: null,
   startPlaying: true,
   bass: 1,
+  playSimilar: false,
 };
 
 module.exports.streamConfig = {
@@ -48,8 +50,8 @@ module.exports.streamConfig = {
     highWaterMark: 1 << 25,
     volume: false,
     requestOptions: {
-      maxRedirects: 4
-    }
+      maxRedirects: 4,
+    },
   },
   options: {
     seek: null,
@@ -57,7 +59,7 @@ module.exports.streamConfig = {
     volume: 1,
     type: "converted",
   },
-}
+};
 
 module.exports.queueConfig = {
   textChannel: null,
@@ -76,7 +78,7 @@ module.exports.queueConfig = {
   votesNeeded: null,
   time: 0,
   endReason: null,
-}
+};
 
 module.exports.emojis = {
   garbage: "🗑️ ",
@@ -98,4 +100,4 @@ module.exports.emojis = {
   stop: "<:stop:674685626108477519> ",
   stopWatch: ":stopwatch: ",
   volumeHigh: "<:volumehigh:674685637626167307> ",
-}
+};

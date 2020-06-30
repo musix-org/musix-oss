@@ -7,7 +7,8 @@ module.exports = async function (
   voiceChannel,
   client,
   playlist,
-  type
+  type,
+  spotifyTrackData
 ) {
   const songInfo = await ytdl.getInfo(resource).catch(err => console.log(err));
   const song = {
@@ -15,7 +16,8 @@ module.exports = async function (
     url: resource,
     author: msg.author,
     type: type,
-    info: songInfo.videoDetails
+    info: songInfo.videoDetails,
+    track: spotifyTrackData
   };
 
   const queue = client.queue.get(msg.guild.id);

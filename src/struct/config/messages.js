@@ -4,11 +4,16 @@ const {
 
 module.exports = {
   emojis: emojis,
+  albumAdded: emojis.green_check_mark +
+    "Album: **%TITLE%** has been added to the queue!",
   alreadyPaused: emojis.redx + "The music is already paused!",
   alreadyVoted: emojis.redx + "You have already voted to skip!",
   announceSongs: emojis.megaPhone + "Current setting:",
   announceSongsFalse: emojis.green_check_mark + "announcesongs now set to `false`!",
   announceSongsTrue: emojis.green_check_mark + "announcesongs now set to `true`!",
+  autoPlay: "Current setting:",
+  autoPlayFalse: emojis.green_check_mark + "autoplay now set to `false`!",
+  autoPlayTrue: emojis.green_check_mark + "autoplay now set to `true`!",
   bassApplied: emojis.volumeHigh + "The bass level **%BASS%** has been applied!",
   bassFalse: emojis.green_check_mark + "Bass is now false!",
   bassLevel: emojis.green_check_mark + "Bass level is now",
@@ -41,6 +46,7 @@ module.exports = {
   defaultVolumeSet: emojis.green_check_mark + "Default volume set to:",
   devMode: emojis.redx +
     "Dev mode has been turned on! Commands are only available to developer(s)!",
+  disabledSpotifySongs: emojis.redx + "Spotify songs cannot be played currently!",
   disableNigthCore: emojis.redx + "Please disable nigthCore in order to use this command!",
   dispatcherError: "Error with the dispatcher: ",
   djFalse: emojis.green_check_mark + "`DJ` now set to `false`",
@@ -62,6 +68,7 @@ module.exports = {
   helpTitle: "help",
   idOrMentionChannel: emojis.redx + "Please provide a channel id or mention a channel!",
   invalidGuild: emojis.redx + "Invalid guild id!",
+  invalidSpotifyUrl: emojis.redx + "That url cannot be played! If you believe this is a mistake please contact support!",
   inviteTitle: "Invite Musix to your Discord server!",
   joined: emojis.green_check_mark + "Joined",
   joinSupport: "Join the musix support server: ",
@@ -152,6 +159,8 @@ module.exports = {
     "The lenght of this song is %LENGTH% seconds! You can't seek further than that!",
   settingsAnnounceSongs: "announcesongs",
   settingsAnnounceSongsDesc: "Whether to announce songs that start playing or not.",
+  settingsAutoPlay: "autoplay",
+  settingsAutoPlayDesc: "When the queue ends similar songs will be played.",
   settingsBass: "bass",
   settingsBassDesc: "Change the default bass level.",
   settingsBlacklist: "blacklist",

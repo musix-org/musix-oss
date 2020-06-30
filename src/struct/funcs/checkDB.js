@@ -11,6 +11,7 @@ module.exports = async function (client) {
         bass: client.config.bass,
         blacklist: [],
         premium: false,
+        playSimilar: client.config.playSimilar,
       });
       client.global.db.guilds[guild.id] = {
         prefix: client.config.prefix,
@@ -22,28 +23,30 @@ module.exports = async function (client) {
         bass: client.config.bass,
         blacklist: [],
         premium: false,
+        playSimilar: client.config.playSimilar,
       };
       return;
     }
-    if (client.global.db.guilds[guild.id].prefix === undefined)
+    if (!client.global.db.guilds[guild.id].prefix)
       client.global.db.guilds[guild.id].prefix = client.config.prefix;
-    if (client.global.db.guilds[guild.id].defaultVolume === undefined)
+    if (!client.global.db.guilds[guild.id].defaultVolume)
       client.global.db.guilds[guild.id].defaultVolume =
       client.config.defaultVolume;
-    if (client.global.db.guilds[guild.id].permissions === undefined)
+    if (!client.global.db.guilds[guild.id].permissions)
       client.global.db.guilds[guild.id].permissions = client.config.permissions;
-    if (client.global.db.guilds[guild.id].dj === undefined)
+    if (!client.global.db.guilds[guild.id].dj)
       client.global.db.guilds[guild.id].dj = client.config.dj;
-    if (client.global.db.guilds[guild.id].djrole === undefined)
+    if (!client.global.db.guilds[guild.id].djrole)
       client.global.db.guilds[guild.id].djrole = client.config.djrole;
-    if (client.global.db.guilds[guild.id].startPlaying === undefined)
+    if (!client.global.db.guilds[guild.id].startPlaying)
       client.global.db.guilds[guild.id].startPlaying =
       client.config.startPlaying;
-    if (client.global.db.guilds[guild.id].bass === undefined)
+    if (!client.global.db.guilds[guild.id].bass)
       client.global.db.guilds[guild.id].bass = client.config.bass;
-    if (client.global.db.guilds[guild.id].blacklsit === undefined)
+    if (!client.global.db.guilds[guild.id].blacklsit)
       client.global.db.guilds[guild.id].blacklist = [];
-    if (client.global.db.guilds[guild.id].premium === undefined)
+    if (!client.global.db.guilds[guild.id].premium)
       client.global.db.guilds[guild.id].premium = false;
+    if (!client.global.db.guilds[guild.id].playSimilar) client.global.db.guilds[guild.id].playSimilar = client.config.playSimilar
   });
 };

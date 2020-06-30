@@ -22,12 +22,12 @@ module.exports = async function (guild, song, client, seek, play) {
       client.queue.delete(guild.id);
       return;
     }
-  }, 10000);
+  }, 30000);
 
   streamConfig.options.seek = seek;
 
   let input = song.url;
-  if (song.type === "ytdl")
+  if (song.type === "ytdl" || song.type === "spotify")
     input = ytdl(song.url, streamConfig.ytdlOptions)
     //.on('info', (info, format) => console.log(format))
     .on("error", (error) => console.log(error));
@@ -69,7 +69,7 @@ module.exports = async function (guild, song, client, seek, play) {
   dispatcher.setVolume(queue.volume / 100);
   require("../../events/dispatcherEvents/handler")(client, dispatcher, queue, guild);
   if ((client.global.db.guilds[guild.id].startPlaying && play) || play) {
-    if (song.type !== "ytdl") return;
+    if (song.type !== "ytdl" && song.type !== "spotify") return;
     const embed = new Discord.MessageEmbed()
       .setTitle(`${client.messages.startPlaying}**${song.title}**`)
       .setDescription(
