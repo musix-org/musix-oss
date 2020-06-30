@@ -11,7 +11,7 @@ module.exports = {
             bass: client.config.bass,
             blacklist: [],
             premium: false,
-            playSimilar: client.config.playSimilar,
+            autoPlay: client.config.autoPlay,
         };
         msg.channel.send(client.messages.reset);
     }

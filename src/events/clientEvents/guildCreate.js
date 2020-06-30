@@ -11,7 +11,7 @@ module.exports = {
       bass: client.config.bass,
       blacklist: [],
       premium: false,
-      playSimilar: client.config.playSimilar,
+      autoPlay: client.config.autoPlay,
     });
     client.global.db.guilds[guild.id] = {
       prefix: client.config.prefix,
@@ -23,7 +23,7 @@ module.exports = {
       bass: client.config.bass,
       blacklist: [],
       premium: false,
-      playSimilar: client.config.playSimilar,
+      autoPlay: client.config.autoPlay,
     };
   },
 };

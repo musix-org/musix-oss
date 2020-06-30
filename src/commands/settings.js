@@ -53,7 +53,6 @@ module.exports = {
         client.messages.settingsAutoPlayDesc,
         true
       )
-      .addField()
       .setFooter(footer)
       .setAuthor(client.user.username, client.user.displayAvatarURL)
       .setColor(client.config.embedColor);

@@ -19,11 +19,20 @@ module.exports = {
       queue.votes = 0;
       queue.voters = [];
       if (queue.endReason !== "replay") {
-        if (queue.endReason === "previous") queue.songs.unshift(queue.prevSongs.pop())
-        if (queue.endReason !== "previous") queue.prevSongs.push(queue.songs.shift());
-        if (client.global.db.guilds[guild.id].playSimilar && !queue.songs[0] && queue.endReason !== "stop") {
-          const prevSongs = queue.prevSongs.filter(song => song.type == "spotify");
-          if (prevSongs.length >= 0) return findSimilar(client, queue, prevSongs, guild);
+        if (queue.endReason === "previous")
+          queue.songs.unshift(queue.prevSongs.pop());
+        if (queue.endReason !== "previous")
+          queue.prevSongs.push(queue.songs.shift());
+        if (
+          client.global.db.guilds[guild.id].autoPlay &&
+          !queue.songs[0] &&
+          queue.endReason !== "stop"
+        ) {
+          const prevSongs = queue.prevSongs.filter(
+            (song) => song.type == "spotify"
+          );
+          if (prevSongs.length >= 0)
+            return findSimilar(client, queue, prevSongs, guild);
         }
       }
     }
@@ -33,8 +42,8 @@ module.exports = {
 
 function findSimilar(client, queue, prevSongs, guild) {
   let retries = 0;
-  const query = prevSongs[Math.floor(Math.random() * Math.floor(prevSongs.length))];
-  if (!query) return client.funcs.play(guild, queue.songs[0], client, 0, true);
+  const query =
+    prevSongs[Math.floor(Math.random() * Math.floor(prevSongs.length))];
   similarSongs.find({
       title: query.track.name,
       artist: query.track.artists[0].name,
@@ -44,16 +53,21 @@ function findSimilar(client, queue, prevSongs, guild) {
       youtubeAPIKey: client.config.api_key,
     },
     async function (err, songs) {
-      if (err) return queue.textChannel.send(err.message);
+      if (err) {
+        console.log(err.message);
+        return queue.textChannel.send(client.messages.error);
+      }
       if (songs[0]) {
-        const random = Math.floor(Math.random() * Math.floor(songs.length))
-        const songInfo = await ytdl.getInfo(`https://www.youtube.com/watch?v=${songs[random].youtubeId}`);
+        const random = Math.floor(Math.random() * Math.floor(songs.length));
+        const songInfo = await ytdl.getInfo(
+          `https://www.youtube.com/watch?v=${songs[random].youtubeId}`
+        );
         queue.songs.push({
           title: Discord.Util.escapeMarkdown(songInfo.videoDetails.title),
           url: `https://www.youtube.com/watch?v=${songs[random].youtubeId}`,
           author: {},
           type: "ytdl",
-          info: songInfo.videoDetails
+          info: songInfo.videoDetails,
         });
         client.funcs.play(guild, queue.songs[0], client, 0, true);
       } else {

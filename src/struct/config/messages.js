@@ -5,7 +5,7 @@ const {
 module.exports = {
   emojis: emojis,
   albumAdded: emojis.green_check_mark +
-    "Album: **%TITLE%** has been added to the queue!",
+    "Album has been added to the queue!",
   alreadyPaused: emojis.redx + "The music is already paused!",
   alreadyVoted: emojis.redx + "You have already voted to skip!",
   announceSongs: emojis.megaPhone + "Current setting:",

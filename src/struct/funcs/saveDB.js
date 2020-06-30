@@ -12,7 +12,7 @@ module.exports = async function (client) {
         bass: client.global.db.guilds[guild.id].bass,
         blacklist: client.global.db.guilds[guild.id].blacklist,
         premium: client.global.db.guilds[guild.id].premium,
-        playSimilar: client.global.db.guilds[guild.id].playSimilar
+        autoPlay: client.global.db.guilds[guild.id].autoPlay
       });
     });
   }

@@ -11,7 +11,7 @@ module.exports = async function (client) {
         bass: client.config.bass,
         blacklist: [],
         premium: false,
-        playSimilar: client.config.playSimilar,
+        autoPlay: client.config.autoPlay,
       });
       client.global.db.guilds[guild.id] = {
         prefix: client.config.prefix,
@@ -23,7 +23,7 @@ module.exports = async function (client) {
         bass: client.config.bass,
         blacklist: [],
         premium: false,
-        playSimilar: client.config.playSimilar,
+        autoPlay: client.config.autoPlay,
       };
       return;
     }
@@ -47,6 +47,6 @@ module.exports = async function (client) {
       client.global.db.guilds[guild.id].blacklist = [];
     if (!client.global.db.guilds[guild.id].premium)
       client.global.db.guilds[guild.id].premium = false;
-    if (!client.global.db.guilds[guild.id].playSimilar) client.global.db.guilds[guild.id].playSimilar = client.config.playSimilar
+    if (!client.global.db.guilds[guild.id].autoPlay) client.global.db.guilds[guild.id].autoPlay = client.config.autoPlay
   });
 };

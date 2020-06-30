@@ -21,7 +21,7 @@ module.exports = {
           bass: client.config.bass,
           blacklist: [],
           premium: true,
-          playSimilar: client.config.playSimilar,
+          autoPlay: client.config.autoPlay,
         };
       });
     }
