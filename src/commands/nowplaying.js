@@ -35,7 +35,7 @@ module.exports = {
       )
       .setFooter(`Queued by ${queue.songs[0].author.tag}`)
       .setURL(queue.songs[0].url)
-      .setThumbnail(queue.songs[0].info.thumbnail.thumbnails[4].url)
+      .setThumbnail(queue.songs[0].info.thumbnail.thumbnails[4].url || queue.songs[0].info.thumbnail.thumbnails[3].url || queue.songs[0].info.thumbnail.thumbnails[2].url || queue.songs[0].info.thumbnail.thumbnails[1].url || queue.songs[0].info.thumbnail.thumbnails[0].url)
       .setColor(client.config.embedColor);
     if (queue.nigthCore)
       embed.setDescription(
