@@ -19,6 +19,7 @@ module.exports = {
                 .addField(client.messages.statusField4, client.shard.ids)
                 .addField("ram usage", `${process.memoryUsage().heapUsed} / ${process.memoryUsage().heapTotal}`, true)
                 .addField("cpu usage", process.cpuUsage().system, true)
+                .addField("version", require("../../package.json").version, true)
                 .setAuthor(client.user.username, client.user.displayAvatarURL)
                 .setColor(client.config.embedColor)
             m.delete();
