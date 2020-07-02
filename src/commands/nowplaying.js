@@ -23,6 +23,7 @@ module.exports = {
     for (let i = 0; i < barlength - completedpercent - 1; i++) {
       array.push("⎯");
     }
+    const thumbnail = queue.songs[0].info.thumbnail.thumbnails[4] || queue.songs[0].info.thumbnail.thumbnails[3] || queue.songs[0].info.thumbnail.thumbnails[2] || queue.songs[0].info.thumbnail.thumbnails[1] || queue.songs[0].info.thumbnail.thumbnails[0];
     const embed = new Discord.MessageEmbed()
       .setTitle(client.messages.nowPlaying)
       .setDescription(
@@ -35,7 +36,7 @@ module.exports = {
       )
       .setFooter(`Queued by ${queue.songs[0].author.tag}`)
       .setURL(queue.songs[0].url)
-      .setThumbnail(queue.songs[0].info.thumbnail.thumbnails[4].url || queue.songs[0].info.thumbnail.thumbnails[3].url || queue.songs[0].info.thumbnail.thumbnails[2].url || queue.songs[0].info.thumbnail.thumbnails[1].url || queue.songs[0].info.thumbnail.thumbnails[0].url)
+      .setThumbnail(thumbnail.url)
       .setColor(client.config.embedColor);
     if (queue.nigthCore)
       embed.setDescription(
