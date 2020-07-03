@@ -49,25 +49,24 @@ module.exports = {
         const playlistId = url.split("/playlist/")[1].split("?")[0];
         spotify.getPlaylist(playlistId).then(
           async function (data) {
-              searchPlaylist(data, client, msg, voiceChannel);
-            },
-            function (err) {
-              console.log(err);
-              msg.channel.send(client.messages.noResultsSpotify);
-            }
+            searchPlaylist(data, client, msg, voiceChannel);
+          },
+          function (err) {
+            console.log(err);
+            msg.channel.send(client.messages.noResultsSpotify);
+          }
         );
       } else if (url.includes("album")) {
         const albumId = url.split("/album/")[1].split("?")[0];
-        spotify.getAlbumTracks(albumId)
-          .then(
-            async function (data) {
-                searchAlbum(data, client, msg, voiceChannel);
-              },
-              function (err) {
-                console.log(err);
-                msg.channel.send(client.messages.noResultsSpotify);
-              }
-          );
+        spotify.getAlbumTracks(albumId).then(
+          async function (data) {
+            searchAlbum(data, client, msg, voiceChannel);
+          },
+          function (err) {
+            console.log(err);
+            msg.channel.send(client.messages.noResultsSpotify);
+          }
+        );
       } else if (url.includes("track")) {
         return msg.channel.send(client.messages.disabledSpotifySongs);
         /*const trackId = url.split("/track/")[1].split("?")[0];
@@ -77,17 +76,23 @@ module.exports = {
           }, function (err) {
             console.log('Something went wrong!', err);
           });*/
-      } else msg.channel.send(client.messages.invalidSpotifyUrl)
+      } else msg.channel.send(client.messages.invalidSpotifyUrl);
     } else if (
       url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)
     ) {
       const lmsg = await msg.channel.send(client.messages.loadingSongs);
-      const playlist = await youtube.getPlaylist(url);
-      const videos = await playlist.getVideos();
+      const playlist = await youtube.getPlaylist(url).catch((err) => {
+        console.log("err1");
+      });
+      const videos = await playlist.getVideos().catch((err) => {
+        console.log("err2");
+      });
       for (const video of Object.values(videos)) {
-        const video2 = await youtube.getVideoByID(video.id);
-        spotify.searchTracks(`track:${video2.name}`)
-          .then(function (data) {
+        const video2 = await youtube.getVideoByID(video.id).catch((err) => {
+          console.log("err3");
+        });
+        spotify.searchTracks(`track:${video2.name}`).then(
+          function (data) {
             client.funcs.handleVideo(
               video2.url,
               msg,
@@ -97,10 +102,11 @@ module.exports = {
               "ytdl",
               data.body.tracks.items[0]
             );
-          }, function (err) {
-            console.log('Something went wrong!', err);
-          });
-
+          },
+          function (err) {
+            console.log("Something went wrong!", err);
+          }
+        );
       }
       const message = client.messages.playlistAdded.replace(
         "%TITLE%",
@@ -109,15 +115,18 @@ module.exports = {
       return lmsg.edit(message);
     } else {
       ytsr(
-        searchString, {
+        searchString,
+        {
           limit: 5,
         },
         function (err, res) {
           if (err) console.log(err);
           if (!res.items[0]) return msg.channel.send(client.messages.noResults);
-          const videoResults = res.items.filter(item => item.type === "video");
-          spotify.searchTracks(`track:${searchString}`)
-            .then(function (data) {
+          const videoResults = res.items.filter(
+            (item) => item.type === "video"
+          );
+          spotify.searchTracks(`track:${searchString}`).then(
+            function (data) {
               client.funcs.handleVideo(
                 videoResults[0].link,
                 msg,
@@ -127,9 +136,11 @@ module.exports = {
                 "ytdl",
                 data.body.tracks.items[0]
               );
-            }, function (err) {
-              console.log('Something went wrong!', err);
-            });
+            },
+            function (err) {
+              console.log("Something went wrong!", err);
+            }
+          );
         }
       );
     }
@@ -143,21 +154,24 @@ async function searchPlaylist(data, client, msg, voiceChannel) {
     const track = await data.body.tracks.items[i].track;
     await client.funcs.sleep(250);
     ytsr(
-      `${track.artists[0].name} ${track.name} audio`, {
+      `${track.artists[0].name} ${track.name} audio`,
+      {
         limit: 5,
       },
       async function (err, res) {
         if (err) return console.log(err);
         if (!res.items[0]) {
           ytsr(
-            `${track.artists[0].name} ${track.name} lyrics`, {
+            `${track.artists[0].name} ${track.name} lyrics`,
+            {
               limit: 5,
             },
             async function (err, res) {
               if (err) return console.log(err);
               if (!res.items[0]) {
                 ytsr(
-                  `${track.artists[0].name} ${track.name}`, {
+                  `${track.artists[0].name} ${track.name}`,
+                  {
                     limit: 5,
                   },
                   async function (err, res) {
@@ -165,7 +179,9 @@ async function searchPlaylist(data, client, msg, voiceChannel) {
                     if (!res.items[0]) {
                       failed++;
                     }
-                    const videoResults = res.items.filter(item => item.type === "video");
+                    const videoResults = res.items.filter(
+                      (item) => item.type === "video"
+                    );
                     client.funcs.handleVideo(
                       videoResults[0].link,
                       msg,
@@ -179,7 +195,9 @@ async function searchPlaylist(data, client, msg, voiceChannel) {
                 );
                 return;
               }
-              const videoResults = res.items.filter(item => item.type === "video");
+              const videoResults = res.items.filter(
+                (item) => item.type === "video"
+              );
               await client.funcs.handleVideo(
                 videoResults[0].link,
                 msg,
@@ -194,7 +212,7 @@ async function searchPlaylist(data, client, msg, voiceChannel) {
           failed++;
           return;
         }
-        const videoResults = res.items.filter(item => item.type === "video");
+        const videoResults = res.items.filter((item) => item.type === "video");
         await client.funcs.handleVideo(
           videoResults[0].link,
           msg,
@@ -226,21 +244,24 @@ async function searchAlbum(data, client, msg, voiceChannel) {
     const track = await data.body.items[i];
     await client.funcs.sleep(250);
     ytsr(
-      `${track.artists[0].name} ${track.name} audio`, {
+      `${track.artists[0].name} ${track.name} audio`,
+      {
         limit: 5,
       },
       async function (err, res) {
         if (err) return console.log(err);
         if (!res.items[0]) {
           ytsr(
-            `${track.artists[0].name} ${track.name} lyrics`, {
+            `${track.artists[0].name} ${track.name} lyrics`,
+            {
               limit: 5,
             },
             async function (err, res) {
               if (err) return console.log(err);
               if (!res.items[0]) {
                 ytsr(
-                  `${track.artists[0].name} ${track.name}`, {
+                  `${track.artists[0].name} ${track.name}`,
+                  {
                     limit: 5,
                   },
                   async function (err, res) {
@@ -248,7 +269,9 @@ async function searchAlbum(data, client, msg, voiceChannel) {
                     if (!res.items[0]) {
                       failed++;
                     }
-                    const videoResults = res.items.filter(item => item.type === "video");
+                    const videoResults = res.items.filter(
+                      (item) => item.type === "video"
+                    );
                     client.funcs.handleVideo(
                       videoResults[0].link,
                       msg,
@@ -262,7 +285,9 @@ async function searchAlbum(data, client, msg, voiceChannel) {
                 );
                 return;
               }
-              const videoResults = res.items.filter(item => item.type === "video");
+              const videoResults = res.items.filter(
+                (item) => item.type === "video"
+              );
               await client.funcs.handleVideo(
                 videoResults[0].link,
                 msg,
@@ -277,7 +302,7 @@ async function searchAlbum(data, client, msg, voiceChannel) {
           failed++;
           return;
         }
-        const videoResults = res.items.filter(item => item.type === "video");
+        const videoResults = res.items.filter((item) => item.type === "video");
         await client.funcs.handleVideo(
           videoResults[0].link,
           msg,
@@ -292,7 +317,10 @@ async function searchAlbum(data, client, msg, voiceChannel) {
   }
   let message;
   if (failed === 0) {
-    message = client.messages.albumAdded.replace("%TITLE%", "yes taht palylist");
+    message = client.messages.albumAdded.replace(
+      "%TITLE%",
+      "yes taht palylist"
+    );
   } else {
     message = `${client.messages.albumAdded.replace(
       "%TITLE%",
@@ -309,21 +337,24 @@ async function searchSong(data, client, msg, voiceChannel) {
     const track = await data.body.tracks.items[i].track;
     await client.funcs.sleep(250);
     ytsr(
-      `${track.artists[0].name} ${track.name} audio`, {
+      `${track.artists[0].name} ${track.name} audio`,
+      {
         limit: 5,
       },
       async function (err, res) {
         if (err) return console.log(err);
         if (!res.items[0]) {
           ytsr(
-            `${track.artists[0].name} ${track.name} lyrics`, {
+            `${track.artists[0].name} ${track.name} lyrics`,
+            {
               limit: 5,
             },
             async function (err, res) {
               if (err) return console.log(err);
               if (!res.items[0]) {
                 ytsr(
-                  `${track.artists[0].name} ${track.name}`, {
+                  `${track.artists[0].name} ${track.name}`,
+                  {
                     limit: 5,
                   },
                   async function (err, res) {
@@ -331,7 +362,9 @@ async function searchSong(data, client, msg, voiceChannel) {
                     if (!res.items[0]) {
                       failed++;
                     }
-                    const videoResults = res.items.filter(item => item.type === "video");
+                    const videoResults = res.items.filter(
+                      (item) => item.type === "video"
+                    );
                     client.funcs.handleVideo(
                       videoResults[0].link,
                       msg,
@@ -345,7 +378,9 @@ async function searchSong(data, client, msg, voiceChannel) {
                 );
                 return;
               }
-              const videoResults = res.items.filter(item => item.type === "video");
+              const videoResults = res.items.filter(
+                (item) => item.type === "video"
+              );
               await client.funcs.handleVideo(
                 videoResults[0].link,
                 msg,
@@ -360,7 +395,7 @@ async function searchSong(data, client, msg, voiceChannel) {
           failed++;
           return;
         }
-        const videoResults = res.items.filter(item => item.type === "video");
+        const videoResults = res.items.filter((item) => item.type === "video");
         await client.funcs.handleVideo(
           videoResults[0].link,
           msg,
