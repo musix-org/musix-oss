@@ -1,7 +1,7 @@
 module.exports = function (client, msg, command) {
   const queue = client.queue.get(msg.guild.id);
   const permissions = msg.channel.permissionsFor(msg.author);
-  if (!queue || !queue.playing) {
+  if (!queue || !queue.playing && command.name !== "stop") {
     msg.channel.send(client.messages.noServerQueue);
     return false;
   }

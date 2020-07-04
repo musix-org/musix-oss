@@ -18,6 +18,9 @@ module.exports = {
 				client.queue.delete(msg.guild.id);
 				return msg.channel.send(client.messages.stop);
 			}
+			if (!queue || !queue.playing) {
+				return msg.channel.send(client.messages.noServerQueue);
+			}
 			queue.songs = [];
 			queue.looping = false;
 			queue.endReason = "stop";
