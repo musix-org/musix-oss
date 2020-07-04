@@ -3,7 +3,7 @@ module.exports = function (msg, args, client, Discord, command) {
   if (!permissions.has("EMBED_LINKS"))
     return msg.channel.send(client.messages.noPermsEmbed);
   if (!permissions.has("USE_EXTERNAL_EMOJIS"))
-    return msg.channel.send(client.noPermsUseExternalEmojis);
+    return msg.channel.send(client.messages.noPermsUseExternalEmojis);
   if (
     command.category === "music" &&
     client.global.db.guilds[msg.guild.id].blacklist.includes(msg.channel.id)

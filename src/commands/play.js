@@ -49,23 +49,24 @@ module.exports = {
         const playlistId = url.split("/playlist/")[1].split("?")[0];
         spotify.getPlaylist(playlistId).then(
           async function (data) {
-            searchPlaylist(data, client, msg, voiceChannel);
-          },
-          function (err) {
-            console.log(err);
-            msg.channel.send(client.messages.noResultsSpotify);
-          }
+              console.log(data.body)
+              searchPlaylist(data, client, msg, voiceChannel);
+            },
+            function (err) {
+              console.log(err);
+              msg.channel.send(client.messages.noResultsSpotify);
+            }
         );
       } else if (url.includes("album")) {
         const albumId = url.split("/album/")[1].split("?")[0];
         spotify.getAlbumTracks(albumId).then(
           async function (data) {
-            searchAlbum(data, client, msg, voiceChannel);
-          },
-          function (err) {
-            console.log(err);
-            msg.channel.send(client.messages.noResultsSpotify);
-          }
+              searchAlbum(data, client, msg, voiceChannel);
+            },
+            function (err) {
+              console.log(err);
+              msg.channel.send(client.messages.noResultsSpotify);
+            }
         );
       } else if (url.includes("track")) {
         return msg.channel.send(client.messages.disabledSpotifySongs);
@@ -115,8 +116,7 @@ module.exports = {
       return lmsg.edit(message);
     } else {
       ytsr(
-        searchString,
-        {
+        searchString, {
           limit: 5,
         },
         function (err, res) {
@@ -154,24 +154,21 @@ async function searchPlaylist(data, client, msg, voiceChannel) {
     const track = await data.body.tracks.items[i].track;
     await client.funcs.sleep(250);
     ytsr(
-      `${track.artists[0].name} ${track.name} audio`,
-      {
+      `${track.artists[0].name} ${track.name} audio`, {
         limit: 5,
       },
       async function (err, res) {
         if (err) return console.log(err);
         if (!res.items[0]) {
           ytsr(
-            `${track.artists[0].name} ${track.name} lyrics`,
-            {
+            `${track.artists[0].name} ${track.name} lyrics`, {
               limit: 5,
             },
             async function (err, res) {
               if (err) return console.log(err);
               if (!res.items[0]) {
                 ytsr(
-                  `${track.artists[0].name} ${track.name}`,
-                  {
+                  `${track.artists[0].name} ${track.name}`, {
                     limit: 5,
                   },
                   async function (err, res) {
@@ -244,24 +241,21 @@ async function searchAlbum(data, client, msg, voiceChannel) {
     const track = await data.body.items[i];
     await client.funcs.sleep(250);
     ytsr(
-      `${track.artists[0].name} ${track.name} audio`,
-      {
+      `${track.artists[0].name} ${track.name} audio`, {
         limit: 5,
       },
       async function (err, res) {
         if (err) return console.log(err);
         if (!res.items[0]) {
           ytsr(
-            `${track.artists[0].name} ${track.name} lyrics`,
-            {
+            `${track.artists[0].name} ${track.name} lyrics`, {
               limit: 5,
             },
             async function (err, res) {
               if (err) return console.log(err);
               if (!res.items[0]) {
                 ytsr(
-                  `${track.artists[0].name} ${track.name}`,
-                  {
+                  `${track.artists[0].name} ${track.name}`, {
                     limit: 5,
                   },
                   async function (err, res) {
@@ -337,24 +331,21 @@ async function searchSong(data, client, msg, voiceChannel) {
     const track = await data.body.tracks.items[i].track;
     await client.funcs.sleep(250);
     ytsr(
-      `${track.artists[0].name} ${track.name} audio`,
-      {
+      `${track.artists[0].name} ${track.name} audio`, {
         limit: 5,
       },
       async function (err, res) {
         if (err) return console.log(err);
         if (!res.items[0]) {
           ytsr(
-            `${track.artists[0].name} ${track.name} lyrics`,
-            {
+            `${track.artists[0].name} ${track.name} lyrics`, {
               limit: 5,
             },
             async function (err, res) {
               if (err) return console.log(err);
               if (!res.items[0]) {
                 ytsr(
-                  `${track.artists[0].name} ${track.name}`,
-                  {
+                  `${track.artists[0].name} ${track.name}`, {
                     limit: 5,
                   },
                   async function (err, res) {

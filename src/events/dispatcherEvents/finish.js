@@ -53,6 +53,7 @@ function findSimilar(client, queue, prevSongs, guild) {
       youtubeAPIKey: client.config.api_key,
     },
     async function (err, songs) {
+      console.log(songs)
       if (err) {
         console.log(err.message);
         return queue.textChannel.send(client.messages.error);

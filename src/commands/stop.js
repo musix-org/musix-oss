@@ -15,7 +15,7 @@ module.exports = {
 					queue.exists = false;
 				}
 				if (msg.guild.voice.channel) msg.guild.voice.channel.leave();
-				client.queue.delete(guild.id);
+				client.queue.delete(msg.guild.id);
 				return msg.channel.send(client.messages.stop);
 			}
 			queue.songs = [];

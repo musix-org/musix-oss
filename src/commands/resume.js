@@ -11,7 +11,7 @@ module.exports = {
 		if (client.funcs.check(client, msg, command)) {
 			if (!queue.paused) return msg.channel.send(client.messages.notPaused);
 			queue.paused = false;
-			queue.connection.dispatcher.resume(true);
+			queue.connection.dispatcher.resume();
 			return msg.channel.send(client.messages.resumed);
 		}
 	}

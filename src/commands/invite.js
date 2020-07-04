@@ -12,6 +12,5 @@ module.exports = {
             .setURL(client.config.invite)
             .setColor(client.config.embedColor)
         msg.channel.send(embed);
-        msg.channel.send(client.messages.joinSupport + client.config.supportServer);
     }
 };

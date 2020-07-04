@@ -69,7 +69,7 @@ module.exports = {
   idOrMentionChannel: emojis.redx + "Please provide a channel id or mention a channel!",
   invalidGuild: emojis.redx + "Invalid guild id!",
   invalidSpotifyUrl: emojis.redx + "That url cannot be played! If you believe this is a mistake please contact support!",
-  inviteTitle: "Invite Musix to your Discord server!",
+  inviteTitle: "Invite a release of Musix to your discord server!",
   joined: emojis.green_check_mark + "Joined",
   joinSupport: "Join the musix support server: ",
   keySet: emojis.green_check_mark + "Key set!",

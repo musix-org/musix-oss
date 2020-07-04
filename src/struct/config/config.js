@@ -22,8 +22,8 @@ module.exports = {
   secondary_test_channel: "570531724002328577",
   devId: "360363051792203779",
   embedColor: "#b50002",
-  invite: "https://discordapp.com/oauth2/authorize?client_id=607266889537945605&permissions=3427328&scope=bot",
-  supportServer: "https://discord.gg/rvHuJtB",
+  invite: "https://musix-web.herokuapp.com/releases",
+  supportServer: "https://musix-web.herokuapp.com/discord",
   devMode: false,
   api: false,
   saveDB: true,
@@ -40,7 +40,7 @@ module.exports = {
   djrole: null,
   startPlaying: true,
   bass: 1,
-  autoPlay: false,
+  autoPlay: true,
 };
 
 module.exports.streamConfig = {

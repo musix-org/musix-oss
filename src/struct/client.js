@@ -29,7 +29,6 @@ module.exports = class extends Client {
       credential: admin.credential.cert(serviceAccount),
     });
     this.commands = new Collection();
-    this.commandAliases = new Collection();
     this.settingCmd = new Collection();
     this.queue = new Map();
     this.funcs = {};
@@ -56,7 +55,6 @@ module.exports = class extends Client {
       const command = require(`../commands/${file}`);
       command.uses = 0;
       this.commands.set(command.name, command);
-      this.commandAliases.set(command.alias, command);
     }
     const settingFiles = fs
       .readdirSync(path.join(path.dirname(__dirname), "commands/settings"))
