@@ -41,8 +41,8 @@ function findSimilar(client, queue, prevSongs, guild) {
   let retries = 0;
   const query =
     prevSongs[Math.floor(Math.random() * Math.floor(prevSongs.length))];
-  similarSongs.find(
-    {
+  if (!query || !query.track) return client.funcs.play(guild, queue.songs[0], client, 0, true);
+  similarSongs.find({
       title: query.track.name,
       artist: query.track.artists[0].name,
       limit: 10,
