@@ -28,11 +28,8 @@ module.exports = {
           !queue.songs[0] &&
           queue.endReason !== "stop"
         ) {
-          const prevSongs = queue.prevSongs.filter(
-            (song) => song.type == "spotify"
-          );
-          if (prevSongs.length >= 0)
-            return findSimilar(client, queue, prevSongs, guild);
+          if (queue.prevSongs.length > 0)
+            return findSimilar(client, queue, queue.prevSongs, guild);
         }
       }
     }
@@ -44,8 +41,8 @@ function findSimilar(client, queue, prevSongs, guild) {
   let retries = 0;
   const query =
     prevSongs[Math.floor(Math.random() * Math.floor(prevSongs.length))];
-  if (!query) return;
-  similarSongs.find({
+  similarSongs.find(
+    {
       title: query.track.name,
       artist: query.track.artists[0].name,
       limit: 10,
@@ -69,6 +66,7 @@ function findSimilar(client, queue, prevSongs, guild) {
           author: {},
           type: "ytdl",
           info: songInfo.videoDetails,
+          track: query.track,
         });
         client.funcs.play(guild, queue.songs[0], client, 0, true);
       } else {

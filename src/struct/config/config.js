@@ -24,7 +24,7 @@ module.exports = {
   embedColor: "#b50002",
   invite: "https://musix-web.herokuapp.com/releases",
   supportServer: "https://musix-web.herokuapp.com/discord",
-  devMode: false,
+  devMode: true,
   api: false,
   saveDB: true,
   respawn: true,
@@ -40,7 +40,7 @@ module.exports = {
   djrole: null,
   startPlaying: true,
   bass: 1,
-  autoPlay: true,
+  autoPlay: false,
 };
 
 module.exports.streamConfig = {
