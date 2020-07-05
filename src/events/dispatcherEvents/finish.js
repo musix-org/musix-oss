@@ -44,6 +44,7 @@ function findSimilar(client, queue, prevSongs, guild) {
   let retries = 0;
   const query =
     prevSongs[Math.floor(Math.random() * Math.floor(prevSongs.length))];
+  if (!query) return;
   similarSongs.find({
       title: query.track.name,
       artist: query.track.artists[0].name,
@@ -53,7 +54,6 @@ function findSimilar(client, queue, prevSongs, guild) {
       youtubeAPIKey: client.config.api_key,
     },
     async function (err, songs) {
-      console.log(songs)
       if (err) {
         console.log(err.message);
         return queue.textChannel.send(client.messages.error);
