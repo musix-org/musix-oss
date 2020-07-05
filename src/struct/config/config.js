@@ -24,7 +24,7 @@ module.exports = {
   embedColor: "#b50002",
   invite: "https://musix-web.herokuapp.com/releases",
   supportServer: "https://musix-web.herokuapp.com/discord",
-  devMode: true,
+  devMode: false,
   api: false,
   saveDB: true,
   respawn: true,
