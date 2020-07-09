@@ -8,6 +8,8 @@ module.exports = {
     let prefix = client.global.db.guilds[msg.guild.id].prefix || client.config.prefix;
     const args = msg.content.slice(prefix.length).split(" ");
     if (client.config.devMode) prefix = client.config.devPrefix;
+    const permission = msg.channel.permissionsFor(client.user);
+    if (!permission.has("SEND_MESSAGES")) return;
     if (msg.mentions.users.first()) {
       if (msg.mentions.users.first().id === client.user.id) {
         if (!args[1]) return;

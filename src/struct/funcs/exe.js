@@ -1,5 +1,5 @@
 module.exports = function (msg, args, client, Discord, command) {
-  const permissions = msg.channel.permissionsFor(msg.client.user);
+  const permissions = msg.channel.permissionsFor(client.user);
   if (!permissions.has("EMBED_LINKS"))
     return msg.channel.send(client.messages.noPermsEmbed);
   if (!permissions.has("USE_EXTERNAL_EMOJIS"))

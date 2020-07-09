@@ -63,7 +63,7 @@ function findSimilar(client, queue, prevSongs, guild) {
         queue.songs.push({
           title: Discord.Util.escapeMarkdown(songInfo.videoDetails.title),
           url: `https://www.youtube.com/watch?v=${songs[random].youtubeId}`,
-          author: {},
+          author: client.user,
           type: "ytdl",
           info: songInfo.videoDetails,
           track: query.track,
