@@ -7,7 +7,7 @@ module.exports = {
     permission: 'dev',
     category: 'util',
     async execute(msg, args, client, Discord, command) {
-        client.funcs.saveDB(client);
+        client.shard.broadcastEval("this.funcs.saveDB(this);");
         msg.channel.send(client.messages.dbSaved);
         msg.channel.send(client.messages.restart);
         client.shard.respawnAll(client.config.shardDelay, client.config.respawnDelay, client.config.spawnTimeout);
