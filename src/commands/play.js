@@ -40,7 +40,6 @@ module.exports = {
         const playlistId = url.split("/playlist/")[1].split("?")[0];
         client.spotify.getPlaylist(playlistId).then(
           async function (data) {
-              console.log(data.body)
               searchPlaylist(data, client, msg, voiceChannel);
             },
             function (err) {
