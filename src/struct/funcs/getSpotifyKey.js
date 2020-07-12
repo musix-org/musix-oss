@@ -1,4 +1,5 @@
 module.exports = async function (client) {
+
     const request = require("request");
 
     const refresh_token = client.config.spotify_refresh_token;
@@ -17,9 +18,11 @@ module.exports = async function (client) {
 
     request.post(authOptions, function (error, response, body) {
         if (!error && response.statusCode === 200) {
+            client.spotify.setAccessToken(body.access_token);
             client.config.spotify_access_key = body.access_token
+            console.log("- Spotify access token set -");
         } else {
-            console.log("An error occured!")
+            console.log("An error occured!");
         }
     });
 };

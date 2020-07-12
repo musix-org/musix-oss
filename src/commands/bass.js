@@ -6,7 +6,7 @@ module.exports = {
   cooldown: 5,
   onlyDev: false,
   permission: "MANAGE_MESSAGES",
-  category: "music",
+  category: "audio modifiers",
   execute(msg, args, client, Discord, command) {
     const queue = client.queue.get(msg.guild.id);
     if (!args[1] && queue)

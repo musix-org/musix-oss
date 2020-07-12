@@ -5,7 +5,7 @@ module.exports = {
 	description: 'See the queue.',
 	onlyDev: false,
 	permission: 'none',
-	category: 'music',
+	category: 'info',
 	async execute(msg, args, client, Discord, command) {
 		const queue = client.queue.get(msg.guild.id);
 		if (!queue) return msg.channel.send(client.messages.noServerQueue);

@@ -6,7 +6,7 @@ module.exports = {
 	cooldown: 5,
 	onlyDev: false,
 	permission: 'MANAGE_MESSAGES',
-	category: 'music',
+	category: 'music control',
 	execute(msg, args, client, Discord, command) {
 		const queue = client.queue.get(msg.guild.id);
 		if (!args[1] && queue) return msg.channel.send(`${client.messages.currentVolume}**${queue.volume}**`);

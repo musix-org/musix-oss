@@ -6,6 +6,7 @@ module.exports = {
   dblKey: process.env.DBLKEY,
   bodKey: process.env.BODKEY,
   api_key: process.env.GOOGLE_API_KEY,
+  api_keys: [process.env.GOOGLE_API_KEY1, process.env.GOOGLE_API_KEY2, process.env.GOOGLE_API_KEY3, process.env.GOOGLE_API_KEY4, process.env.GOOGLE_API_KEY5, process.env.GENIUS_API_KEY6],
   genius_api_key: process.env.GENIUS_API_KEY,
   soundCloud_api_key: process.env.SOUNDCLOUD_API_KEY,
   spotify_access_key: process.env.SPOTIFY_ACCESS_KEY,

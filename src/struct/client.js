@@ -7,6 +7,9 @@ const admin = require("firebase-admin");
 const serviceAccount = require("./config/serviceAccount.json");
 const fs = require("fs");
 const path = require("path");
+const SpotifyApi = require("spotify-web-api-node");
+const YouTube = require("simple-youtube-api");
+const config = require("./config/config");
 
 const myIntents = new Intents();
 myIntents.add(
@@ -31,9 +34,14 @@ module.exports = class extends Client {
     this.commands = new Collection();
     this.settingCmd = new Collection();
     this.queue = new Map();
+    this.spotify = new SpotifyApi({
+      id: config.spotify_client_id,
+      secret: config.spotify_client_secret,
+    });
+    this.youtube = new YouTube(config.api_keys[(this.shard.ids / 2).toFixed()]);
+    this.config = config;
     this.funcs = {};
     this.dispatcher = {};
-    this.config = require("./config/config.js");
     this.messages = require("./config/messages.js");
     this.db = admin.firestore();
     this.db.FieldValue = require("firebase-admin").firestore.FieldValue;

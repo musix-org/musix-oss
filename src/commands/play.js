@@ -1,5 +1,3 @@
-const YouTube = require("simple-youtube-api");
-const SpotifyApi = require("spotify-web-api-node");
 const ytdl = require("ytdl-core");
 const ytsr = require("ytsr");
 
@@ -10,15 +8,8 @@ module.exports = {
   description: "Play some music.",
   onlyDev: false,
   permission: "none",
-  category: "music",
+  category: "play",
   async execute(msg, args, client, Discord, command) {
-    const spotify = new SpotifyApi({
-      id: client.config.spotify_client_id,
-      secret: client.config.spotify_client_secret,
-    });
-    spotify.setAccessToken(client.config.spotify_access_key);
-
-    const youtube = new YouTube(client.config.api_key);
     const searchString = args.slice(1).join(" ");
     const url = args[1] ? args[1].replace(/<(.+)>/g, "$1") : "";
     const queue = client.queue.get(msg.guild.id);
@@ -47,7 +38,7 @@ module.exports = {
     } else if (url.match(/^https?:\/\/(open.spotify.com|spotify.com)(.*)$/)) {
       if (url.includes("playlist")) {
         const playlistId = url.split("/playlist/")[1].split("?")[0];
-        spotify.getPlaylist(playlistId).then(
+        client.spotify.getPlaylist(playlistId).then(
           async function (data) {
               console.log(data.body)
               searchPlaylist(data, client, msg, voiceChannel);
@@ -59,7 +50,7 @@ module.exports = {
         );
       } else if (url.includes("album")) {
         const albumId = url.split("/album/")[1].split("?")[0];
-        spotify.getAlbumTracks(albumId).then(
+        client.spotify.getAlbumTracks(albumId).then(
           async function (data) {
               searchAlbum(data, client, msg, voiceChannel);
             },
@@ -82,17 +73,17 @@ module.exports = {
       url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)
     ) {
       const lmsg = await msg.channel.send(client.messages.loadingSongs);
-      const playlist = await youtube.getPlaylist(url).catch((err) => {
+      const playlist = await client.youtube.getPlaylist(url).catch((err) => {
         console.log("err1");
       });
       const videos = await playlist.getVideos().catch((err) => {
         console.log("err2");
       });
       for (const video of Object.values(videos)) {
-        const video2 = await youtube.getVideoByID(video.id).catch((err) => {
+        const video2 = await client.youtube.getVideoByID(video.id).catch((err) => {
           console.log("err3");
         });
-        spotify.searchTracks(`track:${video2.name}`).then(
+        client.spotify.searchTracks(`track:${video2.name}`).then(
           function (data) {
             client.funcs.handleVideo(
               video2.url,
@@ -125,7 +116,7 @@ module.exports = {
           const videoResults = res.items.filter(
             (item) => item.type === "video"
           );
-          spotify.searchTracks(`track:${searchString}`).then(
+          client.spotify.searchTracks(`track:${searchString}`).then(
             function (data) {
               client.funcs.handleVideo(
                 videoResults[0].link,
@@ -138,7 +129,7 @@ module.exports = {
               );
             },
             function (err) {
-              console.log("Something went wrong!", err);
+              console.log(err);
             }
           );
         }

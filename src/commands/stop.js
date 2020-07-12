@@ -5,7 +5,7 @@ module.exports = {
 	usage: '',
 	onlyDev: false,
 	permission: 'MANAGE_CHANNELS',
-	category: 'music',
+	category: 'music control',
 	execute(msg, args, client, Discord, command) {
 		const queue = client.queue.get(msg.guild.id);
 		if (client.funcs.check(client, msg, command)) {

@@ -5,7 +5,7 @@ module.exports = {
   description: "",
   onlyDev: true,
   permission: "dev",
-  category: "music",
+  category: "play",
   async execute(msg, args, client, Discord, prefix, command) {
     if (!args[1]) return msg.channel.send(client.messages.noQuery);
     const SoundCloud = require("soundcloud-api-client");

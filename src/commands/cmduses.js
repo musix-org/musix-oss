@@ -5,7 +5,7 @@ module.exports = {
     description: 'list all commands and how many times they\'ve been used',
     onlyDev: true,
     permission: 'dev',
-    category: 'info',
+    category: 'util',
     async execute(msg, args, client, Discord, command) {
         const cmduses = [];
         client.commands.forEach((value, key) => {

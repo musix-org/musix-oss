@@ -5,7 +5,7 @@ module.exports = {
     description: 'Replay the currently playing song.',
     onlyDev: false,
     permission: 'MANAGE_MESSAGES',
-    category: 'music',
+    category: 'play',
     async execute(msg, args, client, Discord, command) {
         const queue = client.queue.get(msg.guild.id);
         if (client.funcs.check(client, msg, command)) {

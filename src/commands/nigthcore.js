@@ -5,7 +5,7 @@ module.exports = {
   description: "Change nigthcore audio modifier on/off",
   onlyDev: false,
   permission: "MANAGE_MESSAGES",
-  category: "music",
+  category: "audio modifiers",
   async execute(msg, args, client, Discord, command) {
     const queue = client.queue.get(msg.guild.id);
     if (!args[1] && queue)

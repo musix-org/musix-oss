@@ -1,5 +1,4 @@
 const ytsr = require('ytsr');
-const SpotifyApi = require("spotify-web-api-node");
 const he = require('he');
 
 module.exports = {
@@ -9,14 +8,8 @@ module.exports = {
     description: 'Search the top 10 queryes and choose one.',
     onlyDev: false,
     permission: 'none',
-    category: 'music',
+    category: 'play',
     async execute(msg, args, client, Discord, command) {
-        const spotify = new SpotifyApi({
-            id: client.config.spotify_client_id,
-            secret: client.config.spotify_client_secret,
-        });
-        spotify.setAccessToken(client.config.spotify_access_key);
-
         const searchString = args.slice(1).join(" ");
         const queue = client.queue.get(msg.guild.id);
         const voiceChannel = msg.member.voice.channel;
@@ -54,7 +47,7 @@ module.exports = {
                 return msg.channel.send(client.messages.cancellingVideoSelection);
             }
             const videoIndex = parseInt(response.first().content) - 1;
-            spotify.searchTracks(`track:${videos[videoIndex].title}`)
+            client.spotify.searchTracks(`track:${videos[videoIndex].title}`)
                 .then(function (data) {
                     client.funcs.handleVideo(
                         videoResults[0].link,

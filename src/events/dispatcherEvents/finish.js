@@ -48,7 +48,7 @@ function findSimilar(client, queue, prevSongs, guild) {
       limit: 10,
       lastfmAPIKey: client.config.lastfm_api_key,
       lastfmAPISecret: client.config.lastfm_secret,
-      youtubeAPIKey: client.config.api_key,
+      youtubeAPIKey: client.config.api_keys[(client.shard.ids / 2).toFixed()],
     },
     async function (err, songs) {
       if (err) {
