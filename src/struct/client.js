@@ -38,7 +38,7 @@ module.exports = class extends Client {
       id: config.spotify_client_id,
       secret: config.spotify_client_secret,
     });
-    this.youtube = new YouTube(config.api_keys[(this.shard.ids / 2).toFixed()]);
+    this.youtube = new YouTube(config.api_keys[(this.shard.ids / 2).toFixed()] || client.config.api_key);
     this.config = config;
     this.funcs = {};
     this.dispatcher = {};
