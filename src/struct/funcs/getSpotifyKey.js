@@ -20,7 +20,7 @@ module.exports = async function (client) {
         if (!error && response.statusCode === 200) {
             client.spotify.setAccessToken(body.access_token);
             client.config.spotify_access_key = body.access_token
-            console.log("- Spotify access token set -");
+            if (client.config.devMode) console.log("- Spotify access token set -");
         } else {
             console.log("An error occured!");
         }
