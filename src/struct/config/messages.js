@@ -35,7 +35,7 @@ module.exports = {
   currentBass: emojis.loudSound + "The current bass is: ",
   currentDefaultBass: emojis.speaker + "Currect default bass level: ",
   currentDefaultVolume: emojis.speaker + "Current default volume is:",
-  currentNigthCore: emojis.speaker + "Currect Nigthcore setting: ",
+  currentNightCore: emojis.speaker + "Currect Nightcore setting: ",
   currentPrefix: "Current prefix:",
   currentVolume: emojis.loudSound + "The current volume is: ",
   dbSaved: emojis.green_check_mark + "DB Saved!",
@@ -47,7 +47,7 @@ module.exports = {
   devMode: emojis.redx +
     "Dev mode has been turned on! Commands are only available to developer(s)!",
   disabledSpotifySongs: emojis.redx + "Spotify songs cannot be played currently!",
-  disableNigthCore: emojis.redx + "Please disable nigthCore in order to use this command!",
+  disableNightCore: emojis.redx + "Please disable nightCore in order to use this command!",
   dispatcherError: "Error with the dispatcher: ",
   djFalse: emojis.green_check_mark + "`DJ` now set to `false`",
   djRoleCreated: emojis.green_check_mark +
@@ -84,8 +84,8 @@ module.exports = {
   mentionChannel: emojis.redx + "Please mention a channel!",
   musicCommandsDisabled: emojis.redx +
     "This channels has been blacklisted! Music commands cannot be used here!",
-  nigthCoreApplied: emojis.green_check_mark +
-    "NigthCore is now **%BOOLEAN%** this will be applied when the next song starts playing!",
+  nightCoreApplied: emojis.green_check_mark +
+    "NightCore is now **%BOOLEAN%** this will be applied when the next song starts playing!",
   noDj: emojis.redx + "You need the `DJ` role to use this command!",
   noLooping: emojis.repeat + "No longer looping the queue!",
   noLoopingSong: emojis.repeatSong + "No longer looping the song!",

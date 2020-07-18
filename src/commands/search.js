@@ -50,18 +50,12 @@ module.exports = {
             client.spotify.searchTracks(`track:${videos[videoIndex].title}`)
                 .then(function (data) {
                     client.funcs.handleVideo(
-                        videoResults[0].link,
-                        msg,
-                        voiceChannel,
-                        client,
-                        false,
-                        "ytdl",
+                        videos[videoIndex].link, msg, voiceChannel, client, false, "ytdl",
                         data.body.tracks.items[0]
                     );
                 }, function (err) {
                     console.log('Something went wrong!', err);
                 });
-            return client.funcs.handleVideo(videos[videoIndex].link, msg, voiceChannel, client, false, "ytdl");
         })
     }
 };

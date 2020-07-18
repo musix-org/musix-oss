@@ -38,7 +38,7 @@ module.exports = {
       .setURL(queue.songs[0].url)
       .setThumbnail(thumbnail.url)
       .setColor(client.config.embedColor);
-    if (queue.nigthCore)
+    if (queue.nightCore)
       embed.setDescription(
         `${client.messages.nowPlayingDesc} ${queue.songs[0].title} \nchannel: \`${queue.songs[0].info.author.name}\``
       );

@@ -41,7 +41,7 @@ function findSimilar(client, queue, prevSongs, guild) {
   let retries = 0;
   const query =
     prevSongs[Math.floor(Math.random() * Math.floor(prevSongs.length))];
-  if (!query || !query.track) return client.funcs.play(guild, queue.songs[0], client, 0, true);
+  if (!query || !query.track) return findSimilar(client, queue, prevSongs, guild);
   similarSongs.find({
       title: query.track.name,
       artist: query.track.artists[0].name,
@@ -52,7 +52,20 @@ function findSimilar(client, queue, prevSongs, guild) {
     },
     async function (err, songs) {
       if (err) {
+        if (
+          err.message ==
+          'The request cannot be completed because you have exceeded your <a href="/youtube/v3/getting-started#quota">quota</a>.'
+        ) {
+          queue.voiceChannel.leave();
+          queue.exists = false;
+          client.queue.delete(guild.id);
+          queue.textChannel.send(client.messages.quotaReached);
+          return;
+        }
         console.log(err.message);
+        queue.voiceChannel.leave();
+        queue.exists = false;
+        client.queue.delete(guild.id);
         return queue.textChannel.send(client.messages.error);
       }
       if (songs[0]) {

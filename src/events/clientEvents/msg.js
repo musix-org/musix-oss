@@ -1,5 +1,3 @@
-const ms = require("ms");
-
 module.exports = {
   name: "message",
   async execute(client, msg, Discord) {

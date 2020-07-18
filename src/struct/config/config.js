@@ -68,7 +68,7 @@ module.exports.queueConfig = {
   songs: [],
   volume: null,
   bass: null,
-  nigthCore: false,
+  nightCore: false,
   playing: false,
   paused: false,
   looping: false,

@@ -3,7 +3,6 @@ module.exports = {
   description: "Boost the bass in your music!",
   alias: ["none"],
   usage: "<bass>",
-  cooldown: 5,
   onlyDev: false,
   permission: "MANAGE_MESSAGES",
   category: "audio modifiers",
@@ -15,8 +14,8 @@ module.exports = {
       );
     const bass = parseFloat(args[1]);
     if (client.funcs.check(client, msg, command)) {
-      if (queue.nigthCore)
-        return msg.channel.send(client.messages.disableNigthCore);
+      if (queue.nightCore)
+        return msg.channel.send(client.messages.disableNightCore);
       if (isNaN(bass)) return msg.channel.send(client.messages.validNumber);
       if (bass > 10) return msg.channel.send(client.messages.maxBass);
       if (bass < 0) return msg.channel.send(client.messages.positiveBass);

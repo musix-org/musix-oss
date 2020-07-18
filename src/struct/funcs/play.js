@@ -1,13 +1,14 @@
+const {
+  Readable: ReadableStream
+} = require("stream");
+const Discord = require("discord.js");
+const ytdl = require("ytdl-core");
+const {
+  streamConfig
+} = require("../config/config.js");
+const prism = require("prism-media");
+
 module.exports = async function (guild, song, client, seek, play) {
-  const {
-    Readable: ReadableStream
-  } = require("stream");
-  const Discord = require("discord.js");
-  const ytdl = require("ytdl-core");
-  const {
-    streamConfig
-  } = require("../config/config.js");
-  const prism = require("prism-media");
   const queue = client.queue.get(guild.id);
   if (!song) {
     queue.voiceChannel.leave();
@@ -47,7 +48,7 @@ module.exports = async function (guild, song, client, seek, play) {
     `bass=g=${queue.bass}`,
   ];
   client.funcs.sleep(500);
-  if (queue.nigthCore) {
+  if (queue.nightCore) {
     ffmpegArgs.push("-af");
     ffmpegArgs.push("asetrate=52920");
   }

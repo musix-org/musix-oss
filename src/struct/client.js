@@ -11,8 +11,8 @@ const SpotifyApi = require("spotify-web-api-node");
 const YouTube = require("simple-youtube-api");
 const config = require("./config/config");
 
-const myIntents = new Intents();
-myIntents.add(
+const GatewayIntents = new Intents();
+GatewayIntents.add(
   1 << 0, // GUILDS
   1 << 7, // GUILD_VOICE_STATES
   1 << 9, // GUILD_MESSAGES
@@ -24,7 +24,7 @@ module.exports = class extends Client {
       disableEveryone: true,
       disabledEvents: ["TYPING_START"],
       ws: {
-        intents: myIntents
+        intents: GatewayIntents
       }
     });
 

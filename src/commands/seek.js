@@ -9,8 +9,8 @@ module.exports = {
   async execute(msg, args, client, Discord, command) {
     const queue = client.queue.get(msg.guild.id);
     if (client.funcs.check(client, msg, command)) {
-      if (queue.nigthCore)
-        return msg.channel.send(client.messages.disableNigthCore);
+      if (queue.nightCore)
+        return msg.channel.send(client.messages.disableNightCore);
       if (!args[1])
         return msg.channel.send(
           `${client.messages.correctUsage}\`${
