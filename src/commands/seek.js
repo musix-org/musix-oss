@@ -7,6 +7,7 @@ module.exports = {
   permission: "MANAGE_MESSAGES",
   category: "music control",
   async execute(msg, args, client, Discord, command) {
+    console.log("seek")
     const queue = client.queue.get(msg.guild.id);
     if (client.funcs.check(client, msg, command)) {
       if (queue.nightCore)
@@ -18,19 +19,19 @@ module.exports = {
           }seek ${command.usage}\``
         );
       const pos = parseInt(args[1]);
-      if (isNaN(pos)) {
-        if (pos < 0)
-          return msg.channel.send(client.messages.seekingPointPositive);
-        const totalLength = parseInt(queue.songs[0].info.lengthSeconds);
-        let message;
-        if (pos > totalLength) {
-          message = client.messages.seekMax.replace(
-            "%LENGTH%",
-            queue.songs[0].info.lengthSeconds
-          );
-          return msg.channel.send(message);
-        }
+      if (isNaN(pos)) return msg.channel.send(client.messages.validNumber);
+      if (pos < 0)
+        return msg.channel.send(client.messages.seekingPointPositive);
+      const totalLength = parseInt(queue.songs[0].info.lengthSeconds);
+      let message;
+      if (pos > totalLength) {
+        message = client.messages.seekMax.replace(
+          "%LENGTH%",
+          queue.songs[0].info.lengthSeconds
+        );
+        return msg.channel.send(message);
       }
+
       client.funcs.end(client, msg, pos, command);
     }
   },
