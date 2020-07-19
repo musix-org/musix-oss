@@ -21,12 +21,15 @@ module.exports = {
       if (isNaN(pos)) {
         if (pos < 0)
           return msg.channel.send(client.messages.seekingPointPositive);
+        const totalLength = parseInt(queue.songs[0].info.lengthSeconds);
         let message;
-        message = client.messages.seekMax.replace(
-          "%LENGTH%",
-          queue.songs[0].info.lengthSeconds
-        );
-        if (pos > queue.songs[0].info.lengthSeconds) return msg.channel.send(message);
+        if (pos > totalLength) {
+          message = client.messages.seekMax.replace(
+            "%LENGTH%",
+            queue.songs[0].info.lengthSeconds
+          );
+          return msg.channel.send(message);
+        }
       }
       client.funcs.end(client, msg, pos, command);
     }
