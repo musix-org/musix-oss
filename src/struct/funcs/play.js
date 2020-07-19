@@ -67,8 +67,11 @@ module.exports = async function (guild, song, client, seek, play) {
   });
 
   const dispatcher = queue.connection.play(stream, streamConfig.options)
+
   dispatcher.setVolume(queue.volume / 100);
+
   require("../../events/dispatcherEvents/handler")(client, dispatcher, queue, guild);
+
   if ((client.global.db.guilds[guild.id].startPlaying && play) || play) {
     if (song.type !== "ytdl" && song.type !== "spotify") return;
     const embed = new Discord.MessageEmbed()
