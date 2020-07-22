@@ -22,7 +22,7 @@ module.exports = async function (client) {
             client.config.spotify_access_key = body.access_token
             if (client.config.devMode) console.log("- Spotify access token set -");
         } else {
-            console.log("An error occured!");
+            console.log("An error occured whilst getting spotify access key");
         }
     });
 };
