@@ -10,7 +10,7 @@ module.exports = {
     if (!permission.has("SEND_MESSAGES")) return;
     if (msg.mentions.users.first()) {
       if (msg.mentions.users.first().id === client.user.id) {
-        if (!args[1]) return;
+        if (!args[1] || args[0] !== `@!${client.user.id}>`) return;
         if (args[1] === "prefix") {
           if (!args[2])
             return msg.channel.send(
