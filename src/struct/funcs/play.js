@@ -31,7 +31,12 @@ module.exports = async function (guild, song, client, seek, play) {
   if (song.type === "ytdl" || song.type === "spotify")
     input = ytdl(song.url, streamConfig.ytdlOptions)
     //.on('info', (info, format) => console.log(format))
-    .on("error", (error) => console.log(error));
+    .on("error", (error) => {
+      console.log(error)
+      queue.voiceChannel.leave();
+      client.queue.delete(guild.id);
+      queue.textChannel.send(client.messages.videoUnavailable)
+    });
 
   const ffmpegArgs = [
     "-analyzeduration",
