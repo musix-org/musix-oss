@@ -1,7 +1,7 @@
 module.exports = {
     name: 'reset',
     async execute(msg, args, client) {
-        client.global.db.guilds[guild.id] = {
+        client.global.db.guilds[msg.guild.id] = {
             prefix: client.config.prefix,
             defaultVolume: client.config.defaultVolume,
             permissions: client.config.permissions,
