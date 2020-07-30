@@ -7,7 +7,6 @@ module.exports = {
   permission: "MANAGE_MESSAGES",
   category: "music control",
   async execute(msg, args, client, Discord, command) {
-    console.log("seek")
     const queue = client.queue.get(msg.guild.id);
     if (client.funcs.check(client, msg, command)) {
       if (queue.nightCore)
