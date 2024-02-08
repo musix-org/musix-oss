@@ -26,7 +26,7 @@
     "dblapi.js": "^2.4.0",
     "discord-webhook-node": "^1.1.8",
     "discord.js": "^14.14.1",
-    "dotenv": "^8.2.0",
+    "dotenv": "^16.4.1",
     "erlpack": "github:discordapp/erlpack",
     "express": "^4.17.1",
     "firebase": "^10.8.0",
