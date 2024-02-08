@@ -15,7 +15,7 @@
     "url": "https://https://github.com/MatteZ02/Musix"
   },
   "dependencies": {
-    "dblapi.js": "^2.4.0",
+    "dblapi.js": "^2.4.1",
     "discord.js": "^11.6.4",
     "dotenv": "^16.4.1",
     "ffmpeg-static": "^5.2.0",
