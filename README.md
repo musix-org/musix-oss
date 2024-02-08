@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# Musix OSS
-=======
 # Musix-V2
 
 THIS VERSION OF MUSIX IS NO LONGER SUPPORTED!
@@ -22,4 +19,3 @@ Some modules are outdated to updating is recommended!
 ## Usage
 
 You will need you own .env file and serviceAccount.json for database!
->>>>>>> musix-v2/master
