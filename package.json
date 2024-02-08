@@ -1,0 +1,51 @@
+{
+  "name": "musix",
+  "version": "3.10.2",
+  "description": "V3 for Musix the discord music bot",
+  "main": "./index.js",
+  "scripts": {
+    "start": "node --max-old-space-size=3072 index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatteZ02/Musix-V3.git"
+  },
+  "author": "Matte",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MatteZ02/Musix-V3/issues",
+    "support": "https://discord.gg/rvHuJtB"
+  },
+  "homepage": "https://musix-web.herokuapp.com/",
+  "dependencies": {
+    "@discordjs/opus": "^0.2.1",
+    "bodapi.js": "^1.1.1",
+    "bufferutil": "^4.0.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dblapi.js": "^2.4.0",
+    "discord-webhook-node": "^1.1.8",
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "erlpack": "github:discordapp/erlpack",
+    "express": "^4.17.1",
+    "firebase": "^7.17.1",
+    "firebase-admin": "^8.13.0",
+    "fs": "0.0.1-security",
+    "genius-lyrics-api": "^2.0.3",
+    "he": "^1.2.0",
+    "libsodium-wrappers": "^0.7.6",
+    "ms": "^2.1.2",
+    "node-spotify-api": "^1.1.1",
+    "prism-media": "github:hydrabolt/prism-media",
+    "request": "^2.88.2",
+    "similar-songs": "^0.1.3",
+    "simple-youtube-api": "^5.2.1",
+    "soundcloud-api-client": "0.0.9",
+    "spotify-web-api-node": "^4.0.0",
+    "utf-8-validate": "^5.0.2",
+    "ytdl-core": "^3.2.0",
+    "ytsr": "^0.1.20",
+    "zlib-sync": "^0.1.7"
+  }
+}
