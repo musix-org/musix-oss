@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "dblapi.js": "^2.4.1",
-    "discord.js": "^11.6.4",
+    "discord.js": "^14.14.1",
     "dotenv": "^16.4.1",
     "ffmpeg-static": "^5.2.0",
     "firebase": "^10.8.0",
