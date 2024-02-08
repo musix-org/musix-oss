@@ -1,0 +1,32 @@
+{
+  "name": "Musix",
+  "version": "2.21.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "keywords": [],
+  "author": "MatteZ02",
+  "license": "MIT",
+  "homepage": "https://https://github.com/MatteZ02/Musix",
+  "repository": {
+    "type": "git",
+    "url": "https://https://github.com/MatteZ02/Musix"
+  },
+  "dependencies": {
+    "dblapi.js": "^2.4.0",
+    "discord.js": "^11.6.4",
+    "dotenv": "^8.2.0",
+    "ffmpeg-static": "^4.2.0",
+    "firebase": "^6.6.2",
+    "firebase-admin": "^8.11.0",
+    "fs": "0.0.1-security",
+    "he": "^1.2.0",
+    "ms": "^2.1.2",
+    "node-opus": "^0.3.3",
+    "request": "^2.88.2",
+    "simple-youtube-api": "^5.2.1",
+    "ytdl-core": "^0.29.7"
+  }
+}
