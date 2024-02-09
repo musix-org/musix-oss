@@ -1,12 +1,13 @@
 const YouTube = require("simple-youtube-api");
 const he = require('he');
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
     name: 'add',
-    async execute(message, args, client, Discord, prefix) {
+    async execute(message, args, client, prefix) {
         if (client.global.db.playlists[message.guild.id].saved) {
             const serverQueue = client.queue.get(message.guild.id);
-            const youtube = new YouTube(client.config.api_key);
+            const youtube = new YouTube(client.config.youtube_api_key);
             const searchString = args.slice(2).join(" ");
             const url = args[2] ? args[2].replace(/<(.+)>/g, "$1") : "";
             if (!args[2]) return message.channel.send(':x: You need to use a link or search for a song!');
@@ -16,15 +17,16 @@ module.exports = {
                 try {
                     var videos = await youtube.searchVideos(searchString, 10);
                     let index = 0;
-                    const embed = new Discord.RichEmbed()
+                    const embed = new EmbedBuilder()
                         .setTitle("__Song Selection__")
                         .setDescription(`${videos.map(video2 => `**${++index}** ${he.decode(video2.title)} `).join('\n')}`)
-                        .setFooter("Please provide a number ranging from 1-10 to select one of the search results.")
+                        .setFooter({ text: "Please provide a number ranging from 1-10 to select one of the search results." })
                         .setColor("#b50002")
-                    message.channel.send(embed);
+                    message.channel.send({ embeds: [embed] });
                     try {
-                        var response = await message.channel.awaitMessages(message2 => message2.content > 0 && message2.content < 11, {
-                            maxMatches: 1,
+                        var response = await message.channel.awaitMessages({
+                            filter: message2 => message2.content > 0 && message2.content < 11,
+                            max: 1,
                             time: 10000,
                             errors: ['time']
                         });
@@ -41,7 +43,7 @@ module.exports = {
             }
             let song = {
                 id: video.id,
-                title: Discord.Util.escapeMarkdown(video.title),
+                title: video.title,
                 url: `https://www.youtube.com/watch?v=${video.id}`
             }
             client.global.db.playlists[message.guild.id].songs.push(song);

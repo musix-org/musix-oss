@@ -1,6 +1,8 @@
+const { EmbedBuilder } = require("discord.js");
+
 module.exports = {
     name: 'list',
-    async execute(message, args, client, Discord, prefix) {
+    async execute(message, args, client, prefix) {
         if (args[2]) {
             if (isNaN(args[2])) return msg.channel.send(':x: I\'m sorry, But you need to enter a valid __number__.');
         }
@@ -13,10 +15,10 @@ module.exports = {
         for (let i = 0; i < hashs; i++) {
             queuemessage = queuemessage.replace('**#**', `**${i + 1}**`);
         }
-        const embed = new Discord.RichEmbed()
+        const embed = new EmbedBuilder()
             .setTitle("__playlist queue__")
             .setDescription(`${pagetext}\n${queuemessage}`)
             .setColor("#b50002")
-        return message.channel.send(embed);
+        return message.channel.send({ embeds: [embed] });
     }
 };

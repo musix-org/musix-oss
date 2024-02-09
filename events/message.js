@@ -1,6 +1,6 @@
 module.exports = {
     name: 'message',
-    async execute(client, message, Discord) {
+    async execute(client, message) {
         if (message.author.bot || !message.guild) return;
         let prefix = client.global.db.guilds[message.guild.id].prefix;
         const args = message.content.slice(prefix.length).split(' ');
@@ -10,7 +10,7 @@ module.exports = {
                 if (args[1] === 'prefix') return message.channel.send(`My prefix here is: \`${prefix}\`.`);
                 if (args[1] === 'help') {
                     const command = client.commands.get("help");
-                    return client.funcs.exe(message, args, client, Discord, prefix, command);
+                    return client.funcs.exe(message, args, client, prefix, command);
                 }
             }
         }
@@ -19,7 +19,6 @@ module.exports = {
         const commandName = args[0].toLowerCase();
         const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName)) || client.commandAliases.get(commandName);
         if (!command && message.content !== `${prefix}`) return;
-        if (command.onlyDev && message.author.id !== client.config.devId) return message.channel.send(':x: You are not allowed to do that!');
-        client.funcs.exe(message, args, client, Discord, prefix, command);
+        client.funcs.exe(message, args, client, prefix, command);
     }
 }

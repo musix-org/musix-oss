@@ -1,14 +1,15 @@
+const { EmbedBuilder } = require("discord.js");
+
 module.exports = {
     name: 'invite',
     description: 'Invite command.',
     alias: 'invite',
     cooldown: 5,
-    onlyDev: false,
-    execute(message, args, client, Discord, prefix) {
-        const embed = new Discord.RichEmbed()
+    execute(message, args, client, prefix) {
+        const embed = new EmbedBuilder()
             .setTitle(`Invite ${client.user.username} to your Discord server!`)
-            .setURL(client.config.invite)
+            .setURL(`https://discord.com/oauth2/authorize?client_id=${client.user.id}&permissions=2184465408&scope=applications.commands+bot`)
             .setColor(client.config.embedColor)
-        return message.channel.send(embed);
+        return message.channel.send({ embeds: [embed] });
     }
 };

@@ -1,6 +1,6 @@
 module.exports = {
     name: 'reset',
-    async execute(message, args, client, Discord, prefix) {
+    async execute(message, args, client, prefix) {
         client.global.db.guilds[message.guild.id] = {
             prefix: client.config.prefix,
             defaultVolume: 5,

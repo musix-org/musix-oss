@@ -1,7 +1,7 @@
 module.exports = {
     name: 'setpremium',
-    async execute(message, args, client, Discord, prefix) {
-        if (message.author.id !== client.config.devId) return;
+    async execute(message, args, client, prefix) {
+        //if (message.author.id !== client.config.devId) return;
         if (args[2]) {
             const guild = client.guilds.get(args[2]);
             if (!client.global.db.guilds[guild.id].premium) {

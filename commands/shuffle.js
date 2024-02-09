@@ -3,8 +3,7 @@ module.exports = {
     description: 'Shuffle command.',
     alias: 'shuffle',
     cooldown: 5,
-    onlyDev: false,
-    execute(message, args, client, Discord, prefix) {
+    execute(message, args, client, prefix) {
         const serverQueue = client.queue.get(message.guild.id);
         let currentIndex = serverQueue.songs.length,
             temporaryValue,

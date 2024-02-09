@@ -1,8 +1,9 @@
+const { createAudioPlayer, getVoiceConnection, joinVoiceChannel, NoSubscriberBehavior } = require("@discordjs/voice");
+
 module.exports = async function (video, message, voiceChannel, client, playlist = false) {
-    const Discord = require('discord.js');
     let song = {
         id: video.id,
-        title: Discord.Util.escapeMarkdown(video.title),
+        title: video.title,
         url: `https://www.youtube.com/watch?v=${video.id}`,
         author: message.author
     }
@@ -12,6 +13,11 @@ module.exports = async function (video, message, voiceChannel, client, playlist 
             textChannel: message.channel,
             voiceChannel: voiceChannel,
             connection: null,
+            audioPlayer: createAudioPlayer({
+				behaviors: {
+					noSubscriber: NoSubscriberBehavior.Play,
+				}
+			}),
             songs: [],
             volume: client.global.db.guilds[message.guild.id].defaultVolume,
             playing: false,
@@ -24,12 +30,18 @@ module.exports = async function (video, message, voiceChannel, client, playlist 
         construct.songs.push(song);
         client.queue.set(message.guild.id, construct);
         try {
-            var connection = await voiceChannel.join();
+            const connection =
+				getVoiceConnection(voiceChannel.guild.id) ??
+				joinVoiceChannel({
+					channelId: voiceChannel.id,
+					guildId: voiceChannel.guild.id,
+					adapterCreator: voiceChannel.guild.voiceAdapterCreator
+				});
             construct.connection = connection;
             client.funcs.play(message.guild, construct.songs[0], client, message, 0, true);
         } catch (error) {
             client.queue.delete(message.guild.id);
-            client.channels.get(client.config.debug_channel).send("Error with connecting to voice channel: " + error);
+            console.log("Error with connecting to voice channel: " + error);
             return message.channel.send(`:x: An error occured: ${error}`);
         }
     } else {

@@ -1,10 +1,11 @@
+const { EmbedBuilder } = require("discord.js");
+
 module.exports = {
 	name: 'queue',
 	description: 'Queue command.',
 	alias: 'q',
 	cooldown: 5,
-	onlyDev: false,
-	async execute(message, args, client, Discord, prefix) {
+	async execute(message, args, client, prefix) {
 		const serverQueue = client.queue.get(message.guild.id);
 		if (!serverQueue) return message.channel.send(':x: There is nothing playing.');
 		if (args[1]) {
@@ -21,18 +22,18 @@ module.exports = {
 			queuemessage = queuemessage.replace('**#**', `**${i + 1}**`);
 		}
 		if (!serverQueue.looping) {
-			const embed = new Discord.RichEmbed()
+			const embed = new EmbedBuilder()
 				.setTitle("__Song queue__")
 				.setDescription(`**Now playing:** ${serverQueue.songs[0].title}🎶\n${pagetext}\n${queuemessage}`)
 				.setColor(client.config.embedColor)
-			return message.channel.send(embed);
+			return message.channel.send({ embeds: [embed] });
 		} else {
-			const embed = new Discord.RichEmbed()
+			const embed = new EmbedBuilder()
 				.setTitle("__Song queue__")
 				.setDescription(`**Now playing:** ${serverQueue.songs[0].title}🎶\n${pagetext}\n${queuemessage}`)
-				.setFooter('🔁 Currently looping the queue!')
+				.setFooter({ text: '🔁 Currently looping the queue!' })
 				.setColor(client.config.embedColor)
-			return message.channel.send(embed);
+			return message.channel.send({ embeds: [embed] });
 		}
 	}
 };

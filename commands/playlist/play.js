@@ -1,14 +1,17 @@
+const { PermissionFlagsBits } = require("discord.js");
+const { createAudioPlayer, getVoiceConnection, joinVoiceChannel, NoSubscriberBehavior } = require("@discordjs/voice");
+
 module.exports = {
     name: 'play',
-    async execute(message, args, client, Discord, prefix) {
+    async execute(message, args, client, prefix) {
         const serverQueue = client.queue.get(message.guild.id);
-        const voiceChannel = message.member.voiceChannel;
+        const voiceChannel = message.member.voice.channel;
         if (!voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
         const permissions = voiceChannel.permissionsFor(message.client.user);
-        if (!permissions.has('CONNECT')) {
+        if (!permissions.has(PermissionFlagsBits.Connect)) {
             return message.channel.send(':x: I cannot connect to your voice channel, make sure I have the proper permissions!');
         }
-        if (!permissions.has('SPEAK')) {
+        if (!permissions.has(PermissionFlagsBits.Speak)) {
             return message.channel.send(':x: I cannot speak in your voice channel, make sure I have the proper permissions!');
         }
         let songs;
@@ -24,8 +27,13 @@ module.exports = {
             if (!serverQueue) {
                 const construct = {
                     textChannel: message.channel,
-                    voiceChannel: message.member.voiceChannel,
+                    voiceChannel: message.member.voice.channel,
                     connection: null,
+                    audioPlayer: createAudioPlayer({
+                        behaviors: {
+                            noSubscriber: NoSubscriberBehavior.Play,
+                        }
+                    }),
                     songs: [...songs],
                     volume: client.global.db.guilds[message.guild.id].defaultVolume,
                     playing: false,
@@ -38,7 +46,13 @@ module.exports = {
                 client.queue.set(message.guild.id, construct);
                 message.channel.send(":white_check_mark: Queue set!");
                 try {
-                    var connection = await message.member.voiceChannel.join();
+                    const connection =
+                        getVoiceConnection(voiceChannel.guild.id) ??
+                        joinVoiceChannel({
+                            channelId: voiceChannel.id,
+                            guildId: voiceChannel.guild.id,
+                            adapterCreator: voiceChannel.guild.voiceAdapterCreator
+                        });
                     construct.connection = connection;
                     client.funcs.play(message.guild, construct.songs[0], client, message, 0, false);
                 } catch (error) {
@@ -46,7 +60,7 @@ module.exports = {
                     return message.channel.send(`:x: An error occured: ${error}`);
                 }
             } else {
-                serverQueue.connection.dispatcher.end("queue set");
+                serverQueue.audioPlayer.stop();
                 serverQueue.songs = [...client.global.db.playlists[message.guild.id].songs];
                 message.channel.send(":white_check_mark: Queue set!");
             }

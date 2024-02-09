@@ -1,6 +1,6 @@
 module.exports = {
     name: 'remove',
-    async execute(message, args, client, Discord, prefix) {
+    async execute(message, args, client, prefix) {
         if (client.global.db.playlists[message.guild.id].saved) {
             if (!args[2]) return message.channel.send(':x: Please provide a number on the position of the song that you wan\'t to remove!');
             const songNum = parseInt(args[2]) - 1;

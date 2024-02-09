@@ -1,6 +1,6 @@
 module.exports = {
     name: 'permissions',
-    async execute(message, args, client, Discord, prefix) {
+    async execute(message, args, client, prefix) {
         if (!args[2]) return message.channel.send(`🔒 Permission requirement: \`${client.global.db.guilds[message.guild.id].permissions}\``);
         if (args[2] === 'true') {
             if (!client.global.db.guilds[message.guild.id].permissions) {

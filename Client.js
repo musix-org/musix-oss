@@ -1,12 +1,18 @@
 const { Client, Collection } = require('discord.js');
 const admin = require('firebase-admin');
-const serviceAccount = require('./serviceAccount.json');
+require('dotenv/config');
 
 module.exports = class extends Client {
     constructor() {
         super({
-            disableEveryone: true,
-            disabledEvents: ['TYPING_START']
+            intents: [
+                "Guilds",
+                "GuildMessages",
+                "GuildVoiceStates",
+                "MessageContent"
+            ],
+            disableMentions: "everyone",
+            disabledEvents: ["TYPING_START"]
         });
 
         this.commands = new Collection();
@@ -26,15 +32,9 @@ module.exports = class extends Client {
         this.funcs.handleVideo = require('./funcs/handleVideo.js');
         this.funcs.play = require('./funcs/play.js');
         this.funcs.msToTime = require('./funcs/msToTime.js');
-        this.funcs.dbget = require('./funcs/dbget.js');
         this.funcs.exe = require('./funcs/exe.js');
-        this.funcs.ffmpeg = require('./funcs/ffmpeg.js');
 
-        admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount),
-        });
-
-        this.db = admin.firestore();
+        this.config = require('./config.js');
 
         this.global = {
             db: {
@@ -43,6 +43,16 @@ module.exports = class extends Client {
             },
         };
 
-        this.db.FieldValue = require('firebase-admin').firestore.FieldValue;
+        if(this.config.firebase.serviceAccount){
+            this.funcs.dbget = require('./funcs/dbget.js');
+
+            admin.initializeApp({
+                credential: admin.credential.cert(this.config.firebase.serviceAccount),
+            });
+
+            this.db = admin.firestore();
+
+            this.db.FieldValue = require('firebase-admin').firestore.FieldValue;
+        }
     }
 };

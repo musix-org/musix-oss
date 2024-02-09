@@ -1,12 +1,7 @@
 const Discord = require('discord.js');
-const MusicClient = require('./Struct/Client');
+const MusicClient = require('./Client');
 const client = new MusicClient({});
-const DBL = require("dblapi.js");
-const dbl = new DBL(process.env.DBLTOKEN, client);
 const fs = require('fs');
-require('dotenv/config');
-
-client.config = require('./config/config.js');
 
 const commandFiles = fs.readdirSync('./commands/').filter(f => f.endsWith('.js'));
 for (const file of commandFiles) {
@@ -37,13 +32,13 @@ for (const file of settingFiles) {
 client.on('ready', async () => {
   const eventName = 'ready';
   const event = client.events.get(eventName) || client.events.find(ent => ent.aliases && ent.aliases.includes(eventName));
-  event.execute(client, dbl, Discord);
+  event.execute(client);
 });
 
-client.on('message', message => {
+client.on('messageCreate', message => {
   const eventName = 'message';
   const event = client.events.get(eventName) || client.events.find(ent => ent.aliases && ent.aliases.includes(eventName));
-  event.execute(client, message, Discord);
+  event.execute(client, message);
 });
 
 client.on('guildCreate', async (guild) => {
@@ -52,7 +47,4 @@ client.on('guildCreate', async (guild) => {
   event.execute(client, guild);
 });
 
-dbl.on('error', error => {
-  console.log(`Error with DBL! ${error}`);
-})
-client.login(client.config.token).catch(err => { console.log('- Failed To Login -> ' + err); });
+client.login(client.config.discord_api_token).catch(err => { console.log('- Failed To Login -> ' + err); });

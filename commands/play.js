@@ -1,5 +1,6 @@
 const YouTube = require("simple-youtube-api");
 const he = require('he');
+const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
 
 module.exports = {
 	name: 'play',
@@ -8,13 +9,12 @@ module.exports = {
 	alias: 'p',
 	args: true,
 	cooldown: 3,
-	onlyDev: false,
-	async execute(message, args, client, Discord, prefix) {
-		const youtube = new YouTube(client.config.api_key);
+	async execute(message, args, client, prefix) {
+		const youtube = new YouTube(client.config.youtube_api_key);
 		const searchString = args.slice(1).join(" ");
 		const url = args[1] ? args[1].replace(/<(.+)>/g, "$1") : "";
 		const serverQueue = client.queue.get(message.guild.id);
-		const voiceChannel = message.member.voiceChannel;
+		const voiceChannel = message.member.voice.channel;
 		if (!serverQueue) {
 			if (!voiceChannel) return message.channel.send(':x: I\'m sorry but you need to be in a voice channel to play music!');
 		} else {
@@ -22,10 +22,10 @@ module.exports = {
 		}
 		if (!args[1]) return message.channel.send(':x: You need to use a link or search for a song!');
 		const permissions = voiceChannel.permissionsFor(message.client.user);
-		if (!permissions.has('CONNECT')) {
+		if (!permissions.has(PermissionFlagsBits.Connect)) {
 			return message.channel.send(':x: I cannot connect to your voice channel, make sure I have the proper permissions!');
 		}
-		if (!permissions.has('SPEAK')) {
+		if (!permissions.has(PermissionFlagsBits.Speak)) {
 			return message.channel.send(':x: I cannot speak in your voice channel, make sure I have the proper permissions!');
 		}
 		if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
@@ -43,15 +43,16 @@ module.exports = {
 				try {
 					var videos = await youtube.searchVideos(searchString, 10);
 					let index = 0;
-					const embed = new Discord.RichEmbed()
+					const embed = new EmbedBuilder()
 						.setTitle("__Song Selection__")
 						.setDescription(`${videos.map(video2 => `**${++index}** ${he.decode(video2.title)} `).join('\n')}`)
-						.setFooter("Please provide a number ranging from 1-10 to select one of the search results.")
+						.setFooter({ text: "Please provide a number ranging from 1-10 to select one of the search results." })
 						.setColor(client.config.embedColor)
-					message.channel.send(embed);
+					message.channel.send({ embeds: [embed] });
 					try {
-						var response = await message.channel.awaitMessages(message2 => message2.content > 0 && message2.content < 11 && message2.author === message.author, {
-							maxMatches: 1,
+						var response = await message.channel.awaitMessages({
+							filter: message2 => message2.content > 0 && message2.content < 11 && message2.author === message.author,
+							max: 1,
 							time: 10000,
 							errors: ['time']
 						});

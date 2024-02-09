@@ -1,6 +1,6 @@
 module.exports = {
     name: 'save',
-    async execute(message, args, client, Discord, prefix) {
+    async execute(message, args, client, prefix) {
         const serverQueue = client.queue.get(message.guild.id);
         if (!serverQueue) return message.channel.send(':x: There is nothing playing!');
         client.global.db.playlists[message.guild.id] = {
