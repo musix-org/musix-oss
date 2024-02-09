@@ -23,7 +23,7 @@
     "firebase-admin": "^8.11.0",
     "fs": "0.0.1-security",
     "he": "^1.2.0",
-    "ms": "^2.1.2",
+    "ms": "^2.1.3",
     "node-opus": "^0.3.3",
     "request": "^2.88.2",
     "simple-youtube-api": "^5.2.1",
