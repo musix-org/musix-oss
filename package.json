@@ -44,7 +44,7 @@
     "soundcloud-api-client": "0.0.9",
     "spotify-web-api-node": "^5.0.2",
     "utf-8-validate": "^6.0.3",
-    "ytdl-core": "^3.2.0",
+    "ytdl-core": "^4.11.5",
     "ytsr": "^3.8.4",
     "zlib-sync": "^0.1.7"
   }
