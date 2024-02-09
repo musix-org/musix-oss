@@ -1,6 +1,4 @@
-/node_modules
-dev/
+node_modules
 .env
-.vscode/
-struct/config/serviceAccount.json
-package-lock.json
+.vscode
+serviceAccount.json
