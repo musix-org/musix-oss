@@ -182,7 +182,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
 					return msg.channel.send(':x: There is nothing playing.');
 				}
 				if (msg.content === `${PREFIX}`) return;
-				msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
+				msg.channel.send(`:x: Unknown command! Type ${PREFIX}help for the list of commands!`)
 				return;
 			}
 			if (msg.content === `${PREFIX}`) return;
@@ -195,7 +195,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
 					}
 				}
 			}
-			msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
+			msg.channel.send(`:x: Unknown command! Type ${PREFIX}help for the list of commands!`)
 			return;
 		} else {
 			const args = msg.content.split(' ');
@@ -312,7 +312,7 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
 		if (msg.content === `${PREFIX}`) {
 			return;
 		}
-		msg.channel.send(':x: Unknown command! Type -help for the list of commands!')
+		msg.channel.send(`:x: Unknown command! Type ${PREFIX}help for the list of commands!`)
 		return;
 	}
 });
