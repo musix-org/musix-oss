@@ -1,4 +1,4 @@
-const discord = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "blacklist",
@@ -89,7 +89,7 @@ module.exports = {
         }
         break;
       case "list":
-        embed = new discord.MessageEmbed()
+        embed = new EmbedBuilder()
           .setTitle(client.messages.blacklistTitle)
           .setDescription(
             `${client.global.db.guilds[msg.guild.id].blacklist
@@ -100,14 +100,13 @@ module.exports = {
         msg.channel.send(embed);
         break;
       case undefined:
-        embed = new discord.MessageEmbed()
+        embed = new EmbedBuilder()
           .setTitle(client.messages.blacklistTitle)
-          .addField("add", "Add a channel to the blacklist. (ID or mention)")
-          .addField(
-            "remove",
-            "Remove a channel from the blacklist. (ID or mention)"
+          .addFields(
+            { name: "add", value: "Add a channel to the blacklist. (ID or mention)" },
+            { name: "remove", value: "Remove a channel from the blacklist. (ID or mention)" },
+            { name: "list", value: "List the currently blacklisted channels." }
           )
-          .addField("list", "List the currently blacklisted channels.")
           .setColor(client.config.embedColor);
         msg.channel.send(embed);
         break;

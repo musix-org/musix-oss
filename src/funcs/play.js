@@ -1,12 +1,12 @@
 const {
   Readable: ReadableStream
 } = require("stream");
-const Discord = require("discord.js");
 const ytdl = require("ytdl-core");
 const {
   streamConfig
 } = require("../config/config.js");
 const prism = require("prism-media");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = async function (guild, song, client, seek, play) {
   const queue = client.queue.get(guild.id);
@@ -75,11 +75,11 @@ module.exports = async function (guild, song, client, seek, play) {
 
   dispatcher.setVolume(queue.volume / 100);
 
-  require("../../events/dispatcherEvents/handler")(client, dispatcher, queue, guild);
+  require("../events/dispatcherEvents/handler")(client, dispatcher, queue, guild);
 
   if ((client.global.db.guilds[guild.id].startPlaying && play) || play) {
     if (song.type !== "ytdl" && song.type !== "spotify") return;
-    const embed = new Discord.MessageEmbed()
+    const embed = new EmbedBuilder()
       .setTitle(`${client.messages.startPlaying}**${song.title}**`)
       .setDescription(
         `Song duration: \`${client.funcs.msToTime(

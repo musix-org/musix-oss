@@ -1,6 +1,5 @@
 const similarSongs = require("similar-songs");
 const ytdl = require("ytdl-core");
-const Discord = require("discord.js");
 
 module.exports = {
   async execute(client, guild) {
@@ -48,7 +47,7 @@ function findSimilar(client, queue, prevSongs, guild) {
       limit: 10,
       lastfmAPIKey: client.config.lastfm_api_key,
       lastfmAPISecret: client.config.lastfm_secret,
-      youtubeAPIKey: client.config.api_keys[(client.shard.ids / 2).toFixed() || client.config.api_key],
+      youtubeAPIKey: client.config.youtube_api_key,
     },
     async function (err, songs) {
       if (err) {
@@ -74,7 +73,7 @@ function findSimilar(client, queue, prevSongs, guild) {
           `https://www.youtube.com/watch?v=${songs[random].youtubeId}`
         );
         queue.songs.push({
-          title: Discord.Util.escapeMarkdown(songInfo.videoDetails.title),
+          title: songInfo.videoDetails.title,
           url: `https://www.youtube.com/watch?v=${songs[random].youtubeId}`,
           author: client.user,
           type: "ytdl",

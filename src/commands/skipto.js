@@ -3,10 +3,9 @@ module.exports = {
   alias: ["st"],
   usage: "<point in queue>",
   description: "Skip to a point in the queue",
-  onlyDev: false,
   permission: "MANAGE_MESSAGES",
   category: "music control",
-  async execute(msg, args, client, Discord, command) {
+  async execute(msg, args, client, command) {
     const queue = client.queue.get(msg.guild.id);
     if (client.funcs.check(client, msg, command)) {
       if (!args[1])

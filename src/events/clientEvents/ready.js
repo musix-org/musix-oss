@@ -29,7 +29,6 @@ module.exports = {
     client.user.setActivity(`@${client.user.username} help | 🎶`, {
       type: "LISTENING",
     });
-    if (client.config.api && !client.config.devMode) client.funcs.botListApi(client);
     client.user.setStatus("online");
     client.funcs.getSpotifyKey(client);
     console.log(`- Activated - Shard: ${client.shard.ids} -`);
@@ -42,8 +41,5 @@ module.exports = {
     setInterval(() => {
       client.funcs.getSpotifyKey(client);
     }, 3600000);
-    setInterval(() => {
-      client.funcs.ffmpeg(client, Discord);
-    }, 7200000);
   },
 };

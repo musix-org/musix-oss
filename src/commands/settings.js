@@ -1,60 +1,32 @@
+const { EmbedBuilder } = require("discord.js");
+
 module.exports = {
   name: "settings",
   alias: ["options", "ops", "preferences"],
   usage: "<setting> <value(opt)>",
   description: "Change the server settings for Musix.",
-  onlyDev: false,
   permission: "MANAGE_GUILD",
   category: "util",
-  async execute(msg, args, client, Discord, command) {
+  async execute(msg, args, client, command) {
     let footer;
     footer = client.messages.settingsFooter.replace(
       "%PREFIX%",
       client.global.db.guilds[msg.guild.id].prefix
     );
-    const embed = new Discord.MessageEmbed()
+    const embed = new EmbedBuilder()
       .setTitle(client.messages.settingsTitle)
-      .addField(
-        client.messages.settingsPrefix,
-        client.messages.settingsPrefixDesc,
-        true
+      .addFields(
+        { name: client.messages.settingsPrefix, value: client.messages.settingsPrefixDesc, inline: true },
+        { name: client.messages.settingsVolume, value: client.messages.settingsVolumeDesc, inline: true },
+        { name: client.messages.settingsBlacklist, value: client.messages.settingsBlacklistDesc, inline: true },
+        { name: client.messages.settingsPermissions, value: client.messages.settingsPermissionsDesc, inline: true },
+        { name: client.messages.settingsSetDj, value: client.messages.settingsSetDjDesc, inline: true },
+        { name: client.messages.settingsAnnounceSongs, value: client.messages.settingsAnnounceSongsDesc },
+        { name: client.messages.settingsBass, value: client.messages.settingsBassDesc, inline: true },
+        { name: client.messages.settingsAutoPlay, value: client.messages.settingsAutoPlayDesc, inline: true }
       )
-      .addField(
-        client.messages.settingsVolume,
-        client.messages.settingsVolumeDesc,
-        true
-      )
-      .addField(
-        client.messages.settingsBlacklist,
-        client.messages.settingsBlacklistDesc,
-        true
-      )
-      .addField(
-        client.messages.settingsPermissions,
-        client.messages.settingsPermissionsDesc,
-        true
-      )
-      .addField(
-        client.messages.settingsSetDj,
-        client.messages.settingsSetDjDesc,
-        true
-      )
-      .addField(
-        client.messages.settingsAnnounceSongs,
-        client.messages.settingsAnnounceSongsDesc
-      )
-      .addField(
-        client.messages.settingsBass,
-        client.messages.settingsBassDesc,
-        true
-      )
-      .addField(
-        client.messages.settingsAutoPlay,
-        client.messages.settingsAutoPlayDesc,
-        true
-      )
-      .setFooter(footer)
-      .setAuthor(client.user.username, client.user.displayAvatarURL)
+      .setFooter({ text: footer })
+      .setAuthor({ name: client.user.username, iconURL: client.user.avatarURL() })
       .setColor(client.config.embedColor);
     const permissions = msg.channel.permissionsFor(msg.author);
     if (msg.author.id !== client.config.devId) {

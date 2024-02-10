@@ -1,4 +1,4 @@
-module.exports = function (msg, args, client, Discord, command) {
+module.exports = function (msg, args, client, command) {
   const permissions = msg.channel.permissionsFor(client.user);
   if (!permissions.has("EMBED_LINKS"))
     return msg.channel.send(client.messages.noPermsEmbed);
@@ -11,7 +11,7 @@ module.exports = function (msg, args, client, Discord, command) {
     return msg.channel.send(client.messages.musicCommandsDisabled);
   try {
     command.uses++;
-    command.execute(msg, args, client, Discord, command);
+    command.execute(msg, args, client, command);
   } catch (error) {
     msg.reply(client.messages.errorExe);
     console.log(error.toString());

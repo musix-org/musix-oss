@@ -1,12 +1,13 @@
+const { EmbedBuilder } = require("discord.js");
+
 module.exports = {
 	name: 'queue',
 	alias: ["q", "list", "ls", "songs"],
 	usage: '',
 	description: 'See the queue.',
-	onlyDev: false,
 	permission: 'none',
 	category: 'info',
-	async execute(msg, args, client, Discord, command) {
+	async execute(msg, args, client, command) {
 		const queue = client.queue.get(msg.guild.id);
 		if (!queue) return msg.channel.send(client.messages.noServerQueue);
 		const page = 1;
@@ -18,10 +19,10 @@ module.exports = {
 		}
 		let message;
 		message = client.messages.queueDesc.replace("%SONG%", queue.songs[0].title);
-		const embed = new Discord.MessageEmbed()
+		const embed = new EmbedBuilder()
 			.setTitle(client.messages.queueTitle)
 			.setDescription(`${message}\n${queuemessage}`)
-			.setFooter(`${queue.songs.length - 1} ${client.messages.queueFooter}`)
+			.setFooter({ text: `${queue.songs.length - 1} ${client.messages.queueFooter}`})
 			.setColor(client.config.embedColor)
 		return msg.channel.send(embed);
 	}

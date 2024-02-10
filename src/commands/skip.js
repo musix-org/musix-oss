@@ -3,10 +3,9 @@ module.exports = {
   alias: ["s", "next"],
   usage: "",
   description: "Skip the currently playing song.",
-  onlyDev: false,
   permission: "MANAGE_MESSAGES",
   category: "music control",
-  execute(msg, args, client, Discord, command) {
+  execute(msg, args, client, command) {
     const queue = client.queue.get(msg.guild.id);
     const permissions = msg.channel.permissionsFor(msg.author);
     if (!queue || !queue.playing)

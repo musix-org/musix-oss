@@ -6,10 +6,9 @@ module.exports = {
   alias: ["p", "music"],
   usage: "<song name>",
   description: "Play some music.",
-  onlyDev: false,
   permission: "none",
   category: "play",
-  async execute(msg, args, client, Discord, command) {
+  async execute(msg, args, client, command) {
     const searchString = args.slice(1).join(" ");
     const url = args[1] ? args[1].replace(/<(.+)>/g, "$1") : "";
     const queue = client.queue.get(msg.guild.id);

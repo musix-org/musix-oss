@@ -1,4 +1,3 @@
-const Discord = require("discord.js");
 const ytdl = require("ytdl-core");
 
 module.exports = async function (
@@ -12,7 +11,7 @@ module.exports = async function (
 ) {
   const songInfo = await ytdl.getInfo(resource).catch(err => console.log(err));
   const song = {
-    title: Discord.Util.escapeMarkdown(songInfo.videoDetails.title),
+    title: songInfo.videoDetails.title,
     url: resource,
     author: msg.author,
     type: type,

@@ -27,7 +27,7 @@ module.exports = {
   },
 };
 
-function getCommand(client, args, msg, Discord) {
+function getCommand(client, args, msg) {
   if (!args[0]) return;
   const commandName = args[0].toLowerCase();
   if (commandName === "none") return;
@@ -37,8 +37,5 @@ function getCommand(client, args, msg, Discord) {
       (cmd) => cmd.alias && cmd.alias.includes(commandName)
     );
   if (!command) return;
-  if (command.onlyDev && msg.author.id !== client.config.devId) return msg.channel.send(client.messages.onlyDev);
-  if (client.config.devMode && msg.member.id !== client.config.devId && msg.guild.id !== "718081535240306738")
-    return msg.channel.send(client.messages.devMode);
-  client.funcs.exe(msg, args, client, Discord, command);
+  client.funcs.exe(msg, args, client, command);
 }

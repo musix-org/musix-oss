@@ -3,10 +3,9 @@ module.exports = {
   alias: ["nc"],
   usage: "<true/false>",
   description: "Change nightcore audio modifier on/off",
-  onlyDev: false,
   permission: "MANAGE_MESSAGES",
   category: "audio modifiers",
-  async execute(msg, args, client, Discord, command) {
+  async execute(msg, args, client, command) {
     const queue = client.queue.get(msg.guild.id);
     if (!args[1] && queue)
       return msg.channel.send(

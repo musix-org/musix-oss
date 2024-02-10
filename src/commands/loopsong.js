@@ -3,10 +3,9 @@ module.exports = {
     alias: ["none"],
     usage: '',
     description: 'loop the currently playing song.',
-    onlyDev: false,
     permission: 'MANAGE_MESSAGES',
     category: 'music control',
-    async execute(msg, args, client, Discord, command) {
+    async execute(msg, args, client, command) {
         const queue = client.queue.get(msg.guild.id);
         if (client.funcs.check(client, msg, command)) {
             if (!queue.songLooping) {

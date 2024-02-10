@@ -3,10 +3,9 @@ module.exports = {
 	alias: ["none"],
 	usage: '',
 	description: 'Pause the currently playing music.',
-	onlyDev: false,
 	permission: 'MANAGE_MESSAGES',
 	category: 'music control',
-	execute(msg, args, client, Discord, command) {
+	execute(msg, args, client, command) {
 		const queue = client.queue.get(msg.guild.id);
 		if (client.funcs.check(client, msg, command)) {
 			if (queue.paused) return msg.channel.send(client.messages.alreadyPaused);

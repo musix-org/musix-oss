@@ -3,10 +3,9 @@ module.exports = {
   description: "Boost the bass in your music!",
   alias: ["none"],
   usage: "<bass>",
-  onlyDev: false,
   permission: "MANAGE_MESSAGES",
   category: "audio modifiers",
-  execute(msg, args, client, Discord, command) {
+  execute(msg, args, client, command) {
     const queue = client.queue.get(msg.guild.id);
     if (!args[1] && queue)
       return msg.channel.send(

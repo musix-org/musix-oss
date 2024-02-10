@@ -122,7 +122,6 @@ module.exports = {
     "I'm sorry but you need to be in a voice channel to play music!",
   nowPlaying: "__Now playing__",
   nowPremium: ":tada: Guild %GUILD% is now premium!",
-  onlyDev: emojis.redx + "This command is only available for the bots owner!",
   paused: emojis.pause + "Paused the music!",
   permission: "🔒 Permission requirement:",
   permissionsFalse: emojis.redx + "That value is already `false`!",

@@ -1,9 +1,8 @@
 module.exports = function (client) {
-    const Discord = require('discord.js');
     client.on('ready', () => {
-            require(`./ready.js`).execute(client, Discord);
+            require(`./ready.js`).execute(client);
         }).on('message', (msg) => {
-            require(`./msg.js`).execute(client, msg, Discord);
+            require(`./msg.js`).execute(client, msg);
         }).on('guildCreate', (guild) => {
             require(`./guildCreate.js`).execute(client, guild);
         })

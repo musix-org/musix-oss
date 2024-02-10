@@ -1,15 +1,15 @@
 const ytsr = require('ytsr');
 const he = require('he');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: 'search',
     alias: ["sr", "find"],
     usage: '<search word(s)>',
     description: 'Search the top 10 queryes and choose one.',
-    onlyDev: false,
     permission: 'none',
     category: 'play',
-    async execute(msg, args, client, Discord, command) {
+    async execute(msg, args, client, command) {
         const searchString = args.slice(1).join(" ");
         const queue = client.queue.get(msg.guild.id);
         const voiceChannel = msg.member.voice.channel;
@@ -30,10 +30,10 @@ module.exports = {
             const videoResults = res.items.filter(item => item.type === "video");
             const videos = videoResults.slice(0, 10);
             let index = 0;
-            const embed = new Discord.MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setTitle(client.messages.songSelection)
                 .setDescription(`${videos.map(video2 => `**${++index}** ${he.decode(video2.title)} `).join('\n')}`)
-                .setFooter(client.messages.provideANumber)
+                .setFooter({ text: client.messages.provideANumber })
                 .setColor(client.config.embedColor)
             msg.channel.send(embed);
             try {

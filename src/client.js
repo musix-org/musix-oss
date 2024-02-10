@@ -15,13 +15,14 @@ const GatewayIntents = new Intents();
 GatewayIntents.add(
   1 << 0, // GUILDS
   1 << 7, // GUILD_VOICE_STATES
-  1 << 9, // GUILD_MESSAGES
+  1 << 9, // GUILD_MESSAGES,
+  1 << 15 // MESSAGE_CONTENT
 );
 
 module.exports = class extends Client {
   constructor() {
     super({
-      disableEveryone: true,
+      disableMentions: "everyone",
       disabledEvents: ["TYPING_START"],
       ws: {
         intents: GatewayIntents
@@ -38,7 +39,7 @@ module.exports = class extends Client {
       id: config.spotify_client_id,
       secret: config.spotify_client_secret,
     });
-    this.youtube = new YouTube(config.api_keys[(this.shard.ids / 2).toFixed()] || config.api_key);
+    this.youtube = new YouTube(config.youtube_api_key);
     this.config = config;
     this.funcs = {};
     this.dispatcher = {};
@@ -48,7 +49,7 @@ module.exports = class extends Client {
     this.global = {
       db: {
         guilds: {},
-      },
+      }
     };
     this.logs = [];
 
@@ -71,13 +72,10 @@ module.exports = class extends Client {
       const option = require(`../commands/settings/${file}`);
       this.settingCmd.set(option.name, option);
     }
-    if (this.config.devMode) {
-      this.config.token = this.config.devToken;
-    }
 
-    require("../events/clientEvents/handler.js")(this);
+    require("./events/clientEvents/handler.js")(this);
 
-    this.login(this.config.token).catch((err) =>
+    this.login(this.config.discord_api_token).catch((err) =>
       console.log("Failed to login: " + err)
     );
   }

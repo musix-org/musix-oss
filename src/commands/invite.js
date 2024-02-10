@@ -1,13 +1,14 @@
+const { EmbedBuilder } = require("discord.js");
+
 module.exports = {
     name: 'invite',
     alias: ["i"],
     usage: '',
     description: 'Invite Musix.',
-    onlyDev: false,
     permission: 'none',
     category: 'info',
-    execute(msg, args, client, Discord, command) {
-        const embed = new Discord.MessageEmbed()
+    execute(msg, args, client, command) {
+        const embed = new EmbedBuilder()
             .setTitle(client.messages.inviteTitle)
             .setURL(client.config.invite)
             .setColor(client.config.embedColor)

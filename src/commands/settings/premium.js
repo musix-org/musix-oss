@@ -6,8 +6,6 @@ module.exports = {
         client.messages.premiumState +
           client.global.db.guilds[msg.guild.id].premium
       );
-    if (msg.member.id !== client.config.devId)
-      return msg.channel.send(client.messages.onlyDev);
     if (client.global.db.guilds[args[2]].premium === false) {
       client.global.db.guilds[args[2]].premium = true;
       let message;

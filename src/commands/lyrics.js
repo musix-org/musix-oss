@@ -1,3 +1,4 @@
+const { EmbedBuilder } = require("discord.js");
 const { getLyrics } = require("genius-lyrics-api");
 
 module.exports = {
@@ -5,10 +6,9 @@ module.exports = {
   alias: ["l"],
   usage: "<song>",
   description: "see the lyrics for a song",
-  onlyDev: false,
   permission: "none",
   category: "util",
-  async execute(msg, args, client, Discord, prefix, command) {
+  async execute(msg, args, client, prefix, command) {
     const searchString = args.slice(1).join(" ");
     const options = {
       apiKey: client.config.genius_api_key,
@@ -26,7 +26,7 @@ module.exports = {
       for (let i = 0; i < lyrics.length; i += 2000) {
         let toi = "";
         toi = lyrics.substring(i, Math.min(lyrics.length, i + 2000));
-        const embed = new Discord.MessageEmbed()
+        const embed = new EmbedBuilder()
           .setTitle(client.messages.lyricsTitle)
           .setDescription(toi)
           .setColor(client.config.embedColor);
