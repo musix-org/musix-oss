@@ -6,17 +6,17 @@ module.exports = {
     description: 'Status command.',
     alias: 'status',
     cooldown: 5,
-    execute(message, args, client, prefix) {
+    async execute(message, args, client, prefix) {
         const uptime = client.funcs.msToTime(client.uptime);
         const ping = Math.floor(client.ws.ping * 10) / 10;
 
         const embed = new EmbedBuilder()
             .setTitle(`Status for ${client.user.username}`)
             .addFields(
-                { name: ':signal_strength: Ping', value: ping, inline: true },
+                { name: ':signal_strength: Ping', value: ping + ' ms', inline: true },
                 { name: ':stopwatch: Uptime', value: uptime, inline: true },
-                { name: ':play_pause: Currently playing music on', value: `${getVoiceConnections.size} guild(s)`, inline: true },
-                { name: '💿 Operating system', value: process.platform, inline: true }
+                { name: ':play_pause: Currently playing music on', value: `${getVoiceConnections.size ?? 0} guild(s)`, inline: true },
+                { name: ':cd: Operating system', value: process.platform, inline: true }
             )
             .setAuthor({ name: client.user.username, iconURL: client.user.avatarURL()})
             .setColor(client.config.embedColor)

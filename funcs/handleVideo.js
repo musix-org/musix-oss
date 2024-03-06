@@ -3,7 +3,7 @@ const { createAudioPlayer, getVoiceConnection, joinVoiceChannel, NoSubscriberBeh
 module.exports = async function (video, message, voiceChannel, client, playlist = false) {
     let song = {
         id: video.id,
-        title: video.title,
+        title: he.decode(video.title),
         url: `https://www.youtube.com/watch?v=${video.id}`,
         author: message.author
     }

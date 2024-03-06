@@ -17,9 +17,9 @@ module.exports = {
         { name: 'announcesongs', value: 'Whether to announce songs that start playing or not.' },
         { name: 'songselection', value: 'Will i ask to select a song from the top 10 queries or start playing the first result instantly.' }
       )
-      .setFooter({ text: `how to use: ${prefix}settings <Setting name> <value>` })
-      .setAuthor({ name: client.user.username, iconURL: client.user.avatarURL()})
-      .setColor(client.embedColor)
+      .setFooter({ text: `how to use: ${prefix}settings <name> <value>` })
+      .setAuthor({ name: client.user.username, iconURL: client.user.avatarURL() })
+      .setColor(client.config.embedColor)
     const permissions = message.channel.permissionsFor(message.author);
     if (!permissions.has(PermissionFlagsBits.ManageGuild)) return message.channel.send(':x: You need the `MANAGE_SERVER` permission to change the settings!');
     if (args[1]) {

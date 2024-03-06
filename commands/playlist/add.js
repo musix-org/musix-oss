@@ -43,7 +43,7 @@ module.exports = {
             }
             let song = {
                 id: video.id,
-                title: video.title,
+                title: he.decode(video.title),
                 url: `https://www.youtube.com/watch?v=${video.id}`
             }
             client.global.db.playlists[message.guild.id].songs.push(song);
