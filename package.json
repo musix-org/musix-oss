@@ -16,7 +16,7 @@
     "url": "https://https://github.com/musix-oss/musix"
   },
   "dependencies": {
-    "discord.js": "^14.23.1",
+    "discord.js": "^14.23.2",
     "@discordjs/voice": "^0.19.0",
     "@discordjs/opus": "^0.10.0",
     "dotenv": "^17.2.3",
