@@ -21,7 +21,7 @@
   "dependencies": {
     "@discordjs/opus": "^0.10.0",
     "discord-webhook-node": "^1.1.8",
-    "discord.js": "^14.24.0",
+    "discord.js": "^14.24.1",
     "dotenv": "^17.2.3",
     "firebase": "^12.4.0",
     "firebase-admin": "^13.5.0",
