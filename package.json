@@ -22,7 +22,7 @@
     "@discordjs/opus": "^0.10.0",
     "discord-webhook-node": "^1.1.8",
     "discord.js": "^14.26.2",
-    "dotenv": "^17.4.0",
+    "dotenv": "^17.4.1",
     "firebase": "^12.11.0",
     "firebase-admin": "^13.7.0",
     "he": "^1.2.0",
